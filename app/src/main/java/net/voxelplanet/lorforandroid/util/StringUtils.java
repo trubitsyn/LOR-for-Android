@@ -38,8 +38,7 @@ public class StringUtils {
         return url;
     }
 
-    public static String removeLineBreak(Spanned spanned) {
-        String str = spanned.toString();
-        return str.substring(0, str.length() - 2);
+    public static CharSequence removeLineBreak(Spanned spanned) {
+        return spanned.subSequence(0, spanned.length() - 2);
     }
 }

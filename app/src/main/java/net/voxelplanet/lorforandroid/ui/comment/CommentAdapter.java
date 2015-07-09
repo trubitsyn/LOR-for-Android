@@ -18,6 +18,7 @@ package net.voxelplanet.lorforandroid.ui.comment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         viewHolder.author.setText(comment.getAuthor().getNick());
         //viewHolder.avatar.setImageURI(Uri.parse(comment.getAvatar()));
         viewHolder.message.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
+        viewHolder.message.setMovementMethod(LinkMovementMethod.getInstance());
         viewHolder.stars.setText(comment.getAuthor().getStars());
         viewHolder.date.setText(StringUtils.getDate(comment.getPostdate()));
         if (CommentUtils.isReply(comment)) {

@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,7 @@ public class TopicFragment extends Fragment {
                 } else tags.setVisibility(View.GONE);
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));
+                message.setMovementMethod(LinkMovementMethod.getInstance());
                 swipeRefreshLayout.setRefreshing(false);
             }
 

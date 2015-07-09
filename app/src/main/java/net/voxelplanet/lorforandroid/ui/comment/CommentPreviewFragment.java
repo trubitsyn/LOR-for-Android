@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class CommentPreviewFragment extends DialogFragment {
         TextView commentDate = (TextView) view.findViewById(R.id.commentDate);
 
         commentMessage.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
+        commentMessage.setMovementMethod(LinkMovementMethod.getInstance());
         commentAuthor.setText(comment.getAuthor().getNick());
         commentStars.setText(comment.getAuthor().getStars());
         commentDate.setText(StringUtils.getDate(comment.getPostdate()));
