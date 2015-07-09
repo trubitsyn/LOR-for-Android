@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">LOR for Android</string>
+
+    <string name="activity_main">LINUX.ORG.RU</string>
+    <string name="activity_topic">Тема</string>
+    <string name="activity_comments">Комментарии</string>
+
+    <string name="drawer_profile">anonymous</string>
+    <string name="drawer_news">Новости</string>
+    <string name="drawer_gallery">Галерея</string>
+    <string name="drawer_tracker">Трекер</string>
+    <string name="drawer_settings">Настройки</string>
+
+    <string name="open">Открыть панель навигации</string>
+    <string name="close">Закрыть панель навигации</string>
+    <string name="avatar">Аватар</string>
+    <string name="comments">Комментарии</string>
+
+    <string name="replyTo">В ответ на комментарий от</string>
+
+    <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
+    <string name="error_limit">Нельзя загрузить больше.</string>
+    <string name="error_no_more_data">Нет более старых тем.</string>
+</resources>
