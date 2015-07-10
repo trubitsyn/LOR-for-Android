@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private int navigationItemId;
     private ActionBarDrawerToggle drawerToggle;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTop);
         setSupportActionBar(toolbar);
 
-        final ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         //actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -61,13 +62,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().findItem(navigationItemId).setChecked(true);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        navigate(navigationItemId);
+        onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
     }
 
     @Override
@@ -82,30 +82,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navigate(int selection) {
         switch (selection) {
             case R.id.drawer_profile:
+                actionBar.setTitle(R.string.drawer_profile);
                 UserFragment userFragment = new UserFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, userFragment).commit();
                 getSupportFragmentManager().executePendingTransactions();
                 userFragment.getInfo();
                 break;
             case R.id.drawer_news:
+                actionBar.setTitle(R.string.drawer_news);
                 NewsFragment newsFragment = new NewsFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
                 getSupportFragmentManager().executePendingTransactions();
                 newsFragment.getListItems();
                 break;
             case R.id.drawer_gallery:
+                actionBar.setTitle(R.string.drawer_gallery);
                 GalleryFragment galleryFragment = new GalleryFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
                 getSupportFragmentManager().executePendingTransactions();
                 galleryFragment.getListItems();
                 break;
             case R.id.drawer_tracker:
+                actionBar.setTitle(R.string.drawer_tracker);
                 TrackerFragment trackerFragment = new TrackerFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, trackerFragment).commit();
                 getSupportFragmentManager().executePendingTransactions();
                 trackerFragment.getListItems();
                 break;
             case R.id.drawer_settings:
+                actionBar.setTitle(R.string.drawer_settings);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingsFragment()).commit();
                 break;
         }
