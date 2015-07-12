@@ -63,7 +63,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             viewHolder.replyTo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onParentLink(parent);
+                    listener.onParentLink(comments, parent);
                 }
             });
         } else viewHolder.replyTo.setVisibility(View.GONE);

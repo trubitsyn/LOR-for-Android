@@ -29,19 +29,26 @@ import android.widget.TextView;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.Comment;
+import net.voxelplanet.lorforandroid.util.CommentUtils;
 import net.voxelplanet.lorforandroid.util.StringUtils;
+
+import java.util.List;
 
 public class CommentPreviewFragment extends DialogFragment {
     private Activity activity;
     private Comment comment;
+    private CommentClickListener listener;
+    private List<Comment> comments;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = activity;
+        this.listener = (CommentClickListener) activity;
     }
 
-    public void initializeView(Comment comment) {
+    public void initializeView(List<Comment> comments, Comment comment) {
+        this.comments = comments;
         this.comment = comment;
     }
 
@@ -50,11 +57,22 @@ public class CommentPreviewFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.comment_preview, null);
+        TextView commentReply = (TextView) view.findViewById(R.id.commentReplyTo);
         TextView commentMessage = (TextView) view.findViewById(R.id.commentMessage);
         TextView commentAuthor = (TextView) view.findViewById(R.id.commentAuthor);
         TextView commentStars = (TextView) view.findViewById(R.id.commentStars);
         TextView commentDate = (TextView) view.findViewById(R.id.commentDate);
 
+        if (CommentUtils.isReply(comment)) {
+            final Comment parent = CommentUtils.getParent(comments, comment);
+            commentReply.setText(activity.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
+            commentReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onParentLink(comments, parent);
+                }
+            });
+        } else commentReply.setVisibility(View.GONE);
         commentMessage.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
         commentMessage.setMovementMethod(LinkMovementMethod.getInstance());
         commentAuthor.setText(comment.getAuthor().getNick());

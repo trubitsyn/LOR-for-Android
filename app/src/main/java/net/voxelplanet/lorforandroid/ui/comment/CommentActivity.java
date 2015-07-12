@@ -22,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.Comment;
 
+import java.util.List;
+
 public class CommentActivity extends AppCompatActivity implements CommentClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,9 @@ public class CommentActivity extends AppCompatActivity implements CommentClickLi
     }
 
     @Override
-    public void onParentLink(Comment parentComment) {
+    public void onParentLink(List<Comment> comments, Comment parentComment) {
         CommentPreviewFragment commentPreviewFragment = new CommentPreviewFragment();
-        commentPreviewFragment.initializeView(parentComment);
+        commentPreviewFragment.initializeView(comments, parentComment);
         commentPreviewFragment.show(getSupportFragmentManager(), "commentPreviewFragment");
     }
 }
