@@ -1,5 +1,5 @@
 package net.voxelplanet.lorforandroid.ui.tracker;
 
 public enum TrackerFilterEnum {
-    all, main, notalks, tech;
+    all, main, notalks, tech
 }

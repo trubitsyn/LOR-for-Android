@@ -70,7 +70,7 @@ public class GalleryFragment extends Fragment {
 
         galleryView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view) {
                 callback.onItemClicked(items.get(galleryView.getChildPosition(view)).getUrl());
             }
         }));
@@ -80,7 +80,7 @@ public class GalleryFragment extends Fragment {
         adapter = new GalleryAdapter(items, activity);
         galleryView.setAdapter(adapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.gallerySwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

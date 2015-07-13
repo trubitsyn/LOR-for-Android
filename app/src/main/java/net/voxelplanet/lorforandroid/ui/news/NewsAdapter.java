@@ -28,7 +28,7 @@ import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private final List<Topic> newsItems;
 
     public NewsAdapter(List<Topic> topics) {

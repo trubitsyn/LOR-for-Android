@@ -31,7 +31,7 @@ import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
+class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<Topic> topics;
     private final Activity activity;
 

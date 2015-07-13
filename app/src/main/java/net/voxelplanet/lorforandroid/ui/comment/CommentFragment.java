@@ -72,7 +72,7 @@ public class CommentFragment extends Fragment {
         adapter = new CommentAdapter(comments, activity, (CommentClickListener) activity);
         commentView.setAdapter(adapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.commentSwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

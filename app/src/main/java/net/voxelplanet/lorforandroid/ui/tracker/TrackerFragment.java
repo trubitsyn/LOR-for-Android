@@ -74,14 +74,14 @@ public class TrackerFragment extends Fragment {
                 if (currentOffset < 300) {
                     getListItems(filter);
                 } else {
-                    Toast.makeText(activity, getString(R.string.error_limit), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.error_limit, Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         trackerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view) {
                 callback.onItemClicked(items.get(trackerView.getChildPosition(view)).getUrl());
             }
         }));
@@ -89,7 +89,7 @@ public class TrackerFragment extends Fragment {
         adapter = new TrackerAdapter(items, activity);
         trackerView.setAdapter(adapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.trackerSwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -116,7 +116,7 @@ public class TrackerFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 } else {
-                    Toast.makeText(activity, getString(R.string.error_no_more_data), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
 

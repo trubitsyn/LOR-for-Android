@@ -69,7 +69,7 @@ public class NewsFragment extends Fragment {
 
         newsView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view) {
                 callback.onItemClicked(items.get(newsView.getChildPosition(view)).getUrl());
             }
         }));
@@ -79,7 +79,7 @@ public class NewsFragment extends Fragment {
         adapter = new NewsAdapter(items);
         newsView.setAdapter(adapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.newsSwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

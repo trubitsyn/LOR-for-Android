@@ -44,7 +44,7 @@ public class Topic {
     @Expose
     private Integer postscore;
     @Expose
-    private List<String> tags = new ArrayList<String>();
+    private final List<String> tags = new ArrayList<String>();
     @Expose
     private Author author;
 

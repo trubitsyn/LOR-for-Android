@@ -33,7 +33,7 @@ import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;
 
-public class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<TrackerItem> trackerItems;
     private final Activity activity;
     private final int NEWS = 0, GALLERY = 1;

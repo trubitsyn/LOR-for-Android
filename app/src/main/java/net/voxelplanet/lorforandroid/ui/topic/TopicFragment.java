@@ -63,7 +63,7 @@ public class TopicFragment extends Fragment {
         author = (TextView) view.findViewById(R.id.topicAuthor);
         message = (TextView) view.findViewById(R.id.topicMessage);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.topicSwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
