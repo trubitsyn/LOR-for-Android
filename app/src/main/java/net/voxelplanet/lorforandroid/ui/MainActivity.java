@@ -32,6 +32,7 @@ import net.voxelplanet.lorforandroid.ui.gallery.GalleryFragment;
 import net.voxelplanet.lorforandroid.ui.news.NewsFragment;
 import net.voxelplanet.lorforandroid.ui.topic.TopicActivity;
 import net.voxelplanet.lorforandroid.ui.topic.TopicFragment;
+import net.voxelplanet.lorforandroid.ui.tracker.TrackerFilterEnum;
 import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragment;
 import net.voxelplanet.lorforandroid.ui.util.ItemClickCallback;
 
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TrackerFragment trackerFragment = new TrackerFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, trackerFragment).commit();
                 getSupportFragmentManager().executePendingTransactions();
-                trackerFragment.getListItems();
+                trackerFragment.getListItems(TrackerFilterEnum.all.name());
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);

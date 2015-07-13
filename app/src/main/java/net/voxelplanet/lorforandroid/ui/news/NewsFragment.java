@@ -46,7 +46,7 @@ import retrofit.client.Response;
 
 public class NewsFragment extends Fragment {
     private final ArrayList<Topic> items = new ArrayList<Topic>();
-    private RecyclerView topicsView;
+    private RecyclerView newsView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView.Adapter adapter;
     private ItemClickCallback callback;
@@ -61,23 +61,23 @@ public class NewsFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_topics, container, false);
-        topicsView = (RecyclerView) view.findViewById(R.id.topicsView);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        newsView = (RecyclerView) view.findViewById(R.id.newsView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        topicsView.setLayoutManager(layoutManager);
-        topicsView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
+        newsView.setLayoutManager(layoutManager);
+        newsView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
 
-        topicsView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
+        newsView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                callback.onItemClicked(items.get(topicsView.getChildPosition(view)).getUrl());
+                callback.onItemClicked(items.get(newsView.getChildPosition(view)).getUrl());
             }
         }));
 
         // TODO: Load while scrolling
 
         adapter = new NewsAdapter(items);
-        topicsView.setAdapter(adapter);
+        newsView.setAdapter(adapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

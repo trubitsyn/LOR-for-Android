@@ -49,8 +49,9 @@ public class TrackerFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private RecyclerView.Adapter adapter;
-    private int currentOffset = 0;
     private ItemClickCallback callback;
+    private String filter;
+    private int currentOffset = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -61,47 +62,48 @@ public class TrackerFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_topics, container, false);
-        final RecyclerView topicsView = (RecyclerView) view.findViewById(R.id.topicsView);
+        final View view = inflater.inflate(R.layout.fragment_tracker, container, false);
+        final RecyclerView trackerView = (RecyclerView) view.findViewById(R.id.trackerView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        topicsView.setLayoutManager(layoutManager);
-        topicsView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
+        trackerView.setLayoutManager(layoutManager);
+        trackerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
 
-        topicsView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
+        trackerView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
                 if (currentOffset < 300) {
-                    getListItems();
+                    getListItems(filter);
                 } else {
                     Toast.makeText(activity, getString(R.string.error_limit), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        topicsView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
+        trackerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                callback.onItemClicked(items.get(topicsView.getChildPosition(view)).getUrl());
+                callback.onItemClicked(items.get(trackerView.getChildPosition(view)).getUrl());
             }
         }));
 
         adapter = new TrackerAdapter(items, activity);
-        topicsView.setAdapter(adapter);
+        trackerView.setAdapter(adapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getListItems();
+                getListItems(filter);
             }
         });
 
         return view;
     }
 
-    public void getListItems() {
+    public void getListItems(String filter) {
+        this.filter = filter;
         ApiTracker apiTracker = Adapter.restAdapter.create(ApiTracker.class);
-        apiTracker.getTracker(currentOffset, "all", new Callback<TrackerItems>() {
+        apiTracker.getTracker(currentOffset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {
