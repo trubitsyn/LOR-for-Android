@@ -17,6 +17,7 @@ package net.voxelplanet.lorforandroid.ui.tracker;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,8 +51,9 @@ public class TrackerFragment extends Fragment {
     private Activity activity;
     private RecyclerView.Adapter adapter;
     private ItemClickCallback callback;
-    private String filter;
+    private String currentFilter;
     private int currentOffset = 0;
+    private final int maxOffset = 300;
 
     @Override
     public void onAttach(Activity activity) {
@@ -71,8 +73,8 @@ public class TrackerFragment extends Fragment {
         trackerView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
-                if (currentOffset < 300) {
-                    getListItems(filter);
+                if (currentOffset < maxOffset) {
+                    getListItems(currentFilter);
                 } else {
                     Toast.makeText(activity, R.string.error_limit, Toast.LENGTH_SHORT).show();
                 }
@@ -89,19 +91,56 @@ public class TrackerFragment extends Fragment {
         adapter = new TrackerAdapter(items, activity);
         trackerView.setAdapter(adapter);
 
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.trackerTabs);
+        tabLayout.addTab(tabLayout.newTab().setText("Все"));
+        tabLayout.addTab(tabLayout.newTab().setText("Основные"));
+        tabLayout.addTab(tabLayout.newTab().setText("Без talks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Технические"));
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        getListItems(TrackerFilterEnum.all.name());
+                        break;
+                    case 1:
+                        getListItems(TrackerFilterEnum.main.name());
+                        break;
+                    case 2:
+                        getListItems(TrackerFilterEnum.notalks.name());
+                        break;
+                    case 3:
+                        getListItems(TrackerFilterEnum.tech.name());
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                currentOffset = 0;
+                items.clear();
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.trackerSwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getListItems(filter);
+                getListItems(currentFilter);
             }
         });
 
         return view;
     }
 
-    public void getListItems(String filter) {
-        this.filter = filter;
+    public void getListItems(final String filter) {
+        currentFilter = filter;
+
         ApiTracker apiTracker = Adapter.restAdapter.create(ApiTracker.class);
         apiTracker.getTracker(currentOffset, filter, new Callback<TrackerItems>() {
             @Override
@@ -109,10 +148,12 @@ public class TrackerFragment extends Fragment {
                 if (trackerItems.trackerItems.size() > 0) {
                     currentOffset += 30;
                     items.addAll(trackerItems.trackerItems);
+
                     // Next lines are here to remove duplicate topics from tracker due to linux.org.ru engine bug
                     Set<TrackerItem> trackerItemSet = new LinkedHashSet<TrackerItem>(items);
                     items.clear();
                     items.addAll(trackerItemSet);
+
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 } else {
