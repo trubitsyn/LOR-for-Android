@@ -27,6 +27,10 @@ public class StringUtils {
         return simpleDateFormat.format(date);
     }
 
+    public static String getCurrentDate() {
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+    }
+
     @Deprecated
     public static String clearUrl(String url) {
         int length = url.length() - url.replace("/", "").length();

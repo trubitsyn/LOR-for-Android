@@ -16,14 +16,7 @@
 package net.voxelplanet.lorforandroid.ui.comment;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
@@ -31,8 +24,7 @@ import net.voxelplanet.lorforandroid.api.Adapter;
 import net.voxelplanet.lorforandroid.api.ApiComments;
 import net.voxelplanet.lorforandroid.model.Comment;
 import net.voxelplanet.lorforandroid.model.Comments;
-import net.voxelplanet.lorforandroid.ui.util.DividerItemDecoration;
-import net.voxelplanet.lorforandroid.ui.util.InfiniteScrollListener;
+import net.voxelplanet.lorforandroid.ui.base.BaseListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,73 +33,44 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class CommentFragment extends Fragment {
-    private final List<Comment> comments = new ArrayList<Comment>();
-    private SwipeRefreshLayout swipeRefreshLayout;
+public class CommentFragment extends BaseListFragment {
+    private int page, previousCount = 0;
+    private List<Comment> items;
     private String url;
-    private int currentPage, previousCount = 0;
-    private RecyclerView.Adapter adapter;
-    private Activity activity;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = activity;
+        items = new ArrayList<Comment>();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_comments, container, false);
-        RecyclerView commentView = (RecyclerView) view.findViewById(R.id.comments);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        commentView.setLayoutManager(layoutManager);
-        commentView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
-        commentView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore() {
-                loadComments(url);
-            }
-        });
-
-        adapter = new CommentAdapter(comments, activity, (CommentClickListener) activity);
-        commentView.setAdapter(adapter);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.commentSwipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                currentPage = 0;
-                previousCount = 0;
-                comments.clear();
-                loadComments(url);
-            }
-        });
-
-        return view;
-    }
-
-    public void loadComments(String url) {
-        this.url = url;
+    protected void getListItems() {
         ApiComments apiComments = Adapter.restAdapter.create(ApiComments.class);
-        apiComments.getComments(url, currentPage, new Callback<Comments>() {
+        apiComments.getComments(url, page, new Callback<Comments>() {
             @Override
             public void success(Comments newComments, Response response) {
+                List<Comment> comments = newComments.comments;
                 int commentsPerPage = 50;
+
                 if (previousCount < commentsPerPage) {
                     // Add new comments to existing "page"
-                    comments.subList(comments.size() - previousCount, comments.size()).clear();
-                    comments.addAll(newComments.comments);
+                    int itemSize = items.size();
+                    items.subList(itemSize - previousCount, itemSize).clear();
+                    items.addAll(comments);
                 } else {
                     // Show new comments "page"
-                    comments.addAll(newComments.comments);
+                    items.addAll(comments);
                 }
+
+                int commentSize = comments.size();
 
                 // If loaded all comments at once, increment currentPage
-                if (newComments.comments.size() == commentsPerPage) {
-                    currentPage++;
+                if (commentSize == commentsPerPage) {
+                    page++;
                 }
 
-                previousCount = newComments.comments.size();
+                previousCount = commentSize;
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -118,5 +81,26 @@ public class CommentFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    protected void clearData() {
+        page = 0;
+        previousCount = 0;
+        items.clear();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_swiperefresh_recyclerview;
+    }
+
+    @Override
+    protected RecyclerView.Adapter getAdapter() {
+        return new CommentAdapter(items, activity, (CommentClickListener) activity);
     }
 }

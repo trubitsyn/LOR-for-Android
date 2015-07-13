@@ -15,12 +15,8 @@
 
 package net.voxelplanet.lorforandroid.ui.tracker;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,121 +28,47 @@ import net.voxelplanet.lorforandroid.api.Adapter;
 import net.voxelplanet.lorforandroid.api.ApiTracker;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
 import net.voxelplanet.lorforandroid.model.TrackerItems;
-import net.voxelplanet.lorforandroid.ui.util.DividerItemDecoration;
-import net.voxelplanet.lorforandroid.ui.util.InfiniteScrollListener;
-import net.voxelplanet.lorforandroid.ui.util.ItemClickCallback;
-import net.voxelplanet.lorforandroid.ui.util.ItemClickListener;
+import net.voxelplanet.lorforandroid.ui.base.BaseCallbackFragment;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class TrackerFragment extends Fragment {
-    private final ArrayList<TrackerItem> items = new ArrayList<TrackerItem>();
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private Activity activity;
-    private RecyclerView.Adapter adapter;
-    private ItemClickCallback callback;
-    private String currentFilter;
-    private int currentOffset = 0;
-    private final int maxOffset = 300;
+public class TrackerFragment extends BaseCallbackFragment {
+    private final TabListener tabListener = new TabListener();
+    private int offset;
+    private String filter = TrackerFilterEnum.all.name();
+    private TabLayout tabLayout;
+    private List<TrackerItem> items = new ArrayList<TrackerItem>();
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-        this.callback = (ItemClickCallback) activity;
+    protected String getUrl(int position) {
+        return items.get(position).getUrl();
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_tracker, container, false);
-        final RecyclerView trackerView = (RecyclerView) view.findViewById(R.id.trackerView);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        trackerView.setLayoutManager(layoutManager);
-        trackerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
-
-        trackerView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore() {
-                if (currentOffset < maxOffset) {
-                    getListItems(currentFilter);
-                } else {
-                    Toast.makeText(activity, R.string.error_limit, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        trackerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view) {
-                callback.onItemClicked(items.get(trackerView.getChildPosition(view)).getUrl());
-            }
-        }));
-
-        adapter = new TrackerAdapter(items, activity);
-        trackerView.setAdapter(adapter);
-
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.trackerTabs);
-        tabLayout.addTab(tabLayout.newTab().setText("Все"));
-        tabLayout.addTab(tabLayout.newTab().setText("Основные"));
-        tabLayout.addTab(tabLayout.newTab().setText("Без talks"));
-        tabLayout.addTab(tabLayout.newTab().setText("Технические"));
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-                    case 0:
-                        getListItems(TrackerFilterEnum.all.name());
-                        break;
-                    case 1:
-                        getListItems(TrackerFilterEnum.main.name());
-                        break;
-                    case 2:
-                        getListItems(TrackerFilterEnum.notalks.name());
-                        break;
-                    case 3:
-                        getListItems(TrackerFilterEnum.tech.name());
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                currentOffset = 0;
-                items.clear();
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.trackerSwipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getListItems(currentFilter);
-            }
-        });
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (view != null) {
+            tabLayout = (TabLayout) view.findViewById(R.id.trackerTabs);
+            initTabs();
+        }
         return view;
     }
 
-    public void getListItems(final String filter) {
-        currentFilter = filter;
-
+    @Override
+    public void getListItems() {
         ApiTracker apiTracker = Adapter.restAdapter.create(ApiTracker.class);
-        apiTracker.getTracker(currentOffset, filter, new Callback<TrackerItems>() {
+        apiTracker.getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {
-                    currentOffset += 30;
+                    offset += 30;
                     items.addAll(trackerItems.trackerItems);
 
                     // Next lines are here to remove duplicate topics from tracker due to linux.org.ru engine bug
@@ -167,5 +89,61 @@ public class TrackerFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    protected void clearData() {
+        tabListener.onTabUnselected(null);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_tracker;
+    }
+
+    @Override
+    protected RecyclerView.Adapter getAdapter() {
+        return new TrackerAdapter(items, activity);
+    }
+
+    private void initTabs() {
+        tabLayout.addTab(tabLayout.newTab().setText("Все"));
+        tabLayout.addTab(tabLayout.newTab().setText("Основные"));
+        tabLayout.addTab(tabLayout.newTab().setText("Без talks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Технические"));
+
+        tabLayout.setOnTabSelectedListener(new TabListener());
+    }
+
+    private class TabListener implements TabLayout.OnTabSelectedListener {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            switch (tab.getPosition()) {
+                case 0:
+                    filter = TrackerFilterEnum.all.name();
+                    break;
+                case 1:
+                    filter = TrackerFilterEnum.main.name();
+                    break;
+                case 2:
+                    filter = TrackerFilterEnum.notalks.name();
+                    break;
+                case 3:
+                    filter = TrackerFilterEnum.tech.name();
+                    break;
+            }
+
+            getListItems();
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+            offset = 0;
+            items.clear();
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+        }
     }
 }

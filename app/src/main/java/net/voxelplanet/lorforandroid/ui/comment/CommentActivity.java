@@ -37,7 +37,8 @@ public class CommentActivity extends AppCompatActivity implements CommentClickLi
         if (savedInstanceState == null) {
             CommentFragment commentFragment = (CommentFragment) getSupportFragmentManager().findFragmentById(R.id.commentsFragment);
             String url = getIntent().getStringExtra("url");
-            commentFragment.loadComments(url);
+            commentFragment.setUrl(url);
+            commentFragment.getListItems();
         }
     }
 
