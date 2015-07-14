@@ -15,34 +15,28 @@
 
 package net.voxelplanet.lorforandroid.api;
 
-import net.voxelplanet.lorforandroid.model.Comments;
-
-import retrofit.Callback;
-import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Path;
 import retrofit.http.Query;
 
-public interface ApiComments {
-    @GET("/{topic}/comments")
-    void getComments(
-            @Path(value = "topic", encode = false) String topic,
-            @Query("page") int page, Callback<Comments> response
-    );
-
-    @POST("/add_comment.jsp")
-    void addComment(
-            @Query("topic") int topic,
-            @Query("replyto") int replyTo,
-            @Query("title") String title,
-            @Query("msg") String message,
+public interface ApiFilter {
+    @POST("/user-filter/ignore-user")
+    void manageIgnoredUser(
+            @Query("nick") String nick,
+            @Query("del") Object del,
             @Query("csrf") String csrf
     );
 
-    @POST("/delete_comment.jsp")
-    void deleteComment(
-            @Query("msgid") int messageId,
-            @Query("reason") String reason,
+    @POST("/user-filter/ignore-tag")
+    void manageIgnoredTag(
+            @Query("tagName") String tag,
+            @Query("del") Object del,
+            @Query("csrf") String csrf
+    );
+
+    @POST("/user-filter/favorite-tag")
+    void manageFavoriteTag(
+            @Query("tagName") String tag,
+            @Query("del") Object del,
             @Query("csrf") String csrf
     );
 }

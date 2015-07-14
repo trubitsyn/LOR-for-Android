@@ -23,11 +23,17 @@ import retrofit.converter.GsonConverter;
 
 public class Adapter {
     private static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-    private static final String API = "https://www.linux.org.ru/api";
+    private static final String ROOT = "https://www.linux.org.ru";
+    private static final String API = ROOT + "/api";
 
     public static final RestAdapter restAdapter = new retrofit.RestAdapter.Builder()
             .setConverter(new GsonConverter(GSON))
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .setEndpoint(API)
+            .build();
+
+    public static final RestAdapter directRestAdapter = new retrofit.RestAdapter.Builder()
+            .setEndpoint(ROOT)
+            .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
 }
