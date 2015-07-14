@@ -20,16 +20,12 @@ import net.voxelplanet.lorforandroid.model.Comment;
 import java.util.List;
 
 public class CommentUtils {
-    public static Comment getParent(List<Comment> comments, Comment child) {
+    public static Comment getParent(List<Comment> comments, int reply) {
         for (Comment comment : comments) {
-            if (comment.getId().equals(child.getReply().getId())) {
+            if (comment.getId().equals(reply)) {
                 return comment;
             }
         }
         return new Comment();
-    }
-
-    public static boolean isReply(Comment comment) {
-        return comment.getReply() != null;
     }
 }

@@ -63,8 +63,8 @@ public class CommentPreviewFragment extends DialogFragment {
         TextView commentStars = (TextView) view.findViewById(R.id.commentStars);
         TextView commentDate = (TextView) view.findViewById(R.id.commentDate);
 
-        if (CommentUtils.isReply(comment)) {
-            final Comment parent = CommentUtils.getParent(comments, comment);
+        if (comment.getReply() != null) {
+            final Comment parent = CommentUtils.getParent(comments, comment.getReply().getId());
             commentReply.setText(activity.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
             commentReply.setOnClickListener(new View.OnClickListener() {
                 @Override

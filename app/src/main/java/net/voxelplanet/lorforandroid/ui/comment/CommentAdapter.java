@@ -57,8 +57,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         viewHolder.message.setMovementMethod(LinkMovementMethod.getInstance());
         viewHolder.stars.setText(comment.getAuthor().getStars());
         viewHolder.date.setText(StringUtils.getDate(comment.getPostdate()));
-        if (CommentUtils.isReply(comment)) {
-            final Comment parent = CommentUtils.getParent(comments, comment);
+        if (comment.getReply() != null) {
+            final Comment parent = CommentUtils.getParent(comments, comment.getReply().getId());
             viewHolder.replyTo.setText(context.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
             viewHolder.replyTo.setOnClickListener(new View.OnClickListener() {
                 @Override
