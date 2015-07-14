@@ -53,7 +53,7 @@ public abstract class BaseListFragment extends Fragment {
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setOnScrollListener(new InfiniteScrollListener(layoutManager) {
+        recyclerView.addOnScrollListener(new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
                 getListItems();
