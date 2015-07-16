@@ -95,11 +95,6 @@ public class CommentFragment extends BaseListFragment {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.fragment_swiperefresh_recyclerview;
-    }
-
-    @Override
     protected RecyclerView.Adapter getAdapter() {
         return new CommentAdapter(items, activity, (CommentClickListener) activity);
     }

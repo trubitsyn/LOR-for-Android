@@ -63,10 +63,5 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
         // Clear offset etc.
     }
 
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_swiperefresh_recyclerview;
-    }
-
     protected abstract String getSection();
 }

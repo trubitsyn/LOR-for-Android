@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -28,11 +29,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import net.voxelplanet.lorforandroid.R;
+import net.voxelplanet.lorforandroid.ui.base.TabFragment;
 import net.voxelplanet.lorforandroid.ui.gallery.GalleryFragment;
 import net.voxelplanet.lorforandroid.ui.news.NewsFragment;
 import net.voxelplanet.lorforandroid.ui.topic.TopicActivity;
 import net.voxelplanet.lorforandroid.ui.topic.TopicFragment;
-import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragment;
+import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragmentPagerAdapter;
 import net.voxelplanet.lorforandroid.ui.util.ItemClickCallback;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
@@ -80,34 +82,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void navigate(int selection) {
+        FragmentManager fm = getSupportFragmentManager();
         switch (selection) {
             case R.id.drawer_profile:
                 actionBar.setTitle(R.string.drawer_profile);
                 UserFragment userFragment = new UserFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, userFragment).commit();
-                getSupportFragmentManager().executePendingTransactions();
+                fm.beginTransaction().replace(R.id.fragmentContainer, userFragment).commit();
+                fm.executePendingTransactions();
                 userFragment.getInfo();
                 break;
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
                 NewsFragment newsFragment = new NewsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
-                getSupportFragmentManager().executePendingTransactions();
+                fm.beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
+                fm.executePendingTransactions();
                 newsFragment.getListItems();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
                 GalleryFragment galleryFragment = new GalleryFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
-                getSupportFragmentManager().executePendingTransactions();
+                fm.beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
+                fm.executePendingTransactions();
                 galleryFragment.getListItems();
                 break;
             case R.id.drawer_tracker:
                 actionBar.setTitle(R.string.drawer_tracker);
-                TrackerFragment trackerFragment = new TrackerFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, trackerFragment).commit();
-                getSupportFragmentManager().executePendingTransactions();
-                trackerFragment.getListItems();
+                TabFragment tabFragment = new TabFragment();
+                tabFragment.setAdapter(new TrackerFragmentPagerAdapter(fm));
+                fm.beginTransaction().replace(R.id.fragmentContainer, tabFragment).commit();
+                fm.executePendingTransactions();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);

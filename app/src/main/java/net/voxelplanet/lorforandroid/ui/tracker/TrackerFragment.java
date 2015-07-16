@@ -16,11 +16,7 @@
 package net.voxelplanet.lorforandroid.ui.tracker;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
@@ -40,25 +36,28 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class TrackerFragment extends BaseCallbackFragment {
-    private final TabListener tabListener = new TabListener();
-    private int offset;
-    private String filter = TrackerFilterEnum.all.name();
-    private TabLayout tabLayout;
     private List<TrackerItem> items = new ArrayList<TrackerItem>();
+    private int offset;
+    private String filter;
+
+    public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {
+        TrackerFragment trackerFragment = new TrackerFragment();
+        Bundle args = new Bundle();
+        args.putString("filter", trackerFilterEnum.name());
+        trackerFragment.setArguments(args);
+        return trackerFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        filter = getArguments().getString("filter");
+        getListItems();
+    }
 
     @Override
     protected String getUrl(int position) {
         return items.get(position).getUrl();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        if (view != null) {
-            tabLayout = (TabLayout) view.findViewById(R.id.trackerTabs);
-            initTabs();
-        }
-        return view;
     }
 
     @Override
@@ -93,12 +92,8 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected void clearData() {
-        tabListener.onTabUnselected(null);
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_tracker;
+        offset = 0;
+        items.clear();
     }
 
     @Override
@@ -106,44 +101,4 @@ public class TrackerFragment extends BaseCallbackFragment {
         return new TrackerAdapter(items, activity);
     }
 
-    private void initTabs() {
-        tabLayout.addTab(tabLayout.newTab().setText("Все"));
-        tabLayout.addTab(tabLayout.newTab().setText("Основные"));
-        tabLayout.addTab(tabLayout.newTab().setText("Без talks"));
-        tabLayout.addTab(tabLayout.newTab().setText("Технические"));
-
-        tabLayout.setOnTabSelectedListener(new TabListener());
-    }
-
-    private class TabListener implements TabLayout.OnTabSelectedListener {
-        @Override
-        public void onTabSelected(TabLayout.Tab tab) {
-            switch (tab.getPosition()) {
-                case 0:
-                    filter = TrackerFilterEnum.all.name();
-                    break;
-                case 1:
-                    filter = TrackerFilterEnum.main.name();
-                    break;
-                case 2:
-                    filter = TrackerFilterEnum.notalks.name();
-                    break;
-                case 3:
-                    filter = TrackerFilterEnum.tech.name();
-                    break;
-            }
-
-            getListItems();
-        }
-
-        @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
-            offset = 0;
-            items.clear();
-        }
-
-        @Override
-        public void onTabReselected(TabLayout.Tab tab) {
-        }
-    }
 }

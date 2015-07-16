@@ -44,7 +44,7 @@ public abstract class BaseListFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View newView = inflater.inflate(getLayout(), container, false);
+        View newView = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
         recyclerView = (RecyclerView) newView.findViewById(R.id.recyclerView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
@@ -74,6 +74,5 @@ public abstract class BaseListFragment extends Fragment {
 
     protected abstract void getListItems();
     protected abstract void clearData();
-    protected abstract int getLayout();
     protected abstract RecyclerView.Adapter getAdapter();
 }
