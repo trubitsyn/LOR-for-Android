@@ -53,7 +53,7 @@ class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
         viewHolder.getAuthor().setText(topic.getAuthor().getNick());
         viewHolder.getDate().setText(StringUtils.getDate(topic.getPostDate()));
-        //newsViewHolder.getCommentsCount().setText(item.getCommentsCount());
+        viewHolder.getCommentsCount().setVisibility(View.GONE);
     }
 
     @Override

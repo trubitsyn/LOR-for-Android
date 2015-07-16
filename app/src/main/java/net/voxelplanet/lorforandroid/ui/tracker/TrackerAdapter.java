@@ -83,7 +83,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     newsViewHolder.getTags().setVisibility(View.GONE);
                 } else newsViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
 
-                //newsViewHolder.getCommentsCount().setText(item.getCommentsCount());
+                newsViewHolder.getCommentsCount().setVisibility(View.GONE);
                 break;
             case GALLERY:
                 GalleryViewHolder galleryViewHolder = (GalleryViewHolder) viewHolder;
