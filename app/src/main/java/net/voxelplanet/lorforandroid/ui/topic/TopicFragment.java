@@ -70,6 +70,14 @@ public class TopicFragment extends Fragment {
                 loadTopic(url);
             }
         });
+
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
         return view;
     }
 

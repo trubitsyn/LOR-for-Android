@@ -44,8 +44,8 @@ public abstract class BaseListFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View newView = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
-        recyclerView = (RecyclerView) newView.findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
@@ -60,7 +60,7 @@ public abstract class BaseListFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) newView.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -69,7 +69,14 @@ public abstract class BaseListFragment extends Fragment {
             }
         });
 
-        return newView;
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
+        return view;
     }
 
     protected abstract void getListItems();
