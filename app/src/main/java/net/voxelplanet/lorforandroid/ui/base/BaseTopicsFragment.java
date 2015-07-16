@@ -32,7 +32,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public abstract class BaseTopicsFragment extends BaseCallbackFragment {
-    protected List<Topic> items = new ArrayList<Topic>();
+    protected final List<Topic> items = new ArrayList<Topic>();
 
     @Override
     protected String getUrl(int position) {

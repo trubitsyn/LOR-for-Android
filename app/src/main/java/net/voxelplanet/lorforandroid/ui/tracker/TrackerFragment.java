@@ -36,7 +36,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class TrackerFragment extends BaseCallbackFragment {
-    private List<TrackerItem> items = new ArrayList<TrackerItem>();
+    private final List<TrackerItem> items = new ArrayList<TrackerItem>();
     private int offset;
     private String filter;
 
@@ -61,7 +61,7 @@ public class TrackerFragment extends BaseCallbackFragment {
     }
 
     @Override
-    public void getListItems() {
+    protected void getListItems() {
         ApiTracker apiTracker = Adapter.restAdapter.create(ApiTracker.class);
         apiTracker.getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
