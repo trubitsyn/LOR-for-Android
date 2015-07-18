@@ -48,6 +48,7 @@ class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
 
     @Override
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
+        // TODO: Rewrite this method
         Topic topic = topics.get(i);
         viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
         //galleryViewHolder.getCategory().setText(item.getCategory());

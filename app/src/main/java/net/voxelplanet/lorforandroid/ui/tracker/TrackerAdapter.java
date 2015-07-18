@@ -45,6 +45,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
+        // TODO: It would be better to check this with API method
         if (trackerItems.get(position).getUrl().contains("gallery")) {
             return GALLERY;
         } else return NEWS;
@@ -72,6 +73,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         TrackerItem trackerItem = trackerItems.get(position);
         switch (viewHolder.getItemViewType()) {
+            // TODO: This method uses duplicates NewsAdapter's and GalleryAdapter's methods
             case NEWS:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
                 newsViewHolder.getTitle().setText(Html.fromHtml(trackerItem.getTitle()));
@@ -91,6 +93,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 String url = StringUtils.clearUrl(trackerItem.getUrl());
                 Picasso.with(activity).cancelRequest(galleryViewHolder.getImage());
+                // TODO: Remove hardcoded URL
                 String imageUrl = "https://linux.org.ru/gallery" + url.substring(url.lastIndexOf("/")) + "-med.jpg";
                 Picasso.with(activity).load(imageUrl).resize(400, 0).into((galleryViewHolder.getImage()));
 

@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
-        //actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // TODO: Display logo, collapsing ToolBar
 
         if (savedInstanceState == null) {
             navigationItemId = R.id.drawer_profile;
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onItemClicked(String url) {
         TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
 
+        // TODO: Add support for tablets
         if (topicFragment != null) {
             topicFragment.loadTopic(url);
         } else {

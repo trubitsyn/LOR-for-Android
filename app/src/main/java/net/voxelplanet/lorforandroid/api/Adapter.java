@@ -36,4 +36,6 @@ public class Adapter {
             .setEndpoint(ROOT)
             .setLogLevel(RestAdapter.LogLevel.FULL)
             .build();
+
+    // TODO: Consider using Singleton for storing public variables
 }
