@@ -18,6 +18,9 @@
 
     <string name="replyTo">В ответ на комментарий от</string>
 
+    <string name="notification_title">новых уведомлений</string>
+
     <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
+    <string name="error_network_notification">Ошибка при проверке уведомлений.</string>
     <string name="error_no_more_data">Нет более старых тем.</string>
 </resources>

@@ -15,6 +15,8 @@
 
 package net.voxelplanet.lorforandroid.ui;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.ui.base.TabFragment;
 import net.voxelplanet.lorforandroid.ui.gallery.GalleryFragment;
 import net.voxelplanet.lorforandroid.ui.news.NewsFragment;
+import net.voxelplanet.lorforandroid.ui.notification.NotificationReceiver;
 import net.voxelplanet.lorforandroid.ui.topic.TopicActivity;
 import net.voxelplanet.lorforandroid.ui.topic.TopicFragment;
 import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragmentPagerAdapter;
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupNotificationCheck();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTop);
@@ -71,6 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle.syncState();
 
         onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
+    }
+
+    private void setupNotificationCheck() {
+        Intent alarmIntent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        int interval = 1000 * 60 * 5; // Every 5 minutes
+        alarmManager.cancel(pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
 
     @Override
