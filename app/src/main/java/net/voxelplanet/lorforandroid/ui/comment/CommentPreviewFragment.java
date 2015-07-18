@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,8 +48,7 @@ public class CommentPreviewFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.comment_preview, null);
+        View view = View.inflate(activity, R.layout.comment_preview, null);
         TextView reply = (TextView) view.findViewById(R.id.commentReplyTo);
         TextView message = (TextView) view.findViewById(R.id.commentMessage);
         TextView author = (TextView) view.findViewById(R.id.commentAuthor);

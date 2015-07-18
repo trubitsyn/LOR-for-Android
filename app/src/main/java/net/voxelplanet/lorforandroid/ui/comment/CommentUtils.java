@@ -27,7 +27,7 @@ import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;
 
-public class CommentUtils {
+class CommentUtils {
     public static void initView(final List<Comment> comments, Comment comment, final Activity activity, TextView reply, TextView message, TextView author, TextView stars, TextView date) {
         author.setText(comment.getAuthor().getNick());
         message.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
@@ -46,7 +46,7 @@ public class CommentUtils {
         } else reply.setVisibility(View.GONE);
     }
 
-    public static Comment getParent(List<Comment> comments, int reply) {
+    private static Comment getParent(List<Comment> comments, int reply) {
         for (Comment comment : comments) {
             if (comment.getId().equals(reply)) {
                 return comment;

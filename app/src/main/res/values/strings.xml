@@ -19,6 +19,5 @@
     <string name="replyTo">В ответ на комментарий от</string>
 
     <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
-    <string name="error_limit">Нельзя загрузить больше.</string>
     <string name="error_no_more_data">Нет более старых тем.</string>
 </resources>

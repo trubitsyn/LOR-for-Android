@@ -15,7 +15,6 @@
 
 package net.voxelplanet.lorforandroid.ui.comment;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -34,8 +33,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class CommentFragment extends BaseListFragment {
+    private final List<Comment> items = new ArrayList<Comment>();
     private int page, previousCount = 0;
-    private List<Comment> items = new ArrayList<Comment>();
     private String url;
 
     @Override
