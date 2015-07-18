@@ -15,10 +15,9 @@
 
 package net.voxelplanet.lorforandroid.ui.comment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,20 +25,16 @@ import android.widget.TextView;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.Comment;
-import net.voxelplanet.lorforandroid.util.CommentUtils;
-import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private final List<Comment> comments;
-    private final Context context;
-    private final CommentClickListener listener;
+    private final Activity activity;
 
-    public CommentAdapter(List<Comment> comments, Context context, CommentClickListener listener) {
+    public CommentAdapter(List<Comment> comments, Activity activity) {
         this.comments = comments;
-        this.context = context;
-        this.listener = listener;
+        this.activity = activity;
     }
 
     @Override
@@ -49,24 +44,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final CommentAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final CommentAdapter.ViewHolder v, final int position) {
         Comment comment = comments.get(position);
-        viewHolder.author.setText(comment.getAuthor().getNick());
-        //viewHolder.avatar.setImageURI(Uri.parse(comment.getAvatar()));
-        viewHolder.message.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
-        viewHolder.message.setMovementMethod(LinkMovementMethod.getInstance());
-        viewHolder.stars.setText(comment.getAuthor().getStars());
-        viewHolder.date.setText(StringUtils.getDate(comment.getPostdate()));
-        if (comment.getReply() != null) {
-            final Comment parent = CommentUtils.getParent(comments, comment.getReply().getId());
-            viewHolder.replyTo.setText(context.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
-            viewHolder.replyTo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onParentLink(comments, parent);
-                }
-            });
-        } else viewHolder.replyTo.setVisibility(View.GONE);
+        CommentUtils.initView(comments, comment, activity, v.replyTo, v.message, v.author, v.stars, v.date);
     }
 
     @Override
@@ -76,7 +56,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView author;
-        //private ImageView avatar;
         private final TextView message;
         private final TextView stars;
         private final TextView date;
@@ -86,7 +65,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             super(commentView);
             replyTo = (TextView) commentView.findViewById(R.id.commentReplyTo);
             author = (TextView) commentView.findViewById(R.id.commentAuthor);
-            //avatar = (ImageView) commentView.findViewById(R.id.commentAvatar);
             message = (TextView) commentView.findViewById(R.id.commentMessage);
             stars = (TextView) commentView.findViewById(R.id.commentStars);
             date = (TextView) commentView.findViewById(R.id.commentDate);

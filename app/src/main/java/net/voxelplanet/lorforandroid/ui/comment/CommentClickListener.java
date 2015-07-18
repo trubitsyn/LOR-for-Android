@@ -20,5 +20,5 @@ import net.voxelplanet.lorforandroid.model.Comment;
 import java.util.List;
 
 interface CommentClickListener {
-    void onParentLink(List<Comment> comments, Comment parentComment);
+    void showParent(List<Comment> comments, Comment parentComment);
 }

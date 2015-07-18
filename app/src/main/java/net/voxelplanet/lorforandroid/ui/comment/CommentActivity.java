@@ -43,9 +43,9 @@ public class CommentActivity extends AppCompatActivity implements CommentClickLi
     }
 
     @Override
-    public void onParentLink(List<Comment> comments, Comment parentComment) {
+    public void showParent(List<Comment> comments, Comment parentComment) {
         CommentPreviewFragment commentPreviewFragment = new CommentPreviewFragment();
-        commentPreviewFragment.initializeView(comments, parentComment);
+        commentPreviewFragment.setComments(comments, parentComment);
         commentPreviewFragment.show(getSupportFragmentManager(), "commentPreviewFragment");
     }
 }

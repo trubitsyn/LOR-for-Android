@@ -35,14 +35,8 @@ import retrofit.client.Response;
 
 public class CommentFragment extends BaseListFragment {
     private int page, previousCount = 0;
-    private List<Comment> items;
+    private List<Comment> items = new ArrayList<Comment>();
     private String url;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        items = new ArrayList<Comment>();
-    }
 
     @Override
     protected void getListItems() {
@@ -96,6 +90,6 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new CommentAdapter(items, activity, (CommentClickListener) activity);
+        return new CommentAdapter(items, activity);
     }
 }
