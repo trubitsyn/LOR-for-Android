@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.tracker;
+package net.voxelplanet.lorforandroid.ui.section.tracker;
 
 public enum TrackerFilterEnum {
     all, main, notalks, tech

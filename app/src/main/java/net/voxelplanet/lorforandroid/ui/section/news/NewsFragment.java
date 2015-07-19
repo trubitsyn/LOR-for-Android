@@ -13,8 +13,21 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui;
+package net.voxelplanet.lorforandroid.ui.section.news;
 
-public enum SectionEnum {
-    news, gallery, forum, tracker
+import android.support.v7.widget.RecyclerView;
+
+import net.voxelplanet.lorforandroid.ui.base.BaseTopicsFragment;
+import net.voxelplanet.lorforandroid.ui.section.SectionEnum;
+
+public class NewsFragment extends BaseTopicsFragment {
+    @Override
+    protected RecyclerView.Adapter getAdapter() {
+        return new NewsAdapter(items);
+    }
+
+    @Override
+    protected SectionEnum getSection() {
+        return SectionEnum.news;
+    }
 }

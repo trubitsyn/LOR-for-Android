@@ -32,12 +32,12 @@ import android.view.MenuItem;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.ui.base.TabFragment;
-import net.voxelplanet.lorforandroid.ui.gallery.GalleryFragment;
-import net.voxelplanet.lorforandroid.ui.news.NewsFragment;
 import net.voxelplanet.lorforandroid.ui.notification.NotificationReceiver;
+import net.voxelplanet.lorforandroid.ui.section.gallery.GalleryFragment;
+import net.voxelplanet.lorforandroid.ui.section.news.NewsFragment;
+import net.voxelplanet.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
 import net.voxelplanet.lorforandroid.ui.topic.TopicActivity;
 import net.voxelplanet.lorforandroid.ui.topic.TopicFragment;
-import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragmentPagerAdapter;
 import net.voxelplanet.lorforandroid.ui.util.ItemClickCallback;
 
 import butterknife.Bind;

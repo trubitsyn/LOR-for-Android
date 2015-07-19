@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.tracker;
+package net.voxelplanet.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.api.ApiManager;
-import net.voxelplanet.lorforandroid.api.ApiTracker;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
 import net.voxelplanet.lorforandroid.model.TrackerItems;
 import net.voxelplanet.lorforandroid.ui.base.BaseCallbackFragment;

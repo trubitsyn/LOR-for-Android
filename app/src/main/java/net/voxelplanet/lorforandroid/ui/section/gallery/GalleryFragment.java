@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.gallery;
+package net.voxelplanet.lorforandroid.ui.section.gallery;
 
 import android.support.v7.widget.RecyclerView;
 
-import net.voxelplanet.lorforandroid.ui.SectionEnum;
 import net.voxelplanet.lorforandroid.ui.base.BaseTopicsFragment;
+import net.voxelplanet.lorforandroid.ui.section.SectionEnum;
 
 public class GalleryFragment extends BaseTopicsFragment {
     @Override

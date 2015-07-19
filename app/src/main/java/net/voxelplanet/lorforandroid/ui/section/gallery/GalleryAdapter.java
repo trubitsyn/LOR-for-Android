@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.gallery;
+package net.voxelplanet.lorforandroid.ui.section.gallery;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.tracker;
+package net.voxelplanet.lorforandroid.ui.section.tracker;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -23,10 +23,10 @@ import android.view.ViewGroup;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
-import net.voxelplanet.lorforandroid.ui.gallery.GalleryAdapter;
-import net.voxelplanet.lorforandroid.ui.gallery.GalleryViewHolder;
-import net.voxelplanet.lorforandroid.ui.news.NewsAdapter;
-import net.voxelplanet.lorforandroid.ui.news.NewsViewHolder;
+import net.voxelplanet.lorforandroid.ui.section.gallery.GalleryAdapter;
+import net.voxelplanet.lorforandroid.ui.section.gallery.GalleryViewHolder;
+import net.voxelplanet.lorforandroid.ui.section.news.NewsAdapter;
+import net.voxelplanet.lorforandroid.ui.section.news.NewsViewHolder;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.List;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.news;
+package net.voxelplanet.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;

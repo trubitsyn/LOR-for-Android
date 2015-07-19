@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.tracker;
+package net.voxelplanet.lorforandroid.ui.section.tracker;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

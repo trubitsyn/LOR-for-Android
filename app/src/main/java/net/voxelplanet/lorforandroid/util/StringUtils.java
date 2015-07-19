@@ -17,7 +17,7 @@ package net.voxelplanet.lorforandroid.util;
 
 import android.text.Spanned;
 
-import net.voxelplanet.lorforandroid.ui.SectionEnum;
+import net.voxelplanet.lorforandroid.ui.section.SectionEnum;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

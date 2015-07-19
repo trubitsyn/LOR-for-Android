@@ -19,10 +19,9 @@ import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.api.ApiManager;
-import net.voxelplanet.lorforandroid.api.ApiTopic;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.model.TopicItems;
-import net.voxelplanet.lorforandroid.ui.SectionEnum;
+import net.voxelplanet.lorforandroid.ui.section.SectionEnum;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.ArrayList;

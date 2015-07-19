@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-package net.voxelplanet.lorforandroid.ui.gallery;
+package net.voxelplanet.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.voxelplanet.lorforandroid.R;
@@ -25,13 +24,15 @@ import net.voxelplanet.lorforandroid.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class GalleryViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.galleryTitleAuthor) private TextView title;
-    @Bind(R.id.galleryImage) private ImageView image;
-    @Bind(R.id.galleryTags) private TextView tags;
-    @Bind(R.id.galleryCommentsCount) private TextView commentsCount;
+public class NewsViewHolder extends RecyclerView.ViewHolder {
+    @Bind(R.id.newsTitle) private TextView title;
+    @Bind(R.id.newsCategory) private TextView category;
+    @Bind(R.id.newsTags) private TextView tags;
+    @Bind(R.id.newsAuthor) private TextView author;
+    @Bind(R.id.newsDate) private TextView date;
+    @Bind(R.id.newsCommentsCount) private TextView commentsCount;
 
-    public GalleryViewHolder(View itemView) {
+    public NewsViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
@@ -40,12 +41,20 @@ public class GalleryViewHolder extends RecyclerView.ViewHolder {
         return title;
     }
 
-    public ImageView getImage() {
-        return image;
+    public TextView getCategory() {
+        return category;
     }
 
     public TextView getTags() {
         return tags;
+    }
+
+    public TextView getAuthor() {
+        return author;
+    }
+
+    public TextView getDate() {
+        return date;
     }
 
     public TextView getCommentsCount() {
