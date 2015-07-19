@@ -27,6 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
+import net.voxelplanet.lorforandroid.ui.SectionEnum;
 import net.voxelplanet.lorforandroid.ui.gallery.GalleryViewHolder;
 import net.voxelplanet.lorforandroid.ui.news.NewsViewHolder;
 import net.voxelplanet.lorforandroid.util.StringUtils;
@@ -46,7 +47,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         // TODO: It would be better to check this with API method
-        if (trackerItems.get(position).getUrl().contains("gallery")) {
+        if (trackerItems.get(position).getUrl().contains(SectionEnum.gallery.name())) {
             return GALLERY;
         } else return NEWS;
     }

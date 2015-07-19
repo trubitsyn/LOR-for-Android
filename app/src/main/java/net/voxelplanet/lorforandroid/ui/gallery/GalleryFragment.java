@@ -17,6 +17,7 @@ package net.voxelplanet.lorforandroid.ui.gallery;
 
 import android.support.v7.widget.RecyclerView;
 
+import net.voxelplanet.lorforandroid.ui.SectionEnum;
 import net.voxelplanet.lorforandroid.ui.base.BaseTopicsFragment;
 
 public class GalleryFragment extends BaseTopicsFragment {
@@ -26,7 +27,7 @@ public class GalleryFragment extends BaseTopicsFragment {
     }
 
     @Override
-    protected String getSection() {
-        return "gallery";
+    protected SectionEnum getSection() {
+        return SectionEnum.gallery;
     }
 }

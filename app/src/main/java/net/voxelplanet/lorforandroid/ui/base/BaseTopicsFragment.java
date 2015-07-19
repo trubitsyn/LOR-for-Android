@@ -22,6 +22,7 @@ import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiTopic;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.model.TopicItems;
+import net.voxelplanet.lorforandroid.ui.SectionEnum;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     public void getListItems() {
-        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection(), null, "2007-01-01", StringUtils.getCurrentDate(), null, null, null, null, null, null, new Callback<TopicItems>() {
+        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection().name(), null, "2007-01-01", StringUtils.getCurrentDate(), null, null, null, null, null, null, new Callback<TopicItems>() {
             @Override
             public void success(TopicItems topicItems, Response response) {
                 items.addAll(topicItems.topicItems);
@@ -62,5 +63,5 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
         // Clear offset etc.
     }
 
-    protected abstract String getSection();
+    protected abstract SectionEnum getSection();
 }
