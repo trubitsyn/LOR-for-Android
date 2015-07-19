@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiUser;
 import net.voxelplanet.lorforandroid.model.User;
 import net.voxelplanet.lorforandroid.util.StringUtils;
@@ -65,8 +65,7 @@ public class UserFragment extends Fragment {
 
     public void getInfo() {
         // TODO: Implement user authorization
-        ApiUser apiUser = Adapter.restAdapter.create(ApiUser.class);
-        apiUser.getUser("anonymous", new Callback<User>() {
+        ApiManager.API_MANAGER.getApiUser().getUser("anonymous", new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 id.setText(user.getId());

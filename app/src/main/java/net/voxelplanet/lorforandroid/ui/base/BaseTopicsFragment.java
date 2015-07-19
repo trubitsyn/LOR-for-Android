@@ -18,7 +18,7 @@ package net.voxelplanet.lorforandroid.ui.base;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiTopic;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.model.TopicItems;
@@ -41,8 +41,7 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     public void getListItems() {
-        ApiTopic apiTopic = Adapter.restAdapter.create(ApiTopic.class);
-        apiTopic.getTopics(getSection(), null, "2007-01-01", StringUtils.getCurrentDate(), null, null, null, null, null, null, new Callback<TopicItems>() {
+        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection(), null, "2007-01-01", StringUtils.getCurrentDate(), null, null, null, null, null, null, new Callback<TopicItems>() {
             @Override
             public void success(TopicItems topicItems, Response response) {
                 items.addAll(topicItems.topicItems);

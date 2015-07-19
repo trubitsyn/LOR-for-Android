@@ -8,7 +8,7 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiNotifications;
 
 import retrofit.Callback;
@@ -18,8 +18,7 @@ import retrofit.client.Response;
 public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
-        ApiNotifications apiNotifications = Adapter.directRestAdapter.create(ApiNotifications.class);
-        apiNotifications.getCount(null, new Callback<Integer>() {
+        ApiManager.API_MANAGER.getApiNotifications().getCount(null, new Callback<Integer>() {
             @Override
             public void success(Integer count, Response response) {
                 showNotification(context, count);

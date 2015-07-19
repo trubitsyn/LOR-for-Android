@@ -19,7 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiComments;
 import net.voxelplanet.lorforandroid.model.Comment;
 import net.voxelplanet.lorforandroid.model.Comments;
@@ -39,8 +39,7 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void getListItems() {
-        ApiComments apiComments = Adapter.restAdapter.create(ApiComments.class);
-        apiComments.getComments(url, page, new Callback<Comments>() {
+        ApiManager.API_MANAGER.getApiComments().getComments(url, page, new Callback<Comments>() {
             @Override
             public void success(Comments newComments, Response response) {
                 List<Comment> comments = newComments.comments;

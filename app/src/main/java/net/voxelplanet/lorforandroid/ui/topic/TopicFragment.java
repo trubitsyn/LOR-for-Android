@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiTopic;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.model.Topics;
@@ -84,8 +84,7 @@ public class TopicFragment extends Fragment {
 
     public void loadTopic(String url) {
         this.url = url;
-        final ApiTopic apiTopic = Adapter.restAdapter.create(ApiTopic.class);
-        apiTopic.getTopic(url, new Callback<Topics>() {
+        ApiManager.API_MANAGER.getApiTopic().getTopic(url, new Callback<Topics>() {
             @Override
             public void success(Topics topics, Response response) {
                 Topic topic = topics.topic;

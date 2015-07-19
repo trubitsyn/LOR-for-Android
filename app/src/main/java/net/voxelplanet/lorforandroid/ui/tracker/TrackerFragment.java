@@ -20,7 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.Adapter;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.api.ApiTracker;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
 import net.voxelplanet.lorforandroid.model.TrackerItems;
@@ -62,8 +62,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected void getListItems() {
-        ApiTracker apiTracker = Adapter.restAdapter.create(ApiTracker.class);
-        apiTracker.getTracker(offset, filter, new Callback<TrackerItems>() {
+        ApiManager.API_MANAGER.getApiTracker().getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {

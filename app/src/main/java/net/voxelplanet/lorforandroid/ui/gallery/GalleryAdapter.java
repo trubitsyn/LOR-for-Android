@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import net.voxelplanet.lorforandroid.R;
+import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
