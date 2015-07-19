@@ -24,6 +24,8 @@ import java.util.List;
 public class Topic {
 
     @Expose
+    private final List<String> tags = new ArrayList<String>();
+    @Expose
     private String url;
     @Expose
     private String title;
@@ -43,8 +45,6 @@ public class Topic {
     private Integer watchCount;
     @Expose
     private Integer postscore;
-    @Expose
-    private final List<String> tags = new ArrayList<String>();
     @Expose
     private Author author;
 

@@ -31,22 +31,23 @@ import net.voxelplanet.lorforandroid.api.ApiUser;
 import net.voxelplanet.lorforandroid.model.User;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class UserFragment extends Fragment {
-    //private ImageView avatar;
-    private TextView id;
-    private TextView nick;
-    private TextView url;
-    private TextView regDate;
-    private TextView lastVisit;
-    private TextView status;
-    private TextView score;
-    private TextView favTags;
-    private TextView ignoredTags;
-    private TextView ignoredUsers;
+    @Bind(R.id.userId) private TextView id;
+    @Bind(R.id.userNick) private TextView nick;
+    @Bind(R.id.userUrl) private TextView url;
+    @Bind(R.id.userRegDate) private TextView regDate;
+    @Bind(R.id.userLastVisit) private TextView lastVisit;
+    @Bind(R.id.userStatus) private TextView status;
+    @Bind(R.id.userScore) private TextView score;
+    @Bind(R.id.userFavTags) private TextView favTags;
+    @Bind(R.id.userIgnoredTags) private TextView ignoredTags;
+    @Bind(R.id.userIgnoredUsers) private TextView ignoredUsers;
     private Activity activity;
 
     @Override
@@ -58,17 +59,7 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        //avatar = (ImageView) view.findViewById(R.id.userAvatar);
-        id = (TextView) view.findViewById(R.id.userId);
-        nick = (TextView) view.findViewById(R.id.userNick);
-        url = (TextView) view.findViewById(R.id.userUrl);
-        regDate = (TextView) view.findViewById(R.id.userRegDate);
-        lastVisit = (TextView) view.findViewById(R.id.userLastVisit);
-        status = (TextView) view.findViewById(R.id.userStatus);
-        score = (TextView) view.findViewById(R.id.userScore);
-        favTags = (TextView) view.findViewById(R.id.userFavTags);
-        ignoredTags = (TextView) view.findViewById(R.id.userIgnoredTags);
-        ignoredUsers = (TextView) view.findViewById(R.id.userIgnoredUsers);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -78,7 +69,6 @@ public class UserFragment extends Fragment {
         apiUser.getUser("anonymous", new Callback<User>() {
             @Override
             public void success(User user, Response response) {
-                //avatar.setImageURI(Uri.parse(user.getAvatar()));
                 id.setText(user.getId());
                 nick.setText(user.getNick());
                 url.setText(user.getUrl());

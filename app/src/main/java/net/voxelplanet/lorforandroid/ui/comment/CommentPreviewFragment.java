@@ -29,10 +29,18 @@ import net.voxelplanet.lorforandroid.model.Comment;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class CommentPreviewFragment extends DialogFragment {
     private Activity activity;
     private Comment comment;
     private List<Comment> comments;
+    @Bind(R.id.commentReplyTo) private TextView reply;
+    @Bind(R.id.commentMessage) private TextView message;
+    @Bind(R.id.commentAuthor) private TextView author;
+    @Bind(R.id.commentStars) private TextView stars;
+    @Bind(R.id.commentDate) private TextView date;
 
     @Override
     public void onAttach(Activity activity) {
@@ -49,11 +57,7 @@ public class CommentPreviewFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(activity, R.layout.comment_preview, null);
-        TextView reply = (TextView) view.findViewById(R.id.commentReplyTo);
-        TextView message = (TextView) view.findViewById(R.id.commentMessage);
-        TextView author = (TextView) view.findViewById(R.id.commentAuthor);
-        TextView stars = (TextView) view.findViewById(R.id.commentStars);
-        TextView date = (TextView) view.findViewById(R.id.commentDate);
+        ButterKnife.bind(this, view);
 
         CommentUtils.initView(comments, comment, activity, reply, message, author, stars, date);
 

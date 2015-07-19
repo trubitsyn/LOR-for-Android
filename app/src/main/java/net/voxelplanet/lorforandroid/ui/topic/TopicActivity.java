@@ -26,14 +26,20 @@ import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.ui.comment.CommentActivity;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class TopicActivity extends AppCompatActivity {
+    @Bind(R.id.commentsTextView)
+    private TextView commentsTextView;
+    @Bind(R.id.toolbarTop)
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
-
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTop);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -41,8 +47,6 @@ public class TopicActivity extends AppCompatActivity {
             TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
             final String url = StringUtils.clearUrl(getIntent().getStringExtra("url"));
             topicFragment.loadTopic(url);
-
-            TextView commentsTextView = (TextView) findViewById(R.id.commentsTextView);
             commentsTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

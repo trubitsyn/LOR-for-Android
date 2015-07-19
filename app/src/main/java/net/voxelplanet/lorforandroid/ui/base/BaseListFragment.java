@@ -29,11 +29,14 @@ import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.ui.util.DividerItemDecoration;
 import net.voxelplanet.lorforandroid.ui.util.InfiniteScrollListener;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public abstract class BaseListFragment extends Fragment {
     protected Activity activity;
     protected RecyclerView.Adapter adapter;
-    protected SwipeRefreshLayout swipeRefreshLayout;
-    RecyclerView recyclerView;
+    @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.recyclerView) RecyclerView recyclerView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -45,7 +48,7 @@ public abstract class BaseListFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        ButterKnife.bind(this, view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
@@ -60,7 +63,6 @@ public abstract class BaseListFragment extends Fragment {
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -80,6 +82,8 @@ public abstract class BaseListFragment extends Fragment {
     }
 
     protected abstract void getListItems();
+
     protected abstract void clearData();
+
     protected abstract RecyclerView.Adapter getAdapter();
 }

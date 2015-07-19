@@ -27,6 +27,9 @@ import net.voxelplanet.lorforandroid.model.Comment;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private final List<Comment> comments;
     private final Activity activity;
@@ -54,19 +57,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView author;
-        private final TextView message;
-        private final TextView stars;
-        private final TextView date;
-        private final TextView replyTo;
+        @Bind(R.id.commentAuthor) private TextView author;
+        @Bind(R.id.commentMessage) private TextView message;
+        @Bind(R.id.commentStars) private TextView stars;
+        @Bind(R.id.commentDate) private TextView date;
+        @Bind(R.id.commentReplyTo) private TextView replyTo;
 
         public ViewHolder(View commentView) {
             super(commentView);
-            replyTo = (TextView) commentView.findViewById(R.id.commentReplyTo);
-            author = (TextView) commentView.findViewById(R.id.commentAuthor);
-            message = (TextView) commentView.findViewById(R.id.commentMessage);
-            stars = (TextView) commentView.findViewById(R.id.commentStars);
-            date = (TextView) commentView.findViewById(R.id.commentDate);
+            ButterKnife.bind(this, commentView);
         }
     }
 }

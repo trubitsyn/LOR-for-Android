@@ -20,7 +20,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TrackerFragmentPagerAdapter extends FragmentPagerAdapter {
-    private final String tabs[] = { "Все", "Основные", "Без talks", "Технические"};
+    private final String tabs[] = {"Все", "Основные", "Без talks", "Технические"};
 
     public TrackerFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

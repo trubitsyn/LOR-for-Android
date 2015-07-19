@@ -83,7 +83,8 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 if (trackerItem.getTags().size() == 0) {
                     newsViewHolder.getTags().setVisibility(View.GONE);
-                } else newsViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
+                } else
+                    newsViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
 
                 newsViewHolder.getCommentsCount().setVisibility(View.GONE);
                 break;
@@ -99,7 +100,8 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 if (trackerItem.getTags().size() == 0) {
                     galleryViewHolder.getTags().setVisibility(View.GONE);
-                } else galleryViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
+                } else
+                    galleryViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
 
                 //galleryViewHolder.getCommentsCount().setText(item.getCommentsCount());
         }

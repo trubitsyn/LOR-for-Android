@@ -21,22 +21,20 @@ import android.widget.TextView;
 
 import net.voxelplanet.lorforandroid.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class NewsViewHolder extends RecyclerView.ViewHolder {
-    private final TextView title;
-    private final TextView category;
-    private final TextView tags;
-    private final TextView author;
-    private final TextView date;
-    private final TextView commentsCount;
+    @Bind(R.id.newsTitle) private TextView title;
+    @Bind(R.id.newsCategory) private TextView category;
+    @Bind(R.id.newsTags) private TextView tags;
+    @Bind(R.id.newsAuthor) private TextView author;
+    @Bind(R.id.newsDate) private TextView date;
+    @Bind(R.id.newsCommentsCount) private TextView commentsCount;
 
     public NewsViewHolder(View itemView) {
         super(itemView);
-        title = (TextView) itemView.findViewById(R.id.newsTitle);
-        category = (TextView) itemView.findViewById(R.id.newsCategory);
-        tags = (TextView) itemView.findViewById(R.id.newsTags);
-        author = (TextView) itemView.findViewById(R.id.newsAuthor);
-        date = (TextView) itemView.findViewById(R.id.newsDate);
-        commentsCount = (TextView) itemView.findViewById(R.id.newsCommentsCount);
+        ButterKnife.bind(this, itemView);
     }
 
     public TextView getTitle() {

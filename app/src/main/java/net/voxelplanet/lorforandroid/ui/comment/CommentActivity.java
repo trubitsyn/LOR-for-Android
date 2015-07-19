@@ -24,13 +24,17 @@ import net.voxelplanet.lorforandroid.model.Comment;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class CommentActivity extends AppCompatActivity implements CommentClickListener {
+    @Bind(R.id.toolbarTop) private Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
-
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTop);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

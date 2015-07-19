@@ -40,8 +40,13 @@ import net.voxelplanet.lorforandroid.ui.topic.TopicFragment;
 import net.voxelplanet.lorforandroid.ui.tracker.TrackerFragmentPagerAdapter;
 import net.voxelplanet.lorforandroid.ui.util.ItemClickCallback;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
-    private DrawerLayout drawerLayout;
+    @Bind(R.id.drawer_layout) private DrawerLayout drawerLayout;
+    @Bind(R.id.toolbarTop) private Toolbar toolbar;
+    @Bind(R.id.navigationView) private NavigationView navigationView;
     private int navigationItemId;
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
@@ -50,11 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         setupNotificationCheck();
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarTop);
         setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
@@ -68,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationItemId = savedInstanceState.getInt("NAV_ITEM_ID");
         }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);

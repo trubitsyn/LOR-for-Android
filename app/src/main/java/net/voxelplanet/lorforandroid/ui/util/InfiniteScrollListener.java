@@ -20,9 +20,9 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListener {
     private final LinearLayoutManager layoutManager;
+    private final int visibleThreshold = 5;
     private boolean loading = true;
     private int previousTotal = 0;
-    private final int visibleThreshold = 5;
 
     public InfiniteScrollListener(LinearLayoutManager layoutManager) {
         this.layoutManager = layoutManager;

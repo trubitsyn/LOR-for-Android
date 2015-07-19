@@ -22,18 +22,18 @@ import android.widget.TextView;
 
 import net.voxelplanet.lorforandroid.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
-    private final TextView title;
-    private final ImageView image;
-    private final TextView tags;
-    private final TextView commentsCount;
+    @Bind(R.id.galleryTitleAuthor) private TextView title;
+    @Bind(R.id.galleryImage) private ImageView image;
+    @Bind(R.id.galleryTags) private TextView tags;
+    @Bind(R.id.galleryCommentsCount) private TextView commentsCount;
 
     public GalleryViewHolder(View itemView) {
         super(itemView);
-        title = (TextView) itemView.findViewById(R.id.galleryTitleAuthor);
-        image = (ImageView) itemView.findViewById(R.id.galleryImage);
-        tags = (TextView) itemView.findViewById(R.id.galleryTags);
-        commentsCount = (TextView) itemView.findViewById(R.id.galleryCommentsCount);
+        ButterKnife.bind(this, itemView);
     }
 
     public TextView getTitle() {

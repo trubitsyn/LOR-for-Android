@@ -36,15 +36,22 @@ import net.voxelplanet.lorforandroid.model.Topics;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class TopicFragment extends Fragment {
+    @Bind(R.id.topicTitle)
     private TextView title;
+    @Bind(R.id.topicTags)
     private TextView tags;
+    @Bind(R.id.topicAuthor)
     private TextView author;
+    @Bind(R.id.topicMessage)
     private TextView message;
+    @Bind(R.id.topicSwipeRefreshLayout)
     private SwipeRefreshLayout swipeRefreshLayout;
     private String url;
     private Activity activity;
@@ -58,19 +65,13 @@ public class TopicFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_topic, container, false);
-        title = (TextView) view.findViewById(R.id.topicTitle);
-        tags = (TextView) view.findViewById(R.id.topicTags);
-        author = (TextView) view.findViewById(R.id.topicAuthor);
-        message = (TextView) view.findViewById(R.id.topicMessage);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.topicSwipeRefreshLayout);
+        ButterKnife.bind(this, view);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 loadTopic(url);
             }
         });
-
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
