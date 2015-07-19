@@ -45,7 +45,7 @@ public class TopicActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
-            final String url = StringUtils.clearUrl(getIntent().getStringExtra("url"));
+            final String url = StringUtils.fixUrl(getIntent().getStringExtra("url"));
             topicFragment.loadTopic(url);
             commentsTextView.setOnClickListener(new View.OnClickListener() {
                 @Override

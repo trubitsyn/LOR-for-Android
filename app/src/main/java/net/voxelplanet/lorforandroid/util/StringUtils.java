@@ -17,6 +17,8 @@ package net.voxelplanet.lorforandroid.util;
 
 import android.text.Spanned;
 
+import net.voxelplanet.lorforandroid.ui.SectionEnum;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,7 +34,7 @@ public class StringUtils {
     }
 
     @Deprecated
-    public static String clearUrl(String url) {
+    public static String fixUrl(String url) {
         int length = url.length() - url.replace("/", "").length();
         if (length > 3) {
             return url.substring(0, url.lastIndexOf("/"));
@@ -44,5 +46,20 @@ public class StringUtils {
 
     public static CharSequence removeLineBreak(Spanned spanned) {
         return spanned.subSequence(0, spanned.length() - 2);
+    }
+
+    @Deprecated
+    public static boolean isGallery(String url) {
+        return url.contains(SectionEnum.gallery.name());
+    }
+
+    @Deprecated
+    public static String getImageUrl(String url, String size) {
+        // Size can be either "med" or "med-2x"
+        String fixed = fixUrl(url);
+        if (isGallery(fixed)) {
+            return "https://linux.org.ru/" + SectionEnum.gallery.name() + fixed.substring(fixed.lastIndexOf("/")) + "-" + size + ".jpg";
+        }
+        return null;
     }
 }

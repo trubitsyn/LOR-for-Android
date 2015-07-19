@@ -26,13 +26,13 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import net.voxelplanet.lorforandroid.R;
-import net.voxelplanet.lorforandroid.api.ApiManager;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
-class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
+public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<Topic> topics;
     private final Activity activity;
 
@@ -49,21 +49,25 @@ class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
 
     @Override
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
-        // TODO: Rewrite this method
         Topic topic = topics.get(i);
-        viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
-        //galleryViewHolder.getCategory().setText(item.getCategory());
+        initView(viewHolder, activity, topic.getTitle(), "", StringUtils.getImageUrl(topic.getUrl(), "med"), topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
 
-        String url = StringUtils.clearUrl(topic.getUrl());
-        Picasso.with(activity).cancelRequest(viewHolder.getImage());
-        String imageUrl = "https://linux.org.ru/gallery" + url.substring(url.lastIndexOf("/")) + "-med.jpg";
-        Picasso.with(activity).load(imageUrl).resize(400, 0).into((viewHolder.getImage()));
+    }
 
-        if (topic.getTags().size() == 0) {
+    public static void initView(GalleryViewHolder viewHolder, Activity activity, String title, String groupTitle, String imageUrl, List<String> tags, String nick, Date date, int commentsCount) {
+        viewHolder.getTitle().setText(Html.fromHtml(title) + " (" + nick + ")");
+        //viewHolder.getCategory().setText(groupTitle);
+
+        if (imageUrl != null) {
+            Picasso.with(activity).cancelRequest(viewHolder.getImage());
+            Picasso.with(activity).load(imageUrl).resize(400, 0).into((viewHolder.getImage()));
+        } else viewHolder.getImage().setVisibility(View.GONE);
+
+        if (tags.size() == 0) {
             viewHolder.getTags().setVisibility(View.GONE);
-        } else viewHolder.getTags().setText(TextUtils.join(", ", topic.getTags()));
+        } else viewHolder.getTags().setText(TextUtils.join(", ", tags));
 
-        //viewHolder.getCommentsCount().setText(item.getCommentsCount());
+        //viewHolder.getCommentsCount().setText(commentsCount);
     }
 
     @Override

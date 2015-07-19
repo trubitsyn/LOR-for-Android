@@ -26,9 +26,10 @@ import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.Topic;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
-class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private final List<Topic> newsItems;
 
     public NewsAdapter(List<Topic> topics) {
@@ -44,15 +45,19 @@ class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
         Topic topic = newsItems.get(i);
-        viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
-        //newsViewHolder.getCategory().setText(topic.getGroupTitle());
+        initView(viewHolder, topic.getTitle(), "", topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
+    }
 
-        if (topic.getTags().size() == 0) {
+    public static void initView(NewsViewHolder viewHolder, String title, String groupTitle, List<String> tags, String nick, Date date, int commentsCount) {
+        viewHolder.getTitle().setText(Html.fromHtml(title));
+        viewHolder.getCategory().setText(groupTitle);
+
+        if (tags.size() == 0) {
             viewHolder.getTags().setVisibility(View.GONE);
-        } else viewHolder.getTags().setText(TextUtils.join(", ", topic.getTags()));
+        } else viewHolder.getTags().setText(TextUtils.join(", ", tags));
 
-        viewHolder.getAuthor().setText(topic.getAuthor().getNick());
-        viewHolder.getDate().setText(StringUtils.getDate(topic.getPostDate()));
+        viewHolder.getAuthor().setText(nick);
+        viewHolder.getDate().setText(StringUtils.getDate(date));
         viewHolder.getCommentsCount().setVisibility(View.GONE);
     }
 

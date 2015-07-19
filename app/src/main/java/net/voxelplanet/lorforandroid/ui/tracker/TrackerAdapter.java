@@ -17,18 +17,15 @@ package net.voxelplanet.lorforandroid.ui.tracker;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
-
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.model.TrackerItem;
-import net.voxelplanet.lorforandroid.ui.SectionEnum;
+import net.voxelplanet.lorforandroid.ui.gallery.GalleryAdapter;
 import net.voxelplanet.lorforandroid.ui.gallery.GalleryViewHolder;
+import net.voxelplanet.lorforandroid.ui.news.NewsAdapter;
 import net.voxelplanet.lorforandroid.ui.news.NewsViewHolder;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
@@ -47,7 +44,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         // TODO: It would be better to check this with API method
-        if (trackerItems.get(position).getUrl().contains(SectionEnum.gallery.name())) {
+        if (StringUtils.isGallery(trackerItems.get(position).getUrl())) {
             return GALLERY;
         } else return NEWS;
     }
@@ -72,39 +69,15 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        TrackerItem trackerItem = trackerItems.get(position);
+        TrackerItem item = trackerItems.get(position);
         switch (viewHolder.getItemViewType()) {
-            // TODO: This method uses duplicates NewsAdapter's and GalleryAdapter's methods
             case NEWS:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
-                newsViewHolder.getTitle().setText(Html.fromHtml(trackerItem.getTitle()));
-                newsViewHolder.getCategory().setText(trackerItem.getGroupTitle());
-                newsViewHolder.getAuthor().setText(trackerItem.getLastCommentedBy());
-                newsViewHolder.getDate().setText(StringUtils.getDate(trackerItem.getPostDate()));
-
-                if (trackerItem.getTags().size() == 0) {
-                    newsViewHolder.getTags().setVisibility(View.GONE);
-                } else
-                    newsViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
-
-                newsViewHolder.getCommentsCount().setVisibility(View.GONE);
+                NewsAdapter.initView(newsViewHolder, item.getTitle(), item.getGroupTitle(), item.getTags(), item.getLastCommentedBy(), item.getPostDate(), 0);
                 break;
             case GALLERY:
                 GalleryViewHolder galleryViewHolder = (GalleryViewHolder) viewHolder;
-                galleryViewHolder.getTitle().setText(Html.fromHtml(trackerItem.getTitle()) + " (" + trackerItem.getAuthor() + ")");
-
-                String url = StringUtils.clearUrl(trackerItem.getUrl());
-                Picasso.with(activity).cancelRequest(galleryViewHolder.getImage());
-                // TODO: Remove hardcoded URL
-                String imageUrl = "https://linux.org.ru/gallery" + url.substring(url.lastIndexOf("/")) + "-med.jpg";
-                Picasso.with(activity).load(imageUrl).resize(400, 0).into((galleryViewHolder.getImage()));
-
-                if (trackerItem.getTags().size() == 0) {
-                    galleryViewHolder.getTags().setVisibility(View.GONE);
-                } else
-                    galleryViewHolder.getTags().setText(TextUtils.join(", ", trackerItem.getTags()));
-
-                //galleryViewHolder.getCommentsCount().setText(item.getCommentsCount());
+                GalleryAdapter.initView(galleryViewHolder, activity, item.getTitle(), item.getGroupTitle(), StringUtils.getImageUrl(item.getUrl(), "med"), item.getTags(), item.getAuthor(), item.getPostDate(), 0);
         }
     }
 
