@@ -38,7 +38,7 @@ public abstract class BaseCallbackFragment extends BaseListFragment {
         recyclerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
-                callback.onItemClicked(getUrl(recyclerView.getChildPosition(view)));
+                callback.onItemClicked(getUrl(recyclerView.getChildAdapterPosition(view)));
             }
         }));
 
