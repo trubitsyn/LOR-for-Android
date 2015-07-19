@@ -51,7 +51,7 @@ public abstract class BaseListFragment extends Fragment {
         ButterKnife.bind(this, view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new DividerItemDecoration(activity));
 
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
