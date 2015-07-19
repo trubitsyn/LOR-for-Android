@@ -44,9 +44,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
-    @Bind(R.id.drawer_layout) private DrawerLayout drawerLayout;
-    @Bind(R.id.toolbarTop) private Toolbar toolbar;
-    @Bind(R.id.navigationView) private NavigationView navigationView;
+    @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @Bind(R.id.toolbarTop) Toolbar toolbar;
+    @Bind(R.id.navigationView) NavigationView navigationView;
     private int navigationItemId;
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;

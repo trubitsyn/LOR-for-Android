@@ -35,6 +35,7 @@ public abstract class BaseCallbackFragment extends BaseListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         recyclerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
@@ -42,7 +43,7 @@ public abstract class BaseCallbackFragment extends BaseListFragment {
             }
         }));
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     protected abstract String getUrl(int position);

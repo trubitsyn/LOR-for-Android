@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.api.ApiManager;
-import net.voxelplanet.lorforandroid.api.ApiNotifications;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;

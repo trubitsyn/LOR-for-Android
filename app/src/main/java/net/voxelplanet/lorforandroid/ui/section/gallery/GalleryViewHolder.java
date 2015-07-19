@@ -26,10 +26,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.galleryTitleAuthor) private TextView title;
-    @Bind(R.id.galleryImage) private ImageView image;
-    @Bind(R.id.galleryTags) private TextView tags;
-    @Bind(R.id.galleryCommentsCount) private TextView commentsCount;
+    @Bind(R.id.galleryTitleAuthor) TextView title;
+    @Bind(R.id.galleryImage) ImageView image;
+    @Bind(R.id.galleryTags) TextView tags;
+    @Bind(R.id.galleryCommentsCount) TextView commentsCount;
 
     public GalleryViewHolder(View itemView) {
         super(itemView);

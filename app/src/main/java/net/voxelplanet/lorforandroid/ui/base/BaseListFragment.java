@@ -36,7 +36,7 @@ public abstract class BaseListFragment extends Fragment {
     protected Activity activity;
     protected RecyclerView.Adapter adapter;
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
-    @Bind(R.id.recyclerView) RecyclerView recyclerView;
+    @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -77,8 +77,13 @@ public abstract class BaseListFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(true);
             }
         });
-
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     protected abstract void getListItems();

@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.api.ApiManager;
-import net.voxelplanet.lorforandroid.api.ApiUser;
 import net.voxelplanet.lorforandroid.model.User;
 import net.voxelplanet.lorforandroid.util.StringUtils;
 
@@ -38,16 +37,16 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class UserFragment extends Fragment {
-    @Bind(R.id.userId) private TextView id;
-    @Bind(R.id.userNick) private TextView nick;
-    @Bind(R.id.userUrl) private TextView url;
-    @Bind(R.id.userRegDate) private TextView regDate;
-    @Bind(R.id.userLastVisit) private TextView lastVisit;
-    @Bind(R.id.userStatus) private TextView status;
-    @Bind(R.id.userScore) private TextView score;
-    @Bind(R.id.userFavTags) private TextView favTags;
-    @Bind(R.id.userIgnoredTags) private TextView ignoredTags;
-    @Bind(R.id.userIgnoredUsers) private TextView ignoredUsers;
+    @Bind(R.id.userId) TextView id;
+    @Bind(R.id.userNick) TextView nick;
+    @Bind(R.id.userUrl) TextView url;
+    @Bind(R.id.userRegDate) TextView regDate;
+    @Bind(R.id.userLastVisit) TextView lastVisit;
+    @Bind(R.id.userStatus) TextView status;
+    @Bind(R.id.userScore) TextView score;
+    @Bind(R.id.userFavTags) TextView favTags;
+    @Bind(R.id.userIgnoredTags) TextView ignoredTags;
+    @Bind(R.id.userIgnoredUsers) TextView ignoredUsers;
     private Activity activity;
 
     @Override
@@ -58,9 +57,15 @@ public class UserFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     public void getInfo() {

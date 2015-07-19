@@ -30,10 +30,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class TopicActivity extends AppCompatActivity {
-    @Bind(R.id.commentsTextView)
-    private TextView commentsTextView;
-    @Bind(R.id.toolbarTop)
-    private Toolbar toolbar;
+    @Bind(R.id.commentsTextView) TextView commentsTextView;
+    @Bind(R.id.toolbarTop) Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

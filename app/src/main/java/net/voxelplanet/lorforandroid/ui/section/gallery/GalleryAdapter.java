@@ -41,19 +41,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         this.activity = activity;
     }
 
-    @Override
-    public GalleryViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_gallery, viewGroup, false);
-        return new GalleryViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
-        Topic topic = topics.get(i);
-        initView(viewHolder, activity, topic.getTitle(), "", StringUtils.getImageUrl(topic.getUrl(), "med"), topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
-
-    }
-
     public static void initView(GalleryViewHolder viewHolder, Activity activity, String title, String groupTitle, String imageUrl, List<String> tags, String nick, Date date, int commentsCount) {
         viewHolder.getTitle().setText(Html.fromHtml(title) + " (" + nick + ")");
         //viewHolder.getCategory().setText(groupTitle);
@@ -68,6 +55,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         } else viewHolder.getTags().setText(TextUtils.join(", ", tags));
 
         //viewHolder.getCommentsCount().setText(commentsCount);
+    }
+
+    @Override
+    public GalleryViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_gallery, viewGroup, false);
+        return new GalleryViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
+        Topic topic = topics.get(i);
+        initView(viewHolder, activity, topic.getTitle(), "", StringUtils.getImageUrl(topic.getUrl(), "med"), topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
+
     }
 
     @Override

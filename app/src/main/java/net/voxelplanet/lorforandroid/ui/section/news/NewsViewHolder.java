@@ -25,12 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.newsTitle) private TextView title;
-    @Bind(R.id.newsCategory) private TextView category;
-    @Bind(R.id.newsTags) private TextView tags;
-    @Bind(R.id.newsAuthor) private TextView author;
-    @Bind(R.id.newsDate) private TextView date;
-    @Bind(R.id.newsCommentsCount) private TextView commentsCount;
+    @Bind(R.id.newsTitle) TextView title;
+    @Bind(R.id.newsCategory) TextView category;
+    @Bind(R.id.newsTags) TextView tags;
+    @Bind(R.id.newsAuthor) TextView author;
+    @Bind(R.id.newsDate) TextView date;
+    @Bind(R.id.newsCommentsCount) TextView commentsCount;
 
     public NewsViewHolder(View itemView) {
         super(itemView);

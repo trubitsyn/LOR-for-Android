@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import net.voxelplanet.lorforandroid.R;
 import net.voxelplanet.lorforandroid.api.ApiManager;
-import net.voxelplanet.lorforandroid.api.ApiComments;
 import net.voxelplanet.lorforandroid.model.Comment;
 import net.voxelplanet.lorforandroid.model.Comments;
 import net.voxelplanet.lorforandroid.ui.base.BaseListFragment;

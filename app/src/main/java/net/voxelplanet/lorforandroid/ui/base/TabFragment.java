@@ -30,9 +30,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class TabFragment extends Fragment {
+    @Bind(R.id.viewpager) ViewPager viewPager;
+    @Bind(R.id.tabs) TabLayout tabLayout;
     private FragmentPagerAdapter adapter;
-    @Bind(R.id.viewpager) private ViewPager viewPager;
-    @Bind(R.id.tabs) private TabLayout tabLayout;
 
     public void setAdapter(FragmentPagerAdapter adapter) {
         this.adapter = adapter;
@@ -44,7 +44,11 @@ public class TabFragment extends Fragment {
         ButterKnife.bind(this, view);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
         return view;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

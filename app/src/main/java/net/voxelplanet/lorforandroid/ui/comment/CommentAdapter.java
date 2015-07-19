@@ -57,11 +57,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.commentAuthor) private TextView author;
-        @Bind(R.id.commentMessage) private TextView message;
-        @Bind(R.id.commentStars) private TextView stars;
-        @Bind(R.id.commentDate) private TextView date;
-        @Bind(R.id.commentReplyTo) private TextView replyTo;
+        @Bind(R.id.commentAuthor) TextView author;
+        @Bind(R.id.commentMessage) TextView message;
+        @Bind(R.id.commentStars) TextView stars;
+        @Bind(R.id.commentDate) TextView date;
+        @Bind(R.id.commentReplyTo) TextView replyTo;
 
         public ViewHolder(View commentView) {
             super(commentView);

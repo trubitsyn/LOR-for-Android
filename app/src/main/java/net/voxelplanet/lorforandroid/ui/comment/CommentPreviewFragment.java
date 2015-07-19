@@ -33,14 +33,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CommentPreviewFragment extends DialogFragment {
+    @Bind(R.id.commentReplyTo) TextView reply;
+    @Bind(R.id.commentMessage) TextView message;
+    @Bind(R.id.commentAuthor) TextView author;
+    @Bind(R.id.commentStars) TextView stars;
+    @Bind(R.id.commentDate) TextView date;
     private Activity activity;
     private Comment comment;
     private List<Comment> comments;
-    @Bind(R.id.commentReplyTo) private TextView reply;
-    @Bind(R.id.commentMessage) private TextView message;
-    @Bind(R.id.commentAuthor) private TextView author;
-    @Bind(R.id.commentStars) private TextView stars;
-    @Bind(R.id.commentDate) private TextView date;
 
     @Override
     public void onAttach(Activity activity) {
@@ -58,10 +58,13 @@ public class CommentPreviewFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(activity, R.layout.comment_preview, null);
         ButterKnife.bind(this, view);
-
         CommentUtils.initView(comments, comment, activity, reply, message, author, stars, date);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(activity).setView(view);
         return builder.create();
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

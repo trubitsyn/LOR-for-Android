@@ -28,7 +28,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CommentActivity extends AppCompatActivity implements CommentClickListener {
-    @Bind(R.id.toolbarTop) private Toolbar toolbar;
+    @Bind(R.id.toolbarTop) Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

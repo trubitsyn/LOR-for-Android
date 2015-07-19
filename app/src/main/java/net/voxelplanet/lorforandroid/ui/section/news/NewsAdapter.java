@@ -36,18 +36,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
         this.newsItems = topics;
     }
 
-    @Override
-    public NewsViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_news, viewGroup, false);
-        return new NewsViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
-        Topic topic = newsItems.get(i);
-        initView(viewHolder, topic.getTitle(), "", topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
-    }
-
     public static void initView(NewsViewHolder viewHolder, String title, String groupTitle, List<String> tags, String nick, Date date, int commentsCount) {
         viewHolder.getTitle().setText(Html.fromHtml(title));
         viewHolder.getCategory().setText(groupTitle);
@@ -59,6 +47,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
         viewHolder.getAuthor().setText(nick);
         viewHolder.getDate().setText(StringUtils.getDate(date));
         viewHolder.getCommentsCount().setVisibility(View.GONE);
+    }
+
+    @Override
+    public NewsViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_news, viewGroup, false);
+        return new NewsViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
+        Topic topic = newsItems.get(i);
+        initView(viewHolder, topic.getTitle(), "", topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
     }
 
     @Override
