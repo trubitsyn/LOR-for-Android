@@ -74,10 +74,10 @@ public class TrackerFragment extends BaseCallbackFragment {
                     items.addAll(trackerItemSet);
 
                     adapter.notifyDataSetChanged();
-                    swipeRefreshLayout.setRefreshing(false);
                 } else {
                     Toast.makeText(activity, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override

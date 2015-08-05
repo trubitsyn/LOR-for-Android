@@ -33,6 +33,7 @@ import retrofit.client.Response;
 
 public abstract class BaseTopicsFragment extends BaseCallbackFragment {
     protected final List<Topic> items = new ArrayList<Topic>();
+    private int offset;
 
     @Override
     protected String getUrl(int position) {
@@ -41,11 +42,16 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     public void getListItems() {
-        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection().name(), null, "2007-01-01", StringUtils.getCurrentDate(), null, null, null, null, null, null, new Callback<TopicItems>() {
+        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection().name(), null, "2007-01-01", StringUtils.getCurrentDate(), null, offset, null, null, null, null, new Callback<TopicItems>() {
             @Override
             public void success(TopicItems topicItems, Response response) {
-                items.addAll(topicItems.topicItems);
-                adapter.notifyDataSetChanged();
+                if (topicItems.topicItems.size() > 0) {
+                    offset += 30;
+                    items.addAll(topicItems.topicItems);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(activity, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
+                }
                 swipeRefreshLayout.setRefreshing(false);
             }
 
@@ -59,7 +65,8 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     protected void clearData() {
-        // Clear offset etc.
+        offset = 0;
+        items.clear();
     }
 
     protected abstract SectionEnum getSection();
