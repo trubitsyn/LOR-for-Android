@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Bind(R.id.toolbarTop) Toolbar toolbar;
     @Bind(R.id.navigationView) NavigationView navigationView;
     private int navigationItemId;
+    private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             navigationItemId = R.id.drawer_profile;
         } else {
-            navigationItemId = savedInstanceState.getInt("NAV_ITEM_ID");
+            navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("NAV_ITEM_ID", navigationItemId);
+        outState.putInt(NAV_ITEM_ID, navigationItemId);
     }
 
     @Override
