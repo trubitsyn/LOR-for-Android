@@ -22,6 +22,7 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.TopicItems;
 import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
@@ -41,7 +42,7 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     public void getListItems() {
-        ApiManager.API_MANAGER.getApiTopic().getTopics(getSection().name(), null, "2007-01-01", StringUtils.getCurrentDate(), null, offset, null, null, null, null, new Callback<TopicItems>() {
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopics(getSection().name(),null, "2007-01-01", StringUtils.getCurrentDate(), null, offset, null, null, null, null, new Callback<TopicItems>() {
             @Override
             public void success(TopicItems topicItems, Response response) {
                 if (topicItems.topicItems.size() > 0) {

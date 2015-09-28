@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.api;
 import io.github.getsmp.lorforandroid.model.Comments;
 import retrofit.Callback;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -27,21 +26,5 @@ public interface ApiComments {
     void getComments(
             @Path(value = "topic", encode = false) String topic,
             @Query("page") int page, Callback<Comments> response
-    );
-
-    @POST("/add_comment.jsp")
-    void addComment(
-            @Query("topic") int topic,
-            @Query("replyto") int replyTo,
-            @Query("title") String title,
-            @Query("msg") String message,
-            @Query("csrf") String csrf
-    );
-
-    @POST("/delete_comment.jsp")
-    void deleteComment(
-            @Query("msgid") int messageId,
-            @Query("reason") String reason,
-            @Query("csrf") String csrf
     );
 }

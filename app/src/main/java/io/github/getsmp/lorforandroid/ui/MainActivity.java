@@ -15,8 +15,6 @@
 
 package io.github.getsmp.lorforandroid.ui;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -34,7 +32,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.TabFragment;
-import io.github.getsmp.lorforandroid.ui.notification.NotificationReceiver;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
 import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
@@ -57,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setupNotificationCheck();
         setSupportActionBar(toolbar);
 
         actionBar = getSupportActionBar();
@@ -78,15 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle.syncState();
 
         onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
-    }
-
-    private void setupNotificationCheck() {
-        Intent alarmIntent = new Intent(this, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int interval = 1000 * 60 * 5; // Every 5 minutes
-        alarmManager.cancel(pendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
 
     @Override

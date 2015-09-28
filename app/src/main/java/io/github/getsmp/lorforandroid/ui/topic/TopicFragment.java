@@ -34,6 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
 import retrofit.Callback;
@@ -84,7 +85,7 @@ public class TopicFragment extends Fragment {
 
     public void loadTopic(String url) {
         this.url = url;
-        ApiManager.API_MANAGER.getApiTopic().getTopic(url, new Callback<Topics>() {
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url, new Callback<Topics>() {
             @Override
             public void success(Topics topics, Response response) {
                 Topic topic = topics.topic;

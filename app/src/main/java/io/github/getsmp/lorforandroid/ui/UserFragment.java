@@ -29,6 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.api.ApiUser;
 import io.github.getsmp.lorforandroid.model.User;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 import retrofit.Callback;
@@ -69,7 +70,7 @@ public class UserFragment extends Fragment {
 
     public void getInfo() {
         // TODO: Implement user authorization
-        ApiManager.API_MANAGER.getApiUser().getUser("anonymous", new Callback<User>() {
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiUser.class).getUser("anonymous", new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 id.setText(user.getId());

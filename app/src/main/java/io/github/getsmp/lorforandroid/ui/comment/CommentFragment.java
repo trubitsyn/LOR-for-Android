@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.api.ApiComments;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.model.Comments;
@@ -37,7 +38,7 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void getListItems() {
-        ApiManager.API_MANAGER.getApiComments().getComments(url, page, new Callback<Comments>() {
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page, new Callback<Comments>() {
             @Override
             public void success(Comments newComments, Response response) {
                 List<Comment> comments = newComments.comments;

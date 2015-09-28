@@ -26,6 +26,7 @@ import java.util.Set;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.api.ApiTracker;
 import io.github.getsmp.lorforandroid.model.TrackerItem;
 import io.github.getsmp.lorforandroid.model.TrackerItems;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
@@ -60,7 +61,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected void getListItems() {
-        ApiManager.API_MANAGER.getApiTracker().getTracker(offset, filter, new Callback<TrackerItems>() {
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiTracker.class).getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {

@@ -19,7 +19,6 @@ import io.github.getsmp.lorforandroid.model.TopicItems;
 import io.github.getsmp.lorforandroid.model.Topics;
 import retrofit.Callback;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -45,19 +44,4 @@ public interface ApiTopic {
             Callback<TopicItems> response
     );
 
-    @GET("/resolve.jsp")
-    void setResolved(
-            @Query("msgid") int messageId,
-            @Query("resolve") String resolve
-    );
-
-    @POST("/edit.jsp")
-    void edit(
-            @Query("msgid") int messageId,
-            @Query("lastEdit") int lastEdit,
-            @Query("title") String title,
-            @Query("msg") String message,
-            @Query("tags") String tags,
-            @Query("csrf") String csrf
-    );
 }
