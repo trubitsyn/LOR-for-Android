@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/commentsFragment"
-        class="net.voxelplanet.lorforandroid.ui.comment.CommentFragment"
+        class="io.github.getsmp.lorforandroid.ui.comment.CommentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

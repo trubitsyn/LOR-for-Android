@@ -25,7 +25,7 @@
 
         <fragment
             android:id="@+id/topicFragment"
-            android:name="net.voxelplanet.lorforandroid.ui.topic.TopicFragment"
+            android:name="io.github.getsmp.lorforandroid.ui.topic.TopicFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2" />
