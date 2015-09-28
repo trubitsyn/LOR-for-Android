@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -25,23 +25,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public abstract class BaseListFragment extends Fragment {
-    protected Activity activity;
+    protected Context context;
     protected RecyclerView.Adapter adapter;
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -49,9 +48,9 @@ public abstract class BaseListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
         ButterKnife.bind(this, view);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(activity));
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);

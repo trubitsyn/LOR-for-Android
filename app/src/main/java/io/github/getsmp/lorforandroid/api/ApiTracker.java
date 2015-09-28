@@ -16,7 +16,6 @@
 package io.github.getsmp.lorforandroid.api;
 
 import io.github.getsmp.lorforandroid.model.TrackerItems;
-
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;

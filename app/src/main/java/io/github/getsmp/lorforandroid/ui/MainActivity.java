@@ -30,6 +30,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.TabFragment;
 import io.github.getsmp.lorforandroid.ui.notification.NotificationReceiver;
@@ -39,9 +41,6 @@ import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAda
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.topic.TopicFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;

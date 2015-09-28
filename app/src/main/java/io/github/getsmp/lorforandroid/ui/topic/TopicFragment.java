@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.topic;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,15 +28,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.model.Topic;
-import io.github.getsmp.lorforandroid.model.Topics;
-
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.model.Topic;
+import io.github.getsmp.lorforandroid.model.Topics;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -48,12 +47,12 @@ public class TopicFragment extends Fragment {
     @Bind(R.id.topicMessage) TextView message;
     @Bind(R.id.topicSwipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     private String url;
-    private Activity activity;
+    private Context context;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -103,7 +102,7 @@ public class TopicFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(activity, R.string.error_network, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

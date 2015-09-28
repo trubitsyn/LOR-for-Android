@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,15 +28,15 @@ public abstract class BaseCallbackFragment extends BaseListFragment {
     private ItemClickCallback callback;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        callback = (ItemClickCallback) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (ItemClickCallback) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        recyclerView.addOnItemTouchListener(new ItemClickListener(activity, new ItemClickListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new ItemClickListener(context, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
                 callback.onItemClicked(getUrl(recyclerView.getChildAdapterPosition(view)));

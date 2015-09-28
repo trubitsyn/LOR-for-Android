@@ -24,10 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.github.getsmp.lorforandroid.R;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
 
 public class TabFragment extends Fragment {
     @Bind(R.id.viewpager) ViewPager viewPager;

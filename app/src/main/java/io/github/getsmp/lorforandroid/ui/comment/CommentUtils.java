@@ -16,19 +16,20 @@
 package io.github.getsmp.lorforandroid.ui.comment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-import java.util.List;
-
 class CommentUtils {
-    public static void initView(final List<Comment> comments, Comment comment, final Activity activity, TextView reply, TextView message, TextView author, TextView stars, TextView date) {
+    public static void initView(final List<Comment> comments, Comment comment, final Context context, TextView reply, TextView message, TextView author, TextView stars, TextView date) {
         author.setText(comment.getAuthor().getNick());
         message.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
         message.setMovementMethod(LinkMovementMethod.getInstance());
@@ -36,11 +37,11 @@ class CommentUtils {
         date.setText(StringUtils.getDate(comment.getPostdate()));
         if (comment.getReply() != null) {
             final Comment parent = getParent(comments, comment.getReply().getId());
-            reply.setText(activity.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
+            reply.setText(context.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
             reply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((CommentClickListener) activity).showParent(comments, parent);
+                    ((CommentClickListener) context).showParent(comments, parent);
                 }
             });
         } else reply.setVisibility(View.GONE);

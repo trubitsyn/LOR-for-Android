@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -25,13 +25,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.User;
 import io.github.getsmp.lorforandroid.util.StringUtils;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -47,12 +46,12 @@ public class UserFragment extends Fragment {
     @Bind(R.id.userFavTags) TextView favTags;
     @Bind(R.id.userIgnoredTags) TextView ignoredTags;
     @Bind(R.id.userIgnoredUsers) TextView ignoredUsers;
-    private Activity activity;
+    private Context context;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -87,7 +86,7 @@ public class UserFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(activity, R.string.error_network, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
             }
         });
     }

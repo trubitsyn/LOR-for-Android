@@ -22,12 +22,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.util.StringUtils;
-
-import java.util.Date;
-import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private final List<Topic> newsItems;

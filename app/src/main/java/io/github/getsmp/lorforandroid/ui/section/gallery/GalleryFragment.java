@@ -23,7 +23,7 @@ import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
 public class GalleryFragment extends BaseTopicsFragment {
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new GalleryAdapter(items, activity);
+        return new GalleryAdapter(items, context);
     }
 
     @Override

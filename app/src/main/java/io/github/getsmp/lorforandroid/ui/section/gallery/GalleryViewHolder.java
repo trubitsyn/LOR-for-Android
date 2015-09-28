@@ -20,10 +20,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import io.github.getsmp.lorforandroid.R;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
 
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.galleryTitleAuthor) TextView title;

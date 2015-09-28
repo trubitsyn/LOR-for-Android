@@ -22,12 +22,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
 import io.github.getsmp.lorforandroid.util.StringUtils;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class TopicActivity extends AppCompatActivity {
     @Bind(R.id.commentsTextView) TextView commentsTextView;

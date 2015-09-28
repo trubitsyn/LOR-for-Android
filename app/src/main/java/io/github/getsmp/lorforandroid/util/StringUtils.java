@@ -17,11 +17,11 @@ package io.github.getsmp.lorforandroid.util;
 
 import android.text.Spanned;
 
-import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
 
 public class StringUtils {
     public static String getDate(Date date) {

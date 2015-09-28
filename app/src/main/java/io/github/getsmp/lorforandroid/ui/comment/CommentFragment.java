@@ -18,15 +18,14 @@ package io.github.getsmp.lorforandroid.ui.comment;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.model.Comments;
 import io.github.getsmp.lorforandroid.ui.base.BaseListFragment;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -68,7 +67,7 @@ public class CommentFragment extends BaseListFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(activity, R.string.error_network, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -87,6 +86,6 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new CommentAdapter(items, activity);
+        return new CommentAdapter(items, context);
     }
 }

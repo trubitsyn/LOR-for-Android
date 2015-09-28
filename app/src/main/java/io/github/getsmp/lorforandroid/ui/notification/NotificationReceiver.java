@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

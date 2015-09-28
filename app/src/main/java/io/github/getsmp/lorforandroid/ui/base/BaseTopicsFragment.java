@@ -17,16 +17,15 @@ package io.github.getsmp.lorforandroid.ui.base;
 
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.TopicItems;
 import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
 import io.github.getsmp.lorforandroid.util.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -50,14 +49,14 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
                     items.addAll(topicItems.topicItems);
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(activity, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(activity, R.string.error_network, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

@@ -24,13 +24,12 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.TextView;
 
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
-
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.model.Comment;
 
 public class CommentPreviewFragment extends DialogFragment {
     @Bind(R.id.commentReplyTo) TextView reply;

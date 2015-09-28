@@ -16,6 +16,7 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
@@ -25,29 +26,29 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<Topic> topics;
-    private final Activity activity;
+    private final Context context;
 
-    public GalleryAdapter(List<Topic> topics, Activity activity) {
+    public GalleryAdapter(List<Topic> topics, Context context) {
         this.topics = topics;
-        this.activity = activity;
+        this.context = context;
     }
 
-    public static void initView(GalleryViewHolder viewHolder, Activity activity, String title, String groupTitle, String imageUrl, List<String> tags, String nick, Date date, int commentsCount) {
+    public static void initView(GalleryViewHolder viewHolder, Context context, String title, String groupTitle, String imageUrl, List<String> tags, String nick, Date date, int commentsCount) {
         viewHolder.getTitle().setText(Html.fromHtml(title) + " (" + nick + ")");
         //viewHolder.getCategory().setText(groupTitle);
 
         if (imageUrl != null) {
-            Picasso.with(activity).cancelRequest(viewHolder.getImage());
-            Picasso.with(activity).load(imageUrl).resize(400, 0).into((viewHolder.getImage()));
+            Picasso.with(context).cancelRequest(viewHolder.getImage());
+            Picasso.with(context).load(imageUrl).resize(400, 0).into((viewHolder.getImage()));
         } else viewHolder.getImage().setVisibility(View.GONE);
 
         if (tags.size() == 0) {
@@ -66,7 +67,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     @Override
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
         Topic topic = topics.get(i);
-        initView(viewHolder, activity, topic.getTitle(), "", StringUtils.getImageUrl(topic.getUrl(), "med"), topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
+        initView(viewHolder, context, topic.getTitle(), "", StringUtils.getImageUrl(topic.getUrl(), "med"), topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
 
     }
 

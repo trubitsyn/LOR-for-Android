@@ -19,10 +19,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import io.github.getsmp.lorforandroid.R;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.newsTitle) TextView title;

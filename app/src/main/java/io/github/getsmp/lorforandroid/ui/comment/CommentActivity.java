@@ -19,13 +19,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
-
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.model.Comment;
 
 public class CommentActivity extends AppCompatActivity implements CommentClickListener {
     @Bind(R.id.toolbarTop) Toolbar toolbar;

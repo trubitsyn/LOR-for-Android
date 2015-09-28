@@ -16,10 +16,13 @@
 package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.TrackerItem;
@@ -29,16 +32,14 @@ import io.github.getsmp.lorforandroid.ui.section.news.NewsAdapter;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsViewHolder;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-import java.util.List;
-
 class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<TrackerItem> trackerItems;
-    private final Activity activity;
+    private final Context context;
     private final int NEWS = 0, GALLERY = 1;
 
-    public TrackerAdapter(List<TrackerItem> trackerItems, Activity activity) {
+    public TrackerAdapter(List<TrackerItem> trackerItems, Context context) {
         this.trackerItems = trackerItems;
-        this.activity = activity;
+        this.context = context;
     }
 
     @Override
@@ -77,7 +78,7 @@ class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             case GALLERY:
                 GalleryViewHolder galleryViewHolder = (GalleryViewHolder) viewHolder;
-                GalleryAdapter.initView(galleryViewHolder, activity, item.getTitle(), item.getGroupTitle(), StringUtils.getImageUrl(item.getUrl(), "med"), item.getTags(), item.getAuthor(), item.getPostDate(), 0);
+                GalleryAdapter.initView(galleryViewHolder, context, item.getTitle(), item.getGroupTitle(), StringUtils.getImageUrl(item.getUrl(), "med"), item.getTags(), item.getAuthor(), item.getPostDate(), 0);
         }
     }
 

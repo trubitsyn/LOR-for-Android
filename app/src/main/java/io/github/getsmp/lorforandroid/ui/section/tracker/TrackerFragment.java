@@ -19,17 +19,16 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.model.TrackerItem;
-import io.github.getsmp.lorforandroid.model.TrackerItems;
-import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.api.ApiManager;
+import io.github.getsmp.lorforandroid.model.TrackerItem;
+import io.github.getsmp.lorforandroid.model.TrackerItems;
+import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -75,14 +74,14 @@ public class TrackerFragment extends BaseCallbackFragment {
 
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(activity, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(activity, R.string.error_network, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -96,7 +95,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new TrackerAdapter(items, activity);
+        return new TrackerAdapter(items, context);
     }
 
 }
