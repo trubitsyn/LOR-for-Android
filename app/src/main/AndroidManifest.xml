@@ -9,7 +9,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <receiver android:name="io.github.getsmp.lorforandroid.ui.notification.NotificationReceiver" />
         <activity
             android:name="io.github.getsmp.lorforandroid.ui.MainActivity"
             android:label="@string/activity_main"
