@@ -15,7 +15,6 @@
 
 package io.github.getsmp.lorforandroid.ui.comment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
