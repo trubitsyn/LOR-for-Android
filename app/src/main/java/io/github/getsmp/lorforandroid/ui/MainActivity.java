@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingsFragment()).commit();
+                // TODO: Show settings
                 break;
         }
     }
