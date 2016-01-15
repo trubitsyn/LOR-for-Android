@@ -92,21 +92,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 actionBar.setTitle(R.string.drawer_profile);
                 UserFragment userFragment = new UserFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, userFragment).commit();
-                fm.executePendingTransactions();
                 userFragment.getInfo();
                 break;
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
                 NewsFragment newsFragment = new NewsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
-                fm.executePendingTransactions();
                 newsFragment.getListItems();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
                 GalleryFragment galleryFragment = new GalleryFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
-                fm.executePendingTransactions();
                 galleryFragment.getListItems();
                 break;
             case R.id.drawer_tracker:
@@ -114,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TabFragment tabFragment = new TabFragment();
                 tabFragment.setAdapter(new TrackerFragmentPagerAdapter(fm));
                 fm.beginTransaction().replace(R.id.fragmentContainer, tabFragment).commit();
-                fm.executePendingTransactions();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
