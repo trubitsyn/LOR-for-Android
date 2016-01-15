@@ -52,9 +52,7 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
                 } else {
                     Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
-                if (swipeRefreshLayout != null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
