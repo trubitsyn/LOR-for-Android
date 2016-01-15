@@ -18,7 +18,7 @@ package io.github.getsmp.lorforandroid.ui.base;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +31,9 @@ import io.github.getsmp.lorforandroid.R;
 public class TabFragment extends Fragment {
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.tabs) TabLayout tabLayout;
-    private FragmentPagerAdapter adapter;
+    private FragmentStatePagerAdapter adapter;
 
-    public void setAdapter(FragmentPagerAdapter adapter) {
+    public void setAdapter(FragmentStatePagerAdapter adapter) {
         this.adapter = adapter;
     }
 
