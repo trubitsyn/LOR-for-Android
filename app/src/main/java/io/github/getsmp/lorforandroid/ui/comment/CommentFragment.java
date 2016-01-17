@@ -68,8 +68,7 @@ public class CommentFragment extends BaseListFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
-                stopRefresh();
+                networkError();
             }
         });
     }

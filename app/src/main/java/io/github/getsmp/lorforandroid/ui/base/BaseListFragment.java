@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -93,5 +94,10 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void stopRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    protected void networkError() {
+        stopRefresh();
+        Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
     }
 }
