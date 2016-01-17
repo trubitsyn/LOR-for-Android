@@ -41,28 +41,32 @@ public class CommentFragment extends BaseListFragment {
         ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page, new Callback<Comments>() {
             @Override
             public void success(Comments newComments, Response response) {
-                List<Comment> comments = newComments.comments;
-                int commentsPerPage = 50;
+                if (newComments.comments.size() > 0) {
+                    List<Comment> comments = newComments.comments;
+                    int commentsPerPage = 50;
 
-                if (previousCount < commentsPerPage) {
-                    // Add new comments to existing "page"
-                    int itemSize = items.size();
-                    items.subList(itemSize - previousCount, itemSize).clear();
-                    items.addAll(comments);
+                    if (previousCount < commentsPerPage) {
+                        // Add new comments to existing "page"
+                        int itemSize = items.size();
+                        items.subList(itemSize - previousCount, itemSize).clear();
+                        items.addAll(comments);
+                    } else {
+                        // Show new comments "page"
+                        items.addAll(comments);
+                    }
+
+                    int commentSize = comments.size();
+
+                    // If loaded all comments at once, increment currentPage
+                    if (commentSize == commentsPerPage) {
+                        page++;
+                    }
+
+                    previousCount = commentSize;
+                    adapter.notifyDataSetChanged();
                 } else {
-                    // Show new comments "page"
-                    items.addAll(comments);
+                    Toast.makeText(context, R.string.error_no_more_comments, Toast.LENGTH_SHORT).show();
                 }
-
-                int commentSize = comments.size();
-
-                // If loaded all comments at once, increment currentPage
-                if (commentSize == commentsPerPage) {
-                    page++;
-                }
-
-                previousCount = commentSize;
-                adapter.notifyDataSetChanged();
                 stopRefresh();
             }
 
