@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,7 +97,7 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void stopRefresh() {
         if (swipeRefreshLayout != null) {
-            // SwipeRefreshLayout never stops resreshing regardless of null it is or not
+            // SwipeRefreshLayout never stops refreshing regardless of null it is or not
             swipeRefreshLayout.setRefreshing(false);
         }
     }
