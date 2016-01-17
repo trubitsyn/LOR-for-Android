@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // TODO: Display logo, collapsing ToolBar
 
         if (savedInstanceState == null) {
-            navigationItemId = R.id.drawer_profile;
+            navigationItemId = R.id.drawer_tracker;
         } else {
             navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
