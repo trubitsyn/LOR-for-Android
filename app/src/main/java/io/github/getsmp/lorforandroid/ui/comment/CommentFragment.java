@@ -63,13 +63,13 @@ public class CommentFragment extends BaseListFragment {
 
                 previousCount = commentSize;
                 adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
+                stopRefresh();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
-                swipeRefreshLayout.setRefreshing(false);
+                stopRefresh();
             }
         });
     }

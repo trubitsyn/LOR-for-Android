@@ -90,4 +90,8 @@ public abstract class BaseListFragment extends Fragment {
     protected abstract void clearData();
 
     protected abstract RecyclerView.Adapter getAdapter();
+
+    protected void stopRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
 }
