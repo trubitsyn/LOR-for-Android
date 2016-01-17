@@ -74,7 +74,9 @@ public abstract class BaseListFragment extends Fragment {
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                swipeRefreshLayout.setRefreshing(true);
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
             }
         });
         return view;
@@ -93,7 +95,9 @@ public abstract class BaseListFragment extends Fragment {
     protected abstract RecyclerView.Adapter getAdapter();
 
     protected void stopRefresh() {
-        swipeRefreshLayout.setRefreshing(false);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     protected void networkError() {
