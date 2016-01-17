@@ -21,9 +21,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -73,7 +75,9 @@ public abstract class BaseListFragment extends Fragment {
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                swipeRefreshLayout.setRefreshing(true);
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
             }
         });
         return view;
@@ -90,4 +94,16 @@ public abstract class BaseListFragment extends Fragment {
     protected abstract void clearData();
 
     protected abstract RecyclerView.Adapter getAdapter();
+
+    protected void stopRefresh() {
+        if (swipeRefreshLayout != null) {
+            // SwipeRefreshLayout never stops refreshing regardless of null it is or not
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    protected void networkError() {
+        stopRefresh();
+        Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
+    }
 }
