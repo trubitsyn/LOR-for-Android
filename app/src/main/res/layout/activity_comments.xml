@@ -9,9 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <fragment
-        android:id="@+id/commentsFragment"
-        class="io.github.getsmp.lorforandroid.ui.comment.CommentFragment"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/commentFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

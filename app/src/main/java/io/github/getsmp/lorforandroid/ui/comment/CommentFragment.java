@@ -15,6 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.comment;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -35,6 +36,20 @@ public class CommentFragment extends BaseListFragment {
     private final List<Comment> items = new ArrayList<Comment>();
     private int page, previousCount = 0;
     private String url;
+
+    public static CommentFragment newInstance(String url) {
+        CommentFragment commentFragment = new CommentFragment();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        commentFragment.setArguments(args);
+        return commentFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        url = getArguments().getString("url");
+    }
 
     @Override
     protected void getListItems() {
@@ -76,10 +91,6 @@ public class CommentFragment extends BaseListFragment {
                 networkError();
             }
         });
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override

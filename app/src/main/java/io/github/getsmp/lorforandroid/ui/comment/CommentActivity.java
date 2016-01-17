@@ -15,6 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.comment;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,10 +39,9 @@ public class CommentActivity extends AppCompatActivity implements CommentClickLi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            CommentFragment commentFragment = (CommentFragment) getSupportFragmentManager().findFragmentById(R.id.commentsFragment);
             String url = getIntent().getStringExtra("url");
-            commentFragment.setUrl(url);
-            commentFragment.getListItems();
+            CommentFragment commentFragment = CommentFragment.newInstance(url);
+            getSupportFragmentManager().beginTransaction().replace(R.id.commentFragmentContainer, commentFragment).commit();
         }
     }
 
