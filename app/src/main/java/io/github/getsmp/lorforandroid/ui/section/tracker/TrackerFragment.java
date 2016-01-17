@@ -17,6 +17,7 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -51,7 +52,6 @@ public class TrackerFragment extends BaseCallbackFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         filter = getArguments().getString("filter");
-        getListItems();
     }
 
     @Override
@@ -61,6 +61,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected void getListItems() {
+        startRefresh();
         ApiManager.INSTANCE.apiRestAdapter.create(ApiTracker.class).getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {

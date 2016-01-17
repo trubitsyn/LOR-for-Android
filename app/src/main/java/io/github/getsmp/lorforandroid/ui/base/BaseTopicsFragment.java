@@ -15,6 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ public abstract class BaseTopicsFragment extends BaseCallbackFragment {
 
     @Override
     public void getListItems() {
-        ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopics(getSection().name(),null, "2007-01-01", StringUtils.getCurrentDate(), null, offset, null, null, null, null, new Callback<TopicItems>() {
+        startRefresh();
+        ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopics(getSection().name(), null, "2007-01-01", StringUtils.getCurrentDate(), null, offset, null, null, null, null, new Callback<TopicItems>() {
             @Override
             public void success(TopicItems topicItems, Response response) {
                 if (topicItems.topicItems.size() > 0) {

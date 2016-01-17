@@ -38,6 +38,7 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void getListItems() {
+        startRefresh();
         ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page, new Callback<Comments>() {
             @Override
             public void success(Comments newComments, Response response) {

@@ -98,13 +98,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 actionBar.setTitle(R.string.drawer_news);
                 NewsFragment newsFragment = new NewsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
-                newsFragment.getListItems();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
                 GalleryFragment galleryFragment = new GalleryFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
-                galleryFragment.getListItems();
                 break;
             case R.id.drawer_tracker:
                 actionBar.setTitle(R.string.drawer_tracker);
