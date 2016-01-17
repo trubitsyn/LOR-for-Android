@@ -96,6 +96,7 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void stopRefresh() {
         if (swipeRefreshLayout != null) {
+            // SwipeRefreshLayout never stops resreshing regardless of null it is or not
             swipeRefreshLayout.setRefreshing(false);
         }
     }
