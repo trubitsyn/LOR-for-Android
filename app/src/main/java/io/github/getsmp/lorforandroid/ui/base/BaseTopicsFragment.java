@@ -15,7 +15,6 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;

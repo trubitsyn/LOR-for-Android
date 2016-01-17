@@ -62,7 +62,8 @@ public class CommentPreviewFragment extends DialogFragment {
         return builder.create();
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

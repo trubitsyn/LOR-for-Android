@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,14 +89,14 @@ public abstract class BaseListFragment extends Fragment {
     protected abstract RecyclerView.Adapter getAdapter();
 
     protected void startRefresh() {
-            if (!swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(true);
-                    }
-                });
-            }
+        if (!swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(true);
+                }
+            });
+        }
     }
 
     protected void stopRefresh() {

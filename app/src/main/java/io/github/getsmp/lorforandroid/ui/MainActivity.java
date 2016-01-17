@@ -40,11 +40,11 @@ import io.github.getsmp.lorforandroid.ui.topic.TopicFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
+    private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.toolbarTop) Toolbar toolbar;
     @Bind(R.id.navigationView) NavigationView navigationView;
     private int navigationItemId;
-    private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
 
