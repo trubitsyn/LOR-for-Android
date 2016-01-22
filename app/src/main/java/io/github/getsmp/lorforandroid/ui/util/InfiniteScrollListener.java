@@ -49,4 +49,9 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
     }
 
     public abstract void onLoadMore();
+
+    public void reset() {
+        loading = true;
+        previousTotal = 0;
+    }
 }

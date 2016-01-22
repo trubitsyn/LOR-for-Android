@@ -56,17 +56,20 @@ public abstract class BaseListFragment extends Fragment {
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addOnScrollListener(new InfiniteScrollListener(layoutManager) {
+        final InfiniteScrollListener scrollListener = new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
                 getListItems();
             }
-        });
+        };
+
+        recyclerView.addOnScrollListener(scrollListener);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 clearData();
+                scrollListener.reset();
                 getListItems();
             }
         });
