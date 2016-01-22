@@ -20,9 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
@@ -66,12 +64,12 @@ public class TrackerFragment extends BaseCallbackFragment {
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {
                     offset += 30;
-                    items.addAll(trackerItems.trackerItems);
-
-                    // Next lines are here to remove duplicate topics from tracker due to linux.org.ru engine bug
-                    Set<TrackerItem> trackerItemSet = new LinkedHashSet<TrackerItem>(items);
-                    items.clear();
-                    items.addAll(trackerItemSet);
+                    for (TrackerItem trackerItem : trackerItems.trackerItems) {
+                        // Next lines are here to remove duplicate topics from tracker due to linux.org.ru engine bug
+                        if (!items.contains(trackerItem)) {
+                            items.add(trackerItem);
+                        }
+                    }
 
                     adapter.notifyDataSetChanged();
                 } else {
