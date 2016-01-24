@@ -64,13 +64,8 @@ public class TrackerFragment extends BaseCallbackFragment {
             public void success(TrackerItems trackerItems, Response response) {
                 if (trackerItems.trackerItems.size() > 0) {
                     offset += 30;
-                    for (TrackerItem trackerItem : trackerItems.trackerItems) {
-                        // Next lines are here to remove duplicate topics from tracker due to linux.org.ru engine bug
-                        if (!items.contains(trackerItem)) {
-                            items.add(trackerItem);
-                        }
-                    }
 
+                    items.addAll(trackerItems.trackerItems);
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
