@@ -23,8 +23,9 @@ public class NewsItem {
     private String commentsCount;
     private String tags;
     private String author;
+    private boolean miniNews;
 
-    public NewsItem(String url, String title, String groupTitle, String postDate, String commentsCount, String tags, String author) {
+    public NewsItem(String url, String title, String groupTitle, String postDate, String commentsCount, String tags, String author, boolean miniNews) {
         this.url = url;
         this.title = title;
         this.groupTitle = groupTitle;
@@ -32,6 +33,7 @@ public class NewsItem {
         this.commentsCount = commentsCount;
         this.tags = tags;
         this.author = author;
+        this.miniNews = miniNews;
     }
 
     public String getUrl() {
@@ -60,5 +62,9 @@ public class NewsItem {
 
     public String getGroupTitle() {
         return groupTitle;
+    }
+
+    public boolean isMiniNews() {
+        return miniNews;
     }
 }

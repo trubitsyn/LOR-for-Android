@@ -16,6 +16,7 @@
 package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -60,6 +61,16 @@ public class NewsFragment extends BaseCallbackFragment {
                 for (Element article : articles) {
                     if (article.hasClass("mini-news")) {
                         // Mini-news article
+                        newsItems.add(new NewsItem(
+                                article.select("a[href^=/news/]").first().attr("href"),
+                                article.select("a[href^=/news/]").first().ownText(),
+                                null,
+                                null,
+                                Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", ""),
+                                null,
+                                null,
+                                true
+                        ));
                     } else {
                         // Standard article
                         Elements tags = article.select("a.tag");
@@ -75,7 +86,8 @@ public class NewsFragment extends BaseCallbackFragment {
                                 article.select("time").first().ownText(),
                                 article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
                                 TextUtils.join(", ", strTags),
-                                article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", "")
+                                article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
+                                false
                         ));
                     }
                 }

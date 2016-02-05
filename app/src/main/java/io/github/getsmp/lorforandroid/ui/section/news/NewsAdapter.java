@@ -16,6 +16,7 @@
 package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +41,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
         NewsItem topic = newsItems.get(i);
-        viewHolder.getTitle().setText(topic.getTitle());
-        viewHolder.getCategory().setText(topic.getGroupTitle());
-
-        if (topic.getTags().length() == 0) {
+        if (topic.isMiniNews()) {
+            viewHolder.getCategory().setVisibility(View.GONE);
             viewHolder.getTags().setVisibility(View.GONE);
-        } else viewHolder.getTags().setText(topic.getTags());
-
-        viewHolder.getAuthor().setText(topic.getAuthor());
-        viewHolder.getDate().setText(topic.getPostDate());
+            viewHolder.getAuthor().setVisibility(View.GONE);
+            viewHolder.getDate().setVisibility(View.GONE);
+        } else {
+            viewHolder.getCategory().setText(topic.getGroupTitle());
+            viewHolder.getTags().setText(topic.getTags());
+            viewHolder.getAuthor().setText(topic.getAuthor());
+            viewHolder.getDate().setText(topic.getPostDate());
+        }
+        viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
         viewHolder.getCommentsCount().setText(topic.getCommentsCount());
     }
 
