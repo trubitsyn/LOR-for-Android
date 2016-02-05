@@ -26,9 +26,9 @@ import java.util.List;
 import io.github.getsmp.lorforandroid.R;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
-    private final List<NewsItem> newsItems;
+    private final List<?extends MiniNewsItem> newsItems;
 
-    public NewsAdapter(List<NewsItem> topics) {
+    public NewsAdapter(List<MiniNewsItem> topics) {
         this.newsItems = topics;
     }
 
@@ -40,20 +40,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
-        NewsItem topic = newsItems.get(i);
-        if (topic.isMiniNews()) {
-            viewHolder.getCategory().setVisibility(View.GONE);
-            viewHolder.getTags().setVisibility(View.GONE);
-            viewHolder.getAuthor().setVisibility(View.GONE);
-            viewHolder.getDate().setVisibility(View.GONE);
-        } else {
+        MiniNewsItem newsItem = newsItems.get(i);
+        viewHolder.getTitle().setText(Html.fromHtml(newsItem.getTitle()));
+        viewHolder.getCommentsCount().setText(newsItem.getCommentsCount());
+
+        if (newsItem instanceof NewsItem) {
+            NewsItem topic = (NewsItem) newsItem;
             viewHolder.getCategory().setText(topic.getGroupTitle());
             viewHolder.getTags().setText(topic.getTags());
             viewHolder.getAuthor().setText(topic.getAuthor());
             viewHolder.getDate().setText(topic.getPostDate());
+            viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
+            viewHolder.getCommentsCount().setText(topic.getCommentsCount());
+        } else {
+            viewHolder.getCategory().setVisibility(View.GONE);
+            viewHolder.getTags().setVisibility(View.GONE);
+            viewHolder.getAuthor().setVisibility(View.GONE);
+            viewHolder.getDate().setVisibility(View.GONE);
         }
-        viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
-        viewHolder.getCommentsCount().setText(topic.getCommentsCount());
     }
 
     @Override

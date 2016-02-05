@@ -35,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public class NewsFragment extends BaseCallbackFragment {
-    protected final List<NewsItem> items = new ArrayList<NewsItem>();
+    protected final List<MiniNewsItem> items = new ArrayList<MiniNewsItem>();
     private static final int itemsPerPage = 20;
     private int offset = 0;
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
@@ -57,19 +57,14 @@ public class NewsFragment extends BaseCallbackFragment {
 
                 Elements articles = Jsoup.parse(resp).body().select("article");
 
-                List<NewsItem> newsItems = new ArrayList<NewsItem>();
+                List<MiniNewsItem> newsItems = new ArrayList<MiniNewsItem>();
                 for (Element article : articles) {
                     if (article.hasClass("mini-news")) {
                         // Mini-news article
-                        newsItems.add(new NewsItem(
+                        newsItems.add(new MiniNewsItem(
                                 article.select("a[href^=/news/]").first().attr("href"),
                                 article.select("a[href^=/news/]").first().ownText(),
-                                null,
-                                null,
-                                Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", ""),
-                                null,
-                                null,
-                                true
+                                Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", "")
                         ));
                     } else {
                         // Standard article
@@ -86,8 +81,7 @@ public class NewsFragment extends BaseCallbackFragment {
                                 article.select("time").first().ownText(),
                                 article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
                                 TextUtils.join(", ", strTags),
-                                article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                                false
+                                article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", "")
                         ));
                     }
                 }
