@@ -15,8 +15,8 @@
 
 package io.github.getsmp.lorforandroid.api;
 
-import io.github.getsmp.lorforandroid.model.TopicItems;
 import io.github.getsmp.lorforandroid.model.Topics;
+import io.github.getsmp.lorforandroid.ui.section.news.NewsItem;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -41,7 +41,7 @@ public interface ApiTopic {
             @Query("notalks") Object notalks,
             @Query("commitMode") Object commitMode,
             @Query("author") Object author,
-            Callback<TopicItems> response
+            Callback<NewsItem> response
     );
 
 }

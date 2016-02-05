@@ -88,7 +88,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected RecyclerView.Adapter getAdapter() {
-        return new TrackerAdapter(items, context);
+        return new TrackerAdapter(items);
     }
 
 }

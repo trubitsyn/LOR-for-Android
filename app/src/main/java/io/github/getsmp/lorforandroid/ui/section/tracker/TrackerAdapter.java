@@ -15,8 +15,8 @@
 
 package io.github.getsmp.lorforandroid.ui.section.tracker;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,60 +25,31 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.TrackerItem;
-import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryAdapter;
-import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryViewHolder;
-import io.github.getsmp.lorforandroid.ui.section.news.NewsAdapter;
-import io.github.getsmp.lorforandroid.ui.section.news.NewsViewHolder;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-class TrackerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
     private final List<TrackerItem> trackerItems;
-    private final Context context;
-    private final int NEWS = 0, GALLERY = 1;
 
-    public TrackerAdapter(List<TrackerItem> trackerItems, Context context) {
+    public TrackerAdapter(List<TrackerItem> trackerItems) {
         this.trackerItems = trackerItems;
-        this.context = context;
     }
 
     @Override
-    public int getItemViewType(int position) {
-        // TODO: It would be better to check this with API method
-        if (StringUtils.isGallery(trackerItems.get(position).getUrl())) {
-            return GALLERY;
-        } else return NEWS;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        RecyclerView.ViewHolder viewHolder = null;
+    public TrackerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-
-        switch (viewType) {
-            case NEWS:
-                View news = layoutInflater.inflate(R.layout.item_news, viewGroup, false);
-                viewHolder = new NewsViewHolder(news);
-                break;
-            case GALLERY:
-                View gallery = layoutInflater.inflate(R.layout.item_gallery, viewGroup, false);
-                viewHolder = new GalleryViewHolder(gallery);
-                break;
-        }
-        return viewHolder;
+        View view = layoutInflater.inflate(R.layout.item_tracker, viewGroup, false);
+        return new TrackerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(TrackerViewHolder viewHolder, int position) {
         TrackerItem item = trackerItems.get(position);
-        switch (viewHolder.getItemViewType()) {
-            case NEWS:
-                NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
-                NewsAdapter.initView(newsViewHolder, item.getTitle(), item.getGroupTitle(), item.getTags(), item.getLastCommentedBy(), item.getPostDate(), 0);
-                break;
-            case GALLERY:
-                GalleryViewHolder galleryViewHolder = (GalleryViewHolder) viewHolder;
-                GalleryAdapter.initView(galleryViewHolder, context, item.getTitle(), item.getGroupTitle(), StringUtils.getImageUrl(item.getUrl(), "med"), item.getTags(), item.getAuthor(), item.getPostDate(), 0);
-        }
+        viewHolder.title.setText(item.getTitle());
+        viewHolder.category.setText(item.getGroupTitle());
+        viewHolder.tags.setText(TextUtils.join(",", item.getTags()));
+        viewHolder.author.setText(item.getAuthor());
+        viewHolder.date.setText(StringUtils.getDate(item.getPostDate()));
+        viewHolder.commentsCount.setVisibility(View.GONE);
     }
 
     @Override

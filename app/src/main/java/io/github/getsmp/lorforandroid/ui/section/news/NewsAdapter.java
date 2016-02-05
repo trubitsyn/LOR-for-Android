@@ -16,37 +16,19 @@
 package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Date;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Topic;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
-    private final List<Topic> newsItems;
+    private final List<NewsItem> newsItems;
 
-    public NewsAdapter(List<Topic> topics) {
+    public NewsAdapter(List<NewsItem> topics) {
         this.newsItems = topics;
-    }
-
-    public static void initView(NewsViewHolder viewHolder, String title, String groupTitle, List<String> tags, String nick, Date date, int commentsCount) {
-        viewHolder.getTitle().setText(Html.fromHtml(title));
-        viewHolder.getCategory().setText(groupTitle);
-
-        if (tags.size() == 0) {
-            viewHolder.getTags().setVisibility(View.GONE);
-        } else viewHolder.getTags().setText(TextUtils.join(", ", tags));
-
-        viewHolder.getAuthor().setText(nick);
-        viewHolder.getDate().setText(StringUtils.getDate(date));
-        viewHolder.getCommentsCount().setVisibility(View.GONE);
     }
 
     @Override
@@ -57,8 +39,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
-        Topic topic = newsItems.get(i);
-        initView(viewHolder, topic.getTitle(), "", topic.getTags(), topic.getAuthor().getNick(), topic.getPostDate(), topic.getCommentsCount());
+        NewsItem topic = newsItems.get(i);
+        viewHolder.getTitle().setText(topic.getTitle());
+        viewHolder.getCategory().setText(topic.getGroupTitle());
+
+        if (topic.getTags().length() == 0) {
+            viewHolder.getTags().setVisibility(View.GONE);
+        } else viewHolder.getTags().setText(topic.getTags());
+
+        viewHolder.getAuthor().setText(topic.getAuthor());
+        viewHolder.getDate().setText(topic.getPostDate());
+        viewHolder.getCommentsCount().setText(topic.getCommentsCount());
     }
 
     @Override

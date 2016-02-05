@@ -17,17 +17,33 @@ package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.support.v7.widget.RecyclerView;
 
-import io.github.getsmp.lorforandroid.ui.base.BaseTopicsFragment;
-import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
+import java.util.List;
 
-public class GalleryFragment extends BaseTopicsFragment {
+import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.section.news.NewsItem;
+
+public class GalleryFragment extends BaseCallbackFragment {
+    private int offset;
+    private List<NewsItem> items;
+
+    @Override
+    protected void getListItems() {
+
+    }
+
+    @Override
+    protected void clearData() {
+        offset = 0;
+        items.clear();
+    }
+
     @Override
     protected RecyclerView.Adapter getAdapter() {
         return new GalleryAdapter(items, context);
     }
 
     @Override
-    protected SectionEnum getSection() {
-        return SectionEnum.gallery;
+    protected String getUrl(int position) {
+        return null;
     }
 }

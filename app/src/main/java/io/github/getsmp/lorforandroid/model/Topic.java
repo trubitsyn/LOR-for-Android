@@ -15,38 +15,37 @@
 
 package io.github.getsmp.lorforandroid.model;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Topic {
-
-    @Expose
     private final List<String> tags = new ArrayList<String>();
-    @Expose
     private String url;
-    @Expose
     private String title;
-    @Expose
     private String message;
-    @Expose
     private Date postDate;
-    @Expose
     private Date lastModified;
-    @Expose
     private Boolean sticky;
-    @Expose
     private Integer commentsCount;
-    @Expose
     private Integer favsCount;
-    @Expose
     private Integer watchCount;
-    @Expose
     private Integer postscore;
-    @Expose
     private Author author;
+
+    public Topic(String url, String title, String message, Date postDate, Date lastModified, Boolean sticky, Integer commentsCount, Integer favsCount, Integer watchCount, Integer postscore, Author author) {
+        this.url = url;
+        this.title = title;
+        this.message = message;
+        this.postDate = postDate;
+        this.lastModified = lastModified;
+        this.sticky = sticky;
+        this.commentsCount = commentsCount;
+        this.favsCount = favsCount;
+        this.watchCount = watchCount;
+        this.postscore = postscore;
+        this.author = author;
+    }
 
     public String getUrl() {
         return url;

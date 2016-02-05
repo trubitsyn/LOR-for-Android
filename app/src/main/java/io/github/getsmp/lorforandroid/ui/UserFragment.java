@@ -18,23 +18,14 @@ package io.github.getsmp.lorforandroid.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.api.ApiUser;
-import io.github.getsmp.lorforandroid.model.User;
-import io.github.getsmp.lorforandroid.util.StringUtils;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class UserFragment extends Fragment {
     @Bind(R.id.userId) TextView id;
@@ -70,8 +61,8 @@ public class UserFragment extends Fragment {
     }
 
     public void getInfo() {
-        // TODO: Implement user authorization
-        ApiManager.INSTANCE.apiRestAdapter.create(ApiUser.class).getUser("anonymous", new Callback<User>() {
+        // TODO: Show user info
+        /*ApiManager.INSTANCE.apiRestAdapter.create(ApiUser.class).getUser("anonymous", new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 id.setText(user.getId());
@@ -90,6 +81,6 @@ public class UserFragment extends Fragment {
             public void failure(RetrofitError error) {
                 Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
