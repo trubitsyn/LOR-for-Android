@@ -90,9 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (selection) {
             case R.id.drawer_profile:
                 actionBar.setTitle(R.string.drawer_profile);
-                UserFragment userFragment = new UserFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, userFragment).commit();
-                userFragment.getInfo();
                 break;
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
