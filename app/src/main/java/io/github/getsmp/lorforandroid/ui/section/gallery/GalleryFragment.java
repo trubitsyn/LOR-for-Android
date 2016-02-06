@@ -34,8 +34,8 @@ import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public class GalleryFragment extends BaseCallbackFragment {
-    private final List<GalleryItem> items = new ArrayList<GalleryItem>();
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private final List<GalleryItem> items = new ArrayList<GalleryItem>();
     private int offset;
 
     @Override

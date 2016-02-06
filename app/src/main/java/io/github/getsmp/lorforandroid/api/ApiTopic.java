@@ -16,11 +16,9 @@
 package io.github.getsmp.lorforandroid.api;
 
 import io.github.getsmp.lorforandroid.model.Topics;
-import io.github.getsmp.lorforandroid.ui.section.news.NewsItem;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
-import retrofit.http.Query;
 
 public interface ApiTopic {
     @GET("/{topic}/topic")
@@ -28,20 +26,4 @@ public interface ApiTopic {
             @Path(value = "topic", encode = false) String topic,
             Callback<Topics> response
     );
-
-    @GET("/topics")
-    void getTopics(
-            @Query("section") String section,
-            @Query("group") Object group,
-            @Query("fromDate") String fromDate,
-            @Query("toDate") String toDate,
-            @Query("limit") Object limit,
-            @Query("offset") Object offset,
-            @Query("tag") Object tag,
-            @Query("notalks") Object notalks,
-            @Query("commitMode") Object commitMode,
-            @Query("author") Object author,
-            Callback<NewsItem> response
-    );
-
 }

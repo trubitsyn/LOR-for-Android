@@ -35,9 +35,9 @@ import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public class NewsFragment extends BaseCallbackFragment {
+    private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     protected final List<Object> items = new ArrayList<Object>();
     private int offset = 0;
-    private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
     @Override
     public void getListItems() {
