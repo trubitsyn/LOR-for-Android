@@ -20,16 +20,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Comment;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private final List<Comment> comments;
     private final Context context;
 
@@ -39,13 +36,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     @Override
-    public CommentAdapter.ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+    public CommentViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_comment, viewGroup, false);
-        return new ViewHolder(view);
+        return new CommentViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final CommentAdapter.ViewHolder v, final int position) {
+    public void onBindViewHolder(final CommentViewHolder v, final int position) {
         Comment comment = comments.get(position);
         CommentUtils.initView(comments, comment, context, v.replyTo, v.message, v.author, v.stars, v.date);
     }
@@ -53,18 +50,5 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public int getItemCount() {
         return comments.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.commentAuthor) TextView author;
-        @Bind(R.id.commentMessage) TextView message;
-        @Bind(R.id.commentStars) TextView stars;
-        @Bind(R.id.commentDate) TextView date;
-        @Bind(R.id.commentReplyTo) TextView replyTo;
-
-        public ViewHolder(View commentView) {
-            super(commentView);
-            ButterKnife.bind(this, commentView);
-        }
     }
 }
