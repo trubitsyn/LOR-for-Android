@@ -25,43 +25,66 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
-    private final List<?extends MiniNewsItem> newsItems;
+public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final List<Object> items;
+    private final int MINI = 0, FULL = 1;
 
-    public NewsAdapter(List<MiniNewsItem> topics) {
-        this.newsItems = topics;
+    public NewsAdapter(List<Object> topics) {
+        this.items = topics;
     }
 
     @Override
-    public NewsViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_news, viewGroup, false);
-        return new NewsViewHolder(view);
+    public int getItemViewType(int position) {
+        if (items.get(position) instanceof MiniNewsItem) {
+            return MINI;
+        } else if (items.get(position) instanceof NewsItem) {
+            return FULL;
+        }
+        return -1;
     }
 
     @Override
-    public void onBindViewHolder(NewsViewHolder viewHolder, int i) {
-        MiniNewsItem newsItem = newsItems.get(i);
-        viewHolder.getTitle().setText(Html.fromHtml(newsItem.getTitle()));
-        viewHolder.getCommentsCount().setText(newsItem.getCommentsCount());
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
+        RecyclerView.ViewHolder viewHolder = null;
 
-        if (newsItem instanceof NewsItem) {
-            NewsItem topic = (NewsItem) newsItem;
-            viewHolder.getCategory().setText(topic.getGroupTitle());
-            viewHolder.getTags().setText(topic.getTags());
-            viewHolder.getAuthor().setText(topic.getAuthor());
-            viewHolder.getDate().setText(topic.getPostDate());
-            viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()));
-            viewHolder.getCommentsCount().setText(topic.getCommentsCount());
-        } else {
-            viewHolder.getCategory().setVisibility(View.GONE);
-            viewHolder.getTags().setVisibility(View.GONE);
-            viewHolder.getAuthor().setVisibility(View.GONE);
-            viewHolder.getDate().setVisibility(View.GONE);
+        switch (viewType) {
+            case MINI:
+                View mini = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_mini_news, viewGroup, false);
+                viewHolder = new MiniNewsViewHolder(mini);
+                break;
+            case FULL:
+                View full = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_news, viewGroup, false);
+                viewHolder = new NewsViewHolder(full);
+                break;
+        }
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        switch (viewHolder.getItemViewType()) {
+            case MINI:
+                MiniNewsViewHolder miniNewsViewHolder = (MiniNewsViewHolder) viewHolder;
+                MiniNewsItem miniNewsItem = (MiniNewsItem) items.get(i);
+                miniNewsViewHolder.getTitle().setText(Html.fromHtml(miniNewsItem.getTitle()));
+                miniNewsViewHolder.getCommentsCount().setText(miniNewsItem.getCommentsCount());
+                break;
+            case FULL:
+                NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
+                NewsItem newsItem = (NewsItem) items.get(i);
+                newsViewHolder.getTitle().setText(Html.fromHtml(newsItem.getTitle()));
+                newsViewHolder.getCategory().setText(newsItem.getGroupTitle());
+                newsViewHolder.getTags().setText(newsItem.getTags());
+                newsViewHolder.getAuthor().setText(newsItem.getAuthor());
+                newsViewHolder.getDate().setText(newsItem.getPostDate());
+                newsViewHolder.getCommentsCount().setText(newsItem.getCommentsCount());
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return newsItems.size();
+        return items.size();
     }
 }

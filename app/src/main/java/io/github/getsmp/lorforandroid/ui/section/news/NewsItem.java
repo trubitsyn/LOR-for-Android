@@ -15,22 +15,39 @@
 
 package io.github.getsmp.lorforandroid.ui.section.news;
 
-public class NewsItem extends MiniNewsItem {
+public class NewsItem {
+    private String url;
+    private String title;
     private String groupTitle;
     private String postDate;
+    private String commentsCount;
     private String tags;
     private String author;
 
     public NewsItem(String url, String title, String groupTitle, String postDate, String commentsCount, String tags, String author) {
-        super(url, title, commentsCount);
+        this.url = url;
+        this.title = title;
         this.groupTitle = groupTitle;
         this.postDate = postDate;
+        this.commentsCount = commentsCount;
         this.tags = tags;
         this.author = author;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public String getPostDate() {
         return postDate;
+    }
+
+    public String getCommentsCount() {
+        return commentsCount;
     }
 
     public String getTags() {

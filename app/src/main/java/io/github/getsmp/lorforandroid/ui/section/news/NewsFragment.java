@@ -35,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public class NewsFragment extends BaseCallbackFragment {
-    protected final List<MiniNewsItem> items = new ArrayList<MiniNewsItem>();
+    protected final List<Object> items = new ArrayList<Object>();
     private static final int itemsPerPage = 20;
     private int offset = 0;
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
@@ -57,11 +57,11 @@ public class NewsFragment extends BaseCallbackFragment {
 
                 Elements articles = Jsoup.parse(resp).body().select("article");
 
-                List<MiniNewsItem> newsItems = new ArrayList<MiniNewsItem>();
+                List<Object> news = new ArrayList<Object>();
                 for (Element article : articles) {
                     if (article.hasClass("mini-news")) {
                         // Mini-news article
-                        newsItems.add(new MiniNewsItem(
+                        news.add(new MiniNewsItem(
                                 article.select("a[href^=/news/]").first().attr("href"),
                                 article.select("a[href^=/news/]").first().ownText(),
                                 Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", "")
@@ -74,7 +74,7 @@ public class NewsFragment extends BaseCallbackFragment {
                             strTags.add(tag.ownText());
                         }
 
-                        newsItems.add(new NewsItem(
+                        news.add(new NewsItem(
                                 article.select("h2 > a[href^=/news/]").first().attr("href"),
                                 article.select("h2 > a[href^=/news/]").first().ownText(),
                                 article.select("div.group").first().text(),
@@ -87,7 +87,7 @@ public class NewsFragment extends BaseCallbackFragment {
                 }
 
                 offset += itemsPerPage;
-                items.addAll(newsItems);
+                items.addAll(news);
                 adapter.notifyDataSetChanged();
                 stopRefresh();
             }
@@ -112,6 +112,6 @@ public class NewsFragment extends BaseCallbackFragment {
 
     @Override
     protected String getUrl(int position) {
-        return items.get(position).getUrl();
+        return ((MiniNewsItem) items.get(position)).getUrl();
     }
 }
