@@ -28,10 +28,10 @@ import io.github.getsmp.lorforandroid.model.TrackerItem;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
-    private final List<TrackerItem> trackerItems;
+    private final List<TrackerItem> items;
 
-    public TrackerAdapter(List<TrackerItem> trackerItems) {
-        this.trackerItems = trackerItems;
+    public TrackerAdapter(List<TrackerItem> items) {
+        this.items = items;
     }
 
     @Override
@@ -43,7 +43,7 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
 
     @Override
     public void onBindViewHolder(TrackerViewHolder viewHolder, int position) {
-        TrackerItem item = trackerItems.get(position);
+        TrackerItem item = items.get(position);
         viewHolder.title.setText(item.getTitle());
         viewHolder.category.setText(item.getGroupTitle());
         viewHolder.tags.setText(TextUtils.join(",", item.getTags()));
@@ -54,6 +54,6 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
 
     @Override
     public int getItemCount() {
-        return trackerItems.size();
+        return items.size();
     }
 }

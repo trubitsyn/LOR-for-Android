@@ -18,12 +18,9 @@ package io.github.getsmp.lorforandroid.model;
 import com.google.gson.annotations.Expose;
 
 public class Userpic {
-    @Expose
-    private String url;
-    @Expose
-    private Integer width;
-    @Expose
-    private Integer height;
+    @Expose private String url;
+    @Expose private Integer width;
+    @Expose private Integer height;
 
     public String getUrl() {
         return url;

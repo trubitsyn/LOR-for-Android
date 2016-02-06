@@ -15,7 +15,6 @@
 
 package io.github.getsmp.lorforandroid.ui.comment;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;

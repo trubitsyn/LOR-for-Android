@@ -2,9 +2,9 @@ package io.github.getsmp.lorforandroid.ui.section.news;
 
 
 public class MiniNewsItem {
-    private String url;
-    private String title;
-    private String commentsCount;
+    private final String url;
+    private final String title;
+    private final String commentsCount;
 
     public MiniNewsItem(String url, String title, String commentsCount) {
         this.url = url;

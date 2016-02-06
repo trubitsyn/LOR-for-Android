@@ -20,26 +20,16 @@ import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 public class Comment {
-    @Expose
-    private Integer id;
-    @Expose
-    private Author author;
-    @Expose
-    private String processedMessage;
-    @Expose
-    private Boolean deletable;
-    @Expose
-    private Boolean editable;
-    @Expose
-    private Boolean deleted;
-    @Expose
-    private Date postdate;
-    @Expose
-    private Userpic userpic;
-    @Expose
-    private Reply reply;
-    @Expose
-    private EditSummary editSummary;
+    @Expose private Integer id;
+    @Expose private Author author;
+    @Expose private String processedMessage;
+    @Expose private Boolean deletable;
+    @Expose private Boolean editable;
+    @Expose private Boolean deleted;
+    @Expose private Date postdate;
+    @Expose private Userpic userpic;
+    @Expose private Reply reply;
+    @Expose private EditSummary editSummary;
 
     /**
      * @return The id

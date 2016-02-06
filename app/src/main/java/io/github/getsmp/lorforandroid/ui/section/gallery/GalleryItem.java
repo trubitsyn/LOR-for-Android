@@ -1,14 +1,14 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 public class GalleryItem {
-    private String image;
-    private String url;
-    private String title;
-    private String groupTitle;
-    private String postDate;
-    private String commentsCount;
-    private String tags;
-    private String author;
+    private final String image;
+    private final String url;
+    private final String title;
+    private final String groupTitle;
+    private final String postDate;
+    private final String commentsCount;
+    private final String tags;
+    private final String author;
 
     public GalleryItem(String url, String title, String groupTitle, String postDate, String commentsCount, String tags, String author, String image) {
         this.url = url;

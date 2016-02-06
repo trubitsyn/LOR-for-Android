@@ -18,11 +18,8 @@ package io.github.getsmp.lorforandroid.model;
 import com.google.gson.annotations.Expose;
 
 public class Author {
-
-    @Expose
-    private String nick;
-    @Expose
-    private String stars;
+    @Expose private String nick;
+    @Expose private String stars;
 
     public String getNick() {
         return nick;

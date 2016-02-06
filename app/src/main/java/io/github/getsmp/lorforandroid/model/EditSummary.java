@@ -18,12 +18,9 @@ package io.github.getsmp.lorforandroid.model;
 import com.google.gson.annotations.Expose;
 
 public class EditSummary {
-    @Expose
-    private String editNick;
-    @Expose
-    private String editDate;
-    @Expose
-    private Integer editCount;
+    @Expose private String editNick;
+    @Expose private String editDate;
+    @Expose private Integer editCount;
 
     public String getEditNick() {
         return editNick;

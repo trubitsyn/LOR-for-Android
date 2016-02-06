@@ -23,26 +23,16 @@ import java.util.List;
 
 public class TrackerItem {
 
-    @Expose
-    private final List<String> tags = new ArrayList<String>();
-    @Expose
-    private Integer id;
-    @Expose
-    private String url;
-    @Expose
-    private String title;
-    @Expose
-    private String groupTitle;
-    @Expose
-    private Date postDate;
-    @Expose
-    private Date lastModified;
-    @Expose
-    private String lastCommentedBy;
-    @Expose
-    private Integer pages;
-    @Expose
-    private String author;
+    @Expose private final List<String> tags = new ArrayList<String>();
+    @Expose private Integer id;
+    @Expose private String url;
+    @Expose private String title;
+    @Expose private String groupTitle;
+    @Expose private Date postDate;
+    @Expose private Date lastModified;
+    @Expose private String lastCommentedBy;
+    @Expose private Integer pages;
+    @Expose private String author;
 
     public Integer getId() {
         return id;

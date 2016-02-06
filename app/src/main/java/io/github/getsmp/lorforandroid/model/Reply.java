@@ -20,14 +20,10 @@ import com.google.gson.annotations.Expose;
 import java.util.Date;
 
 public class Reply {
-    @Expose
-    private Integer id;
-    @Expose
-    private String author;
-    @Expose
-    private Date postdate;
-    @Expose
-    private Boolean samePage;
+    @Expose private Integer id;
+    @Expose private String author;
+    @Expose private Date postdate;
+    @Expose private Boolean samePage;
 
     public Integer getId() {
         return id;
