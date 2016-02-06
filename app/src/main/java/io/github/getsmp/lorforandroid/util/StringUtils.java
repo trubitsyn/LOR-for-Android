@@ -21,16 +21,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import io.github.getsmp.lorforandroid.ui.section.SectionEnum;
-
 public class StringUtils {
     public static String getDate(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US);
         return simpleDateFormat.format(date);
-    }
-
-    public static String getCurrentDate() {
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
     }
 
     @Deprecated
@@ -46,20 +40,5 @@ public class StringUtils {
 
     public static CharSequence removeLineBreak(Spanned spanned) {
         return spanned.subSequence(0, spanned.length() - 2);
-    }
-
-    @Deprecated
-    public static boolean isGallery(String url) {
-        return url.contains(SectionEnum.gallery.name());
-    }
-
-    @Deprecated
-    public static String getImageUrl(String url, String size) {
-        // Size can be either "med" or "med-2x"
-        String fixed = fixUrl(url);
-        if (isGallery(fixed)) {
-            return "https://linux.org.ru/" + SectionEnum.gallery.name() + fixed.substring(fixed.lastIndexOf("/")) + "-" + size + ".jpg";
-        }
-        return null;
     }
 }

@@ -35,28 +35,4 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
-
-    public TextView getTitle() {
-        return title;
-    }
-
-    public TextView getCategory() {
-        return category;
-    }
-
-    public TextView getTags() {
-        return tags;
-    }
-
-    public TextView getAuthor() {
-        return author;
-    }
-
-    public TextView getDate() {
-        return date;
-    }
-
-    public TextView getCommentsCount() {
-        return commentsCount;
-    }
 }

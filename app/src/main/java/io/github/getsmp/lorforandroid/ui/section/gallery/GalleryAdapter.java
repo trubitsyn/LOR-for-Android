@@ -17,21 +17,23 @@ package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.section.news.NewsItem;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
-    private final List<NewsItem> topics;
+    private final List<GalleryItem> items;
     private final Context context;
 
-    public GalleryAdapter(List<NewsItem> topics, Context context) {
-        this.topics = topics;
+    public GalleryAdapter(List<GalleryItem> items, Context context) {
+        this.items = items;
         this.context = context;
     }
 
@@ -43,24 +45,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
 
     @Override
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
-        /*NewsItem topic = topics.get(i);
-        viewHolder.getTitle().setText(Html.fromHtml(topic.getTitle()) + " (" + nick + ")");
-        viewHolder.getCategory().setText(groupTitle);
-
-        if (imageUrl != null) {
-            Picasso.with(context).cancelRequest(viewHolder.getImage());
-            Picasso.with(context).load(imageUrl).resize(400, 0).into((viewHolder.getImage()));
-        } else viewHolder.getImage().setVisibility(View.GONE);
-
-        if (tags.length() == 0) {
-            viewHolder.getTags().setVisibility(View.GONE);
-        } else viewHolder.getTags().setText(tags);
-
-        //viewHolder.getCommentsCount().setText(commentsCount);*/
+        GalleryItem item = items.get(i);
+        viewHolder.title.setText(Html.fromHtml(item.getTitle()));
+        viewHolder.category.setText(item.getGroupTitle());
+        viewHolder.tags.setText(item.getTags());
+        Picasso.with(context).cancelRequest(viewHolder.image);
+        Picasso.with(context).load(item.getImage()).resize(400, 0).into((viewHolder.image));
+        viewHolder.author.setText(item.getAuthor());
+        viewHolder.date.setText(item.getPostDate());
+        viewHolder.commentsCount.setText(item.getCommentsCount());
     }
 
     @Override
     public int getItemCount() {
-        return topics.size();
+        return items.size();
     }
 }

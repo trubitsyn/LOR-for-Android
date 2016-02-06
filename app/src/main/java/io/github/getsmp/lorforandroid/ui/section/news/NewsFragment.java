@@ -36,7 +36,6 @@ import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public class NewsFragment extends BaseCallbackFragment {
     protected final List<Object> items = new ArrayList<Object>();
-    private static final int itemsPerPage = 20;
     private int offset = 0;
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 
@@ -86,7 +85,7 @@ public class NewsFragment extends BaseCallbackFragment {
                     }
                 }
 
-                offset += itemsPerPage;
+                offset += 20;
                 items.addAll(news);
                 adapter.notifyDataSetChanged();
                 stopRefresh();

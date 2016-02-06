@@ -73,12 +73,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case FULL:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
                 NewsItem newsItem = (NewsItem) items.get(i);
-                newsViewHolder.getTitle().setText(Html.fromHtml(newsItem.getTitle()));
-                newsViewHolder.getCategory().setText(newsItem.getGroupTitle());
-                newsViewHolder.getTags().setText(newsItem.getTags());
-                newsViewHolder.getAuthor().setText(newsItem.getAuthor());
-                newsViewHolder.getDate().setText(newsItem.getPostDate());
-                newsViewHolder.getCommentsCount().setText(newsItem.getCommentsCount());
+                newsViewHolder.title.setText(Html.fromHtml(newsItem.getTitle()));
+                newsViewHolder.category.setText(newsItem.getGroupTitle());
+                newsViewHolder.tags.setText(newsItem.getTags());
+                newsViewHolder.author.setText(newsItem.getAuthor());
+                newsViewHolder.date.setText(newsItem.getPostDate());
+                newsViewHolder.commentsCount.setText(newsItem.getCommentsCount());
                 break;
         }
     }

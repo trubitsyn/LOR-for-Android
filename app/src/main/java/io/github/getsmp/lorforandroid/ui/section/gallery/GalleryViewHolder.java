@@ -25,29 +25,16 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.galleryTitleAuthor) TextView title;
-    @Bind(R.id.galleryImage) ImageView image;
+    @Bind(R.id.galleryTitle) TextView title;
+    @Bind(R.id.galleryCategory) TextView category;
     @Bind(R.id.galleryTags) TextView tags;
+    @Bind(R.id.galleryAuthor) TextView author;
+    @Bind(R.id.galleryDate) TextView date;
+    @Bind(R.id.galleryImage) ImageView image;
     @Bind(R.id.galleryCommentsCount) TextView commentsCount;
 
     public GalleryViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-    }
-
-    public TextView getTitle() {
-        return title;
-    }
-
-    public ImageView getImage() {
-        return image;
-    }
-
-    public TextView getTags() {
-        return tags;
-    }
-
-    public TextView getCommentsCount() {
-        return commentsCount;
     }
 }
