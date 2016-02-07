@@ -19,5 +19,5 @@
 
     <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
     <string name="error_no_more_data">Нет более старых тем.</string>
-    <string name="error_no_more_comments">Нет новых комментариев.</string>
+    <string name="error_no_comments">Нет комментариев.</string>
 </resources>

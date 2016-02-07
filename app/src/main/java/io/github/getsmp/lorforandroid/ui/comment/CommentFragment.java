@@ -81,7 +81,7 @@ public class CommentFragment extends BaseListFragment {
                     previousCount = commentSize;
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(context, R.string.error_no_more_comments, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.error_no_comments, Toast.LENGTH_SHORT).show();
                 }
                 stopRefresh();
             }
