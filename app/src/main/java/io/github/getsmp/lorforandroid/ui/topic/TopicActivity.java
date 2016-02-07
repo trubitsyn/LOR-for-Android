@@ -21,8 +21,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,7 +42,7 @@ public class TopicActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
-            url = StringUtils.fixUrl(getIntent().getStringExtra("url"));
+            url = StringUtils.removeParams(getIntent().getStringExtra("url"));
             topicFragment.loadTopic(url);
         }
     }

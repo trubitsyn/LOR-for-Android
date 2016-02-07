@@ -37,7 +37,7 @@ public class StringUtils {
     * @param url /forum/general/12336213?lastmod=1454852134842
     * @return /forum/general/12336213
     * */
-    public static String fixUrl(String url) {
+    public static String removeParams(String url) {
         int length = url.length() - url.replace("/", "").length();
         if (length > 3) {
             return url.substring(0, url.lastIndexOf("/"));
