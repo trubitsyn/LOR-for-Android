@@ -43,6 +43,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onBindViewHolder(final CommentViewHolder v, final int position) {
+        v.setIsRecyclable(false);
         Comment comment = comments.get(position);
         CommentUtils.initView(comments, comment, context, v.replyTo, v.message, v.author, v.stars, v.date);
     }
