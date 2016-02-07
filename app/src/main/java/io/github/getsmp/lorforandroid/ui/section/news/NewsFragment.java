@@ -110,6 +110,12 @@ public class NewsFragment extends BaseCallbackFragment {
 
     @Override
     protected String getUrl(int position) {
-        return ((MiniNewsItem) items.get(position)).getUrl();
+        Object item = items.get(position);
+        if (item instanceof MiniNewsItem) {
+            return ((MiniNewsItem) items.get(position)).getUrl();
+        } else if (item instanceof NewsItem) {
+            return ((NewsItem) items.get(position)).getUrl();
+        }
+        throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
     }
 }
