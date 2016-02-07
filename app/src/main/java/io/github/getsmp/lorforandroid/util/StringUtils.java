@@ -64,7 +64,7 @@ public class StringUtils {
     }
 
     public static String removeSectionName(String in) {
-        return in.substring(in.indexOf("-") + 1, in.length());
+        return in.substring(in.indexOf("-") + 2, in.length());
     }
 
     public static CharSequence removeLineBreak(Spanned spanned) {
