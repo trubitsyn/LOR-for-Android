@@ -10,26 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbarBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/black"> <!-- TODO: Show menu instead -->
-
-        <TextView
-            android:id="@+id/commentsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/comments" />
-    </android.support.v7.widget.Toolbar>
-
     <fragment
         android:id="@+id/topicFragment"
         class="io.github.getsmp.lorforandroid.ui.topic.TopicFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/toolbarBottom"
         android:layout_below="@+id/toolbarTop" />
 </RelativeLayout>

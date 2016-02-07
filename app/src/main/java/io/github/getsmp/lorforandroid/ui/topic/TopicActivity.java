@@ -19,6 +19,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,8 +31,8 @@ import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TopicActivity extends AppCompatActivity {
-    @Bind(R.id.commentsTextView) TextView commentsTextView;
     @Bind(R.id.toolbarTop) Toolbar toolbar;
+    private String url;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,16 +44,26 @@ public class TopicActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
-            final String url = StringUtils.fixUrl(getIntent().getStringExtra("url"));
+            url = StringUtils.fixUrl(getIntent().getStringExtra("url"));
             topicFragment.loadTopic(url);
-            commentsTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(TopicActivity.this, CommentActivity.class);
-                    intent.putExtra("url", url);
-                    startActivity(intent);
-                }
-            });
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topic, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.showComments:
+                Intent intent = new Intent(TopicActivity.this, CommentActivity.class);
+                intent.putExtra("url", url);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
