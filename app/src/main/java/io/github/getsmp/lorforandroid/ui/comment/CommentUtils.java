@@ -36,7 +36,7 @@ class CommentUtils {
         date.setText(StringUtils.getDate(comment.getPostdate()));
         if (comment.getReply() != null) {
             final Comment parent = getParent(comments, comment.getReply().getId());
-            reply.setText(context.getString(R.string.replyTo) + " " + parent.getAuthor().getNick());
+            reply.setText(context.getString(R.string.replyTo, parent.getAuthor().getNick()));
             reply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
