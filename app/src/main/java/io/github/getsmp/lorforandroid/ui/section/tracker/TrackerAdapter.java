@@ -47,7 +47,7 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
         TrackerItem item = items.get(position);
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
         viewHolder.category.setText(item.getGroupTitle());
-        viewHolder.tags.setText(TextUtils.join(", ", item.getTags()));
+        viewHolder.tags.setText(StringUtils.getTags(item.getTags()));
         viewHolder.author.setText(item.getAuthor());
         viewHolder.date.setText(StringUtils.getDate(item.getPostDate()));
         viewHolder.commentsCount.setVisibility(View.GONE);

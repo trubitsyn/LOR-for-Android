@@ -37,6 +37,7 @@ import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
+import io.github.getsmp.lorforandroid.util.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -93,7 +94,7 @@ public class TopicFragment extends Fragment {
                 List<String> tagsList = topic.getTags();
                 if (!tagsList.isEmpty()) {
                     tags.setVisibility(View.VISIBLE);
-                    tags.setText(TextUtils.join(", ", topic.getTags()));
+                    tags.setText(StringUtils.getTags(tagsList));
                 } else tags.setVisibility(View.GONE);
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));

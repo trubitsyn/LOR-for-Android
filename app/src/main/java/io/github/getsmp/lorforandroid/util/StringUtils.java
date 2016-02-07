@@ -16,9 +16,15 @@
 package io.github.getsmp.lorforandroid.util;
 
 import android.text.Spanned;
+import android.text.TextUtils;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class StringUtils {
@@ -40,6 +46,18 @@ public class StringUtils {
             return url.split("\\?")[0];
         }
         return url;
+    }
+
+    public static String getTags(List<String> in) {
+        return TextUtils.join(", ", in);
+    }
+
+    public static String getTags(Elements e) {
+        List<String> strTags = new ArrayList<String>();
+        for (Element tag : e) {
+            strTags.add(tag.ownText());
+        }
+        return getTags(strTags);
     }
 
     public static CharSequence removeLineBreak(Spanned spanned) {

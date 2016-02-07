@@ -35,6 +35,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsFragment extends BaseCallbackFragment {
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
@@ -70,19 +71,13 @@ public class NewsFragment extends BaseCallbackFragment {
                             ));
                         } else {
                             // Standard article
-                            Elements tags = article.select("a.tag");
-                            List<String> strTags = new ArrayList<String>();
-                            for (Element tag : tags) {
-                                strTags.add(tag.ownText());
-                            }
-
                             news.add(new NewsItem(
                                     article.select("h2 > a[href^=/news/]").first().attr("href"),
                                     article.select("h2 > a[href^=/news/]").first().ownText(),
                                     article.select("div.group").first().text(),
                                     article.select("time").first().ownText(),
                                     article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
-                                    TextUtils.join(", ", strTags),
+                                    StringUtils.getTags(article.select("a.tag")),
                                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", "")
                             ));
                         }
