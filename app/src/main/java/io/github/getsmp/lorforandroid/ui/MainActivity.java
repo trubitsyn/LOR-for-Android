@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -88,9 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navigate(int selection) {
         FragmentManager fm = getSupportFragmentManager();
         switch (selection) {
-            case R.id.drawer_profile:
-                actionBar.setTitle(R.string.drawer_profile);
-                break;
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
                 NewsFragment newsFragment = new NewsFragment();
@@ -109,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
+                fm.beginTransaction().replace(R.id.fragmentContainer, new Fragment()).commit();
                 // TODO: Show settings
                 break;
         }
