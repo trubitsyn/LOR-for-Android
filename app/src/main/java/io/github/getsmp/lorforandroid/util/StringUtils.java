@@ -29,8 +29,7 @@ import java.util.Locale;
 
 public class StringUtils {
     public static String getDate(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US);
-        return simpleDateFormat.format(date);
+        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US).format(date);
     }
 
     /*
