@@ -27,7 +27,11 @@ public class StringUtils {
         return simpleDateFormat.format(date);
     }
 
-    @Deprecated
+    /*
+    * Removes part of url after "?" including it
+    * @param url /forum/general/12336213?lastmod=1454852134842
+    * @return /forum/general/12336213
+    * */
     public static String fixUrl(String url) {
         int length = url.length() - url.replace("/", "").length();
         if (length > 3) {
