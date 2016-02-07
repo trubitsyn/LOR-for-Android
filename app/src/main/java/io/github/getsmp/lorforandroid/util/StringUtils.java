@@ -63,6 +63,10 @@ public class StringUtils {
         return sb.toString();
     }
 
+    public static String removeSectionName(String in) {
+        return in.substring(in.indexOf("-") + 1, in.length());
+    }
+
     public static CharSequence removeLineBreak(Spanned spanned) {
         return spanned.subSequence(0, spanned.length() - 2);
     }

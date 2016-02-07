@@ -62,7 +62,7 @@ public class GalleryFragment extends BaseCallbackFragment {
                         items.add(new GalleryItem(
                                 article.select("h2 > a[href^=/gallery/]").first().attr("href"),
                                 article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                                article.select("div.group").first().text(),
+                                StringUtils.removeSectionName(article.select("div.group").first().text()),
                                 article.select("time").first().ownText(),
                                 article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
                                 StringUtils.tagsFromElements(article.select("a.tag")),
