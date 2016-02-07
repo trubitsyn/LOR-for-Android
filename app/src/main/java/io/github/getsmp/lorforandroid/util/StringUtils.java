@@ -47,16 +47,20 @@ public class StringUtils {
         return url;
     }
 
-    public static String getTags(List<String> in) {
-        return TextUtils.join(", ", in);
+    public static String tagsFromStrings(List<String> in) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : in) {
+            sb.append("#").append(s).append(" ");
+        }
+        return sb.toString();
     }
 
-    public static String getTags(Elements e) {
-        List<String> strTags = new ArrayList<String>();
+    public static String tagsFromElements(Elements e) {
+        StringBuilder sb = new StringBuilder();
         for (Element tag : e) {
-            strTags.add(tag.ownText());
+            sb.append("#").append(tag.ownText()).append(" ");
         }
-        return getTags(strTags);
+        return sb.toString();
     }
 
     public static CharSequence removeLineBreak(Spanned spanned) {

@@ -16,7 +16,6 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -66,7 +65,7 @@ public class GalleryFragment extends BaseCallbackFragment {
                                 article.select("div.group").first().text(),
                                 article.select("time").first().ownText(),
                                 article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
-                                StringUtils.getTags(article.select("a.tag")),
+                                StringUtils.tagsFromElements(article.select("a.tag")),
                                 article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
                                 article.select("img[itemprop^=thumbnail]").attr("src")
                         ));

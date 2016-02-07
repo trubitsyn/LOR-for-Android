@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,7 +93,7 @@ public class TopicFragment extends Fragment {
                 List<String> tagsList = topic.getTags();
                 if (!tagsList.isEmpty()) {
                     tags.setVisibility(View.VISIBLE);
-                    tags.setText(StringUtils.getTags(tagsList));
+                    tags.setText(StringUtils.tagsFromStrings(tagsList));
                 } else tags.setVisibility(View.GONE);
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));

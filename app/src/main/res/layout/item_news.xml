@@ -31,8 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="@color/tag" />
+            android:singleLine="true"/>
     </LinearLayout>
 
     <LinearLayout

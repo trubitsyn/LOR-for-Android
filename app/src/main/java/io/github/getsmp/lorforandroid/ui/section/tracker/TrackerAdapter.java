@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
         TrackerItem item = items.get(position);
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
         viewHolder.category.setText(item.getGroupTitle());
-        viewHolder.tags.setText(StringUtils.getTags(item.getTags()));
+        viewHolder.tags.setText(StringUtils.tagsFromStrings(item.getTags()));
         viewHolder.author.setText(item.getAuthor());
         viewHolder.date.setText(StringUtils.getDate(item.getPostDate()));
         viewHolder.commentsCount.setVisibility(View.GONE);
