@@ -39,7 +39,7 @@ import io.github.getsmp.lorforandroid.util.StringUtils;
 public class NewsFragment extends BaseCallbackFragment {
     private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     protected final List<Object> items = new ArrayList<Object>();
-    private int offset = 0;
+    private int offset;
 
     @Override
     public void getListItems() {
@@ -58,7 +58,6 @@ public class NewsFragment extends BaseCallbackFragment {
                     }
 
                     Elements articles = Jsoup.parse(resp).body().select("article");
-
                     List<Object> news = new ArrayList<Object>();
                     for (Element article : articles) {
                         if (article.hasClass("mini-news")) {

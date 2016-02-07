@@ -57,7 +57,6 @@ public class GalleryFragment extends BaseCallbackFragment {
                     }
 
                     Elements articles = Jsoup.parse(resp).body().select("article.news");
-
                     for (Element article : articles) {
                         items.add(new GalleryItem(
                                 article.select("h2 > a[href^=/gallery/]").first().attr("href"),
