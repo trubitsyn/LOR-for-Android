@@ -105,7 +105,11 @@ public abstract class BaseListFragment extends Fragment {
         if (swipeRefreshLayout != null) {
             // SwipeRefreshLayout never stops refreshing regardless of null it is or not
             swipeRefreshLayout.setRefreshing(false);
+        }
+        if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
+        }
+        if (recyclerView != null) {
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
