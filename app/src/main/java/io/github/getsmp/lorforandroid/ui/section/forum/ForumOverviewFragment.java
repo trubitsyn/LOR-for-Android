@@ -33,7 +33,7 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
                     // Will never execute
                 }
 
-                Elements sections = Jsoup.parse(resp).body().select("div#bd li");
+                Elements sections = Jsoup.parse(resp).body().select("div#bd").select("ul").first().select("li");
                 for (Element section : sections) {
                     items.add(new ForumOverviewItem(
                             section.select("a").first().attr("href").replace("/forum/", ""),
