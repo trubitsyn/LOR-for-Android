@@ -66,4 +66,9 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
     protected void onItemClickCallback(int position) {
         ((ItemClickCallback) context).onForumSectionRequested(items.get(position).getUrl(), items.get(position).getName());
     }
+
+    @Override
+    protected boolean loadMoreAllowed() {
+        return false;
+    }
 }

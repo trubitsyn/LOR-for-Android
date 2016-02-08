@@ -62,7 +62,9 @@ public abstract class BaseListFragment extends Fragment {
         final InfiniteScrollListener scrollListener = new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
-                getListItems();
+                if (loadMoreAllowed()) {
+                    getListItems();
+                }
             }
         };
 
@@ -86,6 +88,10 @@ public abstract class BaseListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    protected boolean loadMoreAllowed() {
+        return true;
     }
 
     protected abstract void getListItems();
