@@ -15,6 +15,7 @@
             android:title="@string/drawer_tracker" />
         <item
             android:id="@+id/drawer_forum"
+            android:icon="@drawable/ic_forum_black_24dp"
             android:title="@string/drawer_forum"/>
         <item
             android:id="@+id/drawer_settings"
