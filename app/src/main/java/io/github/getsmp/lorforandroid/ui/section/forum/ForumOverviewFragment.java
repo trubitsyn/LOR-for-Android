@@ -23,8 +23,6 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
 
     @Override
     protected void getListItems() {
-        startRefresh();
-
         asyncHttpClient.get("https://www.linux.org.ru/forum/", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

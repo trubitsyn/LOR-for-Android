@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import butterknife.Bind;
@@ -38,6 +39,7 @@ public abstract class BaseListFragment extends Fragment {
     protected RecyclerView.Adapter adapter;
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
+    @Bind(R.id.progressBar) protected ProgressBar progressBar;
 
     @Override
     public void onAttach(Context context) {
@@ -108,6 +110,8 @@ public abstract class BaseListFragment extends Fragment {
         if (swipeRefreshLayout != null) {
             // SwipeRefreshLayout never stops refreshing regardless of null it is or not
             swipeRefreshLayout.setRefreshing(false);
+            progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

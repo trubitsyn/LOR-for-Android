@@ -44,8 +44,6 @@ public class ForumSectionFragment extends BaseCallbackFragment {
     @Override
     protected void getListItems() {
         if (offset <= 300) {
-            startRefresh();
-
             RequestParams params = new RequestParams();
             params.add("offset", String.valueOf(offset));
             asyncHttpClient.get("https://www.linux.org.ru/forum/" + group, params, new AsyncHttpResponseHandler() {

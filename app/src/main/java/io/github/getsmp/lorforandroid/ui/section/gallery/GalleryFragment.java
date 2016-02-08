@@ -44,8 +44,6 @@ public class GalleryFragment extends BaseCallbackFragment {
     @Override
     protected void getListItems() {
         if (offset <= 200) {
-            startRefresh();
-
             RequestParams params = new RequestParams("offset", String.valueOf(offset));
             asyncHttpClient.get("https://www.linux.org.ru/gallery/", params, new AsyncHttpResponseHandler() {
                 @Override

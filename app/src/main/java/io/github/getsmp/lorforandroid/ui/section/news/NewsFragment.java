@@ -46,8 +46,6 @@ public class NewsFragment extends BaseCallbackFragment {
     @Override
     public void getListItems() {
         if (offset <= 200) {
-            startRefresh();
-
             RequestParams params = new RequestParams("offset", String.valueOf(offset));
             asyncHttpClient.get("https://www.linux.org.ru/news/", params, new AsyncHttpResponseHandler() {
                 @Override

@@ -55,7 +55,6 @@ public class TrackerFragment extends BaseCallbackFragment {
 
     @Override
     protected void getListItems() {
-        startRefresh();
         ApiManager.INSTANCE.apiRestAdapter.create(ApiTracker.class).getTracker(offset, filter, new Callback<TrackerItems>() {
             @Override
             public void success(TrackerItems trackerItems, Response response) {
