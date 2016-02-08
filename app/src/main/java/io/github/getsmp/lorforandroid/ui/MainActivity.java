@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.TabFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
+import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
 import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
@@ -150,9 +151,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onItemClicked(String url) {
+    public void onTopicRequested(String url) {
         Intent intent = new Intent(this, TopicActivity.class);
         intent.putExtra("url", url);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onForumSectionRequested(String group) {
+        Intent intent = new Intent(this, ForumSectionActivity.class);
+        intent.putExtra("group", group);
         startActivity(intent);
     }
 }

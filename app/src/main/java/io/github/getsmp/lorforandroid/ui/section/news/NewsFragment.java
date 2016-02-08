@@ -17,6 +17,7 @@ package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.View;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -34,6 +35,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsFragment extends BaseCallbackFragment {
@@ -107,13 +109,15 @@ public class NewsFragment extends BaseCallbackFragment {
     }
 
     @Override
-    protected String getUrl(int position) {
+    protected void onItemClickCallback(int position) {
         Object item = items.get(position);
+        String url = null;
         if (item instanceof MiniNewsItem) {
-            return ((MiniNewsItem) items.get(position)).getUrl();
+            url = ((MiniNewsItem) items.get(position)).getUrl();
         } else if (item instanceof NewsItem) {
-            return ((NewsItem) items.get(position)).getUrl();
-        }
-        throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
+            url = ((NewsItem) items.get(position)).getUrl();
+        } else throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
+
+        ((ItemClickCallback) context).onTopicRequested(url);
     }
 }

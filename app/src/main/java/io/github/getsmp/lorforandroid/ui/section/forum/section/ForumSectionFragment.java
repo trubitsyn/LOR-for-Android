@@ -19,6 +19,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionFragment extends BaseCallbackFragment {
@@ -42,11 +43,6 @@ public class ForumSectionFragment extends BaseCallbackFragment {
     }
 
     @Override
-    protected String getUrl(int position) {
-        return items.get(position).getUrl();
-    }
-
-    @Override
     protected void getListItems() {
         if (offset <= 300) {
             startRefresh();
@@ -65,15 +61,15 @@ public class ForumSectionFragment extends BaseCallbackFragment {
 
                     Elements entries = Jsoup.parse(resp).body().select("tbody tr");
                     for (Element entry : entries) {
-                        Element properties = entries.select("td").first();
+                        Element properties = entry.select("td").first();
                         String bareAuthor = properties.text();
                         items.add(new ForumSectionItem(
                                 properties.select("a").first().attr("href"),
-                                properties.select("a").text(),
+                                properties.select("a").first().ownText(),
                                 StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                                bareAuthor.substring(bareAuthor.indexOf("("), bareAuthor.indexOf(")")),
+                                bareAuthor.substring(bareAuthor.indexOf("("), bareAuthor.indexOf(")")).replaceAll("[()]", ""),
                                 entry.select("td.dateinterval").first().select("time").first().ownText(),
-                                entries.select("td.numbers").first().ownText()
+                                entry.select("td.numbers").first().ownText()
                         ));
                     }
 
@@ -99,5 +95,10 @@ public class ForumSectionFragment extends BaseCallbackFragment {
     @Override
     protected RecyclerView.Adapter getAdapter() {
         return new ForumSectionAdapter(items);
+    }
+
+    @Override
+    protected void onItemClickCallback(int position) {
+        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
     }
 }

@@ -33,6 +33,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends BaseCallbackFragment {
@@ -95,7 +96,7 @@ public class GalleryFragment extends BaseCallbackFragment {
     }
 
     @Override
-    protected String getUrl(int position) {
-        return items.get(position).getUrl();
+    protected void onItemClickCallback(int position) {
+        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
     }
 }

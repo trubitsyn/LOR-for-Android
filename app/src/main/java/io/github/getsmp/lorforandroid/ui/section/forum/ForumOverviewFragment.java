@@ -15,15 +15,11 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
 public class ForumOverviewFragment extends BaseCallbackFragment {
     private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     private final List<ForumOverviewItem> items = new ArrayList<ForumOverviewItem>();
-
-    @Override
-    protected String getUrl(int position) {
-        return items.get(position).getUrl();
-    }
 
     @Override
     protected void getListItems() {
@@ -42,7 +38,7 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
                 Elements sections = Jsoup.parse(resp).body().select("div#bd li");
                 for (Element section : sections) {
                     items.add(new ForumOverviewItem(
-                            section.select("a").first().attr("href"),
+                            section.select("a").first().attr("href").replace("/forum/", ""),
                             section.select("a").first().ownText()
                     ));
                 }
@@ -66,5 +62,10 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
     @Override
     protected RecyclerView.Adapter getAdapter() {
         return new ForumOverviewAdapter(items);
+    }
+
+    @Override
+    protected void onItemClickCallback(int position) {
+        ((ItemClickCallback) context).onForumSectionRequested(items.get(position).getUrl());
     }
 }

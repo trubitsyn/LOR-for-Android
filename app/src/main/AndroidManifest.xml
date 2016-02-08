@@ -19,12 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.github.getsmp.lorforandroid.ui.topic.TopicActivity"
-            android:label="@string/activity_topic"
+            android:name="io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.getsmp.lorforandroid.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="io.github.getsmp.lorforandroid.ui.topic.TopicActivity"
+            android:label="@string/activity_topic"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name="io.github.getsmp.lorforandroid.ui.comment.CommentActivity"

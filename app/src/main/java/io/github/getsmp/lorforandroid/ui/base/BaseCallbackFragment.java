@@ -25,26 +25,18 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 
 public abstract class BaseCallbackFragment extends BaseListFragment {
-    private ItemClickCallback callback;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        callback = (ItemClickCallback) context;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         recyclerView.addOnItemTouchListener(new ItemClickListener(context, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view) {
-                callback.onItemClicked(getUrl(recyclerView.getChildAdapterPosition(view)));
+                onItemClickCallback(recyclerView.getChildAdapterPosition(view));
             }
         }));
 
         return view;
     }
 
-    protected abstract String getUrl(int position);
+    protected abstract void onItemClickCallback(int position);
 }

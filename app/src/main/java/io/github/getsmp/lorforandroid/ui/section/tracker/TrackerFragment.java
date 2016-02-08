@@ -17,6 +17,7 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import io.github.getsmp.lorforandroid.api.ApiTracker;
 import io.github.getsmp.lorforandroid.model.TrackerItem;
 import io.github.getsmp.lorforandroid.model.TrackerItems;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -49,11 +51,6 @@ public class TrackerFragment extends BaseCallbackFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         filter = getArguments().getString("filter");
-    }
-
-    @Override
-    protected String getUrl(int position) {
-        return items.get(position).getUrl();
     }
 
     @Override
@@ -91,4 +88,8 @@ public class TrackerFragment extends BaseCallbackFragment {
         return new TrackerAdapter(items);
     }
 
+    @Override
+    protected void onItemClickCallback(int position) {
+        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
+    }
 }
