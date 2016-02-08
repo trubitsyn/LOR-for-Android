@@ -59,12 +59,12 @@ public class ForumSectionFragment extends BaseCallbackFragment {
                     Elements entries = Jsoup.parse(resp).body().select("tbody tr");
                     for (Element entry : entries) {
                         Element properties = entry.select("td").first();
-                        String bareAuthor = properties.text();
+                        String bareAuthor = properties.ownText();
                         items.add(new ForumSectionItem(
                                 properties.select("a").first().attr("href"),
                                 properties.select("a").first().ownText(),
                                 StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                                bareAuthor.substring(bareAuthor.indexOf("("), bareAuthor.indexOf(")")).replaceAll("[()]", ""),
+                                bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
                                 entry.select("td.dateinterval").first().select("time").first().ownText(),
                                 entry.select("td.numbers").first().ownText()
                         ));
