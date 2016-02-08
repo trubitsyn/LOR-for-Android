@@ -1,6 +1,6 @@
-package io.github.getsmp.lorforandroid.ui.section.forum;
+package io.github.getsmp.lorforandroid.ui.section.forum.section;
 
-public class ForumItem {
+public class ForumSectionItem {
     private String url;
     private String title;
     private String tags;
@@ -8,7 +8,7 @@ public class ForumItem {
     private String replyDate;
     private String commentsCount;
 
-    public ForumItem(String url, String title, String tags, String replyFrom, String replyDate, String commentsCount) {
+    public ForumSectionItem(String url, String title, String tags, String replyFrom, String replyDate, String commentsCount) {
         this.url = url;
         this.title = title;
         this.tags = tags;

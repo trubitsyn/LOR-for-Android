@@ -9,27 +9,31 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 
-
 public class ForumSectionAdapter extends RecyclerView.Adapter<ForumSectionViewHolder> {
-    private List<ForumSection> sections;
+    private List<ForumSectionItem> items;
 
-    public ForumSectionAdapter(List<ForumSection> sections) {
-        this.sections = sections;
+    public ForumSectionAdapter(List<ForumSectionItem> items) {
+        this.items = items;
     }
 
     @Override
     public ForumSectionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_forum, parent, false);
         return new ForumSectionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ForumSectionViewHolder v, int position) {
-        v.itemName.setText(sections.get(position).getName());
+        ForumSectionItem item = items.get(position);
+        v.title.setText(item.getTitle());
+        v.tags.setText(item.getTags());
+        v.replyFrom.setText(item.getReplyFrom());
+        v.replyDate.setText(item.getReplyDate());
+        v.commentsCount.setText(item.getCommentsCount());
     }
 
     @Override
     public int getItemCount() {
-        return sections.size();
+        return items.size();
     }
 }

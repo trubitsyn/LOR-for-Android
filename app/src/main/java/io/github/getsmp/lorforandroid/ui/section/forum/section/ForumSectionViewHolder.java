@@ -8,9 +8,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 
-
 public class ForumSectionViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.itemName) TextView itemName;
+    @Bind(R.id.forumTitle) TextView title;
+    @Bind(R.id.forumTags) TextView tags;
+    @Bind(R.id.forumReplyFrom) TextView replyFrom;
+    @Bind(R.id.forumReplyDate) TextView replyDate;
+    @Bind(R.id.forumCommentsCount) TextView commentsCount;
 
     public ForumSectionViewHolder(View itemView) {
         super(itemView);

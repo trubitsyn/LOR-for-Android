@@ -33,7 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.TabFragment;
-import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionFragment;
+import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
 import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.drawer_forum:
                 actionBar.setTitle(R.string.drawer_forum);
-                ForumSectionFragment forumSectionFragment = new ForumSectionFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, forumSectionFragment).commit();
+                ForumOverviewFragment forumOverviewFragment = new ForumOverviewFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainer, forumOverviewFragment).commit();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
