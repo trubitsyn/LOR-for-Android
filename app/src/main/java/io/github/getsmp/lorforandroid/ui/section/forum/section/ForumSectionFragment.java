@@ -19,7 +19,6 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
-import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionFragment extends BaseCallbackFragment {
@@ -99,6 +98,10 @@ public class ForumSectionFragment extends BaseCallbackFragment {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
+        ((Callback) context).returnToActivity(items.get(position).getUrl());
+    }
+
+    interface Callback {
+        void returnToActivity(String url);
     }
 }

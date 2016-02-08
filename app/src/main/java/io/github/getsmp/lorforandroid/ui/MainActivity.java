@@ -158,9 +158,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onForumSectionRequested(String group) {
-        Intent intent = new Intent(this, ForumSectionActivity.class);
+    public void onForumSectionRequested(String group, String name) {
+        Intent intent = new Intent(MainActivity.this, ForumSectionActivity.class);
         intent.putExtra("group", group);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 }
