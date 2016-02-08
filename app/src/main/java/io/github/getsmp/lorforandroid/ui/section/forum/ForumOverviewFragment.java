@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
@@ -47,7 +48,7 @@ public class ForumOverviewFragment extends BaseCallbackFragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                networkError();
+                showErrorView(R.string.error_network);
             }
         });
     }

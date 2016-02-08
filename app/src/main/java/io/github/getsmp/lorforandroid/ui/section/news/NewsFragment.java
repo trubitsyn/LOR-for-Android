@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.View;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -89,7 +88,7 @@ public class NewsFragment extends BaseCallbackFragment {
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    networkError();
+                    showErrorView(R.string.error_network);
                 }
             });
         } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();

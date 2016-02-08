@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.comment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,14 +79,14 @@ public class CommentFragment extends BaseListFragment {
                     previousCount = commentSize;
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(context, R.string.error_no_comments, Toast.LENGTH_SHORT).show();
+                    showErrorView(R.string.error_no_comments);
                 }
                 stopRefresh();
             }
 
             @Override
             public void failure(RetrofitError error) {
-                networkError();
+                showErrorView(R.string.error_network);
             }
         });
     }

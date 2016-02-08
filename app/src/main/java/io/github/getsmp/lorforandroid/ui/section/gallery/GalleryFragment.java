@@ -76,7 +76,7 @@ public class GalleryFragment extends BaseCallbackFragment {
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    networkError();
+                    showErrorView(R.string.error_network);
                 }
             });
         } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();

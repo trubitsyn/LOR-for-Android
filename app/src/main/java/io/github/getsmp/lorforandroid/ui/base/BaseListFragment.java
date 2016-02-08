@@ -117,9 +117,9 @@ public abstract class BaseListFragment extends Fragment {
         }
     }
 
-    protected void networkError() {
+    protected void showErrorView(int stringResource) {
         stopRefresh();
         errorView.setVisibility(View.VISIBLE);
-        errorView.setText(R.string.error_network);
+        errorView.setText(stringResource);
     }
 }

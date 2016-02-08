@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class TrackerFragment extends BaseCallbackFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                networkError();
+                showErrorView(R.string.error_network);
             }
         });
     }
