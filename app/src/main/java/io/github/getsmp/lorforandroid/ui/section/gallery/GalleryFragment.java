@@ -36,7 +36,7 @@ import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends BaseCallbackFragment {
-    private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     private final List<GalleryItem> items = new ArrayList<GalleryItem>();
     private int offset;
 

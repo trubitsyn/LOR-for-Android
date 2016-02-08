@@ -37,7 +37,7 @@ import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsFragment extends BaseCallbackFragment {
-    private static final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
     protected final List<Object> items = new ArrayList<Object>();
     private int offset;
 

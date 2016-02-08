@@ -9,6 +9,7 @@
     <string name="drawer_news">Новости</string>
     <string name="drawer_gallery">Галерея</string>
     <string name="drawer_tracker">Трекер</string>
+    <string name="drawer_forum">Форум</string>
     <string name="drawer_settings">Настройки</string>
 
     <string name="open">Открыть панель навигации</string>
