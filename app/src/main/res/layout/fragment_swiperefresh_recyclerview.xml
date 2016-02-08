@@ -21,4 +21,11 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/errorView"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>

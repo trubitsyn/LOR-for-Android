@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.Bind;
@@ -40,6 +41,7 @@ public abstract class BaseListFragment extends Fragment {
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
     @Bind(R.id.progressBar) protected ProgressBar progressBar;
+    @Bind(R.id.errorView) TextView errorView;
 
     @Override
     public void onAttach(Context context) {
@@ -75,6 +77,7 @@ public abstract class BaseListFragment extends Fragment {
             public void onRefresh() {
                 clearData();
                 scrollListener.reset();
+                errorView.setVisibility(View.GONE);
                 getListItems();
             }
         });
@@ -116,6 +119,7 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void networkError() {
         stopRefresh();
-        Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
+        errorView.setVisibility(View.VISIBLE);
+        errorView.setText(R.string.error_network);
     }
 }
