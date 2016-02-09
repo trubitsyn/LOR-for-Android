@@ -64,7 +64,7 @@ public class MainActivity extends UpdateActivity implements NavigationView.OnNav
         // TODO: Display logo, collapsing ToolBar
 
         if (savedInstanceState == null) {
-            navigationItemId = R.id.drawer_tracker;
+            navigationItemId = R.id.drawer_news;
         } else {
             navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
