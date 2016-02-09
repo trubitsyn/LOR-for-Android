@@ -2,16 +2,19 @@ package io.github.getsmp.lorforandroid.ui.section.forum.section;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.base.UpdateActivity;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 
-public class ForumSectionActivity extends AppCompatActivity implements ForumSectionFragment.Callback {
+public class ForumSectionActivity extends UpdateActivity implements ForumSectionFragment.Callback {
     @Bind(R.id.toolbarTop) Toolbar toolbar;
+    private ForumSectionFragment fragment;
+    private String group;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,9 +23,23 @@ public class ForumSectionActivity extends AppCompatActivity implements ForumSect
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String group = getIntent().getStringExtra("group");
+        group = getIntent().getStringExtra("group");
         String name = getIntent().getStringExtra("name");
         getSupportActionBar().setTitle(name);
+        replace();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refreshButton:
+                replace();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void replace() {
         ForumSectionFragment fragment = ForumSectionFragment.newInstance(group);
         getSupportFragmentManager().beginTransaction().replace(R.id.forumSectionFragment, fragment).commit();
     }
