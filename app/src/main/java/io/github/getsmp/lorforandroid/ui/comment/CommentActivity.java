@@ -16,8 +16,8 @@
 package io.github.getsmp.lorforandroid.ui.comment;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import java.util.List;
 
@@ -25,9 +25,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.ui.base.UpdateActivity;
 
-public class CommentActivity extends AppCompatActivity implements CommentClickListener {
+public class CommentActivity extends UpdateActivity implements CommentClickListener {
     @Bind(R.id.toolbarTop) Toolbar toolbar;
+    private String url;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,24 @@ public class CommentActivity extends AppCompatActivity implements CommentClickLi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            String url = getIntent().getStringExtra("url");
-            CommentFragment commentFragment = CommentFragment.newInstance(url);
-            getSupportFragmentManager().beginTransaction().replace(R.id.commentFragmentContainer, commentFragment).commit();
+            url = getIntent().getStringExtra("url");
+            replace();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refreshButton:
+                replace();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void replace() {
+        CommentFragment commentFragment = CommentFragment.newInstance(url);
+        getSupportFragmentManager().beginTransaction().replace(R.id.commentFragmentContainer, commentFragment).commit();
     }
 
     @Override
