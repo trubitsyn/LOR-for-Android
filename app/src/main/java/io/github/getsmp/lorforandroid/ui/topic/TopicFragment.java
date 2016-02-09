@@ -15,7 +15,6 @@
 
 package io.github.getsmp.lorforandroid.ui.topic;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,8 +23,8 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -47,14 +46,9 @@ public class TopicFragment extends Fragment {
     @Bind(R.id.topicAuthor) TextView author;
     @Bind(R.id.topicMessage) TextView message;
     @Bind(R.id.topicSwipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.progressBar) ProgressBar progressBar;
+    @Bind(R.id.errorView) TextView errorView;
     private String url;
-    private Context context;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,12 +59,6 @@ public class TopicFragment extends Fragment {
             @Override
             public void onRefresh() {
                 loadTopic(url);
-            }
-        });
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
             }
         });
 
@@ -98,13 +86,16 @@ public class TopicFragment extends Fragment {
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));
                 message.setMovementMethod(LinkMovementMethod.getInstance());
-                swipeRefreshLayout.setRefreshing(false);
+                progressBar.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
+                errorView.setText(R.string.error_network);
+                errorView.setVisibility(View.VISIBLE);
             }
         });
     }
