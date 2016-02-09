@@ -33,7 +33,11 @@ public abstract class SectionCommon extends BaseCallbackFragment {
                         // Will never execute
                     }
 
-                    generateDataSet(Jsoup.parse(resp).body());
+                    try {
+                        generateDataSet(Jsoup.parse(resp).body());
+                    } catch (NullPointerException e) {
+                        showErrorView(R.string.error_npe);
+                    }
 
                     offset += getItemsPerPage();
                     adapter.notifyDataSetChanged();

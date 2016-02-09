@@ -18,6 +18,7 @@
 
     <string name="replyTo">В ответ на комментарий от %1$s</string>
 
+    <string name="error_npe">При обработке данных произошла ошибка. Возможно, это связано с изменениями на сайте.</string>
     <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
     <string name="error_no_more_data">Нет более старых тем.</string>
     <string name="error_no_comments">Нет комментариев.</string>
