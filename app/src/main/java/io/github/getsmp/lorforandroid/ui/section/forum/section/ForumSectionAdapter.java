@@ -26,7 +26,9 @@ public class ForumSectionAdapter extends RecyclerView.Adapter<ForumSectionViewHo
     public void onBindViewHolder(ForumSectionViewHolder v, int position) {
         ForumSectionItem item = items.get(position);
         v.title.setText(item.getTitle());
-        v.tags.setText(item.getTags());
+        if (item.getTags().length() > 0 || item.getTags() == null) {
+            v.tags.setText(item.getTags());
+        } else v.tags.setVisibility(View.GONE);
         v.replyFrom.setText(item.getReplyFrom());
         v.replyDate.setText(item.getReplyDate());
         v.commentsCount.setText(item.getCommentsCount());
