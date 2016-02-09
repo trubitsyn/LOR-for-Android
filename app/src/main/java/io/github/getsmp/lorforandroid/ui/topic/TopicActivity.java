@@ -56,6 +56,9 @@ public class TopicActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
             case R.id.showComments:
                 Intent intent = new Intent(TopicActivity.this, CommentActivity.class);
                 intent.putExtra("url", url);
