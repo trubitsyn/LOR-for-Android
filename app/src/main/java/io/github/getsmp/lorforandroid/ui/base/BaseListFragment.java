@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -112,6 +111,10 @@ public abstract class BaseListFragment extends Fragment {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    protected void stopRefreshAndShow() {
+        stopRefresh();
         if (recyclerView != null) {
             recyclerView.setVisibility(View.VISIBLE);
         }

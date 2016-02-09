@@ -65,7 +65,7 @@ public class TrackerFragment extends BaseCallbackFragment {
                 } else {
                     Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
                 }
-                stopRefresh();
+                stopRefreshAndShow();
             }
 
             @Override

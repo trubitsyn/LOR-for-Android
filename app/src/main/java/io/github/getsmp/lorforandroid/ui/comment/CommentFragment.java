@@ -81,7 +81,7 @@ public class CommentFragment extends BaseListFragment {
                 } else {
                     showErrorView(R.string.error_no_comments);
                 }
-                stopRefresh();
+                stopRefreshAndShow();
             }
 
             @Override
