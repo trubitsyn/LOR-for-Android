@@ -1,6 +1,7 @@
 package io.github.getsmp.lorforandroid.ui.section.forum;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -10,6 +11,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
@@ -46,7 +48,7 @@ public class ForumOverviewFragment extends SectionCommon {
         Elements sections = responseBody.select("div#bd").select("ul").first().select("li");
         for (Element section : sections) {
             items.add(new ForumOverviewItem(
-                    section.select("a").first().attr("href").replace("/forum/", ""),
+                    section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
                     section.select("a").first().ownText()
             ));
         }
@@ -59,7 +61,11 @@ public class ForumOverviewFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onForumSectionRequested(items.get(position).getUrl(), items.get(position).getName());
+        if (items.get(position).getUrl().equals("club")) {
+            Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show();
+        } else {
+            ((ItemClickCallback) context).onForumSectionRequested(items.get(position).getUrl(), items.get(position).getName());
+        }
     }
 
     @Override
