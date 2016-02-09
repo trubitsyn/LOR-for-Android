@@ -16,13 +16,11 @@
 package io.github.getsmp.lorforandroid.util;
 
 import android.text.Spanned;
-import android.text.TextUtils;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;

@@ -17,5 +17,6 @@ package io.github.getsmp.lorforandroid.ui.util;
 
 public interface ItemClickCallback {
     void onTopicRequested(String url);
+
     void onForumSectionRequested(String group, String name);
 }

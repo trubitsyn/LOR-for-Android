@@ -97,7 +97,8 @@ public class NewsFragment extends SectionCommon {
             url = ((MiniNewsItem) items.get(position)).getUrl();
         } else if (item instanceof NewsItem) {
             url = ((NewsItem) items.get(position)).getUrl();
-        } else throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
+        } else
+            throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
 
         ((ItemClickCallback) context).onTopicRequested(url);
     }

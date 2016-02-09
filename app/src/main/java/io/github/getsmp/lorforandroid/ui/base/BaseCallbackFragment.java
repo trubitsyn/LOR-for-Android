@@ -15,13 +15,11 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 
 public abstract class BaseCallbackFragment extends BaseListFragment {
