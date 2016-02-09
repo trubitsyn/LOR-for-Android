@@ -41,9 +41,9 @@ public class TopicActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentById(R.id.topicFragment);
             url = StringUtils.removeParams(getIntent().getStringExtra("url"));
-            topicFragment.loadTopic(url);
+            TopicFragment topicFragment = TopicFragment.newInstance(url);
+            getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment).commit();
         }
     }
 

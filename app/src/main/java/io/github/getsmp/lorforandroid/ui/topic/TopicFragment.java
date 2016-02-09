@@ -50,6 +50,20 @@ public class TopicFragment extends Fragment {
     @Bind(R.id.errorView) TextView errorView;
     private String url;
 
+    public static TopicFragment newInstance(String url) {
+        TopicFragment fragment = new TopicFragment();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        url = getArguments().getString("url");
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -62,6 +76,8 @@ public class TopicFragment extends Fragment {
             }
         });
 
+        loadTopic(url);
+
         return view;
     }
 
@@ -71,7 +87,7 @@ public class TopicFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    public void loadTopic(String url) {
+    private void loadTopic(String url) {
         this.url = url;
         ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url, new Callback<Topics>() {
             @Override
