@@ -66,4 +66,9 @@ public class ForumOverviewFragment extends SectionCommon {
     protected boolean loadMoreAllowed() {
         return false;
     }
+
+    @Override
+    protected boolean showDividers() {
+        return false;
+    }
 }

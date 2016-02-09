@@ -55,7 +55,7 @@ public abstract class BaseListFragment extends Fragment {
         ButterKnife.bind(this, view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(context));
+        if (showDividers()) recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
@@ -93,6 +93,10 @@ public abstract class BaseListFragment extends Fragment {
     }
 
     protected boolean loadMoreAllowed() {
+        return true;
+    }
+
+    protected boolean showDividers() {
         return true;
     }
 
