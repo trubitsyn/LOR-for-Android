@@ -2,60 +2,54 @@ package io.github.getsmp.lorforandroid.ui.section.forum;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.msebera.android.httpclient.Header;
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
-public class ForumOverviewFragment extends BaseCallbackFragment {
-    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+public class ForumOverviewFragment extends SectionCommon {
     private final List<ForumOverviewItem> items = new ArrayList<ForumOverviewItem>();
 
     @Override
-    protected void getListItems() {
-        asyncHttpClient.get("https://www.linux.org.ru/forum/", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String resp = null;
-                try {
-                    resp = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    // Will never execute
-                }
-
-                Elements sections = Jsoup.parse(resp).body().select("div#bd").select("ul").first().select("li");
-                for (Element section : sections) {
-                    items.add(new ForumOverviewItem(
-                            section.select("a").first().attr("href").replace("/forum/", ""),
-                            section.select("a").first().ownText()
-                    ));
-                }
-
-                adapter.notifyDataSetChanged();
-                stopRefresh();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                showErrorView(R.string.error_network);
-            }
-        });
+    protected List getDataSet() {
+        return items;
     }
 
     @Override
-    protected void clearData() {
-        items.clear();
+    public int getItemsPerPage() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxOffset() {
+        return 0;
+    }
+
+    @Override
+    public String getPath() {
+        return "forum";
+    }
+
+    @Override
+    public RequestParams getRequestParams() {
+        return null;
+    }
+
+    @Override
+    protected void generateDataSet(Element responseBody) {
+        Elements sections = responseBody.select("div#bd").select("ul").first().select("li");
+        for (Element section : sections) {
+            items.add(new ForumOverviewItem(
+                    section.select("a").first().attr("href").replace("/forum/", ""),
+                    section.select("a").first().ownText()
+            ));
+        }
     }
 
     @Override

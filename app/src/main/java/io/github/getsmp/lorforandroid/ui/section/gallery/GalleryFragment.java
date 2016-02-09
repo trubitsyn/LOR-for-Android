@@ -16,76 +16,68 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.msebera.android.httpclient.Header;
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-public class GalleryFragment extends BaseCallbackFragment {
-    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-    private final List<GalleryItem> items = new ArrayList<GalleryItem>();
-    private int offset;
+public class GalleryFragment extends SectionCommon {
+    private List<GalleryItem> items = new ArrayList<GalleryItem>();
 
     @Override
-    protected void getListItems() {
-        if (offset <= 200) {
-            RequestParams params = new RequestParams("offset", String.valueOf(offset));
-            asyncHttpClient.get("https://www.linux.org.ru/gallery/", params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    String resp = null;
-                    try {
-                        resp = new String(responseBody, "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        // Will never execute
-                    }
-
-                    Elements articles = Jsoup.parse(resp).body().select("article.news");
-                    for (Element article : articles) {
-                        items.add(new GalleryItem(
-                                article.select("h2 > a[href^=/gallery/]").first().attr("href"),
-                                article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                                StringUtils.removeSectionName(article.select("div.group").first().text()),
-                                article.select("time").first().ownText(),
-                                article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
-                                StringUtils.tagsFromElements(article.select("a.tag")),
-                                article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                                article.select("img[itemprop^=thumbnail]").attr("src")
-                        ));
-                    }
-
-                    offset += 20;
-                    adapter.notifyDataSetChanged();
-                    stopRefresh();
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    showErrorView(R.string.error_network);
-                }
-            });
-        } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
+    protected List getDataSet() {
+        return items;
     }
 
     @Override
     protected void clearData() {
         offset = 0;
         items.clear();
+    }
+
+    @Override
+    public int getItemsPerPage() {
+        return 20;
+    }
+
+    @Override
+    public int getMaxOffset() {
+        return 200;
+    }
+
+    @Override
+    public String getPath() {
+        return "gallery";
+    }
+
+    @Override
+    public RequestParams getRequestParams() {
+        return new RequestParams("offset", offset);
+    }
+
+    @Override
+    protected void generateDataSet(Element responseBody) {
+        Elements articles = responseBody.select("article.news");
+        for (Element article : articles) {
+            items.add(new GalleryItem(
+                    article.select("h2 > a[href^=/gallery/]").first().attr("href"),
+                    article.select("h2 > a[href^=/gallery/]").first().ownText(),
+                    StringUtils.removeSectionName(article.select("div.group").first().text()),
+                    article.select("time").first().ownText(),
+                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
+                    StringUtils.tagsFromElements(article.select("a.tag")),
+                    article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
+                    article.select("img[itemprop^=thumbnail]").attr("src")
+            ));
+        }
     }
 
     @Override
