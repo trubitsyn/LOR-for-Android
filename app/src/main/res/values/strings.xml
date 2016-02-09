@@ -15,6 +15,7 @@
     <string name="open">Открыть панель навигации</string>
     <string name="close">Закрыть панель навигации</string>
     <string name="comments">Комментарии</string>
+    <string name="refresh">Обновить</string>
 
     <string name="replyTo">В ответ на комментарий от %1$s</string>
 
