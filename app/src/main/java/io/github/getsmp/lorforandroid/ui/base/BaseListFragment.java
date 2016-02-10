@@ -53,6 +53,12 @@ public abstract class BaseListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
         ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         if (showDividers()) recyclerView.addItemDecoration(new DividerItemDecoration(context));
@@ -82,8 +88,6 @@ public abstract class BaseListFragment extends Fragment {
         });
 
         getListItems();
-
-        return view;
     }
 
     @Override

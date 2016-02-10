@@ -49,6 +49,7 @@ public class MainActivity extends UpdateActivity implements NavigationView.OnNav
     private int navigationItemId;
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
+    private Bundle saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,8 @@ public class MainActivity extends UpdateActivity implements NavigationView.OnNav
         } else {
             navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
+
+        saved = savedInstanceState;
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -89,34 +92,48 @@ public class MainActivity extends UpdateActivity implements NavigationView.OnNav
 
     private void navigate(int selection) {
         FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment;
+        String tag;
         switch (selection) {
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
-                NewsFragment newsFragment = new NewsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, newsFragment).commit();
+                tag = "news";
+                fragment = (saved == null) ? new NewsFragment() : fm.findFragmentByTag(tag);
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
-                GalleryFragment galleryFragment = new GalleryFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, galleryFragment).commit();
+                tag = "gallery";
+                fragment = (saved == null) ? new GalleryFragment() : fm.findFragmentByTag(tag);
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_tracker:
                 actionBar.setTitle(R.string.drawer_tracker);
-                TabFragment tabFragment = new TabFragment();
-                tabFragment.setAdapter(new TrackerFragmentPagerAdapter(fm));
-                fm.beginTransaction().replace(R.id.fragmentContainer, tabFragment).commit();
+                tag = "tracker";
+                TabFragment tabFragment;
+                if (saved == null) {
+                    tabFragment = new TabFragment();
+                    tabFragment.setAdapter(new TrackerFragmentPagerAdapter(fm));
+                } else {
+                    tabFragment = (TabFragment) fm.findFragmentByTag(tag);
+                }
+                fm.beginTransaction().replace(R.id.fragmentContainer, tabFragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_forum:
                 actionBar.setTitle(R.string.drawer_forum);
-                ForumOverviewFragment forumOverviewFragment = new ForumOverviewFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, forumOverviewFragment).commit();
+                tag = "forum";
+                fragment = (saved == null) ? new ForumOverviewFragment() : fm.findFragmentByTag(tag);
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
-                fm.beginTransaction().replace(R.id.fragmentContainer, new Fragment()).commit();
+                tag = "settings";
+                fragment = (saved == null) ? new Fragment() : fm.findFragmentByTag(tag);
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 // TODO: Show settings
                 break;
         }
+        fm.executePendingTransactions();
     }
 
     @Override
