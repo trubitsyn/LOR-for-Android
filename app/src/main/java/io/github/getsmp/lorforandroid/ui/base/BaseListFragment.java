@@ -23,6 +23,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -37,6 +40,7 @@ import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 public abstract class BaseListFragment extends Fragment {
     protected Context context;
     protected RecyclerView.Adapter adapter;
+    private InfiniteScrollListener scrollListener;
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
     @Bind(R.id.progressBar) protected ProgressBar progressBar;
@@ -46,6 +50,34 @@ public abstract class BaseListFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_wth_refresh, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refreshButton:
+                recyclerView.setVisibility(View.GONE);
+                errorView.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+                clearData();
+                scrollListener.reset();
+                getListItems();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -66,7 +98,7 @@ public abstract class BaseListFragment extends Fragment {
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
 
-        final InfiniteScrollListener scrollListener = new InfiniteScrollListener(layoutManager) {
+        scrollListener = new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
                 if (loadMoreAllowed()) {
