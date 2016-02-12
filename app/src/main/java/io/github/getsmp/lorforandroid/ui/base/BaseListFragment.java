@@ -162,7 +162,9 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void showErrorView(int stringResource) {
         stopRefresh();
-        errorView.setVisibility(View.VISIBLE);
-        errorView.setText(stringResource);
+        if (errorView != null) {
+            errorView.setVisibility(View.VISIBLE);
+            errorView.setText(stringResource);
+        }
     }
 }
