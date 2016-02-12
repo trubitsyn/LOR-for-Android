@@ -17,25 +17,21 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
+
+import com.loopj.android.http.RequestParams;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.api.ApiTracker;
-import io.github.getsmp.lorforandroid.model.TrackerItem;
-import io.github.getsmp.lorforandroid.model.TrackerItems;
-import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import io.github.getsmp.lorforandroid.util.StringUtils;
 
-public class TrackerFragment extends BaseCallbackFragment {
+public class TrackerFragment extends SectionCommon {
     private final List<TrackerItem> items = new ArrayList<TrackerItem>();
-    private int offset;
     private String filter;
 
     public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {
@@ -53,32 +49,44 @@ public class TrackerFragment extends BaseCallbackFragment {
     }
 
     @Override
-    protected void getListItems() {
-        ApiManager.INSTANCE.apiRestAdapter.create(ApiTracker.class).getTracker(offset, filter, new Callback<TrackerItems>() {
-            @Override
-            public void success(TrackerItems trackerItems, Response response) {
-                if (trackerItems.trackerItems.size() > 0) {
-                    offset += 30;
-
-                    items.addAll(trackerItems.trackerItems);
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
-                }
-                stopRefreshAndShow();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                showErrorView(R.string.error_network);
-            }
-        });
+    protected List getDataSet() {
+        return items;
     }
 
     @Override
-    protected void clearData() {
-        offset = 0;
-        items.clear();
+    public int getItemsPerPage() {
+        return 30;
+    }
+
+    @Override
+    public int getMaxOffset() {
+        return 150;
+    }
+
+    @Override
+    public String getPath() {
+        return "tracker";
+    }
+
+    @Override
+    public RequestParams getRequestParams() {
+        return new RequestParams("offset", offset, "filter", filter);
+    }
+
+    @Override
+    protected void generateDataSet(Element responseBody) {
+        Elements topics = responseBody.select("tbody > tr");
+        for (Element topic : topics) {
+            items.add(new TrackerItem(
+                    topic.select("td:eq(1)").select("a").first().attr("href"),
+                    topic.select("td:eq(1)").select("a").first().ownText(),
+                    topic.select("a.secondary").first().ownText(),
+                    topic.select("time").first().ownText(),
+                    topic.select("td.numbers").first().ownText(),
+                    StringUtils.tagsFromElements(topic.select("span.tag")),
+                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", "")
+            ));
+        }
     }
 
     @Override

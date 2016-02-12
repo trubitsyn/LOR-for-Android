@@ -17,6 +17,8 @@ package io.github.getsmp.lorforandroid.model;
 
 import java.util.List;
 
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerItem;
+
 public class TrackerItems {
     public List<TrackerItem> trackerItems;
 }

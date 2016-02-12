@@ -24,8 +24,6 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.TrackerItem;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
     private final List<TrackerItem> items;
@@ -46,10 +44,10 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
         TrackerItem item = items.get(position);
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
         viewHolder.category.setText(item.getGroupTitle());
-        viewHolder.tags.setText(StringUtils.tagsFromStrings(item.getTags()));
+        viewHolder.tags.setText(item.getTags());
         viewHolder.author.setText(item.getAuthor());
-        viewHolder.date.setText(StringUtils.getDate(item.getPostDate()));
-        viewHolder.commentsCount.setVisibility(View.GONE);
+        viewHolder.date.setText(item.getPostDate());
+        viewHolder.commentsCount.setText(item.getCommentsCount());
     }
 
     @Override
