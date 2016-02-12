@@ -24,11 +24,12 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 
 class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
-    private final List<TrackerItem> items;
+    private final List<ItemCommon> items;
 
-    public TrackerAdapter(List<TrackerItem> items) {
+    public TrackerAdapter(List<ItemCommon> items) {
         this.items = items;
     }
 
@@ -41,13 +42,13 @@ class TrackerAdapter extends RecyclerView.Adapter<TrackerViewHolder> {
 
     @Override
     public void onBindViewHolder(TrackerViewHolder viewHolder, int position) {
-        TrackerItem item = items.get(position);
+        ItemCommon item = items.get(position);
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
         viewHolder.category.setText(item.getGroupTitle());
         viewHolder.tags.setText(item.getTags());
+        viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());
-        viewHolder.date.setText(item.getPostDate());
-        viewHolder.commentsCount.setText(item.getCommentsCount());
+        viewHolder.commentsCount.setText(item.getComments());
     }
 
     @Override

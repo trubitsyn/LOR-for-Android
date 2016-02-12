@@ -26,26 +26,27 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {
-    private final List<TrackerItem> items = new ArrayList<TrackerItem>();
+    private final List<ItemCommon> items = new ArrayList<ItemCommon>();
     private String filter;
 
     @Override
     protected void generateDataSet(Element responseBody) {
         Elements topics = responseBody.select("tbody > tr");
         for (Element topic : topics) {
-            items.add(new TrackerItem(
+            items.add(new ItemCommon(
                     topic.select("td:eq(1)").select("a").first().attr("href"),
                     topic.select("td:eq(1)").select("a").first().ownText(),
                     topic.select("a.secondary").first().ownText(),
-                    topic.select("time").first().ownText(),
-                    StringUtils.addEnding(topic.select("td.numbers").first().ownText()),
                     StringUtils.tagsFromElements(topic.select("span.tag")),
-                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", "")
+                    topic.select("time").first().ownText(),
+                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
+                    StringUtils.addEnding(topic.select("td.numbers").first().ownText())
             ));
         }
     }

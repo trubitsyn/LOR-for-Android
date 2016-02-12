@@ -49,11 +49,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
         viewHolder.category.setText(item.getGroupTitle());
         viewHolder.tags.setText(item.getTags());
-        Picasso.with(context).cancelRequest(viewHolder.image);
-        Picasso.with(context).load(item.getImage()).resize(400, 0).into((viewHolder.image));
+        viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());
-        viewHolder.date.setText(item.getPostDate());
-        viewHolder.commentsCount.setText(item.getCommentsCount());
+        viewHolder.commentsCount.setText(item.getComments());
+        Picasso.with(context).cancelRequest(viewHolder.image);
+        Picasso.with(context).load(item.getImageUrl()).resize(400, 0).into((viewHolder.image));
     }
 
     @Override

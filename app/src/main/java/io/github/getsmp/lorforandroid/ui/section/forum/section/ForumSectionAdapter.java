@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 
 public class ForumSectionAdapter extends RecyclerView.Adapter<ForumSectionViewHolder> {
-    private List<ForumSectionItem> items;
+    private List<ItemCommon> items;
 
-    public ForumSectionAdapter(List<ForumSectionItem> items) {
+    public ForumSectionAdapter(List<ItemCommon> items) {
         this.items = items;
     }
 
@@ -24,14 +25,14 @@ public class ForumSectionAdapter extends RecyclerView.Adapter<ForumSectionViewHo
 
     @Override
     public void onBindViewHolder(ForumSectionViewHolder v, int position) {
-        ForumSectionItem item = items.get(position);
+        ItemCommon item = items.get(position);
         v.title.setText(item.getTitle());
         if (item.getTags().length() > 0 || item.getTags() == null) {
             v.tags.setText(item.getTags());
         } else v.tags.setVisibility(View.GONE);
-        v.replyFrom.setText(item.getReplyFrom());
-        v.replyDate.setText(item.getReplyDate());
-        v.commentsCount.setText(item.getCommentsCount());
+        v.replyFrom.setText(item.getAuthor());
+        v.replyDate.setText(item.getDate());
+        v.commentsCount.setText(item.getComments());
     }
 
     @Override

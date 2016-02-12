@@ -11,11 +11,12 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionFragment extends SectionCommon {
-    private final List<ForumSectionItem> items = new ArrayList<ForumSectionItem>();
+    private final List<ItemCommon> items = new ArrayList<ItemCommon>();
     private String group;
 
     public static ForumSectionFragment newInstance(String group) {
@@ -69,12 +70,13 @@ public class ForumSectionFragment extends SectionCommon {
         for (Element entry : entries) {
             Element properties = entry.select("td").first();
             String bareAuthor = properties.ownText();
-            items.add(new ForumSectionItem(
+            items.add(new ItemCommon(
                     properties.select("a").first().attr("href"),
                     properties.select("a").first().ownText(),
+                    null,
                     StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
                     entry.select("td.dateinterval").first().select("time").first().ownText(),
+                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
                     StringUtils.addEnding(entry.select("td.numbers").first().ownText())
             ));
         }

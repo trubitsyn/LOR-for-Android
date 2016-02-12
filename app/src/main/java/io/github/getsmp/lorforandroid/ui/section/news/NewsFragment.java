@@ -26,6 +26,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
@@ -46,14 +47,14 @@ public class NewsFragment extends SectionCommon {
                 ));
             } else {
                 // Standard article
-                items.add(new NewsItem(
+                items.add(new ItemCommon(
                         article.select("h2 > a[href^=/news/]").first().attr("href"),
                         article.select("h2 > a[href^=/news/]").first().ownText(),
                         StringUtils.removeSectionName(article.select("div.group").first().text()),
-                        article.select("time").first().ownText(),
-                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
                         StringUtils.tagsFromElements(article.select("a.tag")),
-                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", "")
+                        article.select("time").first().ownText(),
+                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
+                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText()
                 ));
             }
         }
@@ -95,10 +96,10 @@ public class NewsFragment extends SectionCommon {
         String url = null;
         if (item instanceof MiniNewsItem) {
             url = ((MiniNewsItem) items.get(position)).getUrl();
-        } else if (item instanceof NewsItem) {
-            url = ((NewsItem) items.get(position)).getUrl();
+        } else if (item instanceof ItemCommon) {
+            url = ((ItemCommon) items.get(position)).getUrl();
         } else
-            throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to NewsItem.");
+            throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to ItemCommon.");
 
         ((ItemClickCallback) context).onTopicRequested(url);
     }
