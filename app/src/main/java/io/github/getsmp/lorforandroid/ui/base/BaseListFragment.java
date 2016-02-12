@@ -119,7 +119,8 @@ public abstract class BaseListFragment extends Fragment {
             }
         });
 
-        getListItems();
+        if (savedInstanceState == null) getListItems();
+
     }
 
     @Override
