@@ -75,7 +75,7 @@ public class ForumSectionFragment extends SectionCommon {
                     StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
                     bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
                     entry.select("td.dateinterval").first().select("time").first().ownText(),
-                    entry.select("td.numbers").first().ownText()
+                    StringUtils.addEnding(entry.select("td.numbers").first().ownText())
             ));
         }
     }

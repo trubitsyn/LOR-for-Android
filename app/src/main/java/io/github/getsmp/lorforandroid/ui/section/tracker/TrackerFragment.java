@@ -43,7 +43,7 @@ public class TrackerFragment extends SectionCommon {
                     topic.select("td:eq(1)").select("a").first().ownText(),
                     topic.select("a.secondary").first().ownText(),
                     topic.select("time").first().ownText(),
-                    topic.select("td.numbers").first().ownText(),
+                    StringUtils.addEnding(topic.select("td.numbers").first().ownText()),
                     StringUtils.tagsFromElements(topic.select("span.tag")),
                     topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", "")
             ));

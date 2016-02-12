@@ -65,6 +65,26 @@ public class StringUtils {
         return in.substring(in.indexOf("-") + 2, in.length());
     }
 
+    public static String addEnding(String commentsCount) {
+        if (commentsCount.equals("-")) {
+            return "Нет комментариев";
+        }
+        int last = 0;
+        try {
+            last = Integer.parseInt(commentsCount.substring(commentsCount.length() -1));
+        } catch (NumberFormatException ignored) {}
+
+        switch (last) {
+            case 1:
+                return commentsCount + " комментарий";
+            case 2:
+            case 3:
+            case 4:
+                return commentsCount + " комментария";
+        }
+        return commentsCount + " комментариев";
+    }
+
     public static CharSequence removeLineBreak(Spanned spanned) {
         return spanned.subSequence(0, spanned.length() - 2);
     }
