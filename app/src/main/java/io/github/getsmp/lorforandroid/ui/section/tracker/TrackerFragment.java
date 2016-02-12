@@ -34,6 +34,22 @@ public class TrackerFragment extends SectionCommon {
     private final List<TrackerItem> items = new ArrayList<TrackerItem>();
     private String filter;
 
+    @Override
+    protected void generateDataSet(Element responseBody) {
+        Elements topics = responseBody.select("tbody > tr");
+        for (Element topic : topics) {
+            items.add(new TrackerItem(
+                    topic.select("td:eq(1)").select("a").first().attr("href"),
+                    topic.select("td:eq(1)").select("a").first().ownText(),
+                    topic.select("a.secondary").first().ownText(),
+                    topic.select("time").first().ownText(),
+                    topic.select("td.numbers").first().ownText(),
+                    StringUtils.tagsFromElements(topic.select("span.tag")),
+                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", "")
+            ));
+        }
+    }
+
     public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {
         TrackerFragment trackerFragment = new TrackerFragment();
         Bundle args = new Bundle();
@@ -71,22 +87,6 @@ public class TrackerFragment extends SectionCommon {
     @Override
     public RequestParams getRequestParams() {
         return new RequestParams("offset", offset, "filter", filter);
-    }
-
-    @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements topics = responseBody.select("tbody > tr");
-        for (Element topic : topics) {
-            items.add(new TrackerItem(
-                    topic.select("td:eq(1)").select("a").first().attr("href"),
-                    topic.select("td:eq(1)").select("a").first().ownText(),
-                    topic.select("a.secondary").first().ownText(),
-                    topic.select("time").first().ownText(),
-                    topic.select("td.numbers").first().ownText(),
-                    StringUtils.tagsFromElements(topic.select("span.tag")),
-                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", "")
-            ));
-        }
     }
 
     @Override

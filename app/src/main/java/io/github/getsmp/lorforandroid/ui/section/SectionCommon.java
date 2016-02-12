@@ -59,6 +59,8 @@ public abstract class SectionCommon extends BaseCallbackFragment {
         offset = 0;
     }
 
+    protected abstract void generateDataSet(Element responseBody);
+
     protected abstract List getDataSet();
 
     public abstract int getItemsPerPage();
@@ -68,6 +70,4 @@ public abstract class SectionCommon extends BaseCallbackFragment {
     public abstract String getPath();
 
     public abstract RequestParams getRequestParams();
-
-    protected abstract void generateDataSet(Element responseBody);
 }

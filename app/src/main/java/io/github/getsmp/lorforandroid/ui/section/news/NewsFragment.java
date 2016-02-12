@@ -34,31 +34,6 @@ public class NewsFragment extends SectionCommon {
     private List<Object> items = new ArrayList<Object>();
 
     @Override
-    protected List getDataSet() {
-        return items;
-    }
-
-    @Override
-    public int getItemsPerPage() {
-        return 20;
-    }
-
-    @Override
-    public int getMaxOffset() {
-        return 200;
-    }
-
-    @Override
-    public String getPath() {
-        return "news";
-    }
-
-    @Override
-    public RequestParams getRequestParams() {
-        return new RequestParams("offset", offset);
-    }
-
-    @Override
     protected void generateDataSet(Element responseBody) {
         Elements articles = responseBody.select("article");
         for (Element article : articles) {
@@ -82,6 +57,31 @@ public class NewsFragment extends SectionCommon {
                 ));
             }
         }
+    }
+
+    @Override
+    protected List getDataSet() {
+        return items;
+    }
+
+    @Override
+    public int getItemsPerPage() {
+        return 20;
+    }
+
+    @Override
+    public int getMaxOffset() {
+        return 200;
+    }
+
+    @Override
+    public String getPath() {
+        return "news";
+    }
+
+    @Override
+    public RequestParams getRequestParams() {
+        return new RequestParams("offset", offset);
     }
 
     @Override

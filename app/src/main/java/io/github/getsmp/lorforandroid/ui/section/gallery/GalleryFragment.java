@@ -33,14 +33,25 @@ public class GalleryFragment extends SectionCommon {
     private List<GalleryItem> items = new ArrayList<GalleryItem>();
 
     @Override
-    protected List getDataSet() {
-        return items;
+    protected void generateDataSet(Element responseBody) {
+        Elements articles = responseBody.select("article.news");
+        for (Element article : articles) {
+            items.add(new GalleryItem(
+                    article.select("h2 > a[href^=/gallery/]").first().attr("href"),
+                    article.select("h2 > a[href^=/gallery/]").first().ownText(),
+                    StringUtils.removeSectionName(article.select("div.group").first().text()),
+                    article.select("time").first().ownText(),
+                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
+                    StringUtils.tagsFromElements(article.select("a.tag")),
+                    article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
+                    article.select("img[itemprop^=thumbnail]").attr("src")
+            ));
+        }
     }
 
     @Override
-    protected void clearData() {
-        offset = 0;
-        items.clear();
+    protected List getDataSet() {
+        return items;
     }
 
     @Override
@@ -61,23 +72,6 @@ public class GalleryFragment extends SectionCommon {
     @Override
     public RequestParams getRequestParams() {
         return new RequestParams("offset", offset);
-    }
-
-    @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements articles = responseBody.select("article.news");
-        for (Element article : articles) {
-            items.add(new GalleryItem(
-                    article.select("h2 > a[href^=/gallery/]").first().attr("href"),
-                    article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                    StringUtils.removeSectionName(article.select("div.group").first().text()),
-                    article.select("time").first().ownText(),
-                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
-                    StringUtils.tagsFromElements(article.select("a.tag")),
-                    article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                    article.select("img[itemprop^=thumbnail]").attr("src")
-            ));
-        }
     }
 
     @Override
