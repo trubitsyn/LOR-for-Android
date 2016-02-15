@@ -12,6 +12,8 @@
     <string name="drawer_forum">Форум</string>
     <string name="drawer_settings">Настройки</string>
 
+    <string name="pref_title_dark_theme">Ночной режим</string>
+
     <string name="open">Открыть панель навигации</string>
     <string name="close">Закрыть панель навигации</string>
     <string name="comments">Комментарии</string>
