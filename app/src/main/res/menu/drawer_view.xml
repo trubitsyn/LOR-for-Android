@@ -3,25 +3,25 @@
     <group android:id="@+id/drawerTop" android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_news"
-            android:icon="@drawable/ic_library_books_black_24dp"
+            android:icon="?attr/themedNewsDrawable"
             android:title="@string/drawer_news" />
         <item
             android:id="@+id/drawer_gallery"
-            android:icon="@drawable/ic_image_black_24dp"
+            android:icon="?attr/themedGalleryDrawable"
             android:title="@string/drawer_gallery" />
         <item
             android:id="@+id/drawer_tracker"
-            android:icon="@drawable/ic_whatshot_black_24dp"
+            android:icon="?attr/themedTrackerDrawable"
             android:title="@string/drawer_tracker" />
         <item
             android:id="@+id/drawer_forum"
-            android:icon="@drawable/ic_forum_black_24dp"
+            android:icon="?attr/themedForumDrawable"
             android:title="@string/drawer_forum"/>
     </group>
     <group android:id="@+id/drawerBottom" android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_settings"
-            android:icon="@drawable/ic_settings_black_24dp"
+            android:icon="?attr/themedSettingsDrawable"
             android:title="@string/drawer_settings" />
     </group>
 </menu>
