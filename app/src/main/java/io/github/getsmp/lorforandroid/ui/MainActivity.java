@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
                 tag = "settings";
-                fragment = (saved == null) ? new Fragment() : fm.findFragmentByTag(tag);
+                fragment = (saved == null) ? new SettingsFragment() : fm.findFragmentByTag(tag);
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 // TODO: Show settings
                 break;
