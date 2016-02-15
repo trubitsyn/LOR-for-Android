@@ -25,8 +25,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -34,6 +32,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.TabFragment;
+import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
@@ -42,7 +41,7 @@ import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAda
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
+public class MainActivity extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
     private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.toolbarTop) Toolbar toolbar;
@@ -54,10 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("dark_theme", false)) {
-            setTheme(R.style.AppTheme_Dark);
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

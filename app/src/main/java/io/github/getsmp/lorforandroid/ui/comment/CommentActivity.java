@@ -16,7 +16,6 @@
 package io.github.getsmp.lorforandroid.ui.comment;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -26,8 +25,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 
-public class CommentActivity extends AppCompatActivity implements CommentClickListener {
+public class CommentActivity extends ThemeActivity implements CommentClickListener {
     @Bind(R.id.toolbarTop) Toolbar toolbar;
     private String url;
 

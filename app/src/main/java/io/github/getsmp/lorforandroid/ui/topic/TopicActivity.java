@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +24,11 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-public class TopicActivity extends AppCompatActivity {
+public class TopicActivity extends ThemeActivity {
     @Bind(R.id.toolbarTop) Toolbar toolbar;
     private String url;
 
