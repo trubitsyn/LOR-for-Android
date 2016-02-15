@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_horizontal_margin"
+    style="@style/listThreeLine"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/trackerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:gravity="start"
-        android:textSize="20sp" />
+        style="@style/primaryText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,12 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
+            style="@style/secondaryText"
             android:gravity="start" />
 
         <TextView
             android:id="@+id/trackerTags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/secondaryText"
             android:ellipsize="end"
             android:singleLine="true"/>
     </LinearLayout>
@@ -44,18 +45,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            style="@style/secondaryText"/>
 
         <TextView
             android:id="@+id/trackerDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            style="@style/secondaryText"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/trackerCommentsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="start" />
+        android:gravity="start"
+        style="@style/secondaryText"/>
 
 </LinearLayout>
