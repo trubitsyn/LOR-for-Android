@@ -37,7 +37,6 @@ import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
-import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
@@ -113,7 +112,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 TabFragment tabFragment;
                 if (saved == null) {
                     tabFragment = new TabFragment();
-                    tabFragment.setAdapter(new TrackerFragmentPagerAdapter(fm));
                 } else {
                     tabFragment = (TabFragment) fm.findFragmentByTag(tag);
                 }

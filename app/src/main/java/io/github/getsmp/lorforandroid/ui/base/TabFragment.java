@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.ui.base;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,23 +26,25 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
 
 public class TabFragment extends Fragment {
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.tabs) TabLayout tabLayout;
-    private FragmentStatePagerAdapter adapter;
-
-    public void setAdapter(FragmentStatePagerAdapter adapter) {
-        this.adapter = adapter;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_tabs, container, false);
         ButterKnife.bind(this, view);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewPager.setAdapter(new TrackerFragmentPagerAdapter(getChildFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
