@@ -97,36 +97,36 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
             case R.id.drawer_news:
                 actionBar.setTitle(R.string.drawer_news);
                 tag = "news";
-                fragment = (saved == null) ? new NewsFragment() : fm.findFragmentByTag(tag);
+                fragment = fm.findFragmentByTag(tag);
+                if (fragment == null) fragment = new NewsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
                 tag = "gallery";
-                fragment = (saved == null) ? new GalleryFragment() : fm.findFragmentByTag(tag);
+                fragment = fm.findFragmentByTag(tag);
+                if (fragment == null) fragment = new GalleryFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_tracker:
                 actionBar.setTitle(R.string.drawer_tracker);
                 tag = "tracker";
-                TabFragment tabFragment;
-                if (saved == null) {
-                    tabFragment = new TabFragment();
-                } else {
-                    tabFragment = (TabFragment) fm.findFragmentByTag(tag);
-                }
-                fm.beginTransaction().replace(R.id.fragmentContainer, tabFragment, tag).addToBackStack(tag).commit();
+                fragment = fm.findFragmentByTag(tag);
+                if (fragment == null) fragment = new TabFragment();
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_forum:
                 actionBar.setTitle(R.string.drawer_forum);
                 tag = "forum";
-                fragment = (saved == null) ? new ForumOverviewFragment() : fm.findFragmentByTag(tag);
+                fragment = fm.findFragmentByTag(tag);
+                if (fragment == null) fragment = new ForumOverviewFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
                 tag = "settings";
-                fragment = (saved == null) ? new SettingsFragment() : fm.findFragmentByTag(tag);
+                fragment = fm.findFragmentByTag(tag);
+                if (fragment == null) fragment = new SettingsFragment();
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
                 break;
         }
