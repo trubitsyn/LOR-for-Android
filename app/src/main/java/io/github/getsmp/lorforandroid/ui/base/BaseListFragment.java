@@ -119,7 +119,7 @@ public abstract class BaseListFragment extends Fragment {
             }
         });
 
-        if (savedInstanceState == null) getListItems();
+        getListItems();
 
     }
 
