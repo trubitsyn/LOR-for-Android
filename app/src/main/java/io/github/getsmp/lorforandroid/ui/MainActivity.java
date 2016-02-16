@@ -130,7 +130,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 tag = "settings";
                 fragment = (saved == null) ? new SettingsFragment() : fm.findFragmentByTag(tag);
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
-                // TODO: Show settings
                 break;
         }
         fm.executePendingTransactions();
