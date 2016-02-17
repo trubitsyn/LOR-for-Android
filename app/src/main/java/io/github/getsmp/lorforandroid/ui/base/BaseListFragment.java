@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,7 +68,7 @@ public abstract class BaseListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refreshButton:
-                recyclerView.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
                 errorView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 clearData();
@@ -156,14 +155,15 @@ public abstract class BaseListFragment extends Fragment {
 
     protected void stopRefreshAndShow() {
         stopRefresh();
-        if (recyclerView != null) {
-            recyclerView.setVisibility(View.VISIBLE);
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
         }
     }
 
     protected void showErrorView(int stringResource) {
         stopRefresh();
         if (errorView != null) {
+            swipeRefreshLayout.setVisibility(View.INVISIBLE);
             errorView.setVisibility(View.VISIBLE);
             errorView.setText(stringResource);
         }

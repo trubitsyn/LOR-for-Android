@@ -17,13 +17,13 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class TopicFragment extends Fragment {
     @Bind(R.id.topicTags) TextView tags;
     @Bind(R.id.topicAuthor) TextView author;
     @Bind(R.id.topicMessage) TextView message;
-    @Bind(R.id.topicSwipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.topicScrollView) ScrollView scrollView;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.errorView) TextView errorView;
     private String url;
@@ -69,13 +69,6 @@ public class TopicFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_topic, container, false);
         ButterKnife.bind(this, view);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadTopic(url);
-            }
-        });
-
         loadTopic(url);
 
         return view;
@@ -89,6 +82,8 @@ public class TopicFragment extends Fragment {
 
     private void loadTopic(String url) {
         this.url = url;
+        errorView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url, new Callback<Topics>() {
             @Override
             public void success(Topics topics, Response response) {
@@ -103,13 +98,12 @@ public class TopicFragment extends Fragment {
                 message.setText(Html.fromHtml(topic.getMessage()));
                 message.setMovementMethod(LinkMovementMethod.getInstance());
                 progressBar.setVisibility(View.GONE);
-                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void failure(RetrofitError error) {
                 progressBar.setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
                 errorView.setText(R.string.error_network);
                 errorView.setVisibility(View.VISIBLE);
             }
