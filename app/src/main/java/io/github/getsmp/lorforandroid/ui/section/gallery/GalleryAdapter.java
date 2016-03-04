@@ -16,6 +16,7 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.content.Context;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.util.NetworkUtils;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<GalleryItem> items;
@@ -52,8 +54,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
-        Picasso.with(context).cancelRequest(viewHolder.image);
-        Picasso.with(context).load(item.getImageUrl()).resize(400, 0).into((viewHolder.image));
+
+        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("load_images", false) && NetworkUtils.isMobileData(context)) {
+            // Don't load on mobile data
+            viewHolder.image.setVisibility(View.GONE);
+        } else {
+            Picasso.with(context).cancelRequest(viewHolder.image);
+            Picasso.with(context).load(item.getImageUrl()).resize(400, 0).into((viewHolder.image));
+        }
     }
 
     @Override
