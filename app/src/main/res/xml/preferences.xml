@@ -8,7 +8,7 @@
 
     <SwitchPreferenceCompat
         android:defaultValue="true"
-        android:key="limit_images"
-        android:title="@string/pref_title_limit_images" />
+        android:key="load_images"
+        android:title="@string/pref_title_load_images" />
 
 </PreferenceScreen>

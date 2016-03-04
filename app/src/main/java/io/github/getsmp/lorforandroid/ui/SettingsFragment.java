@@ -38,9 +38,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             SwitchPreferenceCompat preference = (SwitchPreferenceCompat) findPreference(key);
             sharedPreferences.edit().putBoolean("dark_theme", preference.isChecked()).apply();
             restart();
-        } else if (key.equals("limit_images")) {
+        } else if (key.equals("load_images")) {
             SwitchPreferenceCompat limitImagesPreference = (SwitchPreferenceCompat) findPreference(key);
-            sharedPreferences.edit().putBoolean("limit_images", limitImagesPreference.isChecked()).apply();
+            sharedPreferences.edit().putBoolean("load_images", limitImagesPreference.isChecked()).apply();
         }
     }
 

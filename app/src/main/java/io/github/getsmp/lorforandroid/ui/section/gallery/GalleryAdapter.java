@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.util.NetworkUtils;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<GalleryItem> items;
@@ -53,10 +54,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("limit_images", false)) {
+
+        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("load_images", false) && NetworkUtils.isMobileData(context)) {
+            // Don't load on mobile data
+            viewHolder.image.setVisibility(View.GONE);
+        } else {
             Picasso.with(context).cancelRequest(viewHolder.image);
             Picasso.with(context).load(item.getImageUrl()).resize(400, 0).into((viewHolder.image));
-        } else viewHolder.image.setVisibility(View.GONE);
+        }
     }
 
     @Override

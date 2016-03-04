@@ -13,7 +13,7 @@
     <string name="drawer_settings">Настройки</string>
 
     <string name="pref_title_dark_theme">Ночной режим</string>
-    <string name="pref_title_limit_images">Загружать изображения</string>
+    <string name="pref_title_load_images">Загружать изображения при медленном соединении</string>
 
     <string name="open">Открыть панель навигации</string>
     <string name="close">Закрыть панель навигации</string>
