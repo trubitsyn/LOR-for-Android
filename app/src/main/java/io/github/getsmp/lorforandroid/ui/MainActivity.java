@@ -74,7 +74,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
-        drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
         onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
