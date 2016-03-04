@@ -15,6 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.topic;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -22,9 +23,12 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,11 +48,13 @@ public class TopicFragment extends Fragment {
     @Bind(R.id.topicTitle) TextView title;
     @Bind(R.id.topicTags) TextView tags;
     @Bind(R.id.topicAuthor) TextView author;
+    @Bind(R.id.topicImage) ImageView image;
     @Bind(R.id.topicMessage) TextView message;
     @Bind(R.id.topicScrollView) ScrollView scrollView;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.errorView) TextView errorView;
     private String url;
+    private Context context;
 
     public static TopicFragment newInstance(String url) {
         TopicFragment fragment = new TopicFragment();
@@ -56,6 +62,12 @@ public class TopicFragment extends Fragment {
         args.putString("url", url);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -80,7 +92,7 @@ public class TopicFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    private void loadTopic(String url) {
+    private void loadTopic(final String url) {
         this.url = url;
         errorView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
@@ -94,6 +106,12 @@ public class TopicFragment extends Fragment {
                     tags.setVisibility(View.VISIBLE);
                     tags.setText(StringUtils.tagsFromStrings(tagsList));
                 } else tags.setVisibility(View.GONE);
+
+                if (url.contains("gallery")) {
+                    image.setVisibility(View.VISIBLE);
+                    String imageUrl = ApiManager.INSTANCE.ROOT + "/gallery/" + url.split("/")[3] + ".png";
+                    Picasso.with(context).load(imageUrl).into((image));
+                }
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));
                 message.setMovementMethod(LinkMovementMethod.getInstance());

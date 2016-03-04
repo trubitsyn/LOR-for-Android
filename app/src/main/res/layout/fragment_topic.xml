@@ -37,6 +37,13 @@
                 android:gravity="center_horizontal"
                 android:paddingBottom="10dp" />
 
+            <ImageView
+                android:id="@+id/topicImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/topicMessage"
                 android:layout_width="wrap_content"

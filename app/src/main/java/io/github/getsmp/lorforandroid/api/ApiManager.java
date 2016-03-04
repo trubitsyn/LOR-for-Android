@@ -25,7 +25,8 @@ public enum ApiManager {
     INSTANCE;
 
     final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-    final String API = "https://www.linux.org.ru/api";
+    public final String ROOT = "https://linux.org.ru";
+    final String API = ROOT + "/api";
 
     public final RestAdapter apiRestAdapter = new retrofit.RestAdapter.Builder()
             .setConverter(new GsonConverter(GSON))
