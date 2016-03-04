@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.IntentCompat;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
 
@@ -38,12 +37,18 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if (key.equals("dark_theme")) {
             SwitchPreferenceCompat preference = (SwitchPreferenceCompat) findPreference(key);
             sharedPreferences.edit().putBoolean("dark_theme", preference.isChecked()).apply();
-
-            getActivity().finish();
-            Intent intent = getActivity().getIntent();
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-            getActivity().startActivity(intent);
+            restart();
+        } else if (key.equals("limit_images")) {
+            SwitchPreferenceCompat limitImagesPreference = (SwitchPreferenceCompat) findPreference(key);
+            sharedPreferences.edit().putBoolean("limit_images", limitImagesPreference.isChecked()).apply();
         }
+    }
+
+    private void restart() {
+        getActivity().finish();
+        Intent intent = getActivity().getIntent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
     }
 
     @Override

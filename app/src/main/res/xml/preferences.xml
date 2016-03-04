@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="dark_theme"
-            android:title="@string/pref_title_dark_theme" />
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="dark_theme"
+        android:title="@string/pref_title_dark_theme" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="limit_images"
+        android:title="@string/pref_title_limit_images" />
 
 </PreferenceScreen>
