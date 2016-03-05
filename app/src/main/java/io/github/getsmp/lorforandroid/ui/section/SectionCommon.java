@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.section;
 
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -29,17 +28,16 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.util.NetworkClient;
 
 public abstract class SectionCommon extends BaseCallbackFragment {
-    private final AsyncHttpClient client = new AsyncHttpClient();
     protected int offset;
 
     @Override
     protected void getListItems() {
         if (offset <= getMaxOffset()) {
-            client.get(ApiManager.INSTANCE.ROOT + "/" + getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
+            NetworkClient.get(getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String resp = null;
