@@ -36,6 +36,7 @@ import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
+import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
@@ -169,6 +170,13 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         Intent intent = new Intent(this, TopicActivity.class);
         intent.putExtra("url", url);
         startActivity(intent);
+    }
+
+    @Override
+    public void onGalleryTopicRequested(GalleryItem item) {
+        Intent intent = new Intent(this, TopicActivity.class);
+        intent.putExtra("url", item.getUrl());
+        intent.putExtra("imageUrl", item.getImageUrl());
     }
 
     @Override

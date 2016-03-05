@@ -81,6 +81,6 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
+        ((ItemClickCallback) context).onGalleryTopicRequested(items.get(position));
     }
 }
