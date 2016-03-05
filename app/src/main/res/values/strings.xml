@@ -12,7 +12,10 @@
     <string name="drawer_forum">Форум</string>
     <string name="drawer_settings">Настройки</string>
 
+    <string name="pref_dark_theme">dark_theme</string>
     <string name="pref_title_dark_theme">Ночной режим</string>
+
+    <string name="pref_load_images">load_images</string>
     <string name="pref_title_load_images">Загружать изображения при медленном соединении</string>
 
     <string name="open">Открыть панель навигации</string>

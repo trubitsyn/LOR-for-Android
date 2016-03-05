@@ -34,13 +34,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals("dark_theme")) {
+        if (key.equals(getString(R.string.pref_dark_theme))) {
             SwitchPreferenceCompat preference = (SwitchPreferenceCompat) findPreference(key);
-            sharedPreferences.edit().putBoolean("dark_theme", preference.isChecked()).apply();
+            sharedPreferences.edit().putBoolean(getString(R.string.pref_dark_theme), preference.isChecked()).apply();
             restart();
-        } else if (key.equals("load_images")) {
+        } else if (key.equals(getString(R.string.pref_load_images))) {
             SwitchPreferenceCompat limitImagesPreference = (SwitchPreferenceCompat) findPreference(key);
-            sharedPreferences.edit().putBoolean("load_images", limitImagesPreference.isChecked()).apply();
+            sharedPreferences.edit().putBoolean(getString(R.string.pref_load_images), limitImagesPreference.isChecked()).apply();
         }
     }
 

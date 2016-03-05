@@ -55,7 +55,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
 
-        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("load_images", false) && NetworkUtils.isMobileData(context)) {
+        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_load_images), false) && NetworkUtils.isMobileData(context)) {
             // Don't load on mobile data
             viewHolder.image.setVisibility(View.GONE);
         } else {

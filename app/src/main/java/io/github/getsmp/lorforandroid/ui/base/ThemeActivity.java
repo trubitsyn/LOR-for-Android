@@ -25,7 +25,7 @@ import io.github.getsmp.lorforandroid.R;
 public class ThemeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("dark_theme", false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)) {
             setTheme(R.style.AppTheme_Dark);
         }
         super.onCreate(savedInstanceState);
