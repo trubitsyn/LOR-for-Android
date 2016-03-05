@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreferenceCompat
-        android:defaultValue="false"
-        android:key="dark_theme"
-        android:title="@string/pref_title_dark_theme" />
+    <PreferenceCategory android:title="@string/pref_category_interface">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="dark_theme"
+            android:title="@string/pref_title_dark_theme" />
+    </PreferenceCategory>
 
-    <SwitchPreferenceCompat
-        android:defaultValue="true"
-        android:key="load_images"
-        android:title="@string/pref_title_load_images" />
+    <PreferenceCategory android:title="@string/pref_category_preferences">
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="load_images"
+            android:title="@string/pref_title_load_images" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
