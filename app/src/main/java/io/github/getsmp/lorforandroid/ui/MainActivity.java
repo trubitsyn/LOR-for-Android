@@ -65,7 +65,11 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         // TODO: Display logo, collapsing ToolBar
 
         if (savedInstanceState == null) {
-            navigationItemId = R.id.drawer_news;
+            if (getIntent().getBooleanExtra(getString(R.string.intent_settings), false)) {
+                navigationItemId = R.id.drawer_settings;
+            } else {
+                navigationItemId = R.id.drawer_news;
+            }
         } else {
             navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
