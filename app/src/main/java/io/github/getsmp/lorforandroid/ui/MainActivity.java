@@ -50,7 +50,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     private int navigationItemId;
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
-    private Bundle saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +69,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         } else {
             navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
-
-        saved = savedInstanceState;
 
         navigationView.setNavigationItemSelectedListener(this);
 
