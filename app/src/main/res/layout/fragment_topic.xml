@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/topicScrollView"
@@ -9,47 +11,12 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <ViewStub
+            android:id="@+id/topic_layout_stub"
+            android:inflatedId="@+id/topic_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/topicTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/topicTags"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/topicAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:paddingBottom="10dp" />
-
-            <ImageView
-                android:id="@+id/topicImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/topicMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorLink="@color/link" />
-        </LinearLayout>
     </ScrollView>
 
     <include layout="@layout/progress" />

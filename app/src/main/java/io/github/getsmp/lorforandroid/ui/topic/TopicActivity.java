@@ -17,6 +17,7 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
+import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TopicActivity extends ThemeActivity {
@@ -41,8 +43,22 @@ public class TopicActivity extends ThemeActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            url = StringUtils.removeParams(getIntent().getStringExtra("url"));
-            TopicFragment topicFragment = TopicFragment.newInstance(url);
+            Intent intent = getIntent();
+            SectionTypeEnum type = SectionTypeEnum.values()[getIntent().getIntExtra("type", SectionTypeEnum.NEWS.ordinal())];
+            Fragment topicFragment = null;
+
+            switch (type) {
+                case GALLERY:
+                    url = StringUtils.removeParams(intent.getStringExtra("url"));
+                    topicFragment = TopicFragmentStandard.newInstance(url);
+                    break;
+                default:
+                    url = StringUtils.removeParams(intent.getStringExtra("url"));
+                    String imageUrl = intent.getStringExtra("imageUrl");
+                    topicFragment = TopicFragmentGallery.newInstance(url, imageUrl);
+                    break;
+
+            }
             getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment).commit();
         }
     }

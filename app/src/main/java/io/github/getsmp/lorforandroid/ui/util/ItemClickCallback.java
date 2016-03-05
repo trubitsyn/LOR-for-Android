@@ -15,8 +15,11 @@
 
 package io.github.getsmp.lorforandroid.ui.util;
 
+import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
+
 public interface ItemClickCallback {
     void onTopicRequested(String url);
+    void onGalleryTopicRequested(GalleryItem item);
 
     void onForumSectionRequested(String group, String name);
 }

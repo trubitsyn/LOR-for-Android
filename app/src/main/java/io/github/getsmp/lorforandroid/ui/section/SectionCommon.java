@@ -29,6 +29,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
 
 public abstract class SectionCommon extends BaseCallbackFragment {
@@ -38,7 +39,7 @@ public abstract class SectionCommon extends BaseCallbackFragment {
     @Override
     protected void getListItems() {
         if (offset <= getMaxOffset()) {
-            client.get("https://www.linux.org.ru/" + getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
+            client.get(ApiManager.INSTANCE.ROOT + "/" + getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String resp = null;
