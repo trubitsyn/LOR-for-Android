@@ -101,28 +101,28 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 tag = "news";
                 fragment = fm.findFragmentByTag(tag);
                 if (fragment == null) fragment = new NewsFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_gallery:
                 actionBar.setTitle(R.string.drawer_gallery);
                 tag = "gallery";
                 fragment = fm.findFragmentByTag(tag);
                 if (fragment == null) fragment = new GalleryFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_tracker:
                 actionBar.setTitle(R.string.drawer_tracker);
                 tag = "tracker";
                 fragment = fm.findFragmentByTag(tag);
                 if (fragment == null) fragment = new TabFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_forum:
                 actionBar.setTitle(R.string.drawer_forum);
                 tag = "forum";
                 fragment = fm.findFragmentByTag(tag);
                 if (fragment == null) fragment = new ForumOverviewFragment();
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).addToBackStack(tag).commit();
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_settings:
                 actionBar.setTitle(R.string.drawer_settings);
