@@ -30,12 +30,15 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.news.MiniNewsItem;
 import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 
@@ -98,9 +101,6 @@ public abstract class BaseListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         if (showDividers()) recyclerView.addItemDecoration(new DividerItemDecoration(context));
 
-        adapter = getAdapter();
-        recyclerView.setAdapter(adapter);
-
         scrollListener = new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
@@ -121,15 +121,38 @@ public abstract class BaseListFragment extends Fragment {
                 getListItems();
             }
         });
-
-        getListItems();
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("items", (Serializable) items);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            items = (List) savedInstanceState.getSerializable("items");
+            initAdapter();
+            adapter.notifyDataSetChanged();
+            stopRefreshAndShow();
+        } else {
+            initAdapter();
+            getListItems();
+        }
+    }
+
+    private void initAdapter() {
+        adapter = getAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
     protected boolean loadMoreAllowed() {
