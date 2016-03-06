@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "io.github.getsmp.lorforandroid"
-        minSdkVersion 9
+        minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -36,6 +36,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.google.code.gson:gson:2.4'
+    compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'org.jsoup:jsoup:1.8.3'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

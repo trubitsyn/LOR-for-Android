@@ -3,6 +3,7 @@
 
     <string name="activity_main">LINUX.ORG.RU</string>
     <string name="activity_topic">Тема</string>
+    <string name="activity_image">Изображение</string>
     <string name="activity_comments">Комментарии</string>
 
     <string name="drawer_news">Новости</string>
