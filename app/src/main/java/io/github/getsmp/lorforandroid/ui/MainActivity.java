@@ -178,7 +178,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Override
     public void onGalleryTopicRequested(GalleryItem item) {
         Intent intent = new Intent(this, TopicActivity.class);
-        intent.putExtra("type", SectionTypeEnum.GALLERY);
+        intent.putExtra("type", SectionTypeEnum.GALLERY.ordinal());
         intent.putExtra("url", item.getUrl());
         intent.putExtra("imageUrl", item.getImageUrl());
         startActivity(intent);
