@@ -23,9 +23,6 @@ import com.loopj.android.http.RequestParams;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.util.StringUtils;
@@ -51,11 +48,6 @@ public class ForumSectionFragment extends SectionCommon {
     protected void clearData() {
         offset = 0;
         items.clear();
-    }
-
-    @Override
-    protected List getDataSet() {
-        return items;
     }
 
     @Override

@@ -24,7 +24,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
@@ -69,13 +68,11 @@ public abstract class SectionCommon extends BaseCallbackFragment {
 
     @Override
     protected void clearData() {
-        getDataSet().clear();
+        items.clear();
         offset = 0;
     }
 
     protected abstract void generateDataSet(Element responseBody);
-
-    protected abstract List getDataSet();
 
     public abstract int getItemsPerPage();
 
