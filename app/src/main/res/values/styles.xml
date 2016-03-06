@@ -27,7 +27,7 @@
         <item name="themedCommentDrawable">@drawable/ic_chat_bubble_white_24dp</item>
     </style>
 
-    <style name="ImageActivityTheme">
+    <style name="ImageActivityTheme" parent="Theme.AppCompat">
         <item name="android:background">@android:color/black</item>
     </style>
 

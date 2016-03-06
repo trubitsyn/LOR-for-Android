@@ -18,6 +18,7 @@
 package io.github.getsmp.lorforandroid.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -28,7 +29,7 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import uk.co.senab.photoview.PhotoView;
 
-public class ImageActivity extends ThemeActivity {
+public class ImageActivity extends AppCompatActivity {
     @Bind(R.id.photoView) PhotoView photoView;
 
     @Override
