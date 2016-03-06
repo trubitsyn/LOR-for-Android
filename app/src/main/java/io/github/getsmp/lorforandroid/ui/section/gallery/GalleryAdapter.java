@@ -23,7 +23,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -59,8 +61,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
             // Don't load on mobile data
             viewHolder.image.setVisibility(View.GONE);
         } else {
-            Picasso.with(context).cancelRequest(viewHolder.image);
-            Picasso.with(context).load(item.getImageUrl()).resize(400, 0).into((viewHolder.image));
+            Glide.with(context).load(item.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image);
         }
     }
 
