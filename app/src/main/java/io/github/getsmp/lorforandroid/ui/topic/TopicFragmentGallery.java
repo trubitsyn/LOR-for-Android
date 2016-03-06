@@ -17,7 +17,7 @@
 
 package io.github.getsmp.lorforandroid.ui.topic;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -25,7 +25,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
+import io.github.getsmp.lorforandroid.ui.ImageActivity;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -46,7 +48,6 @@ public class TopicFragmentGallery extends TopicFragmentCommon {
     @Bind(R.id.galleryTopicAuthor) TextView author;
     @Bind(R.id.galleryTopicImage) ImageView image;
     @Bind(R.id.galleryTopicMessage) TextView message;
-    private Context context;
     private String url;
     private String imageUrl;
 
@@ -57,12 +58,6 @@ public class TopicFragmentGallery extends TopicFragmentCommon {
         args.putString("imageUrl", imageUrl);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
     }
 
     @Override
@@ -87,7 +82,20 @@ public class TopicFragmentGallery extends TopicFragmentCommon {
                     tags.setText(StringUtils.tagsFromStrings(tagsList));
                 } else tags.setVisibility(View.GONE);
 
-                Picasso.with(context).load(imageUrl).into((image));
+                Glide.with(TopicFragmentGallery.this)
+                        .load(imageUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into((image));
+
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), ImageActivity.class);
+                        intent.putExtra("imageUrl", imageUrl);
+                        startActivity(intent);
+                    }
+                });
+
                 author.setText(topic.getAuthor().getNick());
                 message.setText(Html.fromHtml(topic.getMessage()));
                 message.setMovementMethod(LinkMovementMethod.getInstance());

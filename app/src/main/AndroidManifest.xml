@@ -34,7 +34,8 @@
         <activity
             android:name="io.github.getsmp.lorforandroid.ui.ImageActivity"
             android:label="@string/activity_image"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/ImageActivityTheme">
         </activity>
         <activity
             android:name="io.github.getsmp.lorforandroid.ui.comment.CommentActivity"
