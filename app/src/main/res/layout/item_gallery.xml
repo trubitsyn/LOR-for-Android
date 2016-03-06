@@ -59,8 +59,7 @@
         android:id="@+id/galleryImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        style="@style/secondaryText"/>
+        android:layout_margin="5dp" />
 
     <TextView
         android:id="@+id/galleryCommentsCount"
