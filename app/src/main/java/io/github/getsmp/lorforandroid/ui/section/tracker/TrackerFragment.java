@@ -32,7 +32,6 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {
-    private final List<ItemCommon> items = new ArrayList<ItemCommon>();
     private String filter;
 
     @Override
@@ -97,6 +96,7 @@ public class TrackerFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
+        ItemCommon item = (ItemCommon) items.get(position);
+        ((ItemClickCallback) context).onTopicRequested(item.getUrl());
     }
 }

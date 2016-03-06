@@ -30,8 +30,6 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
-    private List<GalleryItem> items = new ArrayList<GalleryItem>();
-
     @Override
     protected void generateDataSet(Element responseBody) {
         Elements articles = responseBody.select("article.news");
@@ -81,6 +79,7 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onGalleryTopicRequested(items.get(position));
+        GalleryItem item = (GalleryItem) items.get(position);
+        ((ItemClickCallback) context).onGalleryTopicRequested(item);
     }
 }

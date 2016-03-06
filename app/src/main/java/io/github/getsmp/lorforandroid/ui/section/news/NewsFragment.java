@@ -32,8 +32,6 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsFragment extends SectionCommon {
-    private List<Object> items = new ArrayList<Object>();
-
     @Override
     protected void generateDataSet(Element responseBody) {
         Elements articles = responseBody.select("article");

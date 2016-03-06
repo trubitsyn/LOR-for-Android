@@ -30,6 +30,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
@@ -40,6 +43,7 @@ public abstract class BaseListFragment extends Fragment {
     protected Context context;
     protected RecyclerView.Adapter adapter;
     private InfiniteScrollListener scrollListener;
+    protected List items = new ArrayList();
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
     @Bind(R.id.progressBar) protected ProgressBar progressBar;

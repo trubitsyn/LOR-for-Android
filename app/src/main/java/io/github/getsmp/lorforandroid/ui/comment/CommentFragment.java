@@ -32,7 +32,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class CommentFragment extends BaseListFragment {
-    private final List<Comment> items = new ArrayList<Comment>();
     private int page, previousCount = 0;
     private String url;
 

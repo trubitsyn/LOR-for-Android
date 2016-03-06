@@ -31,7 +31,6 @@ import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionFragment extends SectionCommon {
-    private final List<ItemCommon> items = new ArrayList<ItemCommon>();
     private String group;
 
     public static ForumSectionFragment newInstance(String group) {
@@ -104,7 +103,7 @@ public class ForumSectionFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((Callback) context).returnToActivity(items.get(position).getUrl());
+        ((Callback) context).returnToActivity(((ItemCommon) items.get(position)).getUrl());
     }
 
     interface Callback {

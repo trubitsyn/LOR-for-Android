@@ -23,7 +23,6 @@ import com.loopj.android.http.RequestParams;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
@@ -31,8 +30,6 @@ import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
 public class ForumOverviewFragment extends SectionCommon {
-    private final List<ForumOverviewItem> items = new ArrayList<ForumOverviewItem>();
-
     @Override
     protected List getDataSet() {
         return items;
@@ -76,10 +73,11 @@ public class ForumOverviewFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        if (items.get(position).getUrl().equals("club")) {
+        ForumOverviewItem item = (ForumOverviewItem) items.get(position);
+        if (item.getUrl().equals("club")) {
             Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show();
         } else {
-            ((ItemClickCallback) context).onForumSectionRequested(items.get(position).getUrl(), items.get(position).getName());
+            ((ItemClickCallback) context).onForumSectionRequested(item.getUrl(), item.getName());
         }
     }
 
