@@ -84,6 +84,7 @@ public abstract class BaseListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refreshButton:
+                recyclerView.scrollToPosition(0);
                 swipeRefreshLayout.setVisibility(View.GONE);
                 errorView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
