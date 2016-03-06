@@ -43,7 +43,6 @@ public class ImageActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(imageUrl)
                 .fitCenter()
-                .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(photoView);
     }
