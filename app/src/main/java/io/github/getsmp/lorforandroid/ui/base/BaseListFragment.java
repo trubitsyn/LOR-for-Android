@@ -30,15 +30,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
-import io.github.getsmp.lorforandroid.ui.section.news.MiniNewsItem;
 import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 
@@ -58,10 +55,22 @@ public abstract class BaseListFragment extends Fragment {
         this.context = context;
     }
 
+    public void setItems(List items) {
+        this.items = items;
+    }
+
+    public List getItems() {
+        return items;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        if (needRetainInstance()) {
+            setRetainInstance(true);
+        }
     }
 
     @Override
@@ -130,9 +139,9 @@ public abstract class BaseListFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("items", (Serializable) items);
+    public void onDestroy() {
+        super.onDestroy();
+        setItems(items);
     }
 
     @Override
@@ -140,9 +149,7 @@ public abstract class BaseListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            items = (List) savedInstanceState.getSerializable("items");
             initAdapter();
-            adapter.notifyDataSetChanged();
             stopRefreshAndShow();
         } else {
             initAdapter();
@@ -156,6 +163,10 @@ public abstract class BaseListFragment extends Fragment {
     }
 
     protected boolean loadMoreAllowed() {
+        return true;
+    }
+
+    protected boolean needRetainInstance() {
         return true;
     }
 
