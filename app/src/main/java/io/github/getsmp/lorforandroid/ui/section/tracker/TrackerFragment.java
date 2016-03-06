@@ -23,16 +23,12 @@ import com.loopj.android.http.RequestParams;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {
-    private final List<ItemCommon> items = new ArrayList<ItemCommon>();
     private String filter;
 
     @Override
@@ -66,11 +62,6 @@ public class TrackerFragment extends SectionCommon {
     }
 
     @Override
-    protected List getDataSet() {
-        return items;
-    }
-
-    @Override
     public int getItemsPerPage() {
         return 30;
     }
@@ -97,6 +88,7 @@ public class TrackerFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onTopicRequested(items.get(position).getUrl());
+        ItemCommon item = (ItemCommon) items.get(position);
+        ((ItemClickCallback) context).onTopicRequested(item.getUrl());
     }
 }

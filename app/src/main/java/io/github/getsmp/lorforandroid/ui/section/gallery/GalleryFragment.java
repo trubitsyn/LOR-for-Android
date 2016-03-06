@@ -22,16 +22,11 @@ import com.loopj.android.http.RequestParams;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
-    private List<GalleryItem> items = new ArrayList<GalleryItem>();
-
     @Override
     protected void generateDataSet(Element responseBody) {
         Elements articles = responseBody.select("article.news");
@@ -47,11 +42,6 @@ public class GalleryFragment extends SectionCommon {
                     article.select("img[itemprop^=thumbnail]").attr("src")
             ));
         }
-    }
-
-    @Override
-    protected List getDataSet() {
-        return items;
     }
 
     @Override
@@ -81,6 +71,7 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((ItemClickCallback) context).onGalleryTopicRequested(items.get(position));
+        GalleryItem item = (GalleryItem) items.get(position);
+        ((ItemClickCallback) context).onGalleryTopicRequested(item);
     }
 }
