@@ -50,12 +50,12 @@ public class TopicActivity extends ThemeActivity {
             switch (type) {
                 case GALLERY:
                     url = StringUtils.removeParams(intent.getStringExtra("url"));
-                    topicFragment = TopicFragmentStandard.newInstance(url);
+                    String imageUrl = intent.getStringExtra("imageUrl");
+                    topicFragment = TopicFragmentGallery.newInstance(url, imageUrl);
                     break;
                 default:
                     url = StringUtils.removeParams(intent.getStringExtra("url"));
-                    String imageUrl = intent.getStringExtra("imageUrl");
-                    topicFragment = TopicFragmentGallery.newInstance(url, imageUrl);
+                    topicFragment = TopicFragmentStandard.newInstance(url);
                     break;
 
             }

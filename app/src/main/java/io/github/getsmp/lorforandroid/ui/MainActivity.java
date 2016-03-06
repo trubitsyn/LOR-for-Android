@@ -170,7 +170,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Override
     public void onTopicRequested(String url) {
         Intent intent = new Intent(this, TopicActivity.class);
-        intent.putExtra("type", SectionTypeEnum.NEWS);
+        intent.putExtra("type", SectionTypeEnum.NEWS.ordinal());
         intent.putExtra("url", url);
         startActivity(intent);
     }
