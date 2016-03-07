@@ -82,6 +82,11 @@ public class TrackerFragment extends SectionCommon {
     }
 
     @Override
+    protected boolean needRetainInstance() {
+        return false;
+    }
+
+    @Override
     protected RecyclerView.Adapter getAdapter() {
         return new TrackerAdapter(items);
     }
