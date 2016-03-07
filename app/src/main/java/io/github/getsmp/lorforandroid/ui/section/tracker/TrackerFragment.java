@@ -23,6 +23,9 @@ import com.loopj.android.http.RequestParams;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.Serializable;
+import java.util.List;
+
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
@@ -95,5 +98,19 @@ public class TrackerFragment extends SectionCommon {
     protected void onItemClickCallback(int position) {
         ItemCommon item = (ItemCommon) items.get(position);
         ((ItemClickCallback) context).onTopicRequested(item.getUrl());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("items", (Serializable) items);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            items = (List) savedInstanceState.getSerializable("items");
+        }
+        super.onActivityCreated(savedInstanceState);
     }
 }
