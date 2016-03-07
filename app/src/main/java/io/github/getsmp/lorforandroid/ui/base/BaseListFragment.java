@@ -55,13 +55,7 @@ public abstract class BaseListFragment extends Fragment {
         this.context = context;
     }
 
-    public void setItems(List items) {
-        this.items = items;
-    }
 
-    public List getItems() {
-        return items;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,12 +131,6 @@ public abstract class BaseListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        setItems(items);
     }
 
     @Override
