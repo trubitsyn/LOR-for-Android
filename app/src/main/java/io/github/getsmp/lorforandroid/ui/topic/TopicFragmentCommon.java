@@ -37,6 +37,12 @@ public abstract class TopicFragmentCommon extends Fragment {
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.errorView) TextView errorView;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
