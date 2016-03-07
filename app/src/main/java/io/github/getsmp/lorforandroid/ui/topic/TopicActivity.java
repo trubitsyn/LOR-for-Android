@@ -41,12 +41,12 @@ public class TopicActivity extends ThemeActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String tag = "topicFragment";
+        TopicFragmentCommon topicFragment = (TopicFragmentCommon) getSupportFragmentManager().findFragmentByTag(tag);
 
-        if (savedInstanceState == null) {
+        if (topicFragment == null) {
             Intent intent = getIntent();
             SectionTypeEnum type = SectionTypeEnum.values()[getIntent().getIntExtra("type", SectionTypeEnum.NEWS.ordinal())];
-            Fragment topicFragment = null;
-
             switch (type) {
                 case GALLERY:
                     url = StringUtils.removeParams(intent.getStringExtra("url"));
@@ -59,8 +59,8 @@ public class TopicActivity extends ThemeActivity {
                     break;
 
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment).commit();
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment, "topicFragment").commit();
     }
 
     @Override
