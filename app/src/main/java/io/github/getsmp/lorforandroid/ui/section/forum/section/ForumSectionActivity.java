@@ -28,7 +28,6 @@ import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 
 public class ForumSectionActivity extends ThemeActivity implements ForumSectionFragment.Callback {
     @Bind(R.id.toolbarTop) Toolbar toolbar;
-    private ForumSectionFragment fragment;
     private String group;
 
     @Override
@@ -55,8 +54,9 @@ public class ForumSectionActivity extends ThemeActivity implements ForumSectionF
     }
 
     private void replace() {
-        ForumSectionFragment fragment = ForumSectionFragment.newInstance(group);
-        getSupportFragmentManager().beginTransaction().replace(R.id.forumSectionFragment, fragment).commit();
+        ForumSectionFragment fragment = (ForumSectionFragment) getSupportFragmentManager().findFragmentByTag("forumSectionFragment");
+        if (fragment == null) fragment = ForumSectionFragment.newInstance(group);
+        getSupportFragmentManager().beginTransaction().replace(R.id.forumSectionFragment, fragment, "forumSectionFragment").commit();
     }
 
     @Override
