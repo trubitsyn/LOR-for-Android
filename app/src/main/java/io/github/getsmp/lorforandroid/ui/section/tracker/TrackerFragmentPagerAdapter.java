@@ -17,9 +17,10 @@ package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class TrackerFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class TrackerFragmentPagerAdapter extends FragmentPagerAdapter {
     private final String tabs[] = {"Все", "Основные", "Без talks", "Технические"};
 
     public TrackerFragmentPagerAdapter(FragmentManager fm) {
