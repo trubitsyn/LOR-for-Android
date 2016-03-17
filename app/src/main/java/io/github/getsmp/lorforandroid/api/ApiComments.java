@@ -16,15 +16,15 @@
 package io.github.getsmp.lorforandroid.api;
 
 import io.github.getsmp.lorforandroid.model.Comments;
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiComments {
-    @GET("/{topic}/comments")
-    void getComments(
-            @Path(value = "topic", encode = false) String topic,
-            @Query("page") int page, Callback<Comments> response
+    @GET("{topic}/comments")
+    Call<Comments> getComments(
+            @Path(value = "topic", encoded = true) String topic,
+            @Query("page") int page
     );
 }

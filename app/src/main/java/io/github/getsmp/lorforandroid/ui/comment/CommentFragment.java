@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.ui.comment;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
@@ -27,9 +26,9 @@ import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.model.Comments;
 import io.github.getsmp.lorforandroid.ui.base.BaseListFragment;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CommentFragment extends BaseListFragment {
     private int page, previousCount = 0;
@@ -51,40 +50,43 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void getListItems() {
-        ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page, new Callback<Comments>() {
+        Call<Comments> comments = ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page);
+        comments.enqueue(new Callback<Comments>() {
             @Override
-            public void success(Comments newComments, Response response) {
-                if (newComments.comments.size() > 0) {
-                    List<Comment> comments = newComments.comments;
-                    int commentsPerPage = 50;
+            public void onResponse(Call<Comments> call, Response<Comments> response) {
+                if (response.body() != null) {
+                    if (response.body().comments.size() > 0) {
+                        List<Comment> comments = response.body().comments;
+                        int commentsPerPage = 50;
 
-                    if (previousCount < commentsPerPage) {
-                        // Add new comments to existing "page"
-                        int itemSize = items.size();
-                        items.subList(itemSize - previousCount, itemSize).clear();
-                        items.addAll(comments);
+                        if (previousCount < commentsPerPage) {
+                            // Add new comments to existing "page"
+                            int itemSize = items.size();
+                            items.subList(itemSize - previousCount, itemSize).clear();
+                            items.addAll(comments);
+                        } else {
+                            // Show new comments "page"
+                            items.addAll(comments);
+                        }
+
+                        int commentSize = comments.size();
+
+                        // If loaded all comments at once, increment currentPage
+                        if (commentSize == commentsPerPage) {
+                            page++;
+                        }
+
+                        previousCount = commentSize;
+                        adapter.notifyDataSetChanged();
                     } else {
-                        // Show new comments "page"
-                        items.addAll(comments);
+                        showErrorView(R.string.error_no_comments);
                     }
-
-                    int commentSize = comments.size();
-
-                    // If loaded all comments at once, increment currentPage
-                    if (commentSize == commentsPerPage) {
-                        page++;
-                    }
-
-                    previousCount = commentSize;
-                    adapter.notifyDataSetChanged();
-                } else {
-                    showErrorView(R.string.error_no_comments);
                 }
                 stopRefreshAndShow();
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFailure(Call<Comments> call, Throwable t) {
                 showErrorView(R.string.error_network);
             }
         });

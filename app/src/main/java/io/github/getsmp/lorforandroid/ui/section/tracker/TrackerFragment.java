@@ -39,7 +39,7 @@ public class TrackerFragment extends SectionCommon {
         Elements topics = responseBody.select("tbody > tr");
         for (Element topic : topics) {
             items.add(new ItemCommon(
-                    topic.select("td:eq(1)").select("a").first().attr("href"),
+                    topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
                     topic.select("td:eq(1)").select("a").first().ownText(),
                     topic.select("a.secondary").first().ownText(),
                     StringUtils.tagsFromElements(topic.select("span.tag")),

@@ -16,14 +16,13 @@
 package io.github.getsmp.lorforandroid.api;
 
 import io.github.getsmp.lorforandroid.model.Topics;
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface ApiTopic {
-    @GET("/{topic}/topic")
-    void getTopic(
-            @Path(value = "topic", encode = false) String topic,
-            Callback<Topics> response
+    @GET("{topic}/topic")
+    Call<Topics> getTopic(
+            @Path(value = "topic", encoded = true) String topic
     );
 }

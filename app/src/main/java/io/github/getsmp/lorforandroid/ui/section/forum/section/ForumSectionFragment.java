@@ -77,7 +77,7 @@ public class ForumSectionFragment extends SectionCommon {
             Element properties = entry.select("td").first();
             String bareAuthor = properties.ownText();
             items.add(new ItemCommon(
-                    properties.select("a").first().attr("href"),
+                    properties.select("a").first().attr("href").substring(1),
                     properties.select("a").first().ownText(),
                     null,
                     StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
