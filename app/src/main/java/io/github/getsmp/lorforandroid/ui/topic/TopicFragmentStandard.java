@@ -32,9 +32,9 @@ import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
 import io.github.getsmp.lorforandroid.util.StringUtils;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TopicFragmentStandard extends TopicFragmentCommon {
     @Bind(R.id.topicTitle) TextView title;
@@ -61,26 +61,29 @@ public class TopicFragmentStandard extends TopicFragmentCommon {
     protected void loadTopic() {
         loadingStarted();
 
-        ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url, new Callback<Topics>() {
+        Call<Topics> topics = ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url);
+        topics.enqueue(new Callback<Topics>() {
             @Override
-            public void success(Topics topics, Response response) {
-                Topic topic = topics.topic;
-                title.setText(Html.fromHtml(topic.getTitle()));
-                List<String> tagsList = topic.getTags();
-                if (!tagsList.isEmpty()) {
-                    tags.setVisibility(View.VISIBLE);
-                    tags.setText(StringUtils.tagsFromStrings(tagsList));
-                } else tags.setVisibility(View.GONE);
+            public void onResponse(Call<Topics> call, Response<Topics> response) {
+                if (response.body() != null) {
+                    Topic topic = response.body().topic;
+                    title.setText(Html.fromHtml(topic.getTitle()));
+                    List<String> tagsList = topic.getTags();
+                    if (!tagsList.isEmpty()) {
+                        tags.setVisibility(View.VISIBLE);
+                        tags.setText(StringUtils.tagsFromStrings(tagsList));
+                    } else tags.setVisibility(View.GONE);
 
-                author.setText(topic.getAuthor().getNick());
-                message.setText(Html.fromHtml(topic.getMessage()));
-                message.setMovementMethod(LinkMovementMethod.getInstance());
+                    author.setText(topic.getAuthor().getNick());
+                    message.setText(Html.fromHtml(topic.getMessage()));
+                    message.setMovementMethod(LinkMovementMethod.getInstance());
+                }
 
                 loadingEnded();
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFailure(Call<Topics> call, Throwable t) {
                 loadingError();
             }
         });

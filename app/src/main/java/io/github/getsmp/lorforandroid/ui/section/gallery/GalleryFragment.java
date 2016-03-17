@@ -32,7 +32,7 @@ public class GalleryFragment extends SectionCommon {
         Elements articles = responseBody.select("article.news");
         for (Element article : articles) {
             items.add(new GalleryItem(
-                    article.select("h2 > a[href^=/gallery/]").first().attr("href"),
+                    article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
                     article.select("h2 > a[href^=/gallery/]").first().ownText(),
                     StringUtils.removeSectionName(article.select("div.group").first().text()),
                     StringUtils.tagsFromElements(article.select("a.tag")),
