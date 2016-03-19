@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +38,7 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 
-public abstract class BaseListFragment extends Fragment {
+public abstract class BaseListFragment extends BaseFragment {
     protected Context context;
     protected RecyclerView.Adapter adapter;
     private InfiniteScrollListener scrollListener;
@@ -54,8 +53,6 @@ public abstract class BaseListFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,12 +122,6 @@ public abstract class BaseListFragment extends Fragment {
                 getListItems();
             }
         });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

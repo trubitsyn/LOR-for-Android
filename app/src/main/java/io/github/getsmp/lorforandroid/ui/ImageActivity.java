@@ -18,7 +18,6 @@
 package io.github.getsmp.lorforandroid.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,10 +25,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
+import io.github.getsmp.lorforandroid.ui.base.BaseActivity;
 import uk.co.senab.photoview.PhotoView;
 
-public class ImageActivity extends AppCompatActivity {
+public class ImageActivity extends BaseActivity {
     @Bind(R.id.photoView) PhotoView photoView;
 
     @Override
@@ -45,12 +44,6 @@ public class ImageActivity extends AppCompatActivity {
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(photoView);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
     @Override
