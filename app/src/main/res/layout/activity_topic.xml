@@ -12,6 +12,7 @@
 
     <FrameLayout
         android:id="@+id/topicFragmentContainer"
+        android:paddingTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
