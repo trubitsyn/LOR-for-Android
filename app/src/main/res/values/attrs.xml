@@ -8,4 +8,5 @@
 
     <attr name="themedRefreshDrawable" format="reference"/>
     <attr name="themedCommentDrawable" format="reference"/>
+    <attr name="themedCommentSmallDrawable" format="reference"/>
 </resources>

@@ -14,6 +14,7 @@
 
         <item name="themedRefreshDrawable">@drawable/ic_refresh_black_24dp</item>
         <item name="themedCommentDrawable">@drawable/ic_chat_bubble_black_24dp</item>
+        <item name="themedCommentSmallDrawable">@drawable/ic_chat_bubble_black_18dp</item>
     </style>
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
@@ -27,5 +28,6 @@
 
         <item name="themedRefreshDrawable">@drawable/ic_refresh_white_24dp</item>
         <item name="themedCommentDrawable">@drawable/ic_chat_bubble_white_24dp</item>
+        <item name="themedCommentSmallDrawable">@drawable/ic_chat_bubble_white_18dp</item>
     </style>
 </resources>

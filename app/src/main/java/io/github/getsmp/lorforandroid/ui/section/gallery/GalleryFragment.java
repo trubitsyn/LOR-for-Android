@@ -36,9 +36,9 @@ public class GalleryFragment extends SectionCommon {
                     article.select("h2 > a[href^=/gallery/]").first().ownText(),
                     StringUtils.removeSectionName(article.select("div.group").first().text()),
                     StringUtils.tagsFromElements(article.select("a.tag")),
-                    article.select("time").first().ownText(),
+                    article.select("time").first().ownText().split(" ")[0],
                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText(),
+                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replaceAll("\\D+",""),
                     article.select("img[itemprop^=thumbnail]").attr("src")
             ));
         }
