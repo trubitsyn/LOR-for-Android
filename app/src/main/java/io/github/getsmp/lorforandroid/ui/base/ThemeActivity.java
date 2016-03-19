@@ -16,13 +16,12 @@
 package io.github.getsmp.lorforandroid.ui.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 
 import io.github.getsmp.lorforandroid.R;
 
 
-public class ThemeActivity extends AppCompatActivity {
+public class ThemeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)) {

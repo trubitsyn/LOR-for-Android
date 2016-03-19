@@ -19,7 +19,6 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,9 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.base.BaseFragment;
 
-public abstract class TopicFragmentCommon extends Fragment {
+public abstract class TopicFragmentCommon extends BaseFragment {
     @Bind(R.id.topicScrollView) ScrollView scrollView;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.errorView) TextView errorView;
@@ -59,12 +59,6 @@ public abstract class TopicFragmentCommon extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadTopic();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     protected void loadingStarted() {

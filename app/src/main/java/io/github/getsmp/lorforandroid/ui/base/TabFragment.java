@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.ui.base;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragmentPagerAdapter;
 
-public class TabFragment extends Fragment {
+public class TabFragment extends BaseFragment {
     @Bind(R.id.viewpager) ViewPager viewPager;
     @Bind(R.id.tabs) TabLayout tabLayout;
     private TrackerFragmentPagerAdapter adapter;
@@ -53,11 +52,5 @@ public class TabFragment extends Fragment {
         adapter = new TrackerFragmentPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }
