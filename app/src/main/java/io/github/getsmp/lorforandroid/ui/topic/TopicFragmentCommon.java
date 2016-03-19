@@ -19,12 +19,12 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -33,7 +33,7 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.BaseFragment;
 
 public abstract class TopicFragmentCommon extends BaseFragment {
-    @Bind(R.id.topicScrollView) ScrollView scrollView;
+    @Bind(R.id.topicScrollView) NestedScrollView scrollView;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.errorView) TextView errorView;
 
