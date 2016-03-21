@@ -50,7 +50,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
         GalleryItem item = items.get(i);
         viewHolder.title.setText(Html.fromHtml(item.getTitle()));
-        viewHolder.category.setText(item.getGroupTitle());
+
+        if (item.getGroupTitle() == null) {
+            viewHolder.category.setVisibility(View.GONE);
+        } else viewHolder.category.setText(item.getGroupTitle());
+
         viewHolder.tags.setText(item.getTags());
         viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());

@@ -35,6 +35,7 @@ import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
+import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFilterEnum;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
@@ -111,7 +112,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 actionBar.setTitle(R.string.drawer_gallery);
                 tag = "gallery";
                 fragment = fm.findFragmentByTag(tag);
-                if (fragment == null) fragment = new GalleryFragment();
+                if (fragment == null) fragment = GalleryFragment.newInstance(GalleryFilterEnum.all);
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_tracker:

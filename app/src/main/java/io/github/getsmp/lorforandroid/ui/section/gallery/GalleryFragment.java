@@ -15,18 +15,73 @@
 
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
+import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
+    private Spinner spinner;
+    private String filter;
+
+    public static GalleryFragment newInstance(GalleryFilterEnum galleryFilterEnum) {
+        GalleryFragment galleryFragment = new GalleryFragment();
+        Bundle args = new Bundle();
+        args.putString("filter", galleryFilterEnum.name());
+        galleryFragment.setArguments(args);
+        return galleryFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        filter = getArguments().getString("filter");
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        View spinnerView = View.inflate(getActivity(), R.layout.spinner, null);
+        spinner = (Spinner) spinnerView.findViewById(R.id.toolbar_spinner);
+        final ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.gallery_spinner, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setSelection(GalleryFilterEnum.valueOf(filter).ordinal());
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setCustomView(spinnerView);
+
+        final AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((FragmentReplaceCallback) getActivity()).replace(R.id.fragmentContainer, newInstance(GalleryFilterEnum.values()[position]), "gallery");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+
+        spinner.post(new Runnable() {
+            @Override
+            public void run() {
+                spinner.setOnItemSelectedListener(listener);
+            }
+        });
+    }
+
     @Override
     protected void generateDataSet(Element responseBody) {
         Elements articles = responseBody.select("article.news");
@@ -34,11 +89,11 @@ public class GalleryFragment extends SectionCommon {
             items.add(new GalleryItem(
                     article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
                     article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                    StringUtils.removeSectionName(article.select("div.group").first().text()),
+                    filter.equals(GalleryFilterEnum.all.name()) ? StringUtils.removeSectionName(article.select("div.group").first().text()) : null,
                     StringUtils.tagsFromElements(article.select("a.tag")),
                     article.select("time").first().ownText().split(" ")[0],
                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replaceAll("\\D+",""),
+                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replaceAll("\\D+", ""),
                     article.select("img[itemprop^=thumbnail]").attr("src")
             ));
         }
@@ -56,7 +111,8 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     public String getPath() {
-        return "gallery";
+        String path = filter.equals(GalleryFilterEnum.all.name()) ? "" : "/" + filter;
+        return "gallery" + path;
     }
 
     @Override
