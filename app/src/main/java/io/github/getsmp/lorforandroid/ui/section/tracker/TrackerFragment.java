@@ -85,11 +85,6 @@ public class TrackerFragment extends SectionCommon {
     }
 
     @Override
-    protected boolean needRetainInstance() {
-        return false;
-    }
-
-    @Override
     protected RecyclerView.Adapter getAdapter() {
         return new TrackerAdapter(items);
     }
@@ -98,19 +93,5 @@ public class TrackerFragment extends SectionCommon {
     protected void onItemClickCallback(int position) {
         ItemCommon item = (ItemCommon) items.get(position);
         ((ItemClickCallback) context).onTopicRequested(item.getUrl());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("items", (Serializable) items);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            items = (List) savedInstanceState.getSerializable("items");
-        }
-        super.onActivityCreated(savedInstanceState);
     }
 }
