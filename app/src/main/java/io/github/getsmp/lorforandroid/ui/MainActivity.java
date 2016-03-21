@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.TabFragment;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
@@ -39,10 +38,13 @@ import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActiv
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFilterEnum;
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragment;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
+import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
 
-public class MainActivity extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
+public class MainActivity extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback, FragmentReplaceCallback {
     private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.toolbarTop) Toolbar toolbar;
@@ -61,6 +63,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
 
         // TODO: Display logo, collapsing ToolBar
 
@@ -115,7 +118,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 actionBar.setTitle(R.string.drawer_tracker);
                 tag = "tracker";
                 fragment = fm.findFragmentByTag(tag);
-                if (fragment == null) fragment = new TabFragment();
+                if (fragment == null) fragment = TrackerFragment.newInstance(TrackerFilterEnum.all);
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_forum:
@@ -190,5 +193,10 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         intent.putExtra("group", group);
         intent.putExtra("name", name);
         startActivity(intent);
+    }
+
+    @Override
+    public void replace(int containerId, Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction().replace(containerId, fragment, tag).commit();
     }
 }
