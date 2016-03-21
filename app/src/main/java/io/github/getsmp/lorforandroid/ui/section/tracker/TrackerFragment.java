@@ -16,6 +16,7 @@
 package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -78,7 +79,9 @@ public class TrackerFragment extends SectionCommon {
         spinner.setAdapter(spinnerAdapter);
         spinner.setSelection(TrackerFilterEnum.valueOf(filter).ordinal());
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setCustomView(spinnerView);
+        ActionBar supportBar =((AppCompatActivity) getActivity()).getSupportActionBar();
+        supportBar.setDisplayShowCustomEnabled(true);
+        supportBar.setCustomView(spinnerView);
 
         final AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
             @Override

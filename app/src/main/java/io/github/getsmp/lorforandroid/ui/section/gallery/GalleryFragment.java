@@ -16,12 +16,14 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import com.loopj.android.http.RequestParams;
 
@@ -62,7 +64,9 @@ public class GalleryFragment extends SectionCommon {
         spinner.setAdapter(spinnerAdapter);
         spinner.setSelection(GalleryFilterEnum.valueOf(filter).ordinal());
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setCustomView(spinnerView);
+        ActionBar supportBar =((AppCompatActivity) getActivity()).getSupportActionBar();
+        supportBar.setDisplayShowCustomEnabled(true);
+        supportBar.setCustomView(spinnerView);
 
         final AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
             @Override
