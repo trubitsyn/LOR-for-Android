@@ -19,6 +19,12 @@
         <item>Технические</item>
     </string-array>
 
+    <string-array name="gallery_spinner">
+        <item>Все</item>
+        <item>Скриншоты</item>
+        <item>Рабочие места</item>
+    </string-array>
+
     <string name="intent_settings">settings</string>
     
     <string name="pref_category_interface">Интерфейс</string>
