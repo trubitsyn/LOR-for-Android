@@ -16,19 +16,23 @@
 package io.github.getsmp.lorforandroid.ui.section.tracker;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.Serializable;
-import java.util.List;
-
+import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
+import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {
@@ -62,6 +66,36 @@ public class TrackerFragment extends SectionCommon {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         filter = getArguments().getString("filter");
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        View spinnerView = View.inflate(getActivity(), R.layout.spinner, null);
+        final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.toolbar_spinner);
+        final ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.tracker_spinner, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setSelection(TrackerFilterEnum.valueOf(filter).ordinal());
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setCustomView(spinnerView);
+
+        final AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((FragmentReplaceCallback) getActivity()).replace(R.id.fragmentContainer, newInstance(TrackerFilterEnum.values()[position]), "tracker");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+
+        spinner.post(new Runnable() {
+            @Override
+            public void run() {
+                spinner.setOnItemSelectedListener(listener);
+            }
+        });
     }
 
     @Override
