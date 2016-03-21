@@ -4,6 +4,7 @@
         android:id="@+id/progressBar"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_gravity="center"
         android:layout_centerInParent="true"/>
 
     <TextView
