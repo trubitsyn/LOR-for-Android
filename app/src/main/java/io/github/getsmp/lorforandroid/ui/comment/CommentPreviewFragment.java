@@ -47,6 +47,12 @@ public class CommentPreviewFragment extends DialogFragment {
         this.activity = activity;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     public void setComments(List<Comment> comments, Comment comment) {
         this.comments = comments;
         this.comment = comment;
