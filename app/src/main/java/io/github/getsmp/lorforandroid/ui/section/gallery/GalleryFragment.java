@@ -89,7 +89,7 @@ public class GalleryFragment extends SectionCommon {
             items.add(new GalleryItem(
                     article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
                     article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                    filter.equals(GalleryFilterEnum.all.name()) ? StringUtils.removeSectionName(article.select("div.group").first().text()) : null,
+                    isAll() ? StringUtils.removeSectionName(article.select("div.group").first().text()) : null,
                     StringUtils.tagsFromElements(article.select("a.tag")),
                     article.select("time").first().ownText().split(" ")[0],
                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
@@ -97,6 +97,10 @@ public class GalleryFragment extends SectionCommon {
                     article.select("img[itemprop^=thumbnail]").attr("src")
             ));
         }
+    }
+
+    private boolean isAll() {
+        return filter.equals(GalleryFilterEnum.all.name());
     }
 
     @Override
@@ -111,7 +115,7 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     public String getPath() {
-        String path = filter.equals(GalleryFilterEnum.all.name()) ? "" : "/" + filter;
+        String path = isAll() ? "" : "/" + filter;
         return "gallery" + path;
     }
 
