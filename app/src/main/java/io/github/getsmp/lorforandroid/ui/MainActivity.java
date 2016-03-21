@@ -97,6 +97,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     }
 
     private void navigate(int selection) {
+        actionBar.setDisplayShowCustomEnabled(false);
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment;
         String tag;

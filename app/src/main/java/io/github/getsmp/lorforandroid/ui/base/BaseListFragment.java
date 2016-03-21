@@ -128,7 +128,6 @@ public abstract class BaseListFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
 
         if (savedInstanceState != null) {
             initAdapter();
