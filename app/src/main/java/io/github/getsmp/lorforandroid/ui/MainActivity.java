@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.TabFragment;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
@@ -39,6 +38,8 @@ import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActiv
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFragment;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
 import io.github.getsmp.lorforandroid.ui.section.news.NewsFragment;
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFilterEnum;
+import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragment;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
@@ -115,7 +116,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
                 actionBar.setTitle(R.string.drawer_tracker);
                 tag = "tracker";
                 fragment = fm.findFragmentByTag(tag);
-                if (fragment == null) fragment = new TabFragment();
+                if (fragment == null) fragment = TrackerFragment.newInstance(TrackerFilterEnum.all);
                 fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
                 break;
             case R.id.drawer_forum:
