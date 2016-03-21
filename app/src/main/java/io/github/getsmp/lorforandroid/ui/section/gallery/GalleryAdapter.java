@@ -55,7 +55,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
             viewHolder.category.setVisibility(View.GONE);
         } else viewHolder.category.setText(item.getGroupTitle());
 
-        viewHolder.tags.setText(item.getTags());
+        if (item.getTags().isEmpty()) {
+            viewHolder.tags.setVisibility(View.GONE);
+        } else viewHolder.tags.setText(item.getTags());
+
         viewHolder.date.setText(item.getDate());
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
