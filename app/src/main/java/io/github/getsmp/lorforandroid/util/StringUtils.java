@@ -31,18 +31,20 @@ public class StringUtils {
     }
 
     /*
-    * Removes part of url after "?" including it
-    * @param url /forum/general/12336213?lastmod=1454852134842
+    * Removes part of url after topic id
+    * @param url /forum/general/12336213/page1?lastmod=1454852134842
     * @return /forum/general/12336213
     * */
     public static String removeParams(String url) {
         int length = url.length() - url.replace("/", "").length();
         if (length > 3) {
-            return url.substring(0, url.lastIndexOf("/"));
+            url = url.substring(0, url.lastIndexOf("/"));
         } else if (url.contains("?")) {
-            return url.split("\\?")[0];
+            url = url.split("\\?")[0];
         }
-        return url;
+        if (url.split("/").length > 3) {
+            return url.substring(0, url.lastIndexOf("/"));
+        } else return url;
     }
 
     public static String tagsFromStrings(List<String> in) {
