@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
-import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TopicActivity extends ThemeActivity {
@@ -41,25 +40,15 @@ public class TopicActivity extends ThemeActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String tag = "topicFragment";
-        TopicFragmentCommon topicFragment = (TopicFragmentCommon) getSupportFragmentManager().findFragmentByTag(tag);
+        TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentByTag(tag);
 
         if (topicFragment == null) {
             Intent intent = getIntent();
-            SectionTypeEnum type = SectionTypeEnum.values()[getIntent().getIntExtra("type", SectionTypeEnum.NEWS.ordinal())];
-            switch (type) {
-                case GALLERY:
-                    url = StringUtils.removeParams(intent.getStringExtra("url"));
-                    String imageUrl = intent.getStringExtra("imageUrl");
-                    topicFragment = TopicFragmentGallery.newInstance(url, imageUrl);
-                    break;
-                default:
-                    url = StringUtils.removeParams(intent.getStringExtra("url"));
-                    topicFragment = TopicFragmentStandard.newInstance(url);
-                    break;
-
-            }
+            url = StringUtils.removeParams(intent.getStringExtra("url"));
+            String imageUrl = intent.getStringExtra("imageUrl");
+            topicFragment = TopicFragment.newInstance(url, imageUrl);
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment, "topicFragment").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.topicFragmentContainer, topicFragment, tag).commit();
     }
 
     @Override
