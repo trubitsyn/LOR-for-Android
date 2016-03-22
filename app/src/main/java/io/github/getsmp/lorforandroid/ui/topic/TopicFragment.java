@@ -56,6 +56,7 @@ public class TopicFragment extends BaseFragment {
     @Bind(R.id.topicTitle) TextView title;
     @Bind(R.id.topicTags) TextView tags;
     @Bind(R.id.topicAuthor) TextView author;
+    @Bind(R.id.topicDate) TextView date;
     @Bind(R.id.topicImage) @Nullable ImageView image;
     @Bind(R.id.topicMessage) TextView message;
     private String url;
@@ -146,6 +147,7 @@ public class TopicFragment extends BaseFragment {
         }
 
         author.setText(topic.getAuthor().getNick());
+        date.setText(StringUtils.getDate(topic.getPostDate()));
         message.setText(Html.fromHtml(topic.getMessage()));
         message.setMovementMethod(LinkMovementMethod.getInstance());
     }
