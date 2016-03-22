@@ -15,7 +15,9 @@
 
 package io.github.getsmp.lorforandroid.ui.section.forum;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
@@ -47,6 +49,12 @@ public class ForumOverviewFragment extends SectionCommon {
     @Override
     public RequestParams getRequestParams() {
         return null;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setRefreshable(false);
     }
 
     @Override
@@ -82,6 +90,11 @@ public class ForumOverviewFragment extends SectionCommon {
 
     @Override
     protected boolean showDividers() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasRefreshMenu() {
         return false;
     }
 }
