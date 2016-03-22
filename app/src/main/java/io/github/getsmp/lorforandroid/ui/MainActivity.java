@@ -32,7 +32,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
-import io.github.getsmp.lorforandroid.ui.section.SectionTypeEnum;
 import io.github.getsmp.lorforandroid.ui.section.forum.ForumOverviewFragment;
 import io.github.getsmp.lorforandroid.ui.section.forum.section.ForumSectionActivity;
 import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryFilterEnum;
@@ -175,7 +174,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Override
     public void onTopicRequested(String url) {
         Intent intent = new Intent(this, TopicActivity.class);
-        intent.putExtra("type", SectionTypeEnum.NEWS.ordinal());
         intent.putExtra("url", url);
         startActivity(intent);
     }
@@ -183,7 +181,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Override
     public void onGalleryTopicRequested(GalleryItem item) {
         Intent intent = new Intent(this, TopicActivity.class);
-        intent.putExtra("type", SectionTypeEnum.GALLERY.ordinal());
         intent.putExtra("url", item.getUrl());
         intent.putExtra("imageUrl", item.getImageUrl());
         startActivity(intent);
