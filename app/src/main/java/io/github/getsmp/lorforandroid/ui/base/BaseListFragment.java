@@ -58,10 +58,7 @@ public abstract class BaseListFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        if (needRetainInstance()) {
-            setRetainInstance(true);
-        }
+        setRetainInstance(true);
     }
 
     @Override
@@ -143,10 +140,6 @@ public abstract class BaseListFragment extends BaseFragment {
     }
 
     protected boolean loadMoreAllowed() {
-        return true;
-    }
-
-    protected boolean needRetainInstance() {
         return true;
     }
 
