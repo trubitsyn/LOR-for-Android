@@ -36,15 +36,9 @@ public class StringUtils {
     * @return /forum/general/12336213
     * */
     public static String removeParams(String url) {
-        int length = url.length() - url.replace("/", "").length();
-        if (length > 3) {
-            url = url.substring(0, url.lastIndexOf("/"));
-        } else if (url.contains("?")) {
-            url = url.split("\\?")[0];
-        }
         if (url.split("/").length > 3) {
             return url.substring(0, url.lastIndexOf("/"));
-        } else return url;
+        } else return url.split("\\?")[0];
     }
 
     public static String tagsFromStrings(List<String> in) {
