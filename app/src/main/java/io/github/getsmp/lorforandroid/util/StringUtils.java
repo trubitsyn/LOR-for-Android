@@ -84,4 +84,8 @@ public class StringUtils {
     public static CharSequence removeLineBreak(Spanned spanned) {
         return spanned.subSequence(0, spanned.length() - 2);
     }
+
+    public static boolean isClub(String url) {
+        return url.contains("club");
+    }
 }

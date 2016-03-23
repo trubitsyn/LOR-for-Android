@@ -28,6 +28,7 @@ import org.jsoup.select.Elements;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
+import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumOverviewFragment extends SectionCommon {
 
@@ -82,7 +83,7 @@ public class ForumOverviewFragment extends SectionCommon {
     @Override
     protected void onItemClickCallback(int position) {
         ForumOverviewItem item = (ForumOverviewItem) items.get(position);
-        if (item.getUrl().equals("club")) {
+        if (StringUtils.isClub(item.getUrl())) {
             Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show();
         } else {
             ((ItemClickCallback) context).onForumSectionRequested(item.getUrl(), item.getName());

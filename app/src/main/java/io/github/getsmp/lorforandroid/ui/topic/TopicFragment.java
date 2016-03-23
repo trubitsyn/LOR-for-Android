@@ -102,7 +102,7 @@ public class TopicFragment extends BaseFragment {
     }
 
     private void loadTopic() {
-        if (url.contains("club")) {
+        if (StringUtils.isClub(url)) {
             loadingError(R.string.error_access_denied);
         } else {
             Call<Topics> topics = ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url);
