@@ -16,12 +16,9 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
@@ -31,8 +28,9 @@ import org.jsoup.select.Elements;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
-import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
+import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
@@ -56,18 +54,7 @@ public class GalleryFragment extends SectionCommon {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        View spinnerView = View.inflate(getActivity(), R.layout.spinner, null);
-        spinner = (Spinner) spinnerView.findViewById(R.id.toolbar_spinner);
-        final ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.gallery_spinner, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-        spinner.setSelection(GalleryFilterEnum.valueOf(filter).ordinal());
-
-        ActionBar supportBar =((AppCompatActivity) getActivity()).getSupportActionBar();
-        supportBar.setDisplayShowCustomEnabled(true);
-        supportBar.setCustomView(spinnerView);
-
-        final AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        SpinnerViewUtils.setSpinnerView(getActivity(), R.array.gallery_spinner, GalleryFilterEnum.valueOf(filter).ordinal(), new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((FragmentReplaceCallback) getActivity()).replace(R.id.fragmentContainer, newInstance(GalleryFilterEnum.values()[position]), "gallery");
@@ -75,13 +62,6 @@ public class GalleryFragment extends SectionCommon {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
-        };
-
-        spinner.post(new Runnable() {
-            @Override
-            public void run() {
-                spinner.setOnItemSelectedListener(listener);
-            }
         });
     }
 
