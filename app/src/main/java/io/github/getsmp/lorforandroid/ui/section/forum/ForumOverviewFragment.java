@@ -32,6 +32,12 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 public class ForumOverviewFragment extends SectionCommon {
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
+    }
+
+    @Override
     public int getItemsPerPage() {
         return 0;
     }
@@ -93,8 +99,4 @@ public class ForumOverviewFragment extends SectionCommon {
         return false;
     }
 
-    @Override
-    protected boolean hasRefreshMenu() {
-        return false;
-    }
 }

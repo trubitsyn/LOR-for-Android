@@ -65,7 +65,7 @@ public abstract class BaseListFragment extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        if (hasRefreshMenu()) inflater.inflate(R.menu.refresh, menu);
+        inflater.inflate(R.menu.refresh, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -145,10 +145,6 @@ public abstract class BaseListFragment extends BaseFragment {
     }
 
     protected boolean showDividers() {
-        return true;
-    }
-
-    protected boolean hasRefreshMenu() {
         return true;
     }
 
