@@ -1,4 +1,4 @@
-package io.github.getsmp.lorforandroid.util;
+package io.github.getsmp.lorforandroid.ui.util;
 
 import android.support.v4.app.Fragment;
 

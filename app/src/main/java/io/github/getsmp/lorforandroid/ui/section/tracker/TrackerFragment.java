@@ -33,7 +33,7 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
+import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {

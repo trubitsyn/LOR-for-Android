@@ -42,7 +42,7 @@ import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFilterEnum;
 import io.github.getsmp.lorforandroid.ui.section.tracker.TrackerFragment;
 import io.github.getsmp.lorforandroid.ui.topic.TopicActivity;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
+import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 
 public class MainActivity extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback, FragmentReplaceCallback {
     private static final String NAV_ITEM_ID = "NAV_ITEM_ID";

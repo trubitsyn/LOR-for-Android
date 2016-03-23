@@ -23,7 +23,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toolbar;
 
 import com.loopj.android.http.RequestParams;
 
@@ -33,7 +32,7 @@ import org.jsoup.select.Elements;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-import io.github.getsmp.lorforandroid.util.FragmentReplaceCallback;
+import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
