@@ -102,24 +102,28 @@ public class TopicFragment extends BaseFragment {
     }
 
     private void loadTopic() {
-        loadingStarted();
-
-        Call<Topics> topics = ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url);
-        topics.enqueue(new Callback<Topics>() {
-            @Override
-            public void onResponse(Call<Topics> call, Response<Topics> response) {
-                if (response.body() != null) {
-                    topic = response.body().topic;
+        if (url.contains("club")) {
+            loadingError(R.string.error_access_denied);
+        } else {
+            Call<Topics> topics = ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url);
+            topics.enqueue(new Callback<Topics>() {
+                @Override
+                public void onResponse(Call<Topics> call, Response<Topics> response) {
+                    if (response.body() != null) {
+                        topic = response.body().topic;
+                        loadingEnded();
+                        setTopic();
+                    } else {
+                        loadingError(R.string.error_network);
+                    }
                 }
-                loadingEnded();
-                setTopic();
-            }
 
-            @Override
-            public void onFailure(Call<Topics> call, Throwable t) {
-                loadingError();
-            }
-        });
+                @Override
+                public void onFailure(Call<Topics> call, Throwable t) {
+                    loadingError(R.string.error_network);
+                }
+            });
+        }
     }
 
     private void setTopic() {
@@ -152,19 +156,16 @@ public class TopicFragment extends BaseFragment {
         message.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private void loadingStarted() {
-        errorView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
     private void loadingEnded() {
         progressBar.setVisibility(View.GONE);
         scrollView.setVisibility(View.VISIBLE);
     }
 
-    private void loadingError() {
+    private void loadingError(int stringResource) {
+        System.err.println("CALL");
+        scrollView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
-        errorView.setText(R.string.error_network);
+        errorView.setText(stringResource);
         errorView.setVisibility(View.VISIBLE);
     }
 }
