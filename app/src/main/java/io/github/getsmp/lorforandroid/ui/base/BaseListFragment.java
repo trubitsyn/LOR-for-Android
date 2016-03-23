@@ -37,6 +37,7 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 
 public abstract class BaseListFragment extends BaseFragment {
     protected Context context;
@@ -186,5 +187,9 @@ public abstract class BaseListFragment extends BaseFragment {
             errorView.setVisibility(View.VISIBLE);
             errorView.setText(stringResource);
         }
+    }
+
+    protected void setOnClickListener(ItemClickListener.OnItemClickListener listener) {
+        recyclerView.addOnItemTouchListener(new ItemClickListener(context, listener));
     }
 }

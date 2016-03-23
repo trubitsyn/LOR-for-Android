@@ -15,6 +15,8 @@
 
 package io.github.getsmp.lorforandroid.ui.section;
 
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -27,11 +29,23 @@ import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.base.BaseCallbackFragment;
+import io.github.getsmp.lorforandroid.ui.base.BaseListFragment;
+import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 import io.github.getsmp.lorforandroid.util.NetworkClient;
 
-public abstract class SectionCommon extends BaseCallbackFragment {
+public abstract class SectionCommon extends BaseListFragment {
     protected int offset;
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setOnClickListener(new ItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+                onItemClickCallback(recyclerView.getChildAdapterPosition(view));
+            }
+        });
+    }
 
     @Override
     protected void getListItems() {
@@ -81,4 +95,6 @@ public abstract class SectionCommon extends BaseCallbackFragment {
     public abstract String getPath();
 
     public abstract RequestParams getRequestParams();
+
+    protected abstract void onItemClickCallback(int position);
 }
