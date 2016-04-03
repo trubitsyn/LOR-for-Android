@@ -50,7 +50,7 @@ public class CommentFragment extends BaseListFragment {
     }
 
     @Override
-    protected void getListItems() {
+    protected void fetchData() {
         Call<Comments> comments = ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page);
         comments.enqueue(new Callback<Comments>() {
             @Override

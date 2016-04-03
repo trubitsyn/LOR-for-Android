@@ -48,7 +48,7 @@ public abstract class SectionCommon extends BaseListFragment {
     }
 
     @Override
-    protected void getListItems() {
+    protected void fetchData() {
         if (offset <= getMaxOffset()) {
             NetworkClient.get(getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
                 @Override

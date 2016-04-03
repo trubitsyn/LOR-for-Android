@@ -79,7 +79,7 @@ public abstract class BaseListFragment extends BaseFragment {
                 progressBar.setVisibility(View.VISIBLE);
                 clearData();
                 scrollListener.reset();
-                getListItems();
+                fetchData();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -104,7 +104,7 @@ public abstract class BaseListFragment extends BaseFragment {
             @Override
             public void onLoadMore() {
                 if (loadMoreAllowed()) {
-                    getListItems();
+                    fetchData();
                 }
             }
         };
@@ -117,7 +117,7 @@ public abstract class BaseListFragment extends BaseFragment {
                 clearData();
                 scrollListener.reset();
                 errorView.setVisibility(View.GONE);
-                getListItems();
+                fetchData();
             }
         });
     }
@@ -131,7 +131,7 @@ public abstract class BaseListFragment extends BaseFragment {
             stopRefreshAndShow();
         } else {
             initAdapter();
-            getListItems();
+            fetchData();
         }
     }
 
@@ -152,7 +152,7 @@ public abstract class BaseListFragment extends BaseFragment {
         swipeRefreshLayout.setEnabled(refreshable);
     }
 
-    protected abstract void getListItems();
+    protected abstract void fetchData();
 
     protected abstract void clearData();
 
