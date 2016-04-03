@@ -74,15 +74,18 @@ public abstract class BaseListFragment extends BaseFragment {
         switch (item.getItemId()) {
             case R.id.refreshButton:
                 recyclerView.scrollToPosition(0);
-                swipeRefreshLayout.setVisibility(View.GONE);
-                errorView.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
-                clearData();
-                scrollListener.reset();
+                hideAllShowProgressView();
+                resetState();
                 fetchData();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void hideAllShowProgressView() {
+        swipeRefreshLayout.setVisibility(View.GONE);
+        errorView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -114,8 +117,7 @@ public abstract class BaseListFragment extends BaseFragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                clearData();
-                scrollListener.reset();
+                resetState();
                 errorView.setVisibility(View.GONE);
                 fetchData();
             }
@@ -156,6 +158,11 @@ public abstract class BaseListFragment extends BaseFragment {
 
     protected void clearData() {
         items.clear();
+    }
+
+    private void resetState() {
+        clearData();
+        scrollListener.reset();
     }
 
     protected abstract RecyclerView.Adapter getAdapter();
