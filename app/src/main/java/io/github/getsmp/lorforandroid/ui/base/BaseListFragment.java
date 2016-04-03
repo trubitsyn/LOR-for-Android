@@ -154,7 +154,9 @@ public abstract class BaseListFragment extends BaseFragment {
 
     protected abstract void fetchData();
 
-    protected abstract void clearData();
+    protected void clearData() {
+        items.clear();
+    }
 
     protected abstract RecyclerView.Adapter getAdapter();
 

@@ -86,7 +86,7 @@ public abstract class SectionCommon extends BaseListFragment {
 
     @Override
     protected void clearData() {
-        items.clear();
+        super.clearData();
         offset = 0;
     }
 

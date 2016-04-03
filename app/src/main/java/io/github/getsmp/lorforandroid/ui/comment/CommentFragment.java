@@ -101,9 +101,9 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void clearData() {
+        super.clearData();
         page = 0;
         previousCount = 0;
-        items.clear();
     }
 
     @Override
