@@ -148,10 +148,6 @@ public abstract class BaseListFragment extends BaseFragment {
         return true;
     }
 
-    protected void setRefreshable(boolean refreshable) {
-        swipeRefreshLayout.setEnabled(refreshable);
-    }
-
     protected abstract void fetchData();
 
     protected void clearData() {

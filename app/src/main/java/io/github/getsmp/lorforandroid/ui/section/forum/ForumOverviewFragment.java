@@ -61,7 +61,7 @@ public class ForumOverviewFragment extends SectionCommon {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setRefreshable(false);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     @Override
