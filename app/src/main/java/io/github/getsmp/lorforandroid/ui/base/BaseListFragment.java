@@ -106,9 +106,7 @@ public abstract class BaseListFragment extends BaseFragment {
         scrollListener = new InfiniteScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
-                if (loadMoreAllowed()) {
-                    fetchData();
-                }
+                if (loadMoreAllowed()) fetchData();
             }
         };
 
@@ -169,20 +167,14 @@ public abstract class BaseListFragment extends BaseFragment {
 
     protected void stopRefresh() {
         // swipeRefreshLayout still might be null
-        if (swipeRefreshLayout != null) {
-            // SwipeRefreshLayout never stops refreshing regardless of null it is or not
-            swipeRefreshLayout.setRefreshing(false);
-        }
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+        if (swipeRefreshLayout != null) swipeRefreshLayout.setRefreshing(false);
+
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
     }
 
     protected void stopRefreshAndShow() {
         stopRefresh();
-        if (swipeRefreshLayout != null) {
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
-        }
+        if (swipeRefreshLayout != null) swipeRefreshLayout.setVisibility(View.VISIBLE);
     }
 
     protected void showErrorView(int stringResource) {
