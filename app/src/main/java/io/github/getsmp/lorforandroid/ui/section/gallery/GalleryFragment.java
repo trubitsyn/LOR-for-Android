@@ -23,15 +23,12 @@ import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class GalleryFragment extends SectionCommon {
     private Spinner spinner;
@@ -65,25 +62,13 @@ public class GalleryFragment extends SectionCommon {
         });
     }
 
-    @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements articles = responseBody.select("article.news");
-        for (Element article : articles) {
-            items.add(new GalleryItem(
-                    article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
-                    article.select("h2 > a[href^=/gallery/]").first().ownText(),
-                    isAll() ? StringUtils.removeSectionName(article.select("div.group").first().text()) : null,
-                    StringUtils.tagsFromElements(article.select("a.tag")),
-                    article.select("time").first().ownText().split(" ")[0],
-                    article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replaceAll("\\D+", ""),
-                    article.select("img[itemprop^=thumbnail]").attr("src")
-            ));
-        }
-    }
-
     private boolean isAll() {
         return filter.equals(GalleryFilterEnum.all.name());
+    }
+
+    @Override
+    protected ItemFactory getItemFactory() {
+        return new GalleryItemFactory();
     }
 
     @Override

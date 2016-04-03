@@ -20,12 +20,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionFragment extends SectionCommon {
     private String group;
@@ -51,6 +48,11 @@ public class ForumSectionFragment extends SectionCommon {
     }
 
     @Override
+    protected ItemFactory getItemFactory() {
+        return new ForumSectionItemFactory();
+    }
+
+    @Override
     public int getItemsPerPage() {
         return 30;
     }
@@ -68,24 +70,6 @@ public class ForumSectionFragment extends SectionCommon {
     @Override
     public RequestParams getRequestParams() {
         return new RequestParams("offset", offset);
-    }
-
-    @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements entries = responseBody.select("tbody tr");
-        for (Element entry : entries) {
-            Element properties = entry.select("td").first();
-            String bareAuthor = properties.ownText();
-            items.add(new ItemCommon(
-                    properties.select("a").first().attr("href").substring(1),
-                    properties.select("a").first().ownText(),
-                    null,
-                    StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                    entry.select("td.dateinterval").first().select("time").first().ownText(),
-                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
-                    StringUtils.addEnding(entry.select("td.numbers").first().ownText())
-            ));
-        }
     }
 
     @Override

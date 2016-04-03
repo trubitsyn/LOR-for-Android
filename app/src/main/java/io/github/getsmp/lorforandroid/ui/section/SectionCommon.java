@@ -61,7 +61,8 @@ public abstract class SectionCommon extends BaseListFragment {
                     }
 
                     try {
-                        generateDataSet(Jsoup.parse(resp).body());
+                        Element body = Jsoup.parse(resp).body();
+                        items.addAll(getItemFactory().prepareItems(body));
                     } catch (NullPointerException e) {
                         if (offset > 0) {
                             Toast.makeText(context, R.string.error_npe, Toast.LENGTH_SHORT).show();
@@ -90,7 +91,7 @@ public abstract class SectionCommon extends BaseListFragment {
         offset = 0;
     }
 
-    protected abstract void generateDataSet(Element responseBody);
+    protected abstract ItemFactory getItemFactory();
 
     public abstract int getItemsPerPage();
 

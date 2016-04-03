@@ -22,35 +22,16 @@ import android.widget.AdapterView;
 
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerFragment extends SectionCommon {
     private String filter;
-
-    @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements topics = responseBody.select("tbody > tr");
-        for (Element topic : topics) {
-            items.add(new ItemCommon(
-                    topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
-                    topic.select("td:eq(1)").select("a").first().ownText(),
-                    topic.select("a.secondary").first().ownText(),
-                    StringUtils.tagsFromElements(topic.select("span.tag")),
-                    topic.select("time").first().ownText(),
-                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
-                    StringUtils.addEnding(topic.select("td.numbers").first().ownText())
-            ));
-        }
-    }
 
     public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {
         TrackerFragment trackerFragment = new TrackerFragment();
@@ -78,6 +59,11 @@ public class TrackerFragment extends SectionCommon {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
+
+    @Override
+    protected ItemFactory getItemFactory() {
+        return new TrackerItemFactory();
     }
 
     @Override

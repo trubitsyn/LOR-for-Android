@@ -16,43 +16,18 @@
 package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
-import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class NewsFragment extends SectionCommon {
     @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements articles = responseBody.select("article");
-        for (Element article : articles) {
-            if (article.hasClass("mini-news")) {
-                // Mini-news article
-                items.add(new MiniNewsItem(
-                        article.select("a[href^=/news/]").first().attr("href").substring(1),
-                        article.select("a[href^=/news/]").first().ownText(),
-                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", "")
-                ));
-            } else {
-                // Standard article
-                items.add(new ItemCommon(
-                        article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
-                        article.select("h2 > a[href^=/news/]").first().ownText(),
-                        StringUtils.removeSectionName(article.select("div.group").first().text()),
-                        StringUtils.tagsFromElements(article.select("a.tag")),
-                        article.select("time").first().ownText(),
-                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText()
-                ));
-            }
-        }
+    protected ItemFactory getItemFactory() {
+        return new NewsItemFactory();
     }
 
     @Override

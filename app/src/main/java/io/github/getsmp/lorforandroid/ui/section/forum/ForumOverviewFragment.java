@@ -22,10 +22,8 @@ import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import io.github.getsmp.lorforandroid.R;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
@@ -65,14 +63,8 @@ public class ForumOverviewFragment extends SectionCommon {
     }
 
     @Override
-    protected void generateDataSet(Element responseBody) {
-        Elements sections = responseBody.select("div#bd").select("ul").first().select("li");
-        for (Element section : sections) {
-            items.add(new ForumOverviewItem(
-                    section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
-                    section.select("a").first().ownText()
-            ));
-        }
+    protected ItemFactory getItemFactory() {
+        return new ForumOverviewItemFactory();
     }
 
     @Override
