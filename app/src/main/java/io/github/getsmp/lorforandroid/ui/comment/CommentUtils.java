@@ -52,6 +52,6 @@ class CommentUtils {
                 return comment;
             }
         }
-        return new Comment();
+        return null;
     }
 }
