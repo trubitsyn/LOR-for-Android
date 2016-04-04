@@ -73,13 +73,17 @@ public abstract class BaseListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refreshButton:
-                recyclerView.scrollToPosition(0);
-                hideAllShowProgressView();
-                resetState();
-                fetchData();
+                restart();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void restart() {
+        recyclerView.scrollToPosition(0);
+        hideAllShowProgressView();
+        resetState();
+        fetchData();
     }
 
     private void hideAllShowProgressView() {

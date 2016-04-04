@@ -19,14 +19,12 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
 
 import com.loopj.android.http.RequestParams;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
-import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
@@ -53,7 +51,8 @@ public class GalleryFragment extends SectionCommon {
         SpinnerViewUtils.setSpinnerView(getActivity(), R.array.gallery_spinner, GalleryFilterEnum.valueOf(filter).ordinal(), new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((FragmentReplaceCallback) getActivity()).replace(R.id.fragmentContainer, newInstance(GalleryFilterEnum.values()[position]), "gallery");
+                filter = GalleryFilterEnum.values()[position].name();
+                restart();
             }
 
             @Override

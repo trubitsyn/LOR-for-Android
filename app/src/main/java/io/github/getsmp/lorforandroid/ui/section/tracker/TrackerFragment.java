@@ -26,7 +26,6 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
-import io.github.getsmp.lorforandroid.ui.util.FragmentReplaceCallback;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
@@ -53,7 +52,8 @@ public class TrackerFragment extends SectionCommon {
         SpinnerViewUtils.setSpinnerView(getActivity(), R.array.tracker_spinner, TrackerFilterEnum.valueOf(filter).ordinal(), new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((FragmentReplaceCallback) getActivity()).replace(R.id.fragmentContainer, newInstance(TrackerFilterEnum.values()[position]), "tracker");
+                filter = TrackerFilterEnum.values()[position].name();
+                restart();
             }
 
             @Override
