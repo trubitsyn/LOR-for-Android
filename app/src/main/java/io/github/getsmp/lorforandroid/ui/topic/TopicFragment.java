@@ -162,7 +162,6 @@ public class TopicFragment extends BaseFragment {
     }
 
     private void loadingError(int stringResource) {
-        System.err.println("CALL");
         scrollView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         errorView.setText(stringResource);
