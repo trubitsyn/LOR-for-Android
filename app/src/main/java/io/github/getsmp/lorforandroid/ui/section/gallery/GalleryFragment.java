@@ -31,7 +31,6 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
 public class GalleryFragment extends SectionCommon {
-    private Spinner spinner;
     private String filter;
 
     public static GalleryFragment newInstance(GalleryFilterEnum galleryFilterEnum) {
