@@ -31,15 +31,8 @@ public class Comment {
     @Expose private Reply reply;
     @Expose private EditSummary editSummary;
 
-    /**
-     * @return The id
-     */
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Author getAuthor() {
