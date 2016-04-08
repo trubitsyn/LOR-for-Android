@@ -49,7 +49,8 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.toolbarTop) Toolbar toolbar;
     @Bind(R.id.navigationView) NavigationView navigationView;
-    private int navigationItemId;
+    private int currentNavigationItemId;
+    private int requestedNavigationItemId;
     private ActionBarDrawerToggle drawerToggle;
     private ActionBar actionBar;
 
@@ -69,12 +70,12 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
 
         if (savedInstanceState == null) {
             if (getIntent().getBooleanExtra(getString(R.string.intent_settings), false)) {
-                navigationItemId = R.id.drawer_settings;
+                currentNavigationItemId = R.id.drawer_settings;
             } else {
-                navigationItemId = R.id.drawer_news;
+                currentNavigationItemId = R.id.drawer_news;
             }
         } else {
-            navigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
+            currentNavigationItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -85,22 +86,25 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                navigate(navigationItemId);
+                if (requestedNavigationItemId != currentNavigationItemId) {
+                    currentNavigationItemId = requestedNavigationItemId;
+                    navigate(requestedNavigationItemId);
+                }
             }
         });
         drawerToggle.syncState();
 
-        onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
+        onNavigationItemSelected(navigationView.getMenu().findItem(currentNavigationItemId));
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         menuItem.setChecked(true);
-        navigationItemId = menuItem.getItemId();
+        requestedNavigationItemId = menuItem.getItemId();
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            navigate(navigationItemId);
+            navigate(requestedNavigationItemId);
         }
         return true;
     }
@@ -178,7 +182,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(NAV_ITEM_ID, navigationItemId);
+        outState.putInt(NAV_ITEM_ID, currentNavigationItemId);
     }
 
     @Override
