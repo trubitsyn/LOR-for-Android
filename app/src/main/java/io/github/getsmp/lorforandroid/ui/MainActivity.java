@@ -27,6 +27,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -80,6 +81,13 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                navigate(navigationItemId);
+            }
+        });
         drawerToggle.syncState();
 
         onNavigationItemSelected(navigationView.getMenu().findItem(navigationItemId));
@@ -89,8 +97,11 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         menuItem.setChecked(true);
         navigationItemId = menuItem.getItemId();
-        navigate(navigationItemId);
-        drawerLayout.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            navigate(navigationItemId);
+        }
         return true;
     }
 
