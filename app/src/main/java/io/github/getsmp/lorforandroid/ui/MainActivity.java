@@ -66,8 +66,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        // TODO: Display logo, collapsing ToolBar
-
         if (savedInstanceState == null) {
             if (getIntent().getBooleanExtra(getString(R.string.intent_settings), false)) {
                 currentNavigationItemId = R.id.drawer_settings;
