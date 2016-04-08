@@ -64,9 +64,7 @@ public abstract class SectionCommon extends BaseListFragment {
                         Element body = Jsoup.parse(resp).body();
                         items.addAll(getItemFactory().prepareItems(body));
                     } catch (NullPointerException e) {
-                        if (offset > 0) {
-                            Toast.makeText(context, R.string.error_npe, Toast.LENGTH_SHORT).show();
-                        } else showErrorView(R.string.error_npe);
+                        showUserFriendlyError(R.string.error_npe);
                         return;
                     }
 
@@ -77,9 +75,7 @@ public abstract class SectionCommon extends BaseListFragment {
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    if (offset > 0) {
-                        Toast.makeText(context, R.string.error_network, Toast.LENGTH_SHORT).show();
-                    } else showErrorView(R.string.error_network);
+                    showUserFriendlyError(R.string.error_network);
                 }
             });
         } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();

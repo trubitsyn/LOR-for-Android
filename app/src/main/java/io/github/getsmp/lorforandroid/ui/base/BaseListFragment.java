@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,13 +178,19 @@ public abstract class BaseListFragment extends BaseFragment {
         if (swipeRefreshLayout != null) swipeRefreshLayout.setVisibility(View.VISIBLE);
     }
 
-    protected void showErrorView(int stringResource) {
+    private void showErrorView(int stringResource) {
         stopRefresh();
         if (errorView != null) {
             swipeRefreshLayout.setVisibility(View.INVISIBLE);
             errorView.setVisibility(View.VISIBLE);
             errorView.setText(stringResource);
         }
+    }
+
+    protected void showUserFriendlyError(int errorString) {
+        if (items.size() > 0) {
+            Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
+        } else showErrorView(errorString);
     }
 
     protected void setOnClickListener(ItemClickListener.OnItemClickListener listener) {
