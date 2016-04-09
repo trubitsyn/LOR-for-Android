@@ -15,6 +15,8 @@
 
 package io.github.getsmp.lorforandroid.ui.section.tracker;
 
+import android.text.Html;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -33,7 +35,7 @@ public class TrackerItemFactory implements ItemFactory {
         for (Element topic : topics) {
             items.add(new ItemCommon(
                     topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
-                    topic.select("td:eq(1)").select("a").first().ownText(),
+                    Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
                     topic.select("a.secondary").first().ownText(),
                     StringUtils.tagsFromElements(topic.select("span.tag")),
                     topic.select("time").first().ownText(),
