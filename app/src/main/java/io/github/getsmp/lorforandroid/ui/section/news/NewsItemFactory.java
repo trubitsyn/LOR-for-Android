@@ -37,14 +37,14 @@ public class NewsItemFactory implements ItemFactory {
                 // Mini-news article
                 items.add(new MiniNewsItem(
                         article.select("a[href^=/news/]").first().attr("href").substring(1),
-                        article.select("a[href^=/news/]").first().ownText(),
+                        Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
                         Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", "")
                 ));
             } else {
                 // Standard article
                 items.add(new ItemCommon(
                         article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
-                        article.select("h2 > a[href^=/news/]").first().ownText(),
+                        Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
                         StringUtils.removeSectionName(article.select("div.group").first().text()),
                         StringUtils.tagsFromElements(article.select("a.tag")),
                         article.select("time").first().ownText(),

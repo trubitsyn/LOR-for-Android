@@ -16,7 +16,6 @@
 package io.github.getsmp.lorforandroid.ui.section.news;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,13 +67,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case MINI:
                 MiniNewsViewHolder miniNewsViewHolder = (MiniNewsViewHolder) viewHolder;
                 MiniNewsItem miniNewsItem = (MiniNewsItem) items.get(i);
-                miniNewsViewHolder.getTitle().setText(Html.fromHtml(miniNewsItem.getTitle()));
+                miniNewsViewHolder.getTitle().setText(miniNewsItem.getTitle());
                 miniNewsViewHolder.getCommentsCount().setText(miniNewsItem.getCommentsCount());
                 break;
             case FULL:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
                 ItemCommon newsItem = (ItemCommon) items.get(i);
-                newsViewHolder.title.setText(Html.fromHtml(newsItem.getTitle()));
+                newsViewHolder.title.setText(newsItem.getTitle());
                 newsViewHolder.category.setText(newsItem.getGroupTitle());
                 newsViewHolder.tags.setText(newsItem.getTags());
                 newsViewHolder.author.setText(newsItem.getAuthor());
