@@ -20,5 +20,5 @@ import org.jsoup.nodes.Element;
 import java.util.List;
 
 public interface ItemFactory {
-    List prepareItems(Element body);
+    void prepareItems(Element body, List items);
 }

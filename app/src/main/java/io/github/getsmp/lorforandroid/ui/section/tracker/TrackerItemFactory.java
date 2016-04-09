@@ -20,7 +20,6 @@ import android.text.Html;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
@@ -29,8 +28,7 @@ import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TrackerItemFactory implements ItemFactory {
     @Override
-    public List prepareItems(Element body) {
-        List items = new ArrayList();
+    public void prepareItems(Element body, List items) {
         Elements topics = body.select("tbody > tr");
         for (Element topic : topics) {
             items.add(new ItemCommon(
@@ -43,6 +41,5 @@ public class TrackerItemFactory implements ItemFactory {
                     StringUtils.addEnding(topic.select("td.numbers").first().ownText())
             ));
         }
-        return items;
     }
 }

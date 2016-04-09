@@ -18,15 +18,13 @@ package io.github.getsmp.lorforandroid.ui.section.forum;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 
 public class ForumOverviewItemFactory implements ItemFactory {
     @Override
-    public List prepareItems(Element body) {
-        List<ForumOverviewItem> items = new ArrayList<ForumOverviewItem>();
+    public void prepareItems(Element body, List items) {
         Elements sections = body.select("div#bd").select("ul").first().select("li");
         for (Element section : sections) {
             items.add(new ForumOverviewItem(
@@ -34,6 +32,5 @@ public class ForumOverviewItemFactory implements ItemFactory {
                     section.select("a").first().ownText()
             ));
         }
-        return items;
     }
 }

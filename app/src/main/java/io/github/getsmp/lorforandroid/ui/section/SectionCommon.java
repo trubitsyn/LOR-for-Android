@@ -50,7 +50,7 @@ public abstract class SectionCommon extends BaseListFragment {
 
             try {
                 Element body = Jsoup.parse(resp).body();
-                items.addAll(itemFactory.prepareItems(body));
+                itemFactory.prepareItems(body, items);
             } catch (NullPointerException e) {
                 showUserFriendlyError(R.string.error_npe);
                 return;

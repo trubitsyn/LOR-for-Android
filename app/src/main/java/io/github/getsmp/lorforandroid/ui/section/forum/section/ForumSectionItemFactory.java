@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.ui.section.forum.section;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
@@ -27,8 +26,7 @@ import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class ForumSectionItemFactory implements ItemFactory {
     @Override
-    public List prepareItems(Element body) {
-        List<ItemCommon> items = new ArrayList<ItemCommon>();
+    public void prepareItems(Element body, List items) {
         Elements entries = body.select("tbody tr");
         for (Element entry : entries) {
             Element properties = entry.select("td").first();
@@ -43,6 +41,5 @@ public class ForumSectionItemFactory implements ItemFactory {
                     StringUtils.addEnding(entry.select("td.numbers").first().ownText())
             ));
         }
-        return items;
     }
 }
