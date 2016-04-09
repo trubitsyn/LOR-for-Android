@@ -15,6 +15,8 @@
 
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
+import android.text.Html;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -33,7 +35,7 @@ public class GalleryItemFactory implements ItemFactory {
             Element group = article.select("div.group").first();
             items.add(new GalleryItem(
                     article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
-                    article.select("h2 > a[href^=/gallery/]").first().ownText(),
+                    Html.fromHtml(article.select("h2 > a[href^=/gallery/]").first().ownText()).toString(),
                     (group != null) ? StringUtils.removeSectionName(group.text()) : null,
                     StringUtils.tagsFromElements(article.select("a.tag")),
                     article.select("time").first().ownText().split(" ")[0],

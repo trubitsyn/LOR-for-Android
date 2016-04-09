@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.ui.section.gallery;
 import android.content.Context;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     @Override
     public void onBindViewHolder(GalleryViewHolder viewHolder, int i) {
         GalleryItem item = items.get(i);
-        viewHolder.title.setText(Html.fromHtml(item.getTitle()));
+        viewHolder.title.setText(item.getTitle());
 
         if (item.getGroupTitle() == null) {
             viewHolder.category.setVisibility(View.GONE);
