@@ -26,8 +26,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class StringUtils {
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US);
+
     public static String getDate(Date date) {
-        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US).format(date);
+        return simpleDateFormat.format(date);
     }
 
     /*
