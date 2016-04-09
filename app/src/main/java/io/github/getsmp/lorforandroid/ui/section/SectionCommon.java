@@ -35,6 +35,37 @@ import io.github.getsmp.lorforandroid.util.NetworkClient;
 
 public abstract class SectionCommon extends BaseListFragment {
     protected int offset;
+    private final ItemFactory itemFactory = getItemFactory();
+    private final String path = getPath();
+    private final int maxOffset = getMaxOffset();
+    private final AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            String resp = null;
+            try {
+                resp = new String(responseBody, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                // Will never execute
+            }
+
+            try {
+                Element body = Jsoup.parse(resp).body();
+                items.addAll(itemFactory.prepareItems(body));
+            } catch (NullPointerException e) {
+                showUserFriendlyError(R.string.error_npe);
+                return;
+            }
+
+            offset += getItemsPerPage();
+            adapter.notifyDataSetChanged();
+            stopRefreshAndShow();
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            showUserFriendlyError(R.string.error_network);
+        }
+    };
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -49,35 +80,8 @@ public abstract class SectionCommon extends BaseListFragment {
 
     @Override
     protected void fetchData() {
-        if (offset <= getMaxOffset()) {
-            NetworkClient.get(getPath() + "/", getRequestParams(), new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    String resp = null;
-                    try {
-                        resp = new String(responseBody, "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        // Will never execute
-                    }
-
-                    try {
-                        Element body = Jsoup.parse(resp).body();
-                        items.addAll(getItemFactory().prepareItems(body));
-                    } catch (NullPointerException e) {
-                        showUserFriendlyError(R.string.error_npe);
-                        return;
-                    }
-
-                    offset += getItemsPerPage();
-                    adapter.notifyDataSetChanged();
-                    stopRefreshAndShow();
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    showUserFriendlyError(R.string.error_network);
-                }
-            });
+        if (offset <= maxOffset) {
+            NetworkClient.get(path + "/", getRequestParams(), handler);
         } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
     }
 
