@@ -36,7 +36,6 @@ import io.github.getsmp.lorforandroid.util.NetworkClient;
 public abstract class SectionCommon extends BaseListFragment {
     protected int offset;
     private final ItemFactory itemFactory = getItemFactory();
-    private final String path = getPath();
     private final int maxOffset = getMaxOffset();
     private final AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
         @Override
@@ -81,7 +80,7 @@ public abstract class SectionCommon extends BaseListFragment {
     @Override
     protected void fetchData() {
         if (offset <= maxOffset) {
-            NetworkClient.get(path + "/", getRequestParams(), handler);
+            NetworkClient.get(getPath() + "/", getRequestParams(), handler);
         } else Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show();
     }
 
