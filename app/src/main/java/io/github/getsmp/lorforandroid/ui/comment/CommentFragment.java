@@ -21,7 +21,6 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.api.ApiComments;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.model.Comments;
@@ -50,7 +49,7 @@ public class CommentFragment extends BaseListFragment {
 
     @Override
     protected void fetchData() {
-        Call<Comments> comments = ApiManager.INSTANCE.apiRestAdapter.create(ApiComments.class).getComments(url, page);
+        Call<Comments> comments = ApiManager.INSTANCE.getApiComments().getComments(url, page);
         comments.enqueue(new Callback<Comments>() {
             @Override
             public void onResponse(Call<Comments> call, Response<Comments> response) {

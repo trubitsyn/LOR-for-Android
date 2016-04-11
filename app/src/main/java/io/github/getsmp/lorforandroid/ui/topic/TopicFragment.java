@@ -39,7 +39,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.api.ApiTopic;
 import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
 import io.github.getsmp.lorforandroid.ui.ImageActivity;
@@ -105,7 +104,7 @@ public class TopicFragment extends BaseFragment {
         if (StringUtils.isClub(url)) {
             loadingError(R.string.error_access_denied);
         } else {
-            Call<Topics> topics = ApiManager.INSTANCE.apiRestAdapter.create(ApiTopic.class).getTopic(url);
+            Call<Topics> topics = ApiManager.INSTANCE.getApiTopic().getTopic(url);
             topics.enqueue(new Callback<Topics>() {
                 @Override
                 public void onResponse(Call<Topics> call, Response<Topics> response) {

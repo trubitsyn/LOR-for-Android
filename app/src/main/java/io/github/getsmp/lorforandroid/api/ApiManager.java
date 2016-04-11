@@ -28,8 +28,21 @@ public enum ApiManager {
     public final String ROOT = "https://www.linux.org.ru";
     final String API = ROOT + "/api/";
 
-    public final Retrofit apiRestAdapter = new Retrofit.Builder()
+    private static ApiComments apiComments;
+    private static ApiTopic apiTopic;
+
+    private final Retrofit apiRestAdapter = new Retrofit.Builder()
             .baseUrl("https://www.linux.org.ru/api/")
             .addConverterFactory(GsonConverterFactory.create(GSON))
             .build();
+
+    public ApiComments getApiComments() {
+        if (apiComments == null) apiComments = apiRestAdapter.create(ApiComments.class);
+        return apiComments;
+    }
+
+    public ApiTopic getApiTopic() {
+        if (apiTopic == null) apiTopic = apiRestAdapter.create(ApiTopic.class);
+        return apiTopic;
+    }
 }
