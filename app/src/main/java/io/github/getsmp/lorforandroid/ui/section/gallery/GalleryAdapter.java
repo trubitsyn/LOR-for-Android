@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -62,12 +63,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
 
-        if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_load_images), false) && NetworkUtils.isMobileData(context)) {
-            // Don't load on mobile data
-            viewHolder.image.setVisibility(View.GONE);
-        } else {
-            Glide.with(context).load(item.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image);
-        }
+        if (NetworkUtils.isMobileData(context)) {
+            if (shouldLoadImagesOnMobileData()) {
+                loadImage(item.getImageUrl(), viewHolder.image);
+            } else viewHolder.image.setVisibility(View.GONE);
+        } else loadImage(item.getImageUrl(), viewHolder.image);
+    }
+
+    private boolean shouldLoadImagesOnMobileData() {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_load_images), false);
+    }
+
+    private void loadImage(String url, ImageView view) {
+        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(view);
     }
 
     @Override
