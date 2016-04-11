@@ -24,7 +24,7 @@ import com.loopj.android.http.RequestParams;
 import io.github.getsmp.lorforandroid.api.ApiManager;
 
 public class NetworkClient {
-    static final AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler handler) {
         client.get(getAbsoluteUrl(url), params, handler);
