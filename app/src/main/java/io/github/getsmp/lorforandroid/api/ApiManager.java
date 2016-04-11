@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public enum ApiManager {
     INSTANCE;
 
-    final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+    private final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 
     private static ApiComments apiComments;
     private static ApiTopic apiTopic;
