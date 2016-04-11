@@ -29,12 +29,12 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
 public class GalleryFragment extends SectionCommon {
-    private String filter;
+    private int filter;
 
     public static GalleryFragment newInstance(GalleryFilterEnum galleryFilterEnum) {
         GalleryFragment galleryFragment = new GalleryFragment();
         Bundle args = new Bundle();
-        args.putString("filter", galleryFilterEnum.name());
+        args.putInt("filter", galleryFilterEnum.ordinal());
         galleryFragment.setArguments(args);
         return galleryFragment;
     }
@@ -42,16 +42,16 @@ public class GalleryFragment extends SectionCommon {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        filter = getArguments().getString("filter");
+        filter = getArguments().getInt("filter");
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SpinnerViewUtils.setSpinnerView(getActivity(), R.array.gallery_spinner, GalleryFilterEnum.valueOf(filter).ordinal(), new AdapterView.OnItemSelectedListener() {
+        SpinnerViewUtils.setSpinnerView(getActivity(), R.array.gallery_spinner, filter, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter = GalleryFilterEnum.values()[position].name();
+                filter = position;
                 restart();
             }
 
@@ -61,7 +61,7 @@ public class GalleryFragment extends SectionCommon {
     }
 
     private boolean isAll() {
-        return filter.equals(GalleryFilterEnum.all.name());
+        return filter == GalleryFilterEnum.all.ordinal();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class GalleryFragment extends SectionCommon {
 
     @Override
     public String getPath() {
-        String path = isAll() ? "" : "/" + filter;
+        String path = isAll() ? "" : "/" + GalleryFilterEnum.values()[filter].name();
         return "gallery" + path;
     }
 
