@@ -63,24 +63,26 @@ public class StringUtils {
         return in.substring(in.indexOf("-") + 2, in.length());
     }
 
-    public static String addEnding(String commentsCount) {
+    public static String numericStringToHumanReadable(String commentsCount) {
         if (commentsCount.equals("-")) {
             return "Нет комментариев";
         }
-        int last = 0;
+
+        int parsed = 0;
         try {
-            last = Integer.parseInt(commentsCount.substring(commentsCount.length() -1));
+            parsed = Integer.parseInt(commentsCount.substring(commentsCount.length() - 1));
         } catch (NumberFormatException ignored) {}
 
-        switch (last) {
+        switch (parsed) {
             case 1:
                 return commentsCount + " комментарий";
             case 2:
             case 3:
             case 4:
                 return commentsCount + " комментария";
+            default:
+                return commentsCount + " комментариев";
         }
-        return commentsCount + " комментариев";
     }
 
     public static CharSequence removeLineBreak(Spanned spanned) {

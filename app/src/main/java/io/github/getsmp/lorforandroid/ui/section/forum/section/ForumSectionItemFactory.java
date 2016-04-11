@@ -38,7 +38,7 @@ public class ForumSectionItemFactory implements ItemFactory {
                     StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
                     entry.select("td.dateinterval").first().select("time").first().ownText(),
                     bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
-                    StringUtils.addEnding(entry.select("td.numbers").first().ownText())
+                    StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText())
             ));
         }
     }

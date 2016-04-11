@@ -38,7 +38,7 @@ public class TrackerItemFactory implements ItemFactory {
                     StringUtils.tagsFromElements(topic.select("span.tag")),
                     topic.select("time").first().ownText(),
                     topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
-                    StringUtils.addEnding(topic.select("td.numbers").first().ownText())
+                    StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())
             ));
         }
     }
