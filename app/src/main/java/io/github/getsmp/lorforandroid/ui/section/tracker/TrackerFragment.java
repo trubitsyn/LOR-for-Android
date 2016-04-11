@@ -30,12 +30,12 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
 public class TrackerFragment extends SectionCommon {
-    private String filter;
+    private int filter;
 
     public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {
         TrackerFragment trackerFragment = new TrackerFragment();
         Bundle args = new Bundle();
-        args.putString("filter", trackerFilterEnum.name());
+        args.putInt("filter", trackerFilterEnum.ordinal());
         trackerFragment.setArguments(args);
         return trackerFragment;
     }
@@ -43,16 +43,16 @@ public class TrackerFragment extends SectionCommon {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        filter = getArguments().getString("filter");
+        filter = getArguments().getInt("filter");
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SpinnerViewUtils.setSpinnerView(getActivity(), R.array.tracker_spinner, TrackerFilterEnum.valueOf(filter).ordinal(), new AdapterView.OnItemSelectedListener() {
+        SpinnerViewUtils.setSpinnerView(getActivity(), R.array.tracker_spinner, filter, new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filter = TrackerFilterEnum.values()[position].name();
+                filter = position;
                 restart();
             }
 
@@ -83,7 +83,7 @@ public class TrackerFragment extends SectionCommon {
 
     @Override
     public RequestParams getRequestParams() {
-        return new RequestParams("offset", offset, "filter", filter);
+        return new RequestParams("offset", offset, "filter", TrackerFilterEnum.values()[filter].name());
     }
 
     @Override
