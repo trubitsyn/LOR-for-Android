@@ -15,22 +15,10 @@
  *
  */
 
-package io.github.getsmp.lorforandroid.util;
+package io.github.getsmp.lorforandroid;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+public class Const {
+    public static final String SITE_ROOT = "https://www.linux.org.ru/";
 
-import io.github.getsmp.lorforandroid.Const;
-
-public class NetworkClient {
-    private static final AsyncHttpClient client = new AsyncHttpClient();
-
-    public static void get(String url, RequestParams params, AsyncHttpResponseHandler handler) {
-        client.get(getAbsoluteUrl(url), params, handler);
-    }
-
-    private static String getAbsoluteUrl(String relativeUrl) {
-        return Const.SITE_ROOT + relativeUrl;
-    }
+    private Const() {}
 }

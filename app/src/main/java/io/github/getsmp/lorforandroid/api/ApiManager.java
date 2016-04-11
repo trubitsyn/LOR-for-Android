@@ -18,6 +18,7 @@ package io.github.getsmp.lorforandroid.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.github.getsmp.lorforandroid.Const;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,13 +26,12 @@ public enum ApiManager {
     INSTANCE;
 
     final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-    public final String ROOT = "https://www.linux.org.ru";
 
     private static ApiComments apiComments;
     private static ApiTopic apiTopic;
 
     private final Retrofit apiRestAdapter = new Retrofit.Builder()
-            .baseUrl("https://www.linux.org.ru/api/")
+            .baseUrl(Const.SITE_ROOT + "api/")
             .addConverterFactory(GsonConverterFactory.create(GSON))
             .build();
 
