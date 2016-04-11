@@ -26,7 +26,6 @@ public enum ApiManager {
 
     final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
     public final String ROOT = "https://www.linux.org.ru";
-    final String API = ROOT + "/api/";
 
     private static ApiComments apiComments;
     private static ApiTopic apiTopic;
