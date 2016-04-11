@@ -18,7 +18,6 @@ package io.github.getsmp.lorforandroid.ui.section.forum.section;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,16 +40,6 @@ public class ForumSectionActivity extends ThemeActivity implements ForumSectionF
         String name = getIntent().getStringExtra("name");
         getSupportActionBar().setTitle(name);
         replace();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.refreshButton:
-                replace();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void replace() {
