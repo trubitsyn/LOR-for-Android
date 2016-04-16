@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/drawerTop" android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_news"
             android:icon="?attr/themedNewsDrawable"
@@ -18,7 +18,7 @@
             android:icon="?attr/themedForumDrawable"
             android:title="@string/drawer_forum"/>
     </group>
-    <group android:id="@+id/drawerBottom" android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_settings"
             android:icon="?attr/themedSettingsDrawable"
