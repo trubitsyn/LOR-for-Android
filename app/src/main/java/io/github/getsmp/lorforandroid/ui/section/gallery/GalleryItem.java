@@ -18,7 +18,7 @@ package io.github.getsmp.lorforandroid.ui.section.gallery;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 
 public class GalleryItem extends ItemCommon {
-    private String imageUrl;
+    private final String imageUrl;
 
     public GalleryItem(String url, String title, String groupTitle, String tags, String date, String author, String comments, String imageUrl) {
         super(url, title, groupTitle, tags, date, author, comments);

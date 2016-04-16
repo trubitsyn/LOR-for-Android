@@ -44,7 +44,7 @@ public abstract class BaseListFragment extends BaseFragment {
     protected Context context;
     protected RecyclerView.Adapter adapter;
     private InfiniteScrollListener scrollListener;
-    protected List items = new ArrayList();
+    protected final List items = new ArrayList();
     @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
     @Bind(R.id.progressBar) protected ProgressBar progressBar;

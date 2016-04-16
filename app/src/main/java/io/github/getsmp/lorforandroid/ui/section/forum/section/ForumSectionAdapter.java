@@ -26,7 +26,7 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 
 public class ForumSectionAdapter extends RecyclerView.Adapter<ForumSectionViewHolder> {
-    private List<ItemCommon> items;
+    private final List<ItemCommon> items;
 
     public ForumSectionAdapter(List<ItemCommon> items) {
         this.items = items;

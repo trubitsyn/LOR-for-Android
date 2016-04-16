@@ -16,8 +16,8 @@
 package io.github.getsmp.lorforandroid.ui.section.forum;
 
 public class ForumOverviewItem {
-    private String url;
-    private String name;
+    private final String url;
+    private final String name;
 
     public ForumOverviewItem(String url, String name) {
         this.url = url;
