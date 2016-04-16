@@ -58,7 +58,7 @@ public class NewsFragment extends SectionCommon {
     @Override
     protected void onItemClickCallback(int position) {
         Object item = items.get(position);
-        String url = null;
+        String url;
         if (item instanceof MiniNewsItem) {
             url = ((MiniNewsItem) items.get(position)).getUrl();
         } else if (item instanceof ItemCommon) {
