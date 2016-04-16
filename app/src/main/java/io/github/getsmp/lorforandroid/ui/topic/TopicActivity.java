@@ -17,11 +17,9 @@ package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
@@ -29,7 +27,6 @@ import io.github.getsmp.lorforandroid.ui.comment.CommentActivity;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 public class TopicActivity extends ThemeActivity {
-    @Bind(R.id.toolbarTop) Toolbar toolbar;
     private String url;
 
     @Override
@@ -37,8 +34,8 @@ public class TopicActivity extends ThemeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar(this);
+
         String tag = "topicFragment";
         TopicFragment topicFragment = (TopicFragment) getSupportFragmentManager().findFragmentByTag(tag);
 

@@ -23,9 +23,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -47,12 +45,10 @@ import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 public class MainActivity extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
     private static final String NAV_ITEM_ID = "NAV_ITEM_ID";
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @Bind(R.id.toolbarTop) Toolbar toolbar;
     @Bind(R.id.navigationView) NavigationView navigationView;
     private int currentNavigationItemId;
     private int requestedNavigationItemId;
     private ActionBarDrawerToggle drawerToggle;
-    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +56,7 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setupActionBar(this);
         actionBar.setDisplayShowCustomEnabled(true);
 
         if (savedInstanceState == null) {

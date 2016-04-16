@@ -15,14 +15,30 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.getsmp.lorforandroid.R;
 
 public class BaseActivity extends AppCompatActivity {
+    @Bind(R.id.toolbarTop) protected Toolbar toolbar;
+    protected ActionBar actionBar;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    protected void setupActionBar(AppCompatActivity activity) {
+        activity.setSupportActionBar(toolbar);
+        actionBar = activity.getSupportActionBar();
+
+        assert actionBar != null;
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 }

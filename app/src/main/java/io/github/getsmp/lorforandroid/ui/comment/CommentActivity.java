@@ -16,19 +16,16 @@
 package io.github.getsmp.lorforandroid.ui.comment;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.model.Comment;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 
 public class CommentActivity extends ThemeActivity implements CommentClickListener {
-    @Bind(R.id.toolbarTop) Toolbar toolbar;
     private String url;
 
     @Override
@@ -36,8 +33,7 @@ public class CommentActivity extends ThemeActivity implements CommentClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar(this);
 
         if (savedInstanceState == null) {
             url = getIntent().getStringExtra("url");
