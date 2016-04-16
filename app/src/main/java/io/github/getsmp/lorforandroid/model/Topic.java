@@ -17,7 +17,6 @@ package io.github.getsmp.lorforandroid.model;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
