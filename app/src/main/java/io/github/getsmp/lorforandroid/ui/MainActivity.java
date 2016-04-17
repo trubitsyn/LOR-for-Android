@@ -57,7 +57,6 @@ public class MainActivity extends ThemeActivity implements NavigationView.OnNavi
         ButterKnife.bind(this);
 
         setupActionBar(this);
-        actionBar.setDisplayShowCustomEnabled(true);
 
         if (savedInstanceState == null) {
             if (getIntent().getBooleanExtra(getString(R.string.intent_settings), false)) {
