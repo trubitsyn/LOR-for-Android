@@ -34,10 +34,12 @@ import io.github.getsmp.lorforandroid.util.NetworkUtils;
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<GalleryItem> items;
     private final Context context;
+    private final boolean shouldLoadImagesOnMobileData;
 
     public GalleryAdapter(List<GalleryItem> items, Context context) {
         this.items = items;
         this.context = context;
+        shouldLoadImagesOnMobileData = shouldLoadImagesOnMobileData();
     }
 
     @Override
@@ -64,7 +66,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.commentsCount.setText(item.getComments());
 
         if (NetworkUtils.isMobileData(context)) {
-            if (shouldLoadImagesOnMobileData()) {
+            if (shouldLoadImagesOnMobileData) {
                 loadImage(item.getImageUrl(), viewHolder.image);
             } else viewHolder.image.setVisibility(View.GONE);
         } else loadImage(item.getImageUrl(), viewHolder.image);
