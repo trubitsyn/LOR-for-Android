@@ -27,7 +27,7 @@ import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Object> items;
-    private final int MINI = 0, FULL = 1;
+    private static final int MINI = 0, FULL = 1;
 
     public NewsAdapter(List<Object> topics) {
         this.items = topics;
