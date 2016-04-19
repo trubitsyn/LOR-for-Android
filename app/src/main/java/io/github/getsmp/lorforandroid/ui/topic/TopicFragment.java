@@ -156,7 +156,7 @@ public class TopicFragment extends BaseFragment {
     }
 
     private void loadingEnded() {
-        progressBar.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
         scrollView.setVisibility(View.VISIBLE);
     }
 
