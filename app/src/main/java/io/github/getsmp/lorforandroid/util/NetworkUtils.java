@@ -25,6 +25,9 @@ public class NetworkUtils {
     public static boolean isMobileData(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
+        if (activeNetwork != null) {
+            return activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
+        }
+        return false;
     }
 }
