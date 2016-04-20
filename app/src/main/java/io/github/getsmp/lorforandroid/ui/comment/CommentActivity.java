@@ -22,7 +22,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comment;
 import io.github.getsmp.lorforandroid.ui.base.ThemeActivity;
 
 public class CommentActivity extends ThemeActivity implements CommentClickListener {

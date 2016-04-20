@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
 public class Topics {
     public Topic topic;

@@ -22,8 +22,8 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.ApiManager;
-import io.github.getsmp.lorforandroid.model.Comment;
-import io.github.getsmp.lorforandroid.model.Comments;
+import io.github.getsmp.lorforandroid.api.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comments;
 import io.github.getsmp.lorforandroid.ui.base.BaseListFragment;
 import retrofit2.Call;
 import retrofit2.Callback;

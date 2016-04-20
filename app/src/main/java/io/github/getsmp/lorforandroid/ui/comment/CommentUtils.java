@@ -24,7 +24,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comment;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 class CommentUtils {

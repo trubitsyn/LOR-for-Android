@@ -13,32 +13,10 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
-import com.google.gson.annotations.Expose;
+import java.util.List;
 
-import java.util.Date;
-
-public class Reply {
-    @Expose private Integer id;
-    @Expose private String author;
-    @Expose private Date postdate;
-    @Expose private Boolean samePage;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public Date getPostdate() {
-        return postdate;
-    }
-
-    public Boolean getSamePage() {
-        return samePage;
-    }
-
+public class Comments {
+    public List<Comment> comments;
 }

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
 import com.google.gson.annotations.Expose;
 

@@ -17,7 +17,7 @@ package io.github.getsmp.lorforandroid.ui.comment;
 
 import java.util.List;
 
-import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comment;
 
 interface CommentClickListener {
     void showParent(List<Comment> comments, Comment parentComment);

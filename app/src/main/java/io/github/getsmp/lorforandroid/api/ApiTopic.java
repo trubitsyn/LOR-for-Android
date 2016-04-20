@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.api;
 
-import io.github.getsmp.lorforandroid.model.Topics;
+import io.github.getsmp.lorforandroid.api.model.Topics;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

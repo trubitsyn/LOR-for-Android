@@ -29,7 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comment;
 
 public class CommentPreviewFragment extends DialogFragment {
     @Bind(R.id.commentReplyTo) TextView reply;

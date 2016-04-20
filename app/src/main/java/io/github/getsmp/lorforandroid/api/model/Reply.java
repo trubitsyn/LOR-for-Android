@@ -13,25 +13,32 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
 import com.google.gson.annotations.Expose;
 
-public class EditSummary {
-    @Expose private String editNick;
-    @Expose private String editDate;
-    @Expose private Integer editCount;
+import java.util.Date;
 
-    public String getEditNick() {
-        return editNick;
+public class Reply {
+    @Expose private Integer id;
+    @Expose private String author;
+    @Expose private Date postdate;
+    @Expose private Boolean samePage;
+
+    public Integer getId() {
+        return id;
     }
 
-    public String getEditDate() {
-        return editDate;
+    public String getAuthor() {
+        return author;
     }
 
-    public Integer getEditCount() {
-        return editCount;
+    public Date getPostdate() {
+        return postdate;
+    }
+
+    public Boolean getSamePage() {
+        return samePage;
     }
 
 }

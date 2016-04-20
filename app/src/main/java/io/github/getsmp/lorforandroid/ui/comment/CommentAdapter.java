@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.model.Comment;
+import io.github.getsmp.lorforandroid.api.model.Comment;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private final List<Comment> comments;

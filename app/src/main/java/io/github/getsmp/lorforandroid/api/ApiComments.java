@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.api;
 
-import io.github.getsmp.lorforandroid.model.Comments;
+import io.github.getsmp.lorforandroid.api.model.Comments;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

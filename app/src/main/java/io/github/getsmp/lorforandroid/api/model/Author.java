@@ -13,25 +13,20 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
 import com.google.gson.annotations.Expose;
 
-public class Userpic {
-    @Expose private String url;
-    @Expose private Integer width;
-    @Expose private Integer height;
+public class Author {
+    @Expose private String nick;
+    @Expose private String stars;
 
-    public String getUrl() {
-        return url;
+    public String getNick() {
+        return nick;
     }
 
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
+    public String getStars() {
+        return stars;
     }
 
 }

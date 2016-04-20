@@ -13,10 +13,25 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.model;
+package io.github.getsmp.lorforandroid.api.model;
 
-import java.util.List;
+import com.google.gson.annotations.Expose;
 
-public class Comments {
-    public List<Comment> comments;
+public class Userpic {
+    @Expose private String url;
+    @Expose private Integer width;
+    @Expose private Integer height;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
 }
