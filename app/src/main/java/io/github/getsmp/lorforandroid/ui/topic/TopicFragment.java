@@ -45,6 +45,7 @@ import io.github.getsmp.lorforandroid.api.model.Topic;
 import io.github.getsmp.lorforandroid.api.model.Topics;
 import io.github.getsmp.lorforandroid.ui.ImageActivity;
 import io.github.getsmp.lorforandroid.ui.base.BaseFragment;
+import io.github.getsmp.lorforandroid.util.DateUtils;
 import io.github.getsmp.lorforandroid.util.PreferenceUtils;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 import retrofit2.Call;
@@ -151,7 +152,7 @@ public class TopicFragment extends BaseFragment {
         }
 
         author.setText(topic.getAuthor().getNick());
-        date.setText(StringUtils.getDate(topic.getPostDate()));
+        date.setText(DateUtils.getDate(topic.getPostDate()));
         message.setText(Html.fromHtml(topic.getMessage()));
         message.setMovementMethod(LinkMovementMethod.getInstance());
     }

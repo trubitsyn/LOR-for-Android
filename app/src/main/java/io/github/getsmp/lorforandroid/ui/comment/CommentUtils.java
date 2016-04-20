@@ -25,6 +25,7 @@ import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.api.model.Comment;
+import io.github.getsmp.lorforandroid.util.DateUtils;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
 class CommentUtils {
@@ -33,7 +34,7 @@ class CommentUtils {
         message.setText(StringUtils.removeLineBreak(Html.fromHtml(comment.getProcessedMessage())));
         message.setMovementMethod(LinkMovementMethod.getInstance());
         stars.setText(comment.getAuthor().getStars());
-        date.setText(StringUtils.getDate(comment.getPostdate()));
+        date.setText(DateUtils.getDate(comment.getPostdate()));
         if (comment.getReply() != null) {
             final Comment parent = getParent(comments, comment.getReply().getId());
             reply.setText(context.getString(R.string.replyTo, parent.getAuthor().getNick()));

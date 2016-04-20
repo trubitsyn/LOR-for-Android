@@ -20,17 +20,9 @@ import android.text.Spanned;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class StringUtils {
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US);
-
-    public static String getDate(Date date) {
-        return simpleDateFormat.format(date);
-    }
 
     /*
     * Removes part of url after topic id
