@@ -23,6 +23,7 @@ import org.jsoup.select.Elements;
 import java.util.List;
 
 public class StringUtils {
+    private static final StringBuilder sb = new StringBuilder();
 
     /*
     * Removes part of url after topic id
@@ -36,7 +37,7 @@ public class StringUtils {
     }
 
     public static String tagsFromStrings(List<String> in) {
-        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
         for (String s : in) {
             sb.append("#").append(s).append(" ");
         }
@@ -44,7 +45,7 @@ public class StringUtils {
     }
 
     public static String tagsFromElements(Elements e) {
-        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
         for (Element tag : e) {
             sb.append("#").append(tag.ownText()).append(" ");
         }
