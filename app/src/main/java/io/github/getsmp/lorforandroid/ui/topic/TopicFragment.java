@@ -18,6 +18,8 @@
 package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -43,6 +45,7 @@ import io.github.getsmp.lorforandroid.model.Topic;
 import io.github.getsmp.lorforandroid.model.Topics;
 import io.github.getsmp.lorforandroid.ui.ImageActivity;
 import io.github.getsmp.lorforandroid.ui.base.BaseFragment;
+import io.github.getsmp.lorforandroid.util.PreferenceUtils;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,25 +137,49 @@ public class TopicFragment extends BaseFragment {
         } else tags.setVisibility(View.GONE);
 
         if (image != null) {
-            Glide.with(TopicFragment.this)
-                    .load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into((image));
-
-            image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), ImageActivity.class);
-                    intent.putExtra("imageUrl", imageUrl);
-                    startActivity(intent);
-                }
-            });
+            if (PreferenceUtils.shouldLoadImagesNow(getActivity())) {
+                loadImageAndSetImageActivityListener();
+            } else {
+                image.setImageDrawable(getImageDrawableFromAttr());
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loadImageAndSetImageActivityListener();
+                    }
+                });
+            }
         }
 
         author.setText(topic.getAuthor().getNick());
         date.setText(StringUtils.getDate(topic.getPostDate()));
         message.setText(Html.fromHtml(topic.getMessage()));
         message.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private Drawable getImageDrawableFromAttr() {
+        int[] attributes = new int[] {R.attr.themedGalleryDrawable};
+        TypedArray typedArray = getActivity().obtainStyledAttributes(attributes);
+        Drawable imagePlaceholder = typedArray.getDrawable(0);
+        typedArray.recycle();
+        return imagePlaceholder;
+    }
+
+    private void loadImageAndSetImageActivityListener() {
+        assert (image) != null;
+        image.setImageDrawable(null);
+        Glide.with(TopicFragment.this)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into((image));
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ImageActivity.class);
+                intent.putExtra("imageUrl", imageUrl);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadingEnded() {

@@ -16,12 +16,10 @@
 package io.github.getsmp.lorforandroid.ui.section.gallery;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -29,17 +27,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.util.NetworkUtils;
+import io.github.getsmp.lorforandroid.util.PreferenceUtils;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
     private final List<GalleryItem> items;
     private final Context context;
-    private final boolean shouldLoadImagesOnMobileData;
+    private final boolean shouldLoadImages;
 
     public GalleryAdapter(List<GalleryItem> items, Context context) {
         this.items = items;
         this.context = context;
-        shouldLoadImagesOnMobileData = shouldLoadImagesOnMobileData();
+        shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context);
     }
 
     @Override
@@ -65,19 +63,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.author.setText(item.getAuthor());
         viewHolder.commentsCount.setText(item.getComments());
 
-        if (NetworkUtils.isMobileData(context)) {
-            if (shouldLoadImagesOnMobileData) {
-                loadImage(item.getImageUrl(), viewHolder.image);
-            } else viewHolder.image.setVisibility(View.GONE);
-        } else loadImage(item.getImageUrl(), viewHolder.image);
-    }
-
-    private boolean shouldLoadImagesOnMobileData() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.pref_load_images), false);
-    }
-
-    private void loadImage(String url, ImageView view) {
-        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(view);
+        if (shouldLoadImages) {
+            Glide.with(context).load(item.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image);
+        } else viewHolder.image.setVisibility(View.GONE);
     }
 
     @Override
