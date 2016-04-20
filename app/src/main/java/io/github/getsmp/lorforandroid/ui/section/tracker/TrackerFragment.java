@@ -73,7 +73,7 @@ public class TrackerFragment extends SectionFragment {
 
     @Override
     public int getMaxOffset() {
-        return 150;
+        return 180;
     }
 
     @Override
