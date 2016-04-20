@@ -64,7 +64,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
         viewHolder.commentsCount.setText(item.getComments());
 
         if (shouldLoadImages) {
-            Glide.with(context).load(item.getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image);
+            Glide.with(context).load(item.getMediumImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image);
         } else viewHolder.image.setVisibility(View.GONE);
     }
 

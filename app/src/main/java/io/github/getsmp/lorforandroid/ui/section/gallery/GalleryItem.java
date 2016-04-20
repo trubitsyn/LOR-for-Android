@@ -19,13 +19,25 @@ import io.github.getsmp.lorforandroid.ui.section.Item;
 
 public class GalleryItem extends Item {
     private final String imageUrl;
+    private final String medium2xImageUrl;
+    private final String mediumImageUrl;
 
-    public GalleryItem(String url, String title, String groupTitle, String tags, String date, String author, String comments, String imageUrl) {
+    public GalleryItem(String url, String title, String groupTitle, String tags, String date, String author, String comments, String imageUrl, String medium2xImageUrl, String mediumImageUrl) {
         super(url, title, groupTitle, tags, date, author, comments);
         this.imageUrl = imageUrl;
+        this.medium2xImageUrl = medium2xImageUrl;
+        this.mediumImageUrl = mediumImageUrl;
     }
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getMedium2xImageUrl() {
+        return medium2xImageUrl;
+    }
+
+    public String getMediumImageUrl() {
+        return mediumImageUrl;
     }
 }

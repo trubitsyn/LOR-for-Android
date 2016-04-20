@@ -31,6 +31,8 @@ public class GalleryItemFactory implements ItemFactory {
         Elements articles = body.select("article.news");
         for (Element article : articles) {
             Element group = article.select("div.group").first();
+            String imageUrl = article.select("a[itemprop^=contentURL]").attr("href");
+            String withoutExtension = imageUrl.substring(0, imageUrl.length() - 4);
             items.add(new GalleryItem(
                     article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
                     Html.fromHtml(article.select("h2 > a[href^=/gallery/]").first().ownText()).toString(),
@@ -39,7 +41,9 @@ public class GalleryItemFactory implements ItemFactory {
                     article.select("time").first().ownText().split(" ")[0],
                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
                     article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replaceAll("\\D+", ""),
-                    article.select("img[itemprop^=thumbnail]").attr("src")
+                    imageUrl,
+                    withoutExtension + "-med-2x.jpg",
+                    withoutExtension + "-med.jpg"
             ));
         }
     }
