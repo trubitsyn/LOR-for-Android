@@ -15,6 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.base;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 import io.github.getsmp.lorforandroid.R;
 
 public class BaseActivity extends AppCompatActivity {
-    @Bind(R.id.toolbarTop) protected Toolbar toolbar;
+    @Bind(R.id.toolbarTop) @Nullable protected Toolbar toolbar;
     protected ActionBar actionBar;
 
     @Override
