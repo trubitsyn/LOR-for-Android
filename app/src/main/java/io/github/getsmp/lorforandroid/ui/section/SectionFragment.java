@@ -33,7 +33,7 @@ import io.github.getsmp.lorforandroid.ui.base.BaseListFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 import io.github.getsmp.lorforandroid.util.NetworkClient;
 
-public abstract class SectionCommon extends BaseListFragment {
+public abstract class SectionFragment extends BaseListFragment {
     protected int offset;
     private final ItemFactory itemFactory = getItemFactory();
     private final int maxOffset = getMaxOffset();

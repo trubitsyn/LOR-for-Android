@@ -24,11 +24,11 @@ import com.loopj.android.http.RequestParams;
 
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
+import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
-public class ForumOverviewFragment extends SectionCommon {
+public class ForumOverviewFragment extends SectionFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

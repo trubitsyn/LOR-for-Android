@@ -22,9 +22,9 @@ import com.loopj.android.http.RequestParams;
 
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
+import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 
-public class ForumSectionFragment extends SectionCommon {
+public class ForumSectionFragment extends SectionFragment {
     private String group;
 
     public static ForumSectionFragment newInstance(String group) {

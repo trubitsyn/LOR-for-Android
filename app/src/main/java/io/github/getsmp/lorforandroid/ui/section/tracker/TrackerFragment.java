@@ -25,11 +25,11 @@ import com.loopj.android.http.RequestParams;
 import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
+import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
-public class TrackerFragment extends SectionCommon {
+public class TrackerFragment extends SectionFragment {
     private int filter;
 
     public static TrackerFragment newInstance(TrackerFilterEnum trackerFilterEnum) {

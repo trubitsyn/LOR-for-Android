@@ -21,10 +21,10 @@ import com.loopj.android.http.RequestParams;
 
 import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.ui.section.SectionCommon;
+import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 
-public class NewsFragment extends SectionCommon {
+public class NewsFragment extends SectionFragment {
     @Override
     protected ItemFactory getItemFactory() {
         return new NewsItemFactory();
