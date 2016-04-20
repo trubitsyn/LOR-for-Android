@@ -20,7 +20,7 @@ import org.jsoup.select.Elements;
 
 import java.util.List;
 
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
@@ -31,7 +31,7 @@ public class ForumSectionItemFactory implements ItemFactory {
         for (Element entry : entries) {
             Element properties = entry.select("td").first();
             String bareAuthor = properties.ownText();
-            items.add(new ItemCommon(
+            items.add(new Item(
                     properties.select("a").first().attr("href").substring(1),
                     properties.select("a").first().ownText(),
                     null,

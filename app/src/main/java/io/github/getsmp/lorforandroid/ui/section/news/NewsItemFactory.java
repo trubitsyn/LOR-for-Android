@@ -22,7 +22,7 @@ import org.jsoup.select.Elements;
 
 import java.util.List;
 
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
@@ -40,7 +40,7 @@ public class NewsItemFactory implements ItemFactory {
                 ));
             } else {
                 // Standard article
-                items.add(new ItemCommon(
+                items.add(new Item(
                         article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
                         Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
                         StringUtils.removeSectionName(article.select("div.group").first().text()),

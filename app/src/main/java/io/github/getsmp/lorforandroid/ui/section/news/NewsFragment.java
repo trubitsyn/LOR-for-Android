@@ -19,7 +19,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
@@ -61,10 +61,10 @@ public class NewsFragment extends SectionFragment {
         String url;
         if (item instanceof MiniNewsItem) {
             url = ((MiniNewsItem) items.get(position)).getUrl();
-        } else if (item instanceof ItemCommon) {
-            url = ((ItemCommon) items.get(position)).getUrl();
+        } else if (item instanceof Item) {
+            url = ((Item) items.get(position)).getUrl();
         } else
-            throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to ItemCommon.");
+            throw new ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.");
 
         ((ItemClickCallback) context).onTopicRequested(url);
     }

@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Object> items;
@@ -37,7 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
         if (items.get(position) instanceof MiniNewsItem) {
             return MINI;
-        } else if (items.get(position) instanceof ItemCommon) {
+        } else if (items.get(position) instanceof Item) {
             return FULL;
         }
         return -1;
@@ -72,7 +72,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             case FULL:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
-                ItemCommon newsItem = (ItemCommon) items.get(i);
+                Item newsItem = (Item) items.get(i);
                 newsViewHolder.title.setText(newsItem.getTitle());
                 newsViewHolder.category.setText(newsItem.getGroupTitle());
                 newsViewHolder.tags.setText(newsItem.getTags());

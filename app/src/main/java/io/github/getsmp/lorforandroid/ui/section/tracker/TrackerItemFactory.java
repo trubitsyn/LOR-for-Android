@@ -22,7 +22,7 @@ import org.jsoup.select.Elements;
 
 import java.util.List;
 
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.util.StringUtils;
 
@@ -31,7 +31,7 @@ public class TrackerItemFactory implements ItemFactory {
     public void prepareItems(Element body, List items) {
         Elements topics = body.select("tbody > tr");
         for (Element topic : topics) {
-            items.add(new ItemCommon(
+            items.add(new Item(
                     topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
                     Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
                     topic.select("a.secondary").first().ownText(),

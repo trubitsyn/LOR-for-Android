@@ -20,7 +20,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 
@@ -79,7 +79,7 @@ public class ForumSectionFragment extends SectionFragment {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ((Callback) context).returnToActivity(((ItemCommon) items.get(position)).getUrl());
+        ((Callback) context).returnToActivity(((Item) items.get(position)).getUrl());
     }
 
     interface Callback {

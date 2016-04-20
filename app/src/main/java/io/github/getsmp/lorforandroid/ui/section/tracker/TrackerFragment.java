@@ -23,7 +23,7 @@ import android.widget.AdapterView;
 import com.loopj.android.http.RequestParams;
 
 import io.github.getsmp.lorforandroid.R;
-import io.github.getsmp.lorforandroid.ui.section.ItemCommon;
+import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
@@ -93,7 +93,7 @@ public class TrackerFragment extends SectionFragment {
 
     @Override
     protected void onItemClickCallback(int position) {
-        ItemCommon item = (ItemCommon) items.get(position);
+        Item item = (Item) items.get(position);
         ((ItemClickCallback) context).onTopicRequested(item.getUrl());
     }
 }

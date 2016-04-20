@@ -15,7 +15,7 @@
 
 package io.github.getsmp.lorforandroid.ui.section;
 
-public class ItemCommon {
+public class Item {
     private final String url;
     private final String title;
     private final String groupTitle;
@@ -24,7 +24,7 @@ public class ItemCommon {
     private final String author;
     private final String comments;
 
-    public ItemCommon(String url, String title, String groupTitle, String tags, String date, String author, String comments) {
+    public Item(String url, String title, String groupTitle, String tags, String date, String author, String comments) {
         this.url = url;
         this.title = title;
         this.groupTitle = groupTitle;
