@@ -28,20 +28,20 @@ class NewsItemFactory : ItemFactory {
             if (article.hasClass("mini-news")) {
                 // Mini-news article
                 items.add(MiniNewsItem(
-                        article.select("a[href^=/news/]").first().attr("href").substring(1),
-                        Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
-                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")
+                        url = article.select("a[href^=/news/]").first().attr("href").substring(1),
+                        title = Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
+                        commentsCount = Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")
                 ))
             } else {
                 // Standard article
                 items.add(Item(
-                        article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
-                        Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
-                        StringUtils.removeSectionName(article.select("div.group").first().text()),
-                        StringUtils.tagsFromElements(article.select("a.tag")),
-                        article.select("time").first().ownText(),
-                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first()?.ownText()?.replace(" ()", ""),
-                        article.select("div.nav > a[href$=#comments]:eq(0)").first()?.ownText() ?: "Комментарии ограничены"
+                        url = article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
+                        title = Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
+                        groupTitle = StringUtils.removeSectionName(article.select("div.group").first().text()),
+                        tags = StringUtils.tagsFromElements(article.select("a.tag")),
+                        date = article.select("time").first().ownText(),
+                        author = article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first()?.ownText()?.replace(" ()", ""),
+                        comments = article.select("div.nav > a[href$=#comments]:eq(0)").first()?.ownText() ?: "Комментарии ограничены"
                 ))
             }
         }
