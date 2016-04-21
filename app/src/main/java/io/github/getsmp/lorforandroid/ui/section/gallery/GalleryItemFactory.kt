@@ -27,16 +27,16 @@ class GalleryItemFactory : ItemFactory {
             val imageUrl = article.select("a[itemprop^=contentURL]").attr("href")
             val withoutExtension = imageUrl.substring(0, imageUrl.length - 4)
             items.add(GalleryItem(
-                    article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
-                    Html.fromHtml(article.select("h2 > a[href^=/gallery/]").first().ownText()).toString(),
-                    StringUtils.removeSectionName(article.select("div.group").first()?.text()) ?: null,
-                    StringUtils.tagsFromElements(article.select("a.tag")),
-                    article.select("time").first().ownText().split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0],
-                    article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                    article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replace("\\D+".toRegex(), ""),
-                    imageUrl,
-                    withoutExtension + "-med-2x.jpg",
-                    withoutExtension + "-med.jpg"))
+                    url = article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
+                    title = Html.fromHtml(article.select("h2 > a[href^=/gallery/]").first().ownText()).toString(),
+                    groupTitle = StringUtils.removeSectionName(article.select("div.group").first()?.text()) ?: null,
+                    tags = StringUtils.tagsFromElements(article.select("a.tag")),
+                    date = article.select("time").first().ownText().split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0],
+                    author = article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
+                    comments = article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replace("\\D+".toRegex(), ""),
+                    imageUrl = imageUrl,
+                    medium2xImageUrl = withoutExtension + "-med-2x.jpg",
+                    mediumImageUrl = withoutExtension + "-med.jpg"))
         }
     }
 }
