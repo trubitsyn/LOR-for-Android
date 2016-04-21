@@ -23,8 +23,8 @@ class ForumOverviewItemFactory : ItemFactory {
         val sections = body.select("div#bd").select("ul").first().select("li")
         for (section in sections) {
             items.add(ForumOverviewItem(
-                    section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
-                    section.select("a").first().ownText()))
+                    url = section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
+                    name = section.select("a").first().ownText()))
         }
     }
 }
