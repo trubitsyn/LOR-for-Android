@@ -26,13 +26,13 @@ class TrackerItemFactory : ItemFactory {
         val topics = body.select("tbody > tr")
         for (topic in topics) {
             items.add(Item(
-                    topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
-                    Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
-                    topic.select("a.secondary").first().ownText(),
-                    StringUtils.tagsFromElements(topic.select("span.tag")),
-                    topic.select("time").first().ownText(),
-                    topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
-                    StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())))
+                    url = topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
+                    title = Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
+                    groupTitle = topic.select("a.secondary").first().ownText(),
+                    tags = StringUtils.tagsFromElements(topic.select("span.tag")),
+                    date = topic.select("time").first().ownText(),
+                    author = topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
+                    comments = StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())))
         }
     }
 }
