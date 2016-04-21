@@ -24,13 +24,12 @@ class GalleryItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val articles = body.select("article.news")
         for (article in articles) {
-            val group = article.select("div.group").first()
             val imageUrl = article.select("a[itemprop^=contentURL]").attr("href")
             val withoutExtension = imageUrl.substring(0, imageUrl.length - 4)
             items.add(GalleryItem(
                     article.select("h2 > a[href^=/gallery/]").first().attr("href").substring(1),
                     Html.fromHtml(article.select("h2 > a[href^=/gallery/]").first().ownText()).toString(),
-                    if (group != null) StringUtils.removeSectionName(group.text()) else null,
+                    StringUtils.removeSectionName(article.select("div.group").first()?.text()) ?: null,
                     StringUtils.tagsFromElements(article.select("a.tag")),
                     article.select("time").first().ownText().split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0],
                     article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
