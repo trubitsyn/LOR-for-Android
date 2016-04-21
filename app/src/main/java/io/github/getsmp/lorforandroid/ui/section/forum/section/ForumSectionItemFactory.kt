@@ -13,33 +13,27 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.forum.section;
+package io.github.getsmp.lorforandroid.ui.section.forum.section
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import io.github.getsmp.lorforandroid.ui.section.Item
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory
+import io.github.getsmp.lorforandroid.util.StringUtils
+import org.jsoup.nodes.Element
 
-import java.util.List;
-
-import io.github.getsmp.lorforandroid.ui.section.Item;
-import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.util.StringUtils;
-
-public class ForumSectionItemFactory implements ItemFactory {
-    @Override
-    public void prepareItems(Element body, List items) {
-        Elements entries = body.select("tbody tr");
-        for (Element entry : entries) {
-            Element properties = entry.select("td").first();
-            String bareAuthor = properties.ownText();
-            items.add(new Item(
+class ForumSectionItemFactory : ItemFactory {
+    override fun prepareItems(body: Element, items: MutableList<Any>) {
+        val entries = body.select("tbody tr")
+        for (entry in entries) {
+            val properties = entry.select("td").first()
+            val bareAuthor = properties.ownText()
+            items.add(Item(
                     properties.select("a").first().attr("href").substring(1),
                     properties.select("a").first().ownText(),
                     null,
                     StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
                     entry.select("td.dateinterval").first().select("time").first().ownText(),
-                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replaceAll("[()]", ""),
-                    StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText())
-            ));
+                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replace("[()]".toRegex(), ""),
+                    StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText())))
         }
     }
 }

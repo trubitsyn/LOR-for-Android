@@ -13,24 +13,18 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.forum;
+package io.github.getsmp.lorforandroid.ui.section.forum
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory
+import org.jsoup.nodes.Element
 
-import java.util.List;
-
-import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-
-public class ForumOverviewItemFactory implements ItemFactory {
-    @Override
-    public void prepareItems(Element body, List items) {
-        Elements sections = body.select("div#bd").select("ul").first().select("li");
-        for (Element section : sections) {
-            items.add(new ForumOverviewItem(
+class ForumOverviewItemFactory : ItemFactory {
+    override fun prepareItems(body: Element, items: MutableList<Any>) {
+        val sections = body.select("div#bd").select("ul").first().select("li")
+        for (section in sections) {
+            items.add(ForumOverviewItem(
                     section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
-                    section.select("a").first().ownText()
-            ));
+                    section.select("a").first().ownText()))
         }
     }
 }

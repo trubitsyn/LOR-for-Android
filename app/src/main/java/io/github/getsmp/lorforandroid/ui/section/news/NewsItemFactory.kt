@@ -13,42 +13,34 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.news;
+package io.github.getsmp.lorforandroid.ui.section.news
 
-import android.text.Html;
+import android.text.Html
+import io.github.getsmp.lorforandroid.ui.section.Item
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory
+import io.github.getsmp.lorforandroid.util.StringUtils
+import org.jsoup.nodes.Element
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.List;
-
-import io.github.getsmp.lorforandroid.ui.section.Item;
-import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.util.StringUtils;
-
-public class NewsItemFactory implements ItemFactory {
-    @Override
-    public void prepareItems(Element body, List items) {
-        Elements articles = body.select("article");
-        for (Element article : articles) {
+class NewsItemFactory : ItemFactory {
+    override fun prepareItems(body: Element, items: MutableList<Any>) {
+        val articles = body.select("article")
+        for (article in articles) {
             if (article.hasClass("mini-news")) {
                 // Mini-news article
-                items.add(new MiniNewsItem(
+                items.add(MiniNewsItem(
                         article.select("a[href^=/news/]").first().attr("href").substring(1),
                         Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
-                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replaceAll("[()]", "")
-                ));
+                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")))
             } else {
                 // Standard article
-                items.add(new Item(
+                items.add(Item(
                         article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
                         Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
                         StringUtils.removeSectionName(article.select("div.group").first().text()),
                         StringUtils.tagsFromElements(article.select("a.tag")),
                         article.select("time").first().ownText(),
                         article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText()
-                ));
+                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText()))
             }
         }
     }

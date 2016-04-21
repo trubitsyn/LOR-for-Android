@@ -13,33 +13,26 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.tracker;
+package io.github.getsmp.lorforandroid.ui.section.tracker
 
-import android.text.Html;
+import android.text.Html
+import io.github.getsmp.lorforandroid.ui.section.Item
+import io.github.getsmp.lorforandroid.ui.section.ItemFactory
+import io.github.getsmp.lorforandroid.util.StringUtils
+import org.jsoup.nodes.Element
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.List;
-
-import io.github.getsmp.lorforandroid.ui.section.Item;
-import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
-import io.github.getsmp.lorforandroid.util.StringUtils;
-
-public class TrackerItemFactory implements ItemFactory {
-    @Override
-    public void prepareItems(Element body, List items) {
-        Elements topics = body.select("tbody > tr");
-        for (Element topic : topics) {
-            items.add(new Item(
+class TrackerItemFactory : ItemFactory {
+    override fun prepareItems(body: Element, items: MutableList<Any>) {
+        val topics = body.select("tbody > tr")
+        for (topic in topics) {
+            items.add(Item(
                     topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
                     Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
                     topic.select("a.secondary").first().ownText(),
                     StringUtils.tagsFromElements(topic.select("span.tag")),
                     topic.select("time").first().ownText(),
                     topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
-                    StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())
-            ));
+                    StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())))
         }
     }
 }

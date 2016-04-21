@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section;
+package io.github.getsmp.lorforandroid.ui.section
 
-import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Element
 
-import java.util.List;
-
-public interface ItemFactory {
-    void prepareItems(Element body, List items);
+interface ItemFactory {
+    fun prepareItems(body: Element, items: MutableList<Any>)
 }
