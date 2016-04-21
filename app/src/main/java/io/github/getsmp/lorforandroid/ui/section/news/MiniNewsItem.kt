@@ -13,28 +13,6 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.news;
+package io.github.getsmp.lorforandroid.ui.section.news
 
-public class MiniNewsItem {
-    private final String url;
-    private final String title;
-    private final String commentsCount;
-
-    public MiniNewsItem(String url, String title, String commentsCount) {
-        this.url = url;
-        this.title = title;
-        this.commentsCount = commentsCount;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getCommentsCount() {
-        return commentsCount;
-    }
-}
+class MiniNewsItem(val url: String, val title: String, val commentsCount: String)
