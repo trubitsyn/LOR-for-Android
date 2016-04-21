@@ -27,13 +27,13 @@ class ForumSectionItemFactory : ItemFactory {
             val properties = entry.select("td").first()
             val bareAuthor = properties.ownText()
             items.add(Item(
-                    properties.select("a").first().attr("href").substring(1),
-                    properties.select("a").first().ownText(),
-                    null,
-                    StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                    entry.select("td.dateinterval").first().select("time").first().ownText(),
-                    bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replace("[()]".toRegex(), ""),
-                    StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText())))
+                    url = properties.select("a").first().attr("href").substring(1),
+                    title = properties.select("a").first().ownText(),
+                    groupTitle = null,
+                    tags = StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
+                    date = entry.select("td.dateinterval").first().select("time").first().ownText(),
+                    author = bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replace("[()]".toRegex(), ""),
+                    comments = StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText())))
         }
     }
 }
