@@ -13,22 +13,6 @@
  * limitations under the License.
  */
 
-package io.github.getsmp.lorforandroid.ui.section.forum;
+package io.github.getsmp.lorforandroid.ui.section.forum
 
-public class ForumOverviewItem {
-    private final String url;
-    private final String name;
-
-    public ForumOverviewItem(String url, String name) {
-        this.url = url;
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getName() {
-        return name;
-    }
-}
+class ForumOverviewItem(val url: String, val name: String)
