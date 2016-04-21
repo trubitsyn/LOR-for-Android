@@ -37,19 +37,21 @@ public class StringUtils {
     }
 
     public static String tagsFromStrings(List<String> in) {
-        resetStringBuilder();
         for (String s : in) {
             sb.append("#").append(s).append(" ");
         }
-        return sb.toString();
+        String s = sb.toString();
+        resetStringBuilder();
+        return s;
     }
 
     public static String tagsFromElements(Elements e) {
-        resetStringBuilder();
         for (Element tag : e) {
             sb.append("#").append(tag.ownText()).append(" ");
         }
-        return sb.toString();
+        String s = sb.toString();
+        resetStringBuilder();
+        return s;
     }
 
     private static void resetStringBuilder() {
