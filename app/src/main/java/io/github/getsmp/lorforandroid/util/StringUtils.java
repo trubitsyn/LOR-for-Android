@@ -37,7 +37,7 @@ public class StringUtils {
     }
 
     public static String tagsFromStrings(List<String> in) {
-        sb.setLength(0);
+        resetStringBuilder();
         for (String s : in) {
             sb.append("#").append(s).append(" ");
         }
@@ -45,11 +45,16 @@ public class StringUtils {
     }
 
     public static String tagsFromElements(Elements e) {
-        sb.setLength(0);
+        resetStringBuilder();
         for (Element tag : e) {
             sb.append("#").append(tag.ownText()).append(" ");
         }
         return sb.toString();
+    }
+
+    private static void resetStringBuilder() {
+        sb.setLength(0);
+        sb.trimToSize();
     }
 
     public static String removeSectionName(String in) {
