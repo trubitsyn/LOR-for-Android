@@ -30,7 +30,8 @@ class NewsItemFactory : ItemFactory {
                 items.add(MiniNewsItem(
                         article.select("a[href^=/news/]").first().attr("href").substring(1),
                         Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
-                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")))
+                        Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")
+                ))
             } else {
                 // Standard article
                 items.add(Item(
@@ -39,8 +40,9 @@ class NewsItemFactory : ItemFactory {
                         StringUtils.removeSectionName(article.select("div.group").first().text()),
                         StringUtils.tagsFromElements(article.select("a.tag")),
                         article.select("time").first().ownText(),
-                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
-                        article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText()))
+                        article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first()?.ownText()?.replace(" ()", ""),
+                        article.select("div.nav > a[href$=#comments]:eq(0)").first()?.ownText() ?: "Комментарии ограничены"
+                ))
             }
         }
     }
