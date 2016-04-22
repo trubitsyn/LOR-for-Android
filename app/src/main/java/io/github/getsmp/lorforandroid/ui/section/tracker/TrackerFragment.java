@@ -26,6 +26,8 @@ import io.github.getsmp.lorforandroid.R;
 import io.github.getsmp.lorforandroid.ui.section.Item;
 import io.github.getsmp.lorforandroid.ui.section.ItemFactory;
 import io.github.getsmp.lorforandroid.ui.section.SectionFragment;
+import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryItem;
+import io.github.getsmp.lorforandroid.ui.section.gallery.GalleryUtils;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickCallback;
 import io.github.getsmp.lorforandroid.ui.util.SpinnerViewUtils;
 
@@ -94,6 +96,18 @@ public class TrackerFragment extends SectionFragment {
     @Override
     protected void onItemClickCallback(int position) {
         Item item = (Item) items.get(position);
-        ((ItemClickCallback) context).onTopicRequested(item.getUrl());
+        if (GalleryUtils.isGalleryUrl(item.getUrl())) {
+            String imagesUrl = GalleryUtils.getGalleryImagesUrl(item.getUrl());
+            String medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl);
+            String mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl);
+
+            // TODO: Url of high-res image in GalleryItem
+            // Currently cannot get it because images can either have .png extension or .jpg and there's no way to determine the correct without issuing a HTTP request.
+            GalleryItem galleryItem = new GalleryItem(item.getUrl(), item.getTitle(), item.getGroupTitle(), item.getDate(), item.getTags(), item.getAuthor(), item.getComments(), medium2xImageUrl, medium2xImageUrl, mediumImageUrl);
+
+            ((ItemClickCallback) context).onGalleryTopicRequested(galleryItem);
+        } else {
+            ((ItemClickCallback) context).onTopicRequested(item.getUrl());
+        }
     }
 }
