@@ -35,8 +35,9 @@ class GalleryItemFactory : ItemFactory {
                     author = article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first().ownText().replace(" ()", ""),
                     comments = article.select("div.nav > a[href$=#comments]:eq(0)").first().ownText().replace("\\D+".toRegex(), ""),
                     imageUrl = imageUrl,
-                    medium2xImageUrl = withoutExtension + "-med-2x.jpg",
-                    mediumImageUrl = withoutExtension + "-med.jpg"))
+                    medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(withoutExtension),
+                    mediumImageUrl = GalleryUtils.getMediumImageUrl(withoutExtension)
+            ))
         }
     }
 }
