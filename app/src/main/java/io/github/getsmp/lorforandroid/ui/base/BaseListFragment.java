@@ -17,17 +17,11 @@ package io.github.getsmp.lorforandroid.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -40,57 +34,17 @@ import io.github.getsmp.lorforandroid.ui.util.DividerItemDecoration;
 import io.github.getsmp.lorforandroid.ui.util.InfiniteScrollListener;
 import io.github.getsmp.lorforandroid.ui.util.ItemClickListener;
 
-public abstract class BaseListFragment extends BaseFragment {
+public abstract class BaseListFragment extends RefreshableFragment {
     protected Context context;
     protected RecyclerView.Adapter adapter;
     private InfiniteScrollListener scrollListener;
     protected final List items = new ArrayList();
-    @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
-    @Bind(R.id.progressBar) protected ProgressBar progressBar;
-    @Bind(R.id.errorView) TextView errorView;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        setRetainInstance(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.refresh, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.refreshButton:
-                restart();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    protected void restart() {
-        recyclerView.scrollToPosition(0);
-        hideAllShowProgressView();
-        resetState();
-        fetchData();
-    }
-
-    private void hideAllShowProgressView() {
-        swipeRefreshLayout.setVisibility(View.GONE);
-        errorView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -116,15 +70,6 @@ public abstract class BaseListFragment extends BaseFragment {
         };
 
         recyclerView.addOnScrollListener(scrollListener);
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                resetState();
-                errorView.setVisibility(View.GONE);
-                fetchData();
-            }
-        });
     }
 
     @Override
@@ -140,6 +85,24 @@ public abstract class BaseListFragment extends BaseFragment {
         }
     }
 
+    @Override
+    protected void resetState() {
+        clearData();
+        scrollListener.reset();
+    }
+
+    @Override
+    protected void restart() {
+        recyclerView.scrollToPosition(0);
+        super.restart();
+    }
+
+    protected void showUserFriendlyError(int errorString) {
+        if (items.size() > 0) {
+            Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
+        } else showErrorView(errorString);
+    }
+
     private void initAdapter() {
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
@@ -153,47 +116,13 @@ public abstract class BaseListFragment extends BaseFragment {
         return true;
     }
 
-    protected abstract void fetchData();
-
     protected void clearData() {
         items.clear();
-    }
-
-    private void resetState() {
-        clearData();
-        scrollListener.reset();
-    }
-
-    protected abstract RecyclerView.Adapter getAdapter();
-
-    protected void stopRefresh() {
-        // swipeRefreshLayout still might be null
-        if (swipeRefreshLayout != null) swipeRefreshLayout.setRefreshing(false);
-
-        if (progressBar != null) progressBar.setVisibility(View.GONE);
-    }
-
-    protected void stopRefreshAndShow() {
-        stopRefresh();
-        if (swipeRefreshLayout != null) swipeRefreshLayout.setVisibility(View.VISIBLE);
-    }
-
-    private void showErrorView(int stringResource) {
-        stopRefresh();
-        if (errorView != null) {
-            swipeRefreshLayout.setVisibility(View.INVISIBLE);
-            errorView.setVisibility(View.VISIBLE);
-            errorView.setText(stringResource);
-        }
-    }
-
-    protected void showUserFriendlyError(int errorString) {
-        if (items.size() > 0) {
-            Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show();
-        } else showErrorView(errorString);
     }
 
     protected void setOnClickListener(ItemClickListener.OnItemClickListener listener) {
         recyclerView.addOnItemTouchListener(new ItemClickListener(context, listener));
     }
+
+    protected abstract RecyclerView.Adapter getAdapter();
 }

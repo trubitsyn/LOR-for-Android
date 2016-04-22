@@ -29,7 +29,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,7 +43,7 @@ import io.github.getsmp.lorforandroid.api.ApiManager;
 import io.github.getsmp.lorforandroid.api.model.Topic;
 import io.github.getsmp.lorforandroid.api.model.Topics;
 import io.github.getsmp.lorforandroid.ui.ImageActivity;
-import io.github.getsmp.lorforandroid.ui.base.BaseFragment;
+import io.github.getsmp.lorforandroid.ui.base.LoadableFragment;
 import io.github.getsmp.lorforandroid.util.DateUtils;
 import io.github.getsmp.lorforandroid.util.PreferenceUtils;
 import io.github.getsmp.lorforandroid.util.StringUtils;
@@ -52,10 +51,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TopicFragment extends BaseFragment {
+public class TopicFragment extends LoadableFragment {
     @Bind(R.id.topicScrollView) NestedScrollView scrollView;
-    @Bind(R.id.progressBar) ProgressBar progressBar;
-    @Bind(R.id.errorView) TextView errorView;
     @Bind(R.id.topicTitle) TextView title;
     @Bind(R.id.topicTags) TextView tags;
     @Bind(R.id.topicAuthor) TextView author;
@@ -78,7 +75,7 @@ public class TopicFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+        setHasOptionsMenu(false);
         url = getArguments().getString("url");
         imageUrl = getArguments().getString("imageUrl");
     }
@@ -97,16 +94,17 @@ public class TopicFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState == null) {
-            loadTopic();
+            fetchData();
         } else {
-            loadingEnded();
+            stopRefreshAndShow();
             setTopic();
         }
     }
 
-    private void loadTopic() {
+    @Override
+    protected void fetchData() {
         if (StringUtils.isClub(url)) {
-            loadingError(R.string.error_access_denied);
+            showErrorView(R.string.error_access_denied);
         } else {
             Call<Topics> topics = ApiManager.INSTANCE.getApiTopic().getTopic(url);
             topics.enqueue(new Callback<Topics>() {
@@ -114,16 +112,16 @@ public class TopicFragment extends BaseFragment {
                 public void onResponse(Call<Topics> call, Response<Topics> response) {
                     if (response.body() != null) {
                         topic = response.body().topic;
-                        loadingEnded();
+                        stopRefreshAndShow();
                         setTopic();
                     } else {
-                        loadingError(R.string.error_network);
+                        showErrorView(R.string.error_network);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Topics> call, Throwable t) {
-                    loadingError(R.string.error_network);
+                    showErrorView(R.string.error_network);
                 }
             });
         }
@@ -158,7 +156,7 @@ public class TopicFragment extends BaseFragment {
     }
 
     private Drawable getImageDrawableFromAttr() {
-        int[] attributes = new int[] {R.attr.themedGalleryDrawable};
+        int[] attributes = new int[]{R.attr.themedGalleryDrawable};
         TypedArray typedArray = getActivity().obtainStyledAttributes(attributes);
         Drawable imagePlaceholder = typedArray.getDrawable(0);
         typedArray.recycle();
@@ -183,15 +181,8 @@ public class TopicFragment extends BaseFragment {
         });
     }
 
-    private void loadingEnded() {
-        if (progressBar != null) progressBar.setVisibility(View.GONE);
-        scrollView.setVisibility(View.VISIBLE);
-    }
-
-    private void loadingError(int stringResource) {
-        scrollView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
-        errorView.setText(stringResource);
-        errorView.setVisibility(View.VISIBLE);
+    @Override
+    protected View dataView() {
+        return scrollView;
     }
 }
