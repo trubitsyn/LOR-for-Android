@@ -3,3 +3,6 @@
 
 ## TODO
 [Прогресс разработки](https://github.com/getsmp/LOR-for-Android/milestones)
+
+## License
+GNU GPLv3
