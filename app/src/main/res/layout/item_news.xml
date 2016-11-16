@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             style="@style/secondaryText"
-            android:singleLine="true"/>
+            android:maxLines="1" />
     </LinearLayout>
 
     <LinearLayout
