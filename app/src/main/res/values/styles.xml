@@ -1,30 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-        <item name="themedNewsDrawable">@drawable/ic_library_books_black_24dp</item>
-        <item name="themedGalleryDrawable">@drawable/ic_image_black_24dp</item>
-        <item name="themedTrackerDrawable">@drawable/ic_whatshot_black_24dp</item>
-        <item name="themedForumDrawable">@drawable/ic_forum_black_24dp</item>
-        <item name="themedSettingsDrawable">@drawable/ic_settings_black_24dp</item>
-
-        <item name="themedRefreshDrawable">@drawable/ic_refresh_black_24dp</item>
-        <item name="themedCommentDrawable">@drawable/ic_chat_bubble_black_24dp</item>
-    </style>
-
-    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-
-        <item name="themedNewsDrawable">@drawable/ic_library_books_white_24dp</item>
-        <item name="themedGalleryDrawable">@drawable/ic_image_white_24dp</item>
-        <item name="themedTrackerDrawable">@drawable/ic_whatshot_white_24dp</item>
-        <item name="themedForumDrawable">@drawable/ic_forum_white_24dp</item>
-        <item name="themedSettingsDrawable">@drawable/ic_settings_white_24dp</item>
-
-        <item name="themedRefreshDrawable">@drawable/ic_refresh_white_24dp</item>
-        <item name="themedCommentDrawable">@drawable/ic_chat_bubble_white_24dp</item>
     </style>
 
     <style name="ImageActivityTheme" parent="Theme.AppCompat">

@@ -3,6 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/showComments"
           android:title="@string/activity_comments"
-          android:icon="?attr/themedCommentDrawable"
+          android:icon="@drawable/ic_chat_bubble_24dp"
           app:showAsAction="always"/>
 </menu>

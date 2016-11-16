@@ -3,6 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/refreshButton"
           android:title="@string/refresh"
-          android:icon="?attr/themedRefreshDrawable"
+          android:icon="@drawable/ic_refresh_24dp"
           app:showAsAction="always"/>
 </menu>

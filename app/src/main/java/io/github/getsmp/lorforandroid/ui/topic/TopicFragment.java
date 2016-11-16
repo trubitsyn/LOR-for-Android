@@ -18,8 +18,6 @@
 package io.github.getsmp.lorforandroid.ui.topic;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -139,7 +137,6 @@ public class TopicFragment extends LoadableFragment {
             if (PreferenceUtils.shouldLoadImagesNow(getActivity())) {
                 loadImageAndSetImageActivityListener();
             } else {
-                image.setImageDrawable(getImageDrawableFromAttr());
                 image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,14 +150,6 @@ public class TopicFragment extends LoadableFragment {
         date.setText(DateUtils.getDate(topic.getPostDate()));
         message.setText(Html.fromHtml(topic.getMessage()));
         message.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    private Drawable getImageDrawableFromAttr() {
-        int[] attributes = new int[]{R.attr.themedGalleryDrawable};
-        TypedArray typedArray = getActivity().obtainStyledAttributes(attributes);
-        Drawable imagePlaceholder = typedArray.getDrawable(0);
-        typedArray.recycle();
-        return imagePlaceholder;
     }
 
     private void loadImageAndSetImageActivityListener() {
