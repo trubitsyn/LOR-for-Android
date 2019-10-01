@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "io.github.getsmp.lorforandroid"
+        applicationId "dev.trubitsyn.lorforandroid"
         minSdkVersion 10
         targetSdkVersion 25
         versionCode 1
