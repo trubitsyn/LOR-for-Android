@@ -27,12 +27,12 @@ class GalleryItemFactory : ItemFactory {
         val articles = body.select("article.news")
         for (article in articles) {
             val url = article
-                    .select("h2 > a[href^=/gallery/]")
+                    .select("h1 > a[href^=/gallery/]")
                     .first()
                     .attr("href")
                     .substring(1)
             val title = article
-                    .select("h2 > a[href^=/gallery/]")
+                    .select("h1 > a[href^=/gallery/]")
                     .first()
                     .ownText()
                     .let { Html.fromHtml(it) }

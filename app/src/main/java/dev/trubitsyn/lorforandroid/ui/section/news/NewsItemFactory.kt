@@ -57,12 +57,12 @@ class NewsItemFactory : ItemFactory {
             } else {
                 // Standard article
                 val url = article
-                        .select("h2 > a[href^=/news/]")
+                        .select("h1 > a[href^=/news/]")
                         .first()
                         .attr("href")
                         .substring(1)
                 val title = article
-                        .select("h2 > a[href^=/news/]")
+                        .select("h1 > a[href^=/news/]")
                         .first()
                         .ownText()
                         .let { Html.fromHtml(it) }
