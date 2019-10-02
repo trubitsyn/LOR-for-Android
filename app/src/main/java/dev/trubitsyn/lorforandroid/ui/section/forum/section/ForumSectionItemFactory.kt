@@ -25,17 +25,51 @@ class ForumSectionItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val entries = body.select("tbody tr")
         for (entry in entries) {
-            val properties = entry.select("td").first()
-            val bareAuthor = properties.ownText()
+            val properties = entry
+                    .select("td")
+                    .first()
+            val url = properties
+                    .select("a")
+                    .first()
+                    .attr("href")
+                    .substring(1)
+            val title = properties
+                    .select("a")
+                    .first()
+                    .ownText()
+            val tags = properties
+                    .select("a")
+                    .first()
+                    .select("span.tag")
+                    .let { StringUtils.tagsFromElements(it) }
+            val date = entry
+                    .select("td.dateinterval")
+                    .first()
+                    .select("time")
+                    .first()
+                    .ownText()
+            val bareAuthor = properties
+                    .ownText()
+            val author = bareAuthor
+                    .substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")"))
+                    .replace("[()]".toRegex(), "")
+            val comments = entry
+                    .select("td.numbers")
+                    .first()
+                    .ownText()
+                    .let { StringUtils.numericStringToHumanReadable(it) }
+            val isPinned = properties
+                    .select("i.icon-pin")
+                    .size > 0
             items.add(ForumSectionItem(
-                    url = properties.select("a").first().attr("href").substring(1),
-                    title = properties.select("a").first().ownText(),
+                    url = url,
+                    title = title,
                     groupTitle = null,
-                    tags = StringUtils.tagsFromElements(properties.select("a").first().select("span.tag")),
-                    date = entry.select("td.dateinterval").first().select("time").first().ownText(),
-                    author = bareAuthor.substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")")).replace("[()]".toRegex(), ""),
-                    comments = StringUtils.numericStringToHumanReadable(entry.select("td.numbers").first().ownText()),
-                    isPinned = properties.select("i.icon-pin").size > 0
+                    tags = tags,
+                    date = date,
+                    author = author,
+                    comments = comments,
+                    isPinned = isPinned
             ))
         }
     }

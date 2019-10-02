@@ -27,14 +27,51 @@ class TrackerItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val topics = body.select("tbody > tr")
         for (topic in topics) {
+            val url = topic
+                    .select("td:eq(1)")
+                    .select("a")
+                    .first()
+                    .attr("href")
+                    .substring(1)
+            val title = topic
+                    .select("td:eq(1)")
+                    .select("a")
+                    .first()
+                    .ownText()
+                    .let { Html.fromHtml(it) }
+                    .toString()
+            val groupTitle = topic
+                    .select("a.secondary")
+                    .first()
+                    .ownText()
+            val tags = topic
+                    .select("span.tag")
+                    .let { StringUtils.tagsFromElements(it) }
+            val date = topic
+                    .select("time")
+                    .first()
+                    .ownText()
+            val author = topic
+                    .select("td.dateinterval > time")
+                    .first()
+                    .nextSibling()
+                    .toString()
+                    .replace(", ", "")
+            val comments = topic
+                    .select("td.numbers")
+                    .first()
+                    .ownText()
+                    .let { StringUtils.numericStringToHumanReadable(it) }
+
             items.add(Item(
-                    url = topic.select("td:eq(1)").select("a").first().attr("href").substring(1),
-                    title = Html.fromHtml(topic.select("td:eq(1)").select("a").first().ownText()).toString(),
-                    groupTitle = topic.select("a.secondary").first().ownText(),
-                    tags = StringUtils.tagsFromElements(topic.select("span.tag")),
-                    date = topic.select("time").first().ownText(),
-                    author = topic.select("td.dateinterval > time").first().nextSibling().toString().replace(", ", ""),
-                    comments = StringUtils.numericStringToHumanReadable(topic.select("td.numbers").first().ownText())))
+                    url = url,
+                    title = title,
+                    groupTitle = groupTitle,
+                    tags = tags,
+                    date = date,
+                    author = author,
+                    comments = comments
+            ))
         }
     }
 }

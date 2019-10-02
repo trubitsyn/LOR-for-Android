@@ -24,9 +24,21 @@ class ForumOverviewItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val sections = body.select("div#bd").select("ul").first().select("li")
         for (section in sections) {
+            val url = section
+                    .select("a")
+                    .first()
+                    .attr("href")
+                    .replace("/forum/", "")
+                    .replace("/", "")
+            val name = section
+                    .select("a")
+                    .first()
+                    .ownText()
+
             items.add(ForumOverviewItem(
-                    url = section.select("a").first().attr("href").replace("/forum/", "").replace("/", ""),
-                    name = section.select("a").first().ownText()))
+                    url = url,
+                    name = name
+            ))
         }
     }
 }

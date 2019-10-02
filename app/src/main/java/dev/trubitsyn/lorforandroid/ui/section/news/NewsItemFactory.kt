@@ -29,21 +29,75 @@ class NewsItemFactory : ItemFactory {
         for (article in articles) {
             if (article.hasClass("mini-news")) {
                 // Mini-news article
+                val url = article
+                        .select("a[href^=/news/]")
+                        .first()
+                        .attr("href")
+                        .substring(1)
+                val title = article
+                        .select("a[href^=/news/]")
+                        .first()
+                        .ownText()
+                        .let { Html.fromHtml(it) }
+                        .toString()
+                val commentsCount = article
+                        .select("a")
+                        .first()
+                        .nextSibling()
+                        .toString()
+                        .let { Html.fromHtml(it) }
+                        .toString()
+                        .replace("[()]".toRegex(), "")
+
                 items.add(MiniNewsItem(
-                        url = article.select("a[href^=/news/]").first().attr("href").substring(1),
-                        title = Html.fromHtml(article.select("a[href^=/news/]").first().ownText()).toString(),
-                        commentsCount = Html.fromHtml(article.select("a").first().nextSibling().toString()).toString().replace("[()]".toRegex(), "")
+                        url = url,
+                        title = title,
+                        commentsCount = commentsCount
                 ))
             } else {
                 // Standard article
+                val url = article
+                        .select("h2 > a[href^=/news/]")
+                        .first()
+                        .attr("href")
+                        .substring(1)
+                val title = article
+                        .select("h2 > a[href^=/news/]")
+                        .first()
+                        .ownText()
+                        .let { Html.fromHtml(it) }
+                        .toString()
+                val groupTitle = article
+                        .select("div.group")
+                        .first()
+                        .text()
+                        .let { StringUtils.removeSectionName(it) }
+                val tags = article
+                        .select("a.tag")
+                        .let { StringUtils.tagsFromElements(it) }
+                val date = article
+                        .select("time")
+                        .first()
+                        .ownText()
+                val author = article
+                        .select("a[itemprop^=creator], div.sign:contains(anonymous)")
+                        .first()
+                        ?.ownText()
+                        ?.replace(" ()", "")
+                val comments = article
+                        .select("div.nav > a[href$=#comments]:eq(0)")
+                        .first()
+                        ?.ownText()
+                        ?: "Комментарии ограничены"
+
                 items.add(Item(
-                        url = article.select("h2 > a[href^=/news/]").first().attr("href").substring(1),
-                        title = Html.fromHtml(article.select("h2 > a[href^=/news/]").first().ownText()).toString(),
-                        groupTitle = StringUtils.removeSectionName(article.select("div.group").first().text()),
-                        tags = StringUtils.tagsFromElements(article.select("a.tag")),
-                        date = article.select("time").first().ownText(),
-                        author = article.select("a[itemprop^=creator], div.sign:contains(anonymous)").first()?.ownText()?.replace(" ()", ""),
-                        comments = article.select("div.nav > a[href$=#comments]:eq(0)").first()?.ownText() ?: "Комментарии ограничены"
+                        url = url,
+                        title = title,
+                        groupTitle = groupTitle,
+                        tags = tags,
+                        date = date,
+                        author = author,
+                        comments = comments
                 ))
             }
         }
