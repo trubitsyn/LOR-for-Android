@@ -51,7 +51,7 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
             }
         }
 
-        return viewHolder
+        return viewHolder!!
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {

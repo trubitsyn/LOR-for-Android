@@ -74,13 +74,13 @@ class GalleryFragment : SectionFragment() {
         return 200
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
-        return GalleryAdapter(items, context)
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
+        return GalleryAdapter(items as MutableList<GalleryItem>, context_)
     }
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as GalleryItem
-        (context as ItemClickCallback).onGalleryTopicRequested(item)
+        (context_ as ItemClickCallback).onGalleryTopicRequested(item)
     }
 
     companion object {

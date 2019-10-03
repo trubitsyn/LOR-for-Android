@@ -71,8 +71,8 @@ class TrackerFragment : SectionFragment() {
         return 180
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
-        return TrackerAdapter(items)
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
+        return TrackerAdapter(items as MutableList<Item>)
     }
 
     override fun onItemClickCallback(position: Int) {
@@ -86,9 +86,9 @@ class TrackerFragment : SectionFragment() {
             // Currently cannot get it because images can either have .png extension or .jpg and there's no way to determine the correct without issuing a HTTP request.
             val galleryItem = GalleryItem(item.url, item.title, item.groupTitle, item.date, item.tags, item.author!!, item.comments, medium2xImageUrl, medium2xImageUrl, mediumImageUrl)
 
-            (context as ItemClickCallback).onGalleryTopicRequested(galleryItem)
+            (context_ as ItemClickCallback).onGalleryTopicRequested(galleryItem)
         } else {
-            (context as ItemClickCallback).onTopicRequested(item.url)
+            (context_ as ItemClickCallback).onTopicRequested(item.url)
         }
     }
 

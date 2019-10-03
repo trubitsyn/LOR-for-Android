@@ -17,9 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.api
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-
 import dev.trubitsyn.lorforandroid.Const
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,25 +26,11 @@ enum class ApiManager {
     INSTANCE;
 
     private val GSON = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create()
-
     private val apiRestAdapter = Retrofit.Builder()
             .baseUrl(Const.SITE_ROOT + "api/")
             .addConverterFactory(GsonConverterFactory.create(GSON))
             .build()
 
-    fun getApiComments(): ApiComments {
-        if (apiComments == null) apiComments = apiRestAdapter.create(ApiComments::class.java)
-        return apiComments
-    }
-
-    fun getApiTopic(): ApiTopic {
-        if (apiTopic == null) apiTopic = apiRestAdapter.create(ApiTopic::class.java)
-        return apiTopic
-    }
-
-    companion object {
-
-        private var apiComments: ApiComments? = null
-        private var apiTopic: ApiTopic? = null
-    }
+    internal val apiComments: ApiComments by lazy { apiRestAdapter.create(ApiComments::class.java) }
+    internal val apiTopic: ApiTopic by lazy { apiRestAdapter.create(ApiTopic::class.java) }
 }

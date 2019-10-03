@@ -23,27 +23,14 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 class GalleryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @BindView(R.id.galleryTitle)
-    internal var title: TextView? = null
-    @BindView(R.id.galleryCategory)
-    internal var category: TextView? = null
-    @BindView(R.id.galleryTags)
-    internal var tags: TextView? = null
-    @BindView(R.id.galleryAuthor)
-    internal var author: TextView? = null
-    @BindView(R.id.galleryDate)
-    internal var date: TextView? = null
-    @BindView(R.id.galleryImage)
-    internal var image: ImageView? = null
-    @BindView(R.id.galleryCommentsCount)
-    internal var commentsCount: TextView? = null
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    val title by lazy { itemView.findViewById<TextView>(R.id.galleryTitle) }
+    val category by lazy { itemView.findViewById<TextView>(R.id.galleryCategory) }
+    val tags by lazy { itemView.findViewById<TextView>(R.id.galleryTags) }
+    val author by lazy { itemView.findViewById<TextView>(R.id.galleryAuthor) }
+    val date by lazy { itemView.findViewById<TextView>(R.id.galleryDate) }
+    val image by lazy { itemView.findViewById<ImageView>(R.id.galleryImage) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.galleryCommentsCount) }
 }

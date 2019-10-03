@@ -25,14 +25,11 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 
-import butterknife.BindView
 import dev.trubitsyn.lorforandroid.R
 
 abstract class LoadableFragment : BaseFragment() {
-    @BindView(R.id.progressBar)
-    var progressBar: ProgressBar? = null
-    @BindView(R.id.errorView)
-    internal var errorView: TextView? = null
+    val progressBar by lazy { view!!.findViewById<ProgressBar>(R.id.progressBar) }
+    protected val errorView by lazy { view!!.findViewById<TextView>(R.id.errorView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -22,6 +22,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 
 import androidx.core.content.IntentCompat
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 

@@ -19,14 +19,4 @@ package dev.trubitsyn.lorforandroid.ui.base
 
 import androidx.fragment.app.Fragment
 
-import butterknife.ButterKnife
-import butterknife.Unbinder
-
-open class BaseFragment : Fragment() {
-    protected var unbinder: Unbinder? = null
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder!!.unbind()
-    }
-}
+open class BaseFragment : Fragment()

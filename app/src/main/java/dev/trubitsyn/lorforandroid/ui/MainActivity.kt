@@ -22,17 +22,11 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-
 import com.google.android.material.navigation.NavigationView
-
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragment
@@ -47,10 +41,8 @@ import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
 class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
-    @BindView(R.id.drawer_layout)
-    internal var drawerLayout: DrawerLayout? = null
-    @BindView(R.id.navigationView)
-    internal var navigationView: NavigationView? = null
+    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
+    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
     private var currentNavigationItemId: Int = 0
     private var requestedNavigationItemId: Int = 0
     private var drawerToggle: ActionBarDrawerToggle? = null
@@ -58,8 +50,6 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        unbinder = ButterKnife.bind(this)
-
         setupActionBar(this)
 
         if (savedInstanceState == null) {
@@ -77,7 +67,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         drawerLayout!!.addDrawerListener(drawerToggle!!)
         drawerLayout!!.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-            override fun onDrawerClosed(drawerView: View?) {
+            override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 if (requestedNavigationItemId != currentNavigationItemId) {
                     currentNavigationItemId = requestedNavigationItemId

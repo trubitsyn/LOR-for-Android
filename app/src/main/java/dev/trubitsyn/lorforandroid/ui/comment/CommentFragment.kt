@@ -41,7 +41,7 @@ class CommentFragment : BaseListFragment() {
     }
 
     override fun fetchData() {
-        val comments = ApiManager.INSTANCE.getApiComments().getComments(url!!, page)
+        val comments = ApiManager.INSTANCE.apiComments.getComments(url!!, page)
         comments.enqueue(object : Callback<Comments> {
             override fun onResponse(call: Call<Comments>, response: Response<Comments>) {
                 if (response.body() != null) {
@@ -87,8 +87,8 @@ class CommentFragment : BaseListFragment() {
         previousCount = 0
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
-        return CommentAdapter(items, context)
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
+        return CommentAdapter(items as List<Comment>, context_)
     }
 
     companion object {

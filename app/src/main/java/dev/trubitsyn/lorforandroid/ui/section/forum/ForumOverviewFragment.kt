@@ -53,23 +53,23 @@ class ForumOverviewFragment : SectionFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipeRefreshLayout.isEnabled = false
+        swipeRefreshLayout?.isEnabled = false
     }
 
     override fun getItemFactory(): ItemFactory {
         return ForumOverviewItemFactory()
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
-        return ForumOverviewAdapter(items)
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
+        return ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
     }
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as ForumOverviewItem
         if (StringUtils.isClub(item.url)) {
-            Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context_, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
         } else {
-            (context as ItemClickCallback).onForumSectionRequested(item.url, item.name)
+            (context_ as ItemClickCallback).onForumSectionRequested(item.url, item.name)
         }
     }
 

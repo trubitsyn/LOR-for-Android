@@ -21,17 +21,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
-import butterknife.BindView
 import dev.trubitsyn.lorforandroid.R
 
 abstract class RefreshableFragment : LoadableFragment() {
-    @BindView(R.id.swipeRefreshLayout)
-    var swipeRefreshLayout: SwipeRefreshLayout? = null
+    protected val swipeRefreshLayout by lazy { view!!.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipeRefreshLayout!!.setOnRefreshListener {
+        swipeRefreshLayout.setOnRefreshListener {
             resetState()
             errorView!!.visibility = View.GONE
             fetchData()
@@ -40,8 +38,7 @@ abstract class RefreshableFragment : LoadableFragment() {
 
     override fun stopRefresh() {
         super.stopRefresh()
-        // swipeRefreshLayout still might be null
-        if (swipeRefreshLayout != null) swipeRefreshLayout!!.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun dataView(): View? {

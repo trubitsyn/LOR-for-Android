@@ -20,7 +20,6 @@ package dev.trubitsyn.lorforandroid.ui.section.forum.section
 import android.content.Intent
 import android.os.Bundle
 
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
@@ -31,19 +30,21 @@ class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum_section)
-        unbinder = ButterKnife.bind(this)
         setupActionBar(this)
 
         group = intent.getStringExtra("group")
         val name = intent.getStringExtra("name")
-        actionBar.title = name
+        actionBar?.title = name
         replace()
     }
 
     private fun replace() {
         var fragment = supportFragmentManager.findFragmentByTag("forumSectionFragment") as ForumSectionFragment?
-        if (fragment == null) fragment = ForumSectionFragment.newInstance(group)
-        supportFragmentManager.beginTransaction().replace(R.id.forumSectionFragment, fragment!!, "forumSectionFragment").commit()
+        if (fragment == null) fragment = ForumSectionFragment.newInstance(group!!)
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.forumSectionFragment, fragment, "forumSectionFragment")
+                .commit()
     }
 
     override fun returnToActivity(url: String) {

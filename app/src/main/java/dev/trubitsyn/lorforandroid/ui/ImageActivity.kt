@@ -18,32 +18,25 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 import uk.co.senab.photoview.PhotoView
 
 class ImageActivity : BaseActivity() {
-    @BindView(R.id.photoView)
-    internal var photoView: PhotoView? = null
+    private val photoView by lazy { findViewById<PhotoView>(R.id.photoView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-        unbinder = ButterKnife.bind(this)
 
         val imageUrl = intent.getStringExtra("imageUrl")
-
         Glide.with(this)
                 .load(imageUrl)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(photoView!!)
+                .into(photoView)
     }
 
     override fun onBackPressed() {

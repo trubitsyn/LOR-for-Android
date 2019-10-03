@@ -22,19 +22,9 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 class MiniNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @BindView(R.id.miniNewsTitle)
-    var title: TextView? = null
-        internal set
-    @BindView(R.id.miniNewsCommentsCount)
-    var commentsCount: TextView? = null
-        internal set
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    val title by lazy { itemView.findViewById<TextView>(R.id.miniNewsTitle) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.miniNewsCommentsCount) }
 }

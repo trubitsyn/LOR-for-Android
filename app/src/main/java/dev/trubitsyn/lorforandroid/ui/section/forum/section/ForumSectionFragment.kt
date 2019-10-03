@@ -57,12 +57,12 @@ class ForumSectionFragment : SectionFragment() {
         return 300
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
-        return ForumSectionAdapter(items)
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
+        return ForumSectionAdapter(items as MutableList<ForumSectionItem>)
     }
 
     override fun onItemClickCallback(position: Int) {
-        (context as Callback).returnToActivity((items[position] as Item).url)
+        (context_ as Callback).returnToActivity((items[position] as Item).url)
     }
 
     internal interface Callback {

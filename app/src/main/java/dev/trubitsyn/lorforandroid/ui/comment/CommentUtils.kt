@@ -34,7 +34,7 @@ internal object CommentUtils {
         message.text = StringUtils.removeLineBreak(Html.fromHtml(comment.processedMessage))
         message.movementMethod = LinkMovementMethod.getInstance()
         stars.text = comment.author.stars
-        date.text = DateUtils.getDate(comment.postdate)
+        date.text = DateUtils.getDate(comment.postdate!!)
         if (comment.reply != null) {
             val parent = getParent(comments, comment.reply.id!!)
             reply.text = context.getString(R.string.replyTo, parent!!.author!!.nick)

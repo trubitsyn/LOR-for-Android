@@ -27,40 +27,34 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import java.util.ArrayList
-
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.util.DividerItemDecoration
 import dev.trubitsyn.lorforandroid.ui.util.InfiniteScrollListener
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 
 abstract class BaseListFragment : RefreshableFragment() {
-    protected var context: Context
-    protected var adapter: RecyclerView.Adapter<*>
+    protected lateinit var context_: Context
+    protected lateinit var adapter: RecyclerView.Adapter<*>
     private var scrollListener: InfiniteScrollListener? = null
-    protected val items: MutableList<*> = ArrayList()
-    @BindView(R.id.recyclerView)
-    var recyclerView: RecyclerView? = null
+    protected val items: MutableList<Any> = mutableListOf()
+    protected val recyclerView by lazy { view!!.findViewById<RecyclerView>(R.id.recyclerView) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        this.context = context
+        this.context_ = context
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
-        unbinder = ButterKnife.bind(this, view)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(context)
-        recyclerView!!.layoutManager = layoutManager
-        if (showDividers()) recyclerView!!.addItemDecoration(DividerItemDecoration(context))
+        val layoutManager = LinearLayoutManager(context_)
+        recyclerView.layoutManager = layoutManager
+        if (showDividers()) recyclerView.addItemDecoration(DividerItemDecoration(context_))
 
         scrollListener = object : InfiniteScrollListener(layoutManager) {
             override fun onLoadMore() {
@@ -95,13 +89,13 @@ abstract class BaseListFragment : RefreshableFragment() {
 
     protected fun showUserFriendlyError(errorString: Int) {
         if (items.size > 0) {
-            Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context_, errorString, Toast.LENGTH_SHORT).show()
         } else
             showErrorView(errorString)
     }
 
     private fun initAdapter() {
-        adapter = getAdapter()
+        adapter = getAdapter_()
         recyclerView!!.adapter = adapter
     }
 
@@ -118,8 +112,8 @@ abstract class BaseListFragment : RefreshableFragment() {
     }
 
     protected fun setOnClickListener(listener: ItemClickListener.OnItemClickListener) {
-        recyclerView!!.addOnItemTouchListener(ItemClickListener(context, listener))
+        recyclerView!!.addOnItemTouchListener(ItemClickListener(context_, listener))
     }
 
-    protected abstract fun getAdapter(): RecyclerView.Adapter<*>
+    protected abstract fun getAdapter_(): RecyclerView.Adapter<*>
 }

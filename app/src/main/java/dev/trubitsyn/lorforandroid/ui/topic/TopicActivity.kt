@@ -22,7 +22,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 import dev.trubitsyn.lorforandroid.ui.comment.CommentActivity
@@ -34,7 +33,6 @@ class TopicActivity : ThemeActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic)
-        unbinder = ButterKnife.bind(this)
         setupActionBar(this)
 
         val tag = "topicFragment"
@@ -44,9 +42,12 @@ class TopicActivity : ThemeActivity() {
             val intent = intent
             url = StringUtils.removeParams(intent.getStringExtra("url")!!)
             val imageUrl = intent.getStringExtra("imageUrl")
-            topicFragment = TopicFragment.newInstance(url, imageUrl)
+            topicFragment = TopicFragment.newInstance(url!!, imageUrl)
         }
-        supportFragmentManager.beginTransaction().replace(R.id.topicFragmentContainer, topicFragment!!, tag).commit()
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.topicFragmentContainer, topicFragment, tag)
+                .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

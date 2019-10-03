@@ -22,25 +22,13 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 class TrackerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @BindView(R.id.trackerTitle)
-    internal var title: TextView? = null
-    @BindView(R.id.trackerGroupTitle)
-    internal var category: TextView? = null
-    @BindView(R.id.trackerTags)
-    internal var tags: TextView? = null
-    @BindView(R.id.trackerAuthor)
-    internal var author: TextView? = null
-    @BindView(R.id.trackerDate)
-    internal var date: TextView? = null
-    @BindView(R.id.trackerCommentsCount)
-    internal var commentsCount: TextView? = null
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    val title by lazy { itemView.findViewById<TextView>(R.id.trackerTitle) }
+    val category by lazy { itemView.findViewById<TextView>(R.id.trackerGroupTitle) }
+    val tags by lazy { itemView.findViewById<TextView>(R.id.trackerTags) }
+    val author by lazy { itemView.findViewById<TextView>(R.id.trackerAuthor) }
+    val date by lazy { itemView.findViewById<TextView>(R.id.trackerDate) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.trackerCommentsCount) }
 }

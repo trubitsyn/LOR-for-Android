@@ -22,16 +22,9 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 
 class ForumOverviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @BindView(R.id.itemName)
-    internal var itemName: TextView? = null
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    internal val itemName by lazy { itemView.findViewById<TextView>(R.id.itemName) }
 }

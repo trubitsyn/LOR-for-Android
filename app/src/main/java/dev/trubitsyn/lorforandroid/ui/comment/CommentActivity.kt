@@ -20,7 +20,6 @@ package dev.trubitsyn.lorforandroid.ui.comment
 import android.os.Bundle
 import android.view.MenuItem
 
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Comment
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
@@ -31,7 +30,6 @@ class CommentActivity : ThemeActivity(), CommentClickListener {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
-        unbinder = ButterKnife.bind(this)
         setupActionBar(this)
 
         if (savedInstanceState == null) {
@@ -51,7 +49,7 @@ class CommentActivity : ThemeActivity(), CommentClickListener {
     }
 
     private fun replace() {
-        val commentFragment = CommentFragment.newInstance(url)
+        val commentFragment = CommentFragment.newInstance(url!!)
         supportFragmentManager.beginTransaction().replace(R.id.commentFragmentContainer, commentFragment).commit()
     }
 

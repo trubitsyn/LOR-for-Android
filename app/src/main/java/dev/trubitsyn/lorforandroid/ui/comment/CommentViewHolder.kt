@@ -22,23 +22,12 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 class CommentViewHolder(commentView: View) : RecyclerView.ViewHolder(commentView) {
-    @BindView(R.id.commentAuthor)
-    internal var author: TextView? = null
-    @BindView(R.id.commentMessage)
-    internal var message: TextView? = null
-    @BindView(R.id.commentStars)
-    internal var stars: TextView? = null
-    @BindView(R.id.commentDate)
-    internal var date: TextView? = null
-    @BindView(R.id.commentReplyTo)
-    internal var replyTo: TextView? = null
-
-    init {
-        ButterKnife.bind(this, commentView)
-    }
+    internal val author by lazy { commentView.findViewById<TextView>(R.id.commentAuthor) }
+    internal val message by lazy { commentView.findViewById<TextView>(R.id.commentMessage) }
+    internal val stars by lazy { commentView.findViewById<TextView>(R.id.commentStars) }
+    internal val date by lazy { commentView.findViewById<TextView>(R.id.commentDate) }
+    internal val replyTo by lazy { commentView.findViewById<TextView>(R.id.commentReplyTo) }
 }

@@ -21,27 +21,15 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
-import butterknife.BindView
-import butterknife.Unbinder
 import dev.trubitsyn.lorforandroid.R
 
 open class BaseActivity : AppCompatActivity() {
-    @BindView(R.id.toolbarTop)
-    var toolbar: Toolbar? = null
-    protected var unbinder: Unbinder? = null
+    protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop) }
     protected var actionBar: ActionBar? = null
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder!!.unbind()
-    }
 
     protected fun setupActionBar(activity: AppCompatActivity) {
         activity.setSupportActionBar(toolbar)
         actionBar = activity.supportActionBar
-
-        assert(actionBar != null)
-
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

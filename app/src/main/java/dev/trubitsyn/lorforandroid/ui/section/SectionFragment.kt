@@ -25,7 +25,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
 
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
 
 import java.io.UnsupportedEncodingException
 
@@ -34,6 +33,7 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 import dev.trubitsyn.lorforandroid.util.NetworkClient
+import java.nio.charset.Charset
 
 abstract class SectionFragment : BaseListFragment() {
     protected var offset: Int = 0
@@ -43,7 +43,7 @@ abstract class SectionFragment : BaseListFragment() {
         override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
             var resp: String? = null
             try {
-                resp = String(responseBody, "UTF-8")
+                resp = String(responseBody, Charset.forName("UTF-8"))
             } catch (e: UnsupportedEncodingException) {
                 // Will never execute
             }
@@ -70,13 +70,13 @@ abstract class SectionFragment : BaseListFragment() {
 
     abstract val path: String
 
-    abstract val requestParams: RequestParams
+    abstract val requestParams: RequestParams?
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListener(object : ItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View) {
-                onItemClickCallback(recyclerView.getChildAdapterPosition(view))
+                onItemClickCallback(recyclerView!!.getChildAdapterPosition(view))
             }
         })
     }
@@ -85,7 +85,7 @@ abstract class SectionFragment : BaseListFragment() {
         if (offset <= maxOffset) {
             NetworkClient.get("$path/", requestParams, handler)
         } else
-            Toast.makeText(context, R.string.error_no_more_data, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context_, R.string.error_no_more_data, Toast.LENGTH_SHORT).show()
     }
 
     override fun clearData() {

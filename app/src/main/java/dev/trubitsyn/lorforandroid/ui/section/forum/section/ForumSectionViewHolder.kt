@@ -23,25 +23,13 @@ import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 
 class ForumSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    @BindView(R.id.forumTitle)
-    internal var title: TextView? = null
-    @BindView(R.id.forumTags)
-    internal var tags: TextView? = null
-    @BindView(R.id.forumReplyFrom)
-    internal var replyFrom: TextView? = null
-    @BindView(R.id.forumReplyDate)
-    internal var replyDate: TextView? = null
-    @BindView(R.id.forumCommentsCount)
-    internal var commentsCount: TextView? = null
-    @BindView(R.id.forumPinned)
-    internal var pinned: ImageView? = null
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    val title by lazy { itemView.findViewById<TextView>(R.id.forumTitle) }
+    val tags by lazy { itemView.findViewById<TextView>(R.id.forumTags) }
+    val replyFrom by lazy { itemView.findViewById<TextView>(R.id.forumReplyFrom) }
+    val replyDate by lazy { itemView.findViewById<TextView>(R.id.forumReplyDate) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.forumCommentsCount) }
+    val pinned by lazy { itemView.findViewById<ImageView>(R.id.forumPinned) }
 }

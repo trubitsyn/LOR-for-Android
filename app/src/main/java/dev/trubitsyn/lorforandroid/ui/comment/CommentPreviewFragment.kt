@@ -25,24 +25,15 @@ import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Comment
 
 class CommentPreviewFragment : DialogFragment() {
-    @BindView(R.id.commentReplyTo)
-    internal var reply: TextView? = null
-    @BindView(R.id.commentMessage)
-    internal var message: TextView? = null
-    @BindView(R.id.commentAuthor)
-    internal var author: TextView? = null
-    @BindView(R.id.commentStars)
-    internal var stars: TextView? = null
-    @BindView(R.id.commentDate)
-    internal var date: TextView? = null
-    private var unbinder: Unbinder? = null
+    val reply by lazy { view!!.findViewById<TextView>(R.id.commentReplyTo) }
+    val message by lazy { view!!.findViewById<TextView>(R.id.commentMessage) }
+    val author by lazy { view!!.findViewById<TextView>(R.id.commentAuthor) }
+    val stars by lazy { view!!.findViewById<TextView>(R.id.commentStars) }
+    val date by lazy { view!!.findViewById<TextView>(R.id.commentDate) }
     private var activity: Activity? = null
     private var comment: Comment? = null
     private var comments: List<Comment>? = null
@@ -64,14 +55,8 @@ class CommentPreviewFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.comment_preview, null)
-        unbinder = ButterKnife.bind(this, view)
-        CommentUtils.initView(comments, comment!!, activity, reply, message!!, author!!, stars!!, date!!)
+        CommentUtils.initView(comments!!, comment!!, context!!, reply, message, author, stars, date)
         val builder = AlertDialog.Builder(activity).setView(view)
         return builder.create()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unbinder!!.unbind()
     }
 }

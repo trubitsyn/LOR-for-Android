@@ -45,7 +45,7 @@ class NewsFragment : SectionFragment() {
         return 200
     }
 
-    override fun getAdapter(): RecyclerView.Adapter<*> {
+    override fun getAdapter_(): RecyclerView.Adapter<*> {
         return NewsAdapter(items)
     }
 
@@ -59,6 +59,6 @@ class NewsFragment : SectionFragment() {
         } else
             throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
 
-        (context as ItemClickCallback).onTopicRequested(url)
+        (context_ as ItemClickCallback).onTopicRequested(url)
     }
 }

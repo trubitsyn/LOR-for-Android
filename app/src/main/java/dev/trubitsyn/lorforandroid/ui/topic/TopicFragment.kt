@@ -31,8 +31,6 @@ import androidx.core.widget.NestedScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-import butterknife.BindView
-import butterknife.ButterKnife
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Topic
@@ -47,20 +45,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TopicFragment : LoadableFragment() {
-    @BindView(R.id.topicScrollView)
-    internal var scrollView: NestedScrollView? = null
-    @BindView(R.id.topicTitle)
-    internal var title: TextView? = null
-    @BindView(R.id.topicTags)
-    internal var tags: TextView? = null
-    @BindView(R.id.topicAuthor)
-    internal var author: TextView? = null
-    @BindView(R.id.topicDate)
-    internal var date: TextView? = null
-    @BindView(R.id.topicImage)
-    internal var image: ImageView? = null
-    @BindView(R.id.topicMessage)
-    internal var message: TextView? = null
+    internal val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView) }
+    internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle) }
+    internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags) }
+    internal val author by lazy { view!!.findViewById<TextView>(R.id.topicAuthor) }
+    internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate) }
+    internal val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage) }
+    internal val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage) }
     private var url: String? = null
     private var imageUrl: String? = null
     private var topic: Topic? = null
@@ -75,7 +66,6 @@ class TopicFragment : LoadableFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_topic, container, false)
-        unbinder = ButterKnife.bind(this, view)
         return view
     }
 
@@ -94,7 +84,7 @@ class TopicFragment : LoadableFragment() {
         if (StringUtils.isClub(url!!)) {
             showErrorView(R.string.error_access_denied)
         } else {
-            val topics = ApiManager.INSTANCE.getApiTopic().getTopic(url!!)
+            val topics = ApiManager.INSTANCE.apiTopic.getTopic(url!!)
             topics.enqueue(object : Callback<Topics> {
                 override fun onResponse(call: Call<Topics>, response: Response<Topics>) {
                     if (response.body() != null) {
@@ -123,7 +113,7 @@ class TopicFragment : LoadableFragment() {
             tags!!.visibility = View.GONE
 
         if (image != null) {
-            if (PreferenceUtils.shouldLoadImagesNow(activity)) {
+            if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
                 loadImageAndSetImageActivityListener()
             } else {
                 image!!.setOnClickListener { loadImageAndSetImageActivityListener() }
@@ -131,7 +121,7 @@ class TopicFragment : LoadableFragment() {
         }
 
         author!!.text = topic!!.author!!.nick
-        date!!.text = DateUtils.getDate(topic!!.postDate)
+        date!!.text = DateUtils.getDate(topic!!.postDate!!)
         message!!.text = Html.fromHtml(topic!!.message)
         message!!.movementMethod = LinkMovementMethod.getInstance()
     }
@@ -142,7 +132,7 @@ class TopicFragment : LoadableFragment() {
         Glide.with(context!!)
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image)
+                .into(image!!)
 
         image!!.setOnClickListener {
             val intent = Intent(activity, ImageActivity::class.java)
