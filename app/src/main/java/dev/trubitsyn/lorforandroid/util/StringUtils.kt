@@ -18,8 +18,6 @@
 package dev.trubitsyn.lorforandroid.util
 
 import android.text.Spanned
-
-import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
 object StringUtils {

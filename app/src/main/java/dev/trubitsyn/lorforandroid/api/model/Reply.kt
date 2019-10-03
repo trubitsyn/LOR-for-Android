@@ -18,8 +18,7 @@
 package dev.trubitsyn.lorforandroid.api.model
 
 import com.google.gson.annotations.Expose
-
-import java.util.Date
+import java.util.*
 
 class Reply {
     @Expose

@@ -19,7 +19,6 @@ package dev.trubitsyn.lorforandroid.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 
 object NetworkUtils {
     fun isMobileData(context: Context): Boolean {

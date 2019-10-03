@@ -18,11 +18,8 @@
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import androidx.recyclerview.widget.RecyclerView
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.Item
 

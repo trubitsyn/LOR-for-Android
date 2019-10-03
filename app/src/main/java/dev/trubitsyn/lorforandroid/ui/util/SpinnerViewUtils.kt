@@ -22,10 +22,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-
 import dev.trubitsyn.lorforandroid.R
 
 object SpinnerViewUtils {

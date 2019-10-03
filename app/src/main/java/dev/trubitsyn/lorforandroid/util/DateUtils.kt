@@ -18,8 +18,7 @@
 package dev.trubitsyn.lorforandroid.util
 
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 object DateUtils {
     private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US)

@@ -20,19 +20,15 @@ package dev.trubitsyn.lorforandroid.ui.section
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
-
-import org.jsoup.Jsoup
-
-import java.io.UnsupportedEncodingException
-
 import cz.msebera.android.httpclient.Header
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 import dev.trubitsyn.lorforandroid.util.NetworkClient
+import org.jsoup.Jsoup
+import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 
 abstract class SectionFragment : BaseListFragment() {

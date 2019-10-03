@@ -18,11 +18,8 @@
 package dev.trubitsyn.lorforandroid.ui.section.news
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import androidx.recyclerview.widget.RecyclerView
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.Item
 
@@ -65,7 +62,7 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
             FULL -> {
                 val newsViewHolder = viewHolder as NewsViewHolder
                 val newsItem = items[i] as Item
-                newsViewHolder.title!!.text = newsItem.title
+                newsViewHolder.title.text = newsItem.title
                 newsViewHolder.category!!.text = newsItem.groupTitle
                 newsViewHolder.tags!!.text = newsItem.tags
                 newsViewHolder.author!!.text = newsItem.author

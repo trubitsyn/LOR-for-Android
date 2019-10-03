@@ -58,7 +58,7 @@ class GalleryItemFactory : ItemFactory {
                     .select("div.nav > a[href$=#comments]:eq(0)")
                     .first()
                     .ownText()
-                    .replace("\\D+".toRegex(),"")
+                    .replace("\\D+".toRegex(), "")
             val imageUrl = article
                     .select("a[itemprop^=contentURL]")
                     .attr("href")

@@ -17,11 +17,8 @@
 package dev.trubitsyn.lorforandroid.ui.util
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.view.View
-
 import androidx.recyclerview.widget.RecyclerView
 
 class DividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
