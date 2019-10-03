@@ -17,7 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 

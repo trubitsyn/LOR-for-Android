@@ -18,7 +18,8 @@
 package dev.trubitsyn.lorforandroid.ui.section.forum.section;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 

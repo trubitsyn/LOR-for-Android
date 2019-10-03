@@ -20,9 +20,10 @@ package dev.trubitsyn.lorforandroid.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.content.IntentCompat;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.SwitchPreferenceCompat;
+
+import androidx.core.content.IntentCompat;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import dev.trubitsyn.lorforandroid.R;
 
@@ -49,7 +50,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private void restart() {
         getActivity().finish();
         Intent intent = getActivity().getIntent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(getString(R.string.intent_settings), true);
         getActivity().startActivity(intent);
     }

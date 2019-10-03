@@ -22,20 +22,20 @@ import android.os.Bundle;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity;
 import uk.co.senab.photoview.PhotoView;
 
 public class ImageActivity extends BaseActivity {
-    @Bind(R.id.photoView) PhotoView photoView;
+    @BindView(R.id.photoView) PhotoView photoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
 
         String imageUrl = getIntent().getStringExtra("imageUrl");
 

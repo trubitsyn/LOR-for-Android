@@ -17,22 +17,23 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 public class ForumSectionViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.forumTitle) TextView title;
-    @Bind(R.id.forumTags) TextView tags;
-    @Bind(R.id.forumReplyFrom) TextView replyFrom;
-    @Bind(R.id.forumReplyDate) TextView replyDate;
-    @Bind(R.id.forumCommentsCount) TextView commentsCount;
-    @Bind(R.id.forumPinned) ImageView pinned;
+    @BindView(R.id.forumTitle) TextView title;
+    @BindView(R.id.forumTags) TextView tags;
+    @BindView(R.id.forumReplyFrom) TextView replyFrom;
+    @BindView(R.id.forumReplyDate) TextView replyDate;
+    @BindView(R.id.forumCommentsCount) TextView commentsCount;
+    @BindView(R.id.forumPinned) ImageView pinned;
 
     public ForumSectionViewHolder(View itemView) {
         super(itemView);

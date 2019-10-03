@@ -34,7 +34,7 @@ public class CommentActivity extends ThemeActivity implements CommentClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         setupActionBar(this);
 
         if (savedInstanceState == null) {

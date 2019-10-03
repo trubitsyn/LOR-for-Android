@@ -18,15 +18,16 @@
 package dev.trubitsyn.lorforandroid.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
-import butterknife.Bind;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import butterknife.BindView;
 import dev.trubitsyn.lorforandroid.R;
 
 public abstract class RefreshableFragment extends LoadableFragment {
-    @Bind(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.swipeRefreshLayout) protected SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

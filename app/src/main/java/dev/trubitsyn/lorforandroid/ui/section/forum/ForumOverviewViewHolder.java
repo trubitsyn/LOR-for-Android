@@ -17,17 +17,18 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 
 public class ForumOverviewViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.itemName) TextView itemName;
+    @BindView(R.id.itemName) TextView itemName;
 
     public ForumOverviewViewHolder(View itemView) {
         super(itemView);

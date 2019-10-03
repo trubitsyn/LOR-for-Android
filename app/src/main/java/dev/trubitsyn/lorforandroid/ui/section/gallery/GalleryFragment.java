@@ -18,9 +18,10 @@
 package dev.trubitsyn.lorforandroid.ui.section.gallery;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.RequestParams;
 

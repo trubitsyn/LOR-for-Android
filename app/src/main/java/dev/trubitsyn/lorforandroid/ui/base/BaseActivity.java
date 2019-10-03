@@ -17,23 +17,24 @@
 
 package dev.trubitsyn.lorforandroid.ui.base;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 import dev.trubitsyn.lorforandroid.R;
 
 public class BaseActivity extends AppCompatActivity {
-    @Bind(R.id.toolbarTop) @Nullable protected Toolbar toolbar;
+    @BindView(R.id.toolbarTop) @Nullable protected Toolbar toolbar;
+    protected Unbinder unbinder;
     protected ActionBar actionBar;
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     protected void setupActionBar(AppCompatActivity activity) {

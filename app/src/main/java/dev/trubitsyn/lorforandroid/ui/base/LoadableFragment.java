@@ -25,12 +25,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import dev.trubitsyn.lorforandroid.R;
 
 public abstract class LoadableFragment extends BaseFragment {
-    @Bind(R.id.progressBar) protected ProgressBar progressBar;
-    @Bind(R.id.errorView) TextView errorView;
+    @BindView(R.id.progressBar) protected ProgressBar progressBar;
+    @BindView(R.id.errorView) TextView errorView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

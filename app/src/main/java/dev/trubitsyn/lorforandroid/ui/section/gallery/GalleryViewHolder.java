@@ -17,23 +17,24 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 public class GalleryViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.galleryTitle) TextView title;
-    @Bind(R.id.galleryCategory) TextView category;
-    @Bind(R.id.galleryTags) TextView tags;
-    @Bind(R.id.galleryAuthor) TextView author;
-    @Bind(R.id.galleryDate) TextView date;
-    @Bind(R.id.galleryImage) ImageView image;
-    @Bind(R.id.galleryCommentsCount) TextView commentsCount;
+    @BindView(R.id.galleryTitle) TextView title;
+    @BindView(R.id.galleryCategory) TextView category;
+    @BindView(R.id.galleryTags) TextView tags;
+    @BindView(R.id.galleryAuthor) TextView author;
+    @BindView(R.id.galleryDate) TextView date;
+    @BindView(R.id.galleryImage) ImageView image;
+    @BindView(R.id.galleryCommentsCount) TextView commentsCount;
 
     public GalleryViewHolder(View itemView) {
         super(itemView);

@@ -32,7 +32,7 @@ public class ForumSectionActivity extends ThemeActivity implements ForumSectionF
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_section);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         setupActionBar(this);
 
         group = getIntent().getStringExtra("group");

@@ -17,14 +17,17 @@
 
 package dev.trubitsyn.lorforandroid.ui.base;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class BaseFragment extends Fragment {
+    protected Unbinder unbinder;
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 }

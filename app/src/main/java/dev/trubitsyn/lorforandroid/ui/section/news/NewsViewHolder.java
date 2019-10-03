@@ -17,21 +17,22 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.newsTitle) TextView title;
-    @Bind(R.id.newsCategory) TextView category;
-    @Bind(R.id.newsTags) TextView tags;
-    @Bind(R.id.newsAuthor) TextView author;
-    @Bind(R.id.newsDate) TextView date;
-    @Bind(R.id.newsCommentsCount) TextView commentsCount;
+    @BindView(R.id.newsTitle) TextView title;
+    @BindView(R.id.newsCategory) TextView category;
+    @BindView(R.id.newsTags) TextView tags;
+    @BindView(R.id.newsAuthor) TextView author;
+    @BindView(R.id.newsDate) TextView date;
+    @BindView(R.id.newsCommentsCount) TextView commentsCount;
 
     public NewsViewHolder(View itemView) {
         super(itemView);

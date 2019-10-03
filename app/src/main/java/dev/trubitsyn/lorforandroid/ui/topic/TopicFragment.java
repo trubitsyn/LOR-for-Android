@@ -19,8 +19,6 @@ package dev.trubitsyn.lorforandroid.ui.topic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -29,12 +27,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 import dev.trubitsyn.lorforandroid.api.ApiManager;
@@ -50,13 +51,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TopicFragment extends LoadableFragment {
-    @Bind(R.id.topicScrollView) NestedScrollView scrollView;
-    @Bind(R.id.topicTitle) TextView title;
-    @Bind(R.id.topicTags) TextView tags;
-    @Bind(R.id.topicAuthor) TextView author;
-    @Bind(R.id.topicDate) TextView date;
-    @Bind(R.id.topicImage) @Nullable ImageView image;
-    @Bind(R.id.topicMessage) TextView message;
+    @BindView(R.id.topicScrollView) NestedScrollView scrollView;
+    @BindView(R.id.topicTitle) TextView title;
+    @BindView(R.id.topicTags) TextView tags;
+    @BindView(R.id.topicAuthor) TextView author;
+    @BindView(R.id.topicDate) TextView date;
+    @BindView(R.id.topicImage) @Nullable ImageView image;
+    @BindView(R.id.topicMessage) TextView message;
     private String url;
     private String imageUrl;
     private Topic topic;
@@ -83,7 +84,7 @@ public class TopicFragment extends LoadableFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_topic, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -155,7 +156,7 @@ public class TopicFragment extends LoadableFragment {
     private void loadImageAndSetImageActivityListener() {
         assert (image) != null;
         image.setImageDrawable(null);
-        Glide.with(TopicFragment.this)
+        Glide.with(getContext())
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into((image));

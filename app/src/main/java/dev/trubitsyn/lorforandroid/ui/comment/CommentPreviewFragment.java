@@ -21,24 +21,27 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dev.trubitsyn.lorforandroid.R;
 import dev.trubitsyn.lorforandroid.api.model.Comment;
 
 public class CommentPreviewFragment extends DialogFragment {
-    @Bind(R.id.commentReplyTo) TextView reply;
-    @Bind(R.id.commentMessage) TextView message;
-    @Bind(R.id.commentAuthor) TextView author;
-    @Bind(R.id.commentStars) TextView stars;
-    @Bind(R.id.commentDate) TextView date;
+    @BindView(R.id.commentReplyTo) TextView reply;
+    @BindView(R.id.commentMessage) TextView message;
+    @BindView(R.id.commentAuthor) TextView author;
+    @BindView(R.id.commentStars) TextView stars;
+    @BindView(R.id.commentDate) TextView date;
+    private Unbinder unbinder;
     private Activity activity;
     private Comment comment;
     private List<Comment> comments;
@@ -64,7 +67,7 @@ public class CommentPreviewFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(activity, R.layout.comment_preview, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         CommentUtils.initView(comments, comment, activity, reply, message, author, stars, date);
         AlertDialog.Builder builder = new AlertDialog.Builder(activity).setView(view);
         return builder.create();
@@ -73,6 +76,6 @@ public class CommentPreviewFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 }

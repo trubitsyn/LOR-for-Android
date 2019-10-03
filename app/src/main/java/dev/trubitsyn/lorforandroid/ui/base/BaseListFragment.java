@@ -19,17 +19,18 @@ package dev.trubitsyn.lorforandroid.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 import dev.trubitsyn.lorforandroid.ui.util.DividerItemDecoration;
@@ -41,7 +42,7 @@ public abstract class BaseListFragment extends RefreshableFragment {
     protected RecyclerView.Adapter adapter;
     private InfiniteScrollListener scrollListener;
     protected final List items = new ArrayList();
-    @Bind(R.id.recyclerView) protected RecyclerView recyclerView;
+    @BindView(R.id.recyclerView) protected RecyclerView recyclerView;
 
     @Override
     public void onAttach(Context context) {
@@ -53,7 +54,7 @@ public abstract class BaseListFragment extends RefreshableFragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 

@@ -17,17 +17,18 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 public class MiniNewsViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.miniNewsTitle) TextView title;
-    @Bind(R.id.miniNewsCommentsCount) TextView commentsCount;
+    @BindView(R.id.miniNewsTitle) TextView title;
+    @BindView(R.id.miniNewsCommentsCount) TextView commentsCount;
 
     public MiniNewsViewHolder(View itemView) {
         super(itemView);

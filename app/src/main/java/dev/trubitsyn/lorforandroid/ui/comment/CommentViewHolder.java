@@ -17,20 +17,21 @@
 
 package dev.trubitsyn.lorforandroid.ui.comment;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.trubitsyn.lorforandroid.R;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.commentAuthor) TextView author;
-    @Bind(R.id.commentMessage) TextView message;
-    @Bind(R.id.commentStars) TextView stars;
-    @Bind(R.id.commentDate) TextView date;
-    @Bind(R.id.commentReplyTo) TextView replyTo;
+    @BindView(R.id.commentAuthor) TextView author;
+    @BindView(R.id.commentMessage) TextView message;
+    @BindView(R.id.commentStars) TextView stars;
+    @BindView(R.id.commentDate) TextView date;
+    @BindView(R.id.commentReplyTo) TextView replyTo;
 
     public CommentViewHolder(View commentView) {
         super(commentView);

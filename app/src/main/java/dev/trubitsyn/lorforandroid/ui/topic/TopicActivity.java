@@ -35,7 +35,7 @@ public class TopicActivity extends ThemeActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         setupActionBar(this);
 
         String tag = "topicFragment";
