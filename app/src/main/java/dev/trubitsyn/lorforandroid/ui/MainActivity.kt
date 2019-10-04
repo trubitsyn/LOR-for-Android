@@ -59,7 +59,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
                 currentNavigationItemId = R.id.drawer_news
             }
         } else {
-            currentNavigationItemId = savedInstanceState.getInt(NAV_ITEM_ID)
+            currentNavigationItemId = savedInstanceState.getInt(ARG_NAV_ITEM_ID)
         }
 
         navigationView!!.setNavigationItemSelectedListener(this)
@@ -90,43 +90,47 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         return true
     }
 
+    private data class NavigationTarget(val title: Int, val fragmentFunc: () -> Fragment, val tag: String)
+
     private fun navigate(selection: Int) {
         actionBar!!.setDisplayShowCustomEnabled(false)
-        val fm = supportFragmentManager
-        var fragment: Fragment?
-        when (selection) {
-            R.id.drawer_news -> {
-                actionBar!!.setTitle(R.string.drawer_news)
-                fragment = fm.findFragmentByTag(NewsFragment.TAG)
-                if (fragment == null) fragment = NewsFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, NewsFragment.TAG).commit()
-            }
-            R.id.drawer_gallery -> {
-                actionBar!!.setTitle(R.string.drawer_gallery)
-                fragment = fm.findFragmentByTag(GalleryFragment.TAG)
-                if (fragment == null) fragment = GalleryFragment.newInstance(GalleryFilterEnum.all)
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, GalleryFragment.TAG).commit()
-            }
-            R.id.drawer_tracker -> {
-                actionBar!!.setTitle(R.string.drawer_tracker)
-                fragment = fm.findFragmentByTag(TrackerFragment.TAG)
-                if (fragment == null) fragment = TrackerFragment.newInstance(TrackerFilterEnum.all)
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TrackerFragment.TAG).commit()
-            }
-            R.id.drawer_forum -> {
-                actionBar!!.setTitle(R.string.drawer_forum)
-                fragment = fm.findFragmentByTag(ForumOverviewFragment.TAG)
-                if (fragment == null) fragment = ForumOverviewFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, ForumOverviewFragment.TAG).commit()
-            }
-            R.id.drawer_settings -> {
-                actionBar!!.setTitle(R.string.drawer_settings)
-                fragment = fm.findFragmentByTag(SettingsFragment.TAG)
-                if (fragment == null) fragment = SettingsFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, SettingsFragment.TAG).commit()
-            }
+        val target = when (selection) {
+            R.id.drawer_news -> NavigationTarget(
+                    title = R.string.drawer_news,
+                    fragmentFunc = { NewsFragment() },
+                    tag = NewsFragment.TAG
+            )
+            R.id.drawer_gallery -> NavigationTarget(
+                    title = R.string.drawer_gallery,
+                    fragmentFunc = { GalleryFragment.newInstance(GalleryFilterEnum.all) },
+                    tag = GalleryFragment.TAG
+            )
+            R.id.drawer_tracker -> NavigationTarget(
+                    title = R.string.drawer_tracker,
+                    fragmentFunc = { TrackerFragment.newInstance(TrackerFilterEnum.all) },
+                    tag = TrackerFragment.TAG
+            )
+            R.id.drawer_forum -> NavigationTarget(
+                    title = R.string.drawer_forum,
+                    fragmentFunc = { ForumOverviewFragment() },
+                    tag = ForumOverviewFragment.TAG
+            )
+            R.id.drawer_settings -> NavigationTarget(
+                    title = R.string.drawer_settings,
+                    fragmentFunc = { SettingsFragment() },
+                    tag = SettingsFragment.TAG
+            )
+            else -> null
         }
-        fm.executePendingTransactions()
+        target?.let {
+            actionBar!!.setTitle(it.title)
+            val fragment = supportFragmentManager.findFragmentByTag(it.tag) ?: it.fragmentFunc()
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment, it.tag)
+                    .commit()
+            supportFragmentManager.executePendingTransactions()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -154,7 +158,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(NAV_ITEM_ID, currentNavigationItemId)
+        outState.putInt(ARG_NAV_ITEM_ID, currentNavigationItemId)
     }
 
     override fun onTopicRequested(url: String) {
@@ -178,6 +182,6 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     companion object {
-        private const val NAV_ITEM_ID = "NAV_ITEM_ID"
+        private const val ARG_NAV_ITEM_ID = "navItemId"
     }
 }
