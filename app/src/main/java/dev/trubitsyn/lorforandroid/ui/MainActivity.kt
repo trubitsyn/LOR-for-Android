@@ -53,7 +53,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         setupActionBar(this)
 
         if (savedInstanceState == null) {
-            if (intent.getBooleanExtra(getString(R.string.intent_settings), false)) {
+            if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
                 currentNavigationItemId = R.id.drawer_settings
             } else {
                 currentNavigationItemId = R.id.drawer_news
@@ -63,7 +63,6 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         }
 
         navigationView!!.setNavigationItemSelectedListener(this)
-
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         drawerLayout!!.addDrawerListener(drawerToggle!!)
         drawerLayout!!.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
@@ -95,42 +94,36 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         actionBar!!.setDisplayShowCustomEnabled(false)
         val fm = supportFragmentManager
         var fragment: Fragment?
-        val tag: String
         when (selection) {
             R.id.drawer_news -> {
                 actionBar!!.setTitle(R.string.drawer_news)
-                tag = "news"
-                fragment = fm.findFragmentByTag(tag)
+                fragment = fm.findFragmentByTag(NewsFragment.TAG)
                 if (fragment == null) fragment = NewsFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit()
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, NewsFragment.TAG).commit()
             }
             R.id.drawer_gallery -> {
                 actionBar!!.setTitle(R.string.drawer_gallery)
-                tag = "gallery"
-                fragment = fm.findFragmentByTag(tag)
+                fragment = fm.findFragmentByTag(GalleryFragment.TAG)
                 if (fragment == null) fragment = GalleryFragment.newInstance(GalleryFilterEnum.all)
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit()
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, GalleryFragment.TAG).commit()
             }
             R.id.drawer_tracker -> {
                 actionBar!!.setTitle(R.string.drawer_tracker)
-                tag = "tracker"
-                fragment = fm.findFragmentByTag(tag)
+                fragment = fm.findFragmentByTag(TrackerFragment.TAG)
                 if (fragment == null) fragment = TrackerFragment.newInstance(TrackerFilterEnum.all)
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit()
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, TrackerFragment.TAG).commit()
             }
             R.id.drawer_forum -> {
                 actionBar!!.setTitle(R.string.drawer_forum)
-                tag = "forum"
-                fragment = fm.findFragmentByTag(tag)
+                fragment = fm.findFragmentByTag(ForumOverviewFragment.TAG)
                 if (fragment == null) fragment = ForumOverviewFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit()
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, ForumOverviewFragment.TAG).commit()
             }
             R.id.drawer_settings -> {
                 actionBar!!.setTitle(R.string.drawer_settings)
-                tag = "settings"
-                fragment = fm.findFragmentByTag(tag)
+                fragment = fm.findFragmentByTag(SettingsFragment.TAG)
                 if (fragment == null) fragment = SettingsFragment()
-                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit()
+                fm.beginTransaction().replace(R.id.fragmentContainer, fragment, SettingsFragment.TAG).commit()
             }
         }
         fm.executePendingTransactions()
@@ -166,25 +159,25 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onTopicRequested(url: String) {
         val intent = Intent(this, TopicActivity::class.java)
-        intent.putExtra("url", url)
+        intent.putExtra(TopicActivity.ARG_URL, url)
         startActivity(intent)
     }
 
     override fun onGalleryTopicRequested(item: GalleryItem) {
         val intent = Intent(this, TopicActivity::class.java)
-        intent.putExtra("url", item.url)
-        intent.putExtra("imageUrl", item.imageUrl)
+        intent.putExtra(TopicActivity.ARG_URL, item.url)
+        intent.putExtra(TopicActivity.ARG_IMAGE_URL, item.imageUrl)
         startActivity(intent)
     }
 
     override fun onForumSectionRequested(group: String, name: String) {
         val intent = Intent(this@MainActivity, ForumSectionActivity::class.java)
-        intent.putExtra("group", group)
-        intent.putExtra("name", name)
+        intent.putExtra(ForumSectionActivity.ARG_GROUP, group)
+        intent.putExtra(ForumSectionActivity.ARG_NAME, name)
         startActivity(intent)
     }
 
     companion object {
-        private val NAV_ITEM_ID = "NAV_ITEM_ID"
+        private const val NAV_ITEM_ID = "NAV_ITEM_ID"
     }
 }

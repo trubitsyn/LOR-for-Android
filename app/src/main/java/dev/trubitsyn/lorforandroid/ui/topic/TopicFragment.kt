@@ -59,8 +59,8 @@ class TopicFragment : LoadableFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-        url = arguments!!.getString("url")
-        imageUrl = arguments!!.getString("imageUrl")
+        url = arguments!!.getString(ARG_URL)
+        imageUrl = arguments!!.getString(ARG_IMAGE_URL)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,7 +71,6 @@ class TopicFragment : LoadableFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         if (savedInstanceState == null) {
             fetchData()
         } else {
@@ -136,7 +135,7 @@ class TopicFragment : LoadableFragment() {
 
         image!!.setOnClickListener {
             val intent = Intent(activity, ImageActivity::class.java)
-            intent.putExtra("imageUrl", imageUrl)
+            intent.putExtra(ImageActivity.ARG_IMAGE_URL, imageUrl)
             startActivity(intent)
         }
     }
@@ -146,12 +145,15 @@ class TopicFragment : LoadableFragment() {
     }
 
     companion object {
+        const val ARG_URL = "url"
+        const val ARG_IMAGE_URL = "imageUrl"
+        const val TAG = "topicFragment"
 
         fun newInstance(url: String, imageUrl: String): TopicFragment {
             val fragment = TopicFragment()
             val args = Bundle()
-            args.putString("url", url)
-            args.putString("imageUrl", imageUrl)
+            args.putString(ARG_URL, url)
+            args.putString(ARG_IMAGE_URL, imageUrl)
             fragment.arguments = args
             return fragment
         }

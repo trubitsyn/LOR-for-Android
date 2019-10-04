@@ -41,7 +41,7 @@ class ForumSectionFragment : SectionFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        group = arguments!!.getString("group")
+        group = arguments!!.getString(ARG_GROUP)
     }
 
     override fun clearData() {
@@ -70,11 +70,13 @@ class ForumSectionFragment : SectionFragment() {
     }
 
     companion object {
+        const val ARG_GROUP = "group"
+        const val TAG = "forumSectionFragment"
 
         fun newInstance(group: String): ForumSectionFragment {
             val forumSectionFragment = ForumSectionFragment()
             val args = Bundle()
-            args.putString("group", group)
+            args.putString(ARG_GROUP, group)
             forumSectionFragment.arguments = args
             return forumSectionFragment
         }

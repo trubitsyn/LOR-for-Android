@@ -37,7 +37,7 @@ class CommentFragment : BaseListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        url = arguments!!.getString("url")
+        url = arguments!!.getString(ARG_URL)
     }
 
     override fun fetchData() {
@@ -92,11 +92,13 @@ class CommentFragment : BaseListFragment() {
     }
 
     companion object {
+        const val ARG_URL = "url"
+        const val TAG = "commentFragment"
 
         fun newInstance(url: String): CommentFragment {
             val commentFragment = CommentFragment()
             val args = Bundle()
-            args.putString("url", url)
+            args.putString(ARG_URL, url)
             commentFragment.arguments = args
             return commentFragment
         }

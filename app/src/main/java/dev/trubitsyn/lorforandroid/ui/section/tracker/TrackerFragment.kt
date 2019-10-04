@@ -48,7 +48,7 @@ class TrackerFragment : SectionFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        filter = arguments!!.getInt("filter")
+        filter = arguments!!.getInt(ARG_FILTER)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -93,11 +93,13 @@ class TrackerFragment : SectionFragment() {
     }
 
     companion object {
+        const val ARG_FILTER = "filter"
+        const val TAG = "trackerFragment"
 
         fun newInstance(trackerFilterEnum: TrackerFilterEnum): TrackerFragment {
             val trackerFragment = TrackerFragment()
             val args = Bundle()
-            args.putInt("filter", trackerFilterEnum.ordinal)
+            args.putInt(ARG_FILTER, trackerFilterEnum.ordinal)
             trackerFragment.arguments = args
             return trackerFragment
         }

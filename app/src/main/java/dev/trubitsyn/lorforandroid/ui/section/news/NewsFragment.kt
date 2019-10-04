@@ -61,4 +61,8 @@ class NewsFragment : SectionFragment() {
 
         (context_ as ItemClickCallback).onTopicRequested(url)
     }
+
+    companion object {
+        const val TAG = "newsFragment"
+    }
 }

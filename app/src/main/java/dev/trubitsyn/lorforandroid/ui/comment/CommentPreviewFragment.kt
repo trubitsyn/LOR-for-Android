@@ -59,4 +59,10 @@ class CommentPreviewFragment : DialogFragment() {
         val builder = AlertDialog.Builder(activity).setView(view)
         return builder.create()
     }
+
+    companion object {
+        const val TAG = "commentPreviewFragment"
+
+        fun newInstance() = CommentPreviewFragment()
+    }
 }

@@ -34,19 +34,15 @@ class TopicActivity : ThemeActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic)
         setupActionBar(this)
-
-        val tag = "topicFragment"
-        var topicFragment = supportFragmentManager.findFragmentByTag(tag) as TopicFragment?
-
+        var topicFragment = supportFragmentManager.findFragmentByTag(TopicFragment.TAG) as? TopicFragment
         if (topicFragment == null) {
-            val intent = intent
-            url = StringUtils.removeParams(intent.getStringExtra("url")!!)
-            val imageUrl = intent.getStringExtra("imageUrl")
+            url = StringUtils.removeParams(intent.getStringExtra(ARG_URL)!!)
+            val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)
             topicFragment = TopicFragment.newInstance(url!!, imageUrl)
         }
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.topicFragmentContainer, topicFragment, tag)
+                .replace(R.id.topicFragmentContainer, topicFragment, TopicFragment.TAG)
                 .commit()
     }
 
@@ -63,11 +59,16 @@ class TopicActivity : ThemeActivity() {
             }
             R.id.showComments -> {
                 val intent = Intent(this@TopicActivity, CommentActivity::class.java)
-                intent.putExtra("url", url)
+                intent.putExtra(CommentActivity.ARG_URL, url)
                 startActivity(intent)
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        const val ARG_URL = "url"
+        const val ARG_IMAGE_URL = "imageUrl"
     }
 }

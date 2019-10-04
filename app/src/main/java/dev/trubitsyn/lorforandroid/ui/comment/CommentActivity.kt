@@ -25,37 +25,43 @@ import dev.trubitsyn.lorforandroid.api.model.Comment
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 
 class CommentActivity : ThemeActivity(), CommentClickListener {
-    private var url: String? = null
+    private lateinit var url: String
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
         setupActionBar(this)
-
         if (savedInstanceState == null) {
-            url = intent.getStringExtra("url")
-            replace()
+            url = intent.getStringExtra(ARG_URL)!!
+            replace(url)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.refreshButton -> {
-                replace()
+                replace(url)
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun replace() {
-        val commentFragment = CommentFragment.newInstance(url!!)
-        supportFragmentManager.beginTransaction().replace(R.id.commentFragmentContainer, commentFragment).commit()
+    private fun replace(url: String) {
+        val commentFragment = CommentFragment.newInstance(url)
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.commentFragmentContainer, commentFragment, CommentFragment.TAG)
+                .commit()
     }
 
     override fun showParent(comments: List<Comment>, parentComment: Comment) {
-        val commentPreviewFragment = CommentPreviewFragment()
+        val commentPreviewFragment = CommentPreviewFragment.newInstance()
         commentPreviewFragment.setComments(comments, parentComment)
-        commentPreviewFragment.show(supportFragmentManager, "commentPreviewFragment")
+        commentPreviewFragment.show(supportFragmentManager, CommentPreviewFragment.TAG)
+    }
+
+    companion object {
+        const val ARG_URL = "url"
     }
 }

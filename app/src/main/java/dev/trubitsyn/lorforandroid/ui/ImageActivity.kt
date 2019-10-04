@@ -31,7 +31,7 @@ class ImageActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
 
-        val imageUrl = intent.getStringExtra("imageUrl")
+        val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)
         Glide.with(this)
                 .load(imageUrl)
                 .fitCenter()
@@ -42,5 +42,9 @@ class ImageActivity : BaseActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    companion object {
+        const val ARG_IMAGE_URL = "imageUrl"
     }
 }

@@ -81,4 +81,7 @@ class ForumOverviewFragment : SectionFragment() {
         return false
     }
 
+    companion object {
+        const val TAG = "forumOverviewFragment"
+    }
 }

@@ -32,24 +32,29 @@ class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
         setContentView(R.layout.activity_forum_section)
         setupActionBar(this)
 
-        group = intent.getStringExtra("group")
-        val name = intent.getStringExtra("name")
+        group = intent.getStringExtra(ARG_GROUP)
+        val name = intent.getStringExtra(ARG_NAME)
         actionBar?.title = name
         replace()
     }
 
     private fun replace() {
-        var fragment = supportFragmentManager.findFragmentByTag("forumSectionFragment") as ForumSectionFragment?
+        var fragment = supportFragmentManager.findFragmentByTag(ForumSectionFragment.TAG) as ForumSectionFragment?
         if (fragment == null) fragment = ForumSectionFragment.newInstance(group!!)
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.forumSectionFragment, fragment, "forumSectionFragment")
+                .replace(R.id.forumSectionFragment, fragment, ForumSectionFragment.TAG)
                 .commit()
     }
 
     override fun returnToActivity(url: String) {
         val intent = Intent(this, TopicActivity::class.java)
-        intent.putExtra("url", url)
+        intent.putExtra(TopicActivity.ARG_URL, url)
         startActivity(intent)
+    }
+
+    companion object {
+        const val ARG_GROUP = "group"
+        const val ARG_NAME = "name"
     }
 }

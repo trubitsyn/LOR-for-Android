@@ -27,19 +27,21 @@ import dev.trubitsyn.lorforandroid.R
 
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
+    val KEY_DARK_THEME = getString(R.string.pref_dark_theme)
+    val KEY_LOAD_IMAGES = getString(R.string.pref_load_images)
+
     override fun onCreatePreferences(bundle: Bundle, s: String) {
         addPreferencesFromResource(R.xml.preferences)
     }
 
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == getString(R.string.pref_dark_theme)) {
+        if (key == KEY_DARK_THEME) {
             val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-            sharedPreferences.edit().putBoolean(getString(R.string.pref_dark_theme), preference!!.isChecked).apply()
+            sharedPreferences.edit().putBoolean(KEY_DARK_THEME, preference!!.isChecked).apply()
             restart()
-        } else if (key == getString(R.string.pref_load_images)) {
+        } else if (key == KEY_LOAD_IMAGES) {
             val loadImagesPreference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-            sharedPreferences.edit().putBoolean(getString(R.string.pref_load_images), loadImagesPreference!!.isChecked).apply()
+            sharedPreferences.edit().putBoolean(KEY_LOAD_IMAGES, loadImagesPreference!!.isChecked).apply()
         }
     }
 
@@ -47,7 +49,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
         activity!!.finish()
         val intent = activity!!.intent
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(getString(R.string.intent_settings), true)
+        intent.putExtra(ARG_RESTART_ACTIVITY, true)
         activity!!.startActivity(intent)
     }
 
@@ -60,5 +62,10 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     override fun onPause() {
         super.onPause()
         preferenceManager.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    companion object {
+        const val ARG_RESTART_ACTIVITY = "restartActivity"
+        const val TAG = "settingsFragment"
     }
 }
