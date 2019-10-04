@@ -36,19 +36,11 @@ internal object CommentUtils {
         stars.text = comment.author.stars
         date.text = DateUtils.getDate(comment.postdate!!)
         if (comment.reply != null) {
-            val parent = getParent(comments, comment.reply.id!!)
+            val parent = comments.parentOfReply(comment.reply.id!!)
             reply.text = context.getString(R.string.replyTo, parent!!.author!!.nick)
             reply.setOnClickListener { (context as CommentClickListener).showParent(comments, parent) }
-        } else
-            reply.visibility = View.GONE
+        } else reply.visibility = View.GONE
     }
 
-    private fun getParent(comments: List<Comment>, reply: Int): Comment? {
-        for (comment in comments) {
-            if (comment.id == reply) {
-                return comment
-            }
-        }
-        return null
-    }
+    private fun List<Comment>.parentOfReply(reply: Int) = firstOrNull { it.id == reply }
 }
