@@ -118,7 +118,7 @@ class TopicFragment : LoadableFragment() {
         }
 
         author.text = topic.author!!.nick
-        date.text = DateUtils.getDate(topic.postDate!!)
+        date.text = DateUtils.format(topic.postDate!!)
         message.text = Html.fromHtml(topic.message)
         message.movementMethod = LinkMovementMethod.getInstance()
     }

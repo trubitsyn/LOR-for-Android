@@ -35,22 +35,24 @@ object StringUtils {
             url.split("\\?".toRegex()).dropLastWhile(String::isEmpty)[0]
     }
 
-    fun tagsFromStrings(`in`: List<String>): String {
-        for (s in `in`) {
-            sb.append("#").append(s).append(" ")
+    fun tagsFromStrings(strings: List<String>): String {
+        strings.forEach {
+            sb.append("#").append(it).append(" ")
         }
-        val s = sb.toString()
-        resetStringBuilder()
-        return s
+        sb.toString().let {
+            resetStringBuilder()
+            return it
+        }
     }
 
     fun tagsFromElements(e: Elements): String {
-        for (tag in e) {
-            sb.append("#").append(tag.ownText()).append(" ")
+        e.forEach {
+            sb.append("#").append(it.ownText()).append(" ")
         }
-        val s = sb.toString()
-        resetStringBuilder()
-        return s
+        sb.toString().let {
+            resetStringBuilder()
+            return it
+        }
     }
 
     private fun resetStringBuilder() {
@@ -58,7 +60,7 @@ object StringUtils {
         sb.trimToSize()
     }
 
-    fun removeSectionName(`in`: String) = `in`.substring(`in`.indexOf("—") + 2, `in`.length)
+    fun removeSectionName(s: String) = s.substring(s.indexOf("—") + 2, s.length)
 
     fun numericStringToHumanReadable(commentsCount: String): String {
         if (commentsCount == "-") {

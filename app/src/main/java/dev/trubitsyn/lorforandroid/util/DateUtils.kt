@@ -23,5 +23,5 @@ import java.util.*
 object DateUtils {
     private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.US)
 
-    fun getDate(date: Date) = simpleDateFormat.format(date)
+    fun format(date: Date): String = simpleDateFormat.format(date)
 }
