@@ -44,14 +44,13 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
     private lateinit var drawerToggle: ActionBarDrawerToggle
-    private var currentNavigationItemId: Int = 0
-    private var requestedNavigationItemId: Int = 0
+    private var navigationItemId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
-        currentNavigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
+        navigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
                 ?: if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
                     R.id.drawer_settings
                 } else {
@@ -64,23 +63,20 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
-                requestedNavigationItemId.let {
-                    currentNavigationItemId = it
-                    navigate(it)
-                }
+                navigate(navigationItemId)
             }
         })
         drawerToggle.syncState()
-        onNavigationItemSelected(navigationView.menu.findItem(currentNavigationItemId))
+        onNavigationItemSelected(navigationView.menu.findItem(navigationItemId))
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         menuItem.isChecked = true
-        requestedNavigationItemId = menuItem.itemId
+        navigationItemId = menuItem.itemId
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            navigate(requestedNavigationItemId)
+            navigate(navigationItemId)
         }
         return true
     }
@@ -151,7 +147,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(ARG_NAV_ITEM_ID, currentNavigationItemId)
+        outState.putInt(ARG_NAV_ITEM_ID, navigationItemId)
     }
 
     override fun onTopicRequested(url: String) {
