@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/news"
         android:name="dev.trubitsyn.lorforandroid.ui.section.news.NewsFragment"
-        android:label="@string/drawer_news" />
+        android:label="@string/drawer_news">
+        <action
+            android:id="@+id/action_news_to_topic"
+            app:destination="@id/topic" />
+    </fragment>
     <fragment
         android:id="@+id/gallery"
         android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment"
@@ -17,6 +21,9 @@
             android:name="filter"
             app:argType="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum"
             android:defaultValue="all" />
+        <action
+            android:id="@+id/action_gallery_to_topic"
+            app:destination="@id/topic" />
     </fragment>
     <fragment
         android:id="@+id/tracker"
@@ -26,13 +33,40 @@
             android:name="filter"
             app:argType="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum"
             android:defaultValue="all" />
+        <action
+            android:id="@+id/action_tracker_to_topic"
+            app:destination="@id/topic" />
     </fragment>
     <fragment
         android:id="@+id/forum"
         android:name="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragment"
-        android:label="@string/drawer_forum" />
+        android:label="@string/drawer_forum">
+        <action
+            android:id="@+id/action_forumOverview_to_forumSection"
+            app:destination="@id/forumSection" />
+    </fragment>
     <fragment
         android:id="@+id/settings"
         android:name="dev.trubitsyn.lorforandroid.ui.SettingsFragment"
         android:label="@string/drawer_settings" />
+    <fragment
+        android:id="@+id/comment"
+        android:name="dev.trubitsyn.lorforandroid.ui.comment.CommentFragment"
+        android:label="@string/activity_comments" />
+    <fragment
+        android:id="@+id/topic"
+        android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicFragment"
+        android:label="@string/activity_topic">
+        <action
+            android:id="@+id/action_topic_to_comment"
+            app:destination="@id/comment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forumSection"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionFragment"
+        android:label="">
+        <action
+            android:id="@+id/action_forumSection_to_topic"
+            app:destination="@id/topic" />
+    </fragment>
 </navigation>
