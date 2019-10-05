@@ -24,21 +24,18 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Topic
-import dev.trubitsyn.lorforandroid.api.model.Topics
 import dev.trubitsyn.lorforandroid.ui.base.LoadableFragment
 import dev.trubitsyn.lorforandroid.util.DateUtils
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TopicFragment : LoadableFragment() {
     private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView)!! }
@@ -50,7 +47,6 @@ class TopicFragment : LoadableFragment() {
     private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
     private lateinit var url: String
     private var imageUrl: String? = null
-    private lateinit var topic: Topic
 
     private val args by navArgs<TopicFragmentArgs>()
 
@@ -88,36 +84,22 @@ class TopicFragment : LoadableFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (savedInstanceState == null) {
-            fetchData()
-        } else {
-            stopRefreshAndShow()
-            setTopic()
+        if (StringUtils.isClub(url)) {
+            showErrorView(R.string.error_access_denied)
+            return
         }
+        val viewModel = ViewModelProviders.of(this, TopicViewModelFactory(url))
+                .get(TopicViewModel::class.java)
+        viewModel.getTopic().observe(this, Observer { topic ->
+            stopRefreshAndShow()
+            setTopic(topic)
+        })
     }
 
     override fun fetchData() {
-        if (StringUtils.isClub(url)) {
-            showErrorView(R.string.error_access_denied)
-        } else {
-            val topics = ApiManager.INSTANCE.apiTopic.getTopic(url)
-            topics.enqueue(object : Callback<Topics> {
-                override fun onResponse(call: Call<Topics>, response: Response<Topics>) {
-                    response.body()?.let {
-                        topic = it.topic ?: return@let null
-                        stopRefreshAndShow()
-                        setTopic()
-                    } ?: showErrorView(R.string.error_network)
-                }
-
-                override fun onFailure(call: Call<Topics>, t: Throwable) {
-                    showErrorView(R.string.error_network)
-                }
-            })
-        }
     }
 
-    private fun setTopic() {
+    private fun setTopic(topic: Topic) {
         title.text = Html.fromHtml(topic.title)
         val tagsList = topic.tags
         if (tagsList!!.isNotEmpty()) {
