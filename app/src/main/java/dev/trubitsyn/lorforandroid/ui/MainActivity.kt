@@ -30,7 +30,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
-import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionActivity
+import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragmentDirections
+import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragmentDirections
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
@@ -80,18 +81,18 @@ class MainActivity : ThemeActivity(), ItemClickCallback {
     }
 
     override fun onGalleryTopicRequested(item: GalleryItem) {
-        Intent(this, TopicActivity::class.java).apply {
-            putExtra(TopicActivity.ARG_URL, item.url)
-            putExtra(TopicActivity.ARG_IMAGE_URL, item.imageUrl)
-            startActivity(this)
-        }
+        val action = GalleryFragmentDirections.actionGalleryToTopic(
+                url = item.url,
+                imageUrl = item.imageUrl
+        )
+        navController.navigate(action)
     }
 
     override fun onForumSectionRequested(group: String, name: String) {
-        Intent(this, ForumSectionActivity::class.java).apply {
-            putExtra(ForumSectionActivity.ARG_GROUP, group)
-            putExtra(ForumSectionActivity.ARG_NAME, name)
-            startActivity(this)
-        }
+        val action = ForumOverviewFragmentDirections.actionForumOverviewToForumSection(
+                group = group,
+                name = name
+        )
+        navController.navigate(action)
     }
 }
