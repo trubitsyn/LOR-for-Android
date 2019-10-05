@@ -86,7 +86,7 @@ abstract class BaseListFragment : RefreshableFragment() {
     }
 
     protected fun showUserFriendlyError(errorString: Int) {
-        if (items.size > 0) {
+        if (items.isNotEmpty()) {
             Toast.makeText(context_, errorString, Toast.LENGTH_SHORT).show()
         } else
             showErrorView(errorString)
