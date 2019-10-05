@@ -156,23 +156,26 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onTopicRequested(url: String) {
-        val intent = Intent(this, TopicActivity::class.java)
-        intent.putExtra(TopicActivity.ARG_URL, url)
-        startActivity(intent)
+        Intent(this, TopicActivity::class.java).apply {
+            putExtra(TopicActivity.ARG_URL, url)
+            startActivity(this)
+        }
     }
 
     override fun onGalleryTopicRequested(item: GalleryItem) {
-        val intent = Intent(this, TopicActivity::class.java)
-        intent.putExtra(TopicActivity.ARG_URL, item.url)
-        intent.putExtra(TopicActivity.ARG_IMAGE_URL, item.imageUrl)
-        startActivity(intent)
+        Intent(this, TopicActivity::class.java).apply {
+            putExtra(TopicActivity.ARG_URL, item.url)
+            putExtra(TopicActivity.ARG_IMAGE_URL, item.imageUrl)
+            startActivity(this)
+        }
     }
 
     override fun onForumSectionRequested(group: String, name: String) {
-        val intent = Intent(this, ForumSectionActivity::class.java)
-        intent.putExtra(ForumSectionActivity.ARG_GROUP, group)
-        intent.putExtra(ForumSectionActivity.ARG_NAME, name)
-        startActivity(intent)
+        Intent(this, ForumSectionActivity::class.java).apply {
+            putExtra(ForumSectionActivity.ARG_GROUP, group)
+            putExtra(ForumSectionActivity.ARG_NAME, name)
+            startActivity(this)
+        }
     }
 
     companion object {
