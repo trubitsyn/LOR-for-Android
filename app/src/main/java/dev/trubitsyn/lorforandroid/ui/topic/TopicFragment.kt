@@ -45,13 +45,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TopicFragment : LoadableFragment() {
-    private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView) }
-    internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle) }
-    internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags) }
-    internal val author by lazy { view!!.findViewById<TextView>(R.id.topicAuthor) }
-    internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate) }
-    private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage) }
-    private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage) }
+    private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView)!! }
+    internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle)!! }
+    internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags)!! }
+    internal val author by lazy { view!!.findViewById<TextView>(R.id.topicAuthor)!! }
+    internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate)!! }
+    private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
+    private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
     private var url: String? = null
     private var imageUrl: String? = null
     private var topic: Topic? = null
@@ -102,16 +102,16 @@ class TopicFragment : LoadableFragment() {
     }
 
     private fun setTopic() {
-        title!!.text = Html.fromHtml(topic!!.title)
+        title.text = Html.fromHtml(topic!!.title)
         val tagsList = topic!!.tags
         if (tagsList!!.isNotEmpty()) {
-            tags!!.visibility = View.VISIBLE
-            tags!!.text = StringUtils.tagsFromStrings(tagsList)
+            tags.visibility = View.VISIBLE
+            tags.text = StringUtils.tagsFromStrings(tagsList)
         } else {
-            tags!!.visibility = View.GONE
+            tags.visibility = View.GONE
         }
 
-        image?.let {
+        image.let {
             if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
                 loadImageAndSetImageActivityListener()
             } else {
@@ -119,21 +119,20 @@ class TopicFragment : LoadableFragment() {
             }
         }
 
-        author!!.text = topic!!.author!!.nick
-        date!!.text = DateUtils.getDate(topic!!.postDate!!)
-        message!!.text = Html.fromHtml(topic!!.message)
-        message!!.movementMethod = LinkMovementMethod.getInstance()
+        author.text = topic!!.author!!.nick
+        date.text = DateUtils.getDate(topic!!.postDate!!)
+        message.text = Html.fromHtml(topic!!.message)
+        message.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun loadImageAndSetImageActivityListener() {
-        assert(image != null)
-        image!!.setImageDrawable(null)
+        image.setImageDrawable(null)
         Glide.with(context!!)
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image!!)
+                .into(image)
 
-        image!!.setOnClickListener {
+        image.setOnClickListener {
             val intent = Intent(activity, ImageActivity::class.java)
             intent.putExtra(ImageActivity.ARG_IMAGE_URL, imageUrl)
             startActivity(intent)

@@ -41,17 +41,16 @@ import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
 class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
-    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
-    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
+    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
+    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
+    private lateinit var drawerToggle: ActionBarDrawerToggle
     private var currentNavigationItemId: Int = 0
     private var requestedNavigationItemId: Int = 0
-    private var drawerToggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
-
         currentNavigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
                 ?: if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
                     R.id.drawer_settings
@@ -59,10 +58,10 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
                     R.id.drawer_news
                 }
 
-        navigationView!!.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener(this)
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
-        drawerLayout!!.addDrawerListener(drawerToggle!!)
-        drawerLayout!!.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+        drawerLayout.addDrawerListener(drawerToggle)
+        drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
                 requestedNavigationItemId.let {
@@ -71,15 +70,15 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
                 }
             }
         })
-        drawerToggle!!.syncState()
-        onNavigationItemSelected(navigationView!!.menu.findItem(currentNavigationItemId))
+        drawerToggle.syncState()
+        onNavigationItemSelected(navigationView.menu.findItem(currentNavigationItemId))
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         menuItem.isChecked = true
         requestedNavigationItemId = menuItem.itemId
-        if (drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             navigate(requestedNavigationItemId)
         }
@@ -132,7 +131,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                drawerLayout!!.openDrawer(GravityCompat.START)
+                drawerLayout.openDrawer(GravityCompat.START)
                 return true
             }
         }
@@ -140,14 +139,14 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onBackPressed() {
-        if (drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout!!.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else super.onBackPressed()
     }
 
     override fun onConfigurationChanged(newConfiguration: Configuration) {
         super.onConfigurationChanged(newConfiguration)
-        drawerToggle!!.onConfigurationChanged(newConfiguration)
+        drawerToggle.onConfigurationChanged(newConfiguration)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

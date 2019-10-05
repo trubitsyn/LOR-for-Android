@@ -25,7 +25,7 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 import uk.co.senab.photoview.PhotoView
 
 class ImageActivity : BaseActivity() {
-    private val photoView by lazy { findViewById<PhotoView>(R.id.photoView) }
+    private val photoView by lazy { findViewById<PhotoView>(R.id.photoView)!! }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
