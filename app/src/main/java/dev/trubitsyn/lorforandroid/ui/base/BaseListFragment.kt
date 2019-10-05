@@ -46,8 +46,7 @@ abstract class BaseListFragment : RefreshableFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

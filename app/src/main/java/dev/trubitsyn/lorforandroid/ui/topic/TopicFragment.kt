@@ -65,8 +65,7 @@ class TopicFragment : LoadableFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_topic, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_topic, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
