@@ -17,18 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.base
 
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import dev.trubitsyn.lorforandroid.R
 
 abstract class BaseActivity : AppCompatActivity() {
     protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop)!! }
-    protected var actionBar: ActionBar? = null
 
     protected fun setupActionBar(activity: AppCompatActivity) {
         activity.setSupportActionBar(toolbar)
-        actionBar = activity.supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

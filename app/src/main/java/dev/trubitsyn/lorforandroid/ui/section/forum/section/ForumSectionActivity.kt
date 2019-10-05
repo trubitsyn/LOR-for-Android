@@ -34,7 +34,7 @@ class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
 
         group = intent.getStringExtra(ARG_GROUP)
         val name = intent.getStringExtra(ARG_NAME)
-        actionBar?.title = name
+        supportActionBar?.title = name
         replace()
     }
 
