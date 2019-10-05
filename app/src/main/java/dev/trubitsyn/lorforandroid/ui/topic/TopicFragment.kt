@@ -27,6 +27,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
+import androidx.navigation.fragment.navArgs
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -55,6 +56,8 @@ class TopicFragment : LoadableFragment() {
     private lateinit var url: String
     private lateinit var imageUrl: String
     private lateinit var topic: Topic
+
+    private val args by navArgs<TopicFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

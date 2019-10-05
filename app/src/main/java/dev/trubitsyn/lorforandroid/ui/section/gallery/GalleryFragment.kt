@@ -20,6 +20,7 @@ package dev.trubitsyn.lorforandroid.ui.section.gallery
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.navigation.fragment.navArgs
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
@@ -27,6 +28,7 @@ import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
 class GalleryFragment : SectionFragment() {
+    private val args by navArgs<GalleryFragmentArgs>()
     private var filter: Int = 0
 
     private val isAll: Boolean

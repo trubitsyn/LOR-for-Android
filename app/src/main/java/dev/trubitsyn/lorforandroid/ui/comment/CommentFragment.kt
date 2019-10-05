@@ -18,6 +18,7 @@
 package dev.trubitsyn.lorforandroid.ui.comment
 
 import android.os.Bundle
+import androidx.navigation.fragment.navArgs
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Comment
@@ -31,6 +32,8 @@ class CommentFragment : BaseListFragment() {
     private var page: Int = 0
     private var previousCount = 0
     private lateinit var url: String
+
+    private val args by navArgs<CommentFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

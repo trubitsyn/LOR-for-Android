@@ -20,6 +20,7 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.navigation.fragment.navArgs
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
@@ -29,6 +30,7 @@ import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
 class TrackerFragment : SectionFragment() {
+    private val args by navArgs<TrackerFragmentArgs>()
     private var filter: Int = 0
 
     override val itemsPerPage = 30
