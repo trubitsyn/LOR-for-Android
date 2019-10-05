@@ -39,12 +39,13 @@ import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment
 import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
+import kotlin.properties.Delegates
 
 class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
     private lateinit var drawerToggle: ActionBarDrawerToggle
-    private var navigationItemId: Int = 0
+    private var navigationItemId by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
