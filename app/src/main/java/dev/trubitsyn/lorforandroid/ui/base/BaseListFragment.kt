@@ -35,7 +35,7 @@ import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 abstract class BaseListFragment : RefreshableFragment() {
     protected lateinit var context_: Context
     protected lateinit var adapter: RecyclerView.Adapter<*>
-    private var scrollListener: InfiniteScrollListener? = null
+    private lateinit var scrollListener: InfiniteScrollListener
     protected val items: MutableList<Any> = mutableListOf()
     protected val recyclerView by lazy { view!!.findViewById<RecyclerView>(R.id.recyclerView)!! }
 
@@ -61,7 +61,7 @@ abstract class BaseListFragment : RefreshableFragment() {
                 if (loadMoreAllowed) fetchData()
             }
         }
-        recyclerView.addOnScrollListener(scrollListener!!)
+        recyclerView.addOnScrollListener(scrollListener)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ abstract class BaseListFragment : RefreshableFragment() {
 
     override fun resetState() {
         clearData()
-        scrollListener!!.reset()
+        scrollListener.reset()
     }
 
     override fun restart() {

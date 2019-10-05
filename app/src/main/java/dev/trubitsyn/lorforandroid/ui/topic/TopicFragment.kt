@@ -52,15 +52,15 @@ class TopicFragment : LoadableFragment() {
     internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate)!! }
     private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
     private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
-    private var url: String? = null
-    private var imageUrl: String? = null
-    private var topic: Topic? = null
+    private lateinit var url: String
+    private lateinit var imageUrl: String
+    private lateinit var topic: Topic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-        url = arguments!!.getString(ARG_URL)
-        imageUrl = arguments!!.getString(ARG_IMAGE_URL)
+        url = arguments!!.getString(ARG_URL)!!
+        imageUrl = arguments!!.getString(ARG_IMAGE_URL)!!
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -79,19 +79,17 @@ class TopicFragment : LoadableFragment() {
     }
 
     override fun fetchData() {
-        if (StringUtils.isClub(url!!)) {
+        if (StringUtils.isClub(url)) {
             showErrorView(R.string.error_access_denied)
         } else {
-            val topics = ApiManager.INSTANCE.apiTopic.getTopic(url!!)
+            val topics = ApiManager.INSTANCE.apiTopic.getTopic(url)
             topics.enqueue(object : Callback<Topics> {
                 override fun onResponse(call: Call<Topics>, response: Response<Topics>) {
-                    if (response.body() != null) {
-                        topic = response.body().topic
+                    response.body()?.let {
+                        topic = it.topic ?: return@let null
                         stopRefreshAndShow()
                         setTopic()
-                    } else {
-                        showErrorView(R.string.error_network)
-                    }
+                    } ?: showErrorView(R.string.error_network)
                 }
 
                 override fun onFailure(call: Call<Topics>, t: Throwable) {
@@ -102,8 +100,8 @@ class TopicFragment : LoadableFragment() {
     }
 
     private fun setTopic() {
-        title.text = Html.fromHtml(topic!!.title)
-        val tagsList = topic!!.tags
+        title.text = Html.fromHtml(topic.title)
+        val tagsList = topic.tags
         if (tagsList!!.isNotEmpty()) {
             tags.visibility = View.VISIBLE
             tags.text = StringUtils.tagsFromStrings(tagsList)
@@ -119,9 +117,9 @@ class TopicFragment : LoadableFragment() {
             }
         }
 
-        author.text = topic!!.author!!.nick
-        date.text = DateUtils.getDate(topic!!.postDate!!)
-        message.text = Html.fromHtml(topic!!.message)
+        author.text = topic.author!!.nick
+        date.text = DateUtils.getDate(topic.postDate!!)
+        message.text = Html.fromHtml(topic.message)
         message.movementMethod = LinkMovementMethod.getInstance()
     }
 

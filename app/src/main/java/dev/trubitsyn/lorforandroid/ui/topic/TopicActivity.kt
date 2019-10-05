@@ -28,7 +28,7 @@ import dev.trubitsyn.lorforandroid.ui.comment.CommentActivity
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
 class TopicActivity : ThemeActivity() {
-    private var url: String? = null
+    private lateinit var url: String
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class TopicActivity : ThemeActivity() {
         setupActionBar()
         val topicFragment = supportFragmentManager.findFragmentByTag(TopicFragment.TAG) ?: {
             url = StringUtils.removeParams(intent.getStringExtra(ARG_URL)!!)
-            val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)
-            TopicFragment.newInstance(url!!, imageUrl)
+            val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)!!
+            TopicFragment.newInstance(url, imageUrl)
         }()
         supportFragmentManager
                 .beginTransaction()

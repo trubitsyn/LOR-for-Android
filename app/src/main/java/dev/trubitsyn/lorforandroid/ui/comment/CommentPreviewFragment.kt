@@ -17,45 +17,30 @@
 
 package dev.trubitsyn.lorforandroid.ui.comment
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Comment
 
-class CommentPreviewFragment : DialogFragment() {
+class CommentPreviewFragment(val comments: List<Comment>, val comment: Comment) : DialogFragment() {
     private val reply by lazy { view!!.findViewById<TextView>(R.id.commentReplyTo)!! }
     private val message by lazy { view!!.findViewById<TextView>(R.id.commentMessage)!! }
     private val author by lazy { view!!.findViewById<TextView>(R.id.commentAuthor)!! }
     private val stars by lazy { view!!.findViewById<TextView>(R.id.commentStars)!! }
     private val date by lazy { view!!.findViewById<TextView>(R.id.commentDate)!! }
-    private var activity: Activity? = null
-    private var comment: Comment? = null
-    private var comments: List<Comment>? = null
-
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        this.activity = activity
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
     }
 
-    fun setComments(comments: List<Comment>, comment: Comment) {
-        this.comments = comments
-        this.comment = comment
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.comment_preview, null)
-        CommentUtils.initView(comments!!, comment!!, context!!, reply, message, author, stars, date)
+        CommentUtils.initView(comments, comment, context!!, reply, message, author, stars, date)
         return AlertDialog.Builder(activity)
                 .setView(view)
                 .create()
@@ -64,6 +49,8 @@ class CommentPreviewFragment : DialogFragment() {
     companion object {
         const val TAG = "commentPreviewFragment"
 
-        fun newInstance() = CommentPreviewFragment()
+        fun newInstance(comments: List<Comment>, comment: Comment): CommentPreviewFragment {
+            return CommentPreviewFragment(comments, comment)
+        }
     }
 }

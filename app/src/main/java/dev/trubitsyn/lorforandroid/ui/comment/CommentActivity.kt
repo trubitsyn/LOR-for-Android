@@ -56,8 +56,7 @@ class CommentActivity : ThemeActivity(), CommentClickListener {
     }
 
     override fun showParent(comments: List<Comment>, parentComment: Comment) {
-        val commentPreviewFragment = CommentPreviewFragment.newInstance()
-        commentPreviewFragment.setComments(comments, parentComment)
+        val commentPreviewFragment = CommentPreviewFragment.newInstance(comments, parentComment)
         commentPreviewFragment.show(supportFragmentManager, CommentPreviewFragment.TAG)
     }
 

@@ -28,7 +28,6 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 import dev.trubitsyn.lorforandroid.util.NetworkClient
 import org.jsoup.Jsoup
-import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 
 abstract class SectionFragment : BaseListFragment() {
@@ -66,7 +65,7 @@ abstract class SectionFragment : BaseListFragment() {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListener(object : ItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View) {
-                onItemClickCallback(recyclerView!!.getChildAdapterPosition(view))
+                onItemClickCallback(recyclerView.getChildAdapterPosition(view))
             }
         })
     }

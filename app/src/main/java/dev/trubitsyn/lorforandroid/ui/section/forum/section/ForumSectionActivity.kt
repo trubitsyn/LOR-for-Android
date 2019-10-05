@@ -25,22 +25,22 @@ import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 
 class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
-    private var group: String? = null
+    private lateinit var group: String
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum_section)
         setupActionBar()
 
-        group = intent.getStringExtra(ARG_GROUP)
-        val name = intent.getStringExtra(ARG_NAME)
+        group = intent.getStringExtra(ARG_GROUP)!!
+        val name = intent.getStringExtra(ARG_NAME)!!
         supportActionBar?.title = name
         replace()
     }
 
     private fun replace() {
         val fragment = supportFragmentManager.findFragmentByTag(ForumSectionFragment.TAG)
-                ?: ForumSectionFragment.newInstance(group!!)
+                ?: ForumSectionFragment.newInstance(group)
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.forumSectionFragment, fragment, ForumSectionFragment.TAG)

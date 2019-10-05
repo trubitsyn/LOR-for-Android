@@ -22,7 +22,6 @@ import android.view.View
 import android.widget.AdapterView
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils

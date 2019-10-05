@@ -30,15 +30,15 @@ import retrofit2.Response
 class CommentFragment : BaseListFragment() {
     private var page: Int = 0
     private var previousCount = 0
-    private var url: String? = null
+    private lateinit var url: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        url = arguments!!.getString(ARG_URL)
+        url = arguments!!.getString(ARG_URL)!!
     }
 
     override fun fetchData() {
-        val call = ApiManager.INSTANCE.apiComments.getComments(url!!, page)
+        val call = ApiManager.INSTANCE.apiComments.getComments(url, page)
         call.enqueue(object : Callback<Comments> {
             override fun onResponse(call: Call<Comments>, response: Response<Comments>) {
                 response.body()?.let {
