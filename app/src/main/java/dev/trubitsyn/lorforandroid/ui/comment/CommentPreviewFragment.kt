@@ -56,8 +56,9 @@ class CommentPreviewFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = View.inflate(activity, R.layout.comment_preview, null)
         CommentUtils.initView(comments!!, comment!!, context!!, reply, message, author, stars, date)
-        val builder = AlertDialog.Builder(activity).setView(view)
-        return builder.create()
+        return AlertDialog.Builder(activity)
+                .setView(view)
+                .create()
     }
 
     companion object {
