@@ -32,5 +32,4 @@ class Topic {
     val watchCount: Int? = null
     val postscore: Int? = null
     val author: Author? = null
-
 }

@@ -21,5 +21,4 @@ class Userpic {
     val url: String? = null
     val width: Int? = null
     val height: Int? = null
-
 }

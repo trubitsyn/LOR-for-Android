@@ -21,5 +21,4 @@ class EditSummary {
     val editNick: String? = null
     val editDate: String? = null
     val editCount: Int? = null
-
 }

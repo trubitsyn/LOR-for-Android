@@ -20,5 +20,4 @@ package dev.trubitsyn.lorforandroid.api.model
 class Author {
     val nick: String? = null
     val stars: String? = null
-
 }

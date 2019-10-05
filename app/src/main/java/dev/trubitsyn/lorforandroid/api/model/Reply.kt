@@ -24,5 +24,4 @@ class Reply {
     val author: String? = null
     val postdate: Date? = null
     val samePage: Boolean? = null
-
 }

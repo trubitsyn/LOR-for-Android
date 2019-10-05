@@ -30,5 +30,4 @@ class Comment {
     val userpic: Userpic? = null
     val reply: Reply? = null
     val editSummary: EditSummary? = null
-
 }
