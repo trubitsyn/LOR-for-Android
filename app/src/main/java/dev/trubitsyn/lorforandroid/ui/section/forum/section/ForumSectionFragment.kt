@@ -47,7 +47,7 @@ class ForumSectionFragment : SectionFragment() {
 
     override val maxOffset = 300
 
-    override fun getAdapter_() = ForumSectionAdapter(items as MutableList<ForumSectionItem>)
+    override val adapter = ForumSectionAdapter(items as MutableList<ForumSectionItem>)
 
     override fun onItemClickCallback(position: Int) {
         (context_ as Callback).returnToActivity((items[position] as Item).url)

@@ -35,7 +35,7 @@ class NewsFragment : SectionFragment() {
 
     override val maxOffset = 200
 
-    override fun getAdapter_() = NewsAdapter(items)
+    override val adapter = NewsAdapter(items)
 
     override fun onItemClickCallback(position: Int) {
         val url = when (val item = items[position]) {

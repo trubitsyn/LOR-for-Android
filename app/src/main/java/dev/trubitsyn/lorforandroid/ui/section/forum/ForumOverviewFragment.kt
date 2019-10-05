@@ -48,7 +48,7 @@ class ForumOverviewFragment : SectionFragment() {
 
     override val itemFactory = ForumOverviewItemFactory()
 
-    override fun getAdapter_() = ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
+    override val adapter = ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as ForumOverviewItem
