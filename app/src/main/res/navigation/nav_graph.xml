@@ -52,7 +52,11 @@
     <fragment
         android:id="@+id/comment"
         android:name="dev.trubitsyn.lorforandroid.ui.comment.CommentFragment"
-        android:label="@string/activity_comments" />
+        android:label="@string/activity_comments" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/topic"
         android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicFragment"
@@ -60,6 +64,13 @@
         <action
             android:id="@+id/action_topic_to_comment"
             app:destination="@id/comment" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/forumSection"
@@ -68,5 +79,11 @@
         <action
             android:id="@+id/action_forumSection_to_topic"
             app:destination="@id/topic" />
+        <argument
+            android:name="group"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>
