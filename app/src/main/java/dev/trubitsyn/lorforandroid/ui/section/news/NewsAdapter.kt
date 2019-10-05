@@ -48,20 +48,22 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {
         when (viewHolder.itemViewType) {
             MINI -> {
-                val miniNewsViewHolder = viewHolder as MiniNewsViewHolder
                 val miniNewsItem = items[i] as MiniNewsItem
-                miniNewsViewHolder.title!!.text = miniNewsItem.title
-                miniNewsViewHolder.commentsCount!!.text = miniNewsItem.commentsCount
+                (viewHolder as MiniNewsViewHolder).apply {
+                    title!!.text = miniNewsItem.title
+                    commentsCount!!.text = miniNewsItem.commentsCount
+                }
             }
             FULL -> {
-                val newsViewHolder = viewHolder as NewsViewHolder
                 val newsItem = items[i] as Item
-                newsViewHolder.title.text = newsItem.title
-                newsViewHolder.category!!.text = newsItem.groupTitle
-                newsViewHolder.tags!!.text = newsItem.tags
-                newsViewHolder.author!!.text = newsItem.author
-                newsViewHolder.date!!.text = newsItem.date
-                newsViewHolder.commentsCount!!.text = newsItem.comments
+                (viewHolder as NewsViewHolder).apply {
+                    title.text = newsItem.title
+                    category!!.text = newsItem.groupTitle
+                    tags!!.text = newsItem.tags
+                    author!!.text = newsItem.author
+                    date!!.text = newsItem.date
+                    commentsCount!!.text = newsItem.comments
+                }
             }
         }
     }

@@ -40,26 +40,30 @@ class GalleryAdapter(private val items: List<GalleryItem>, private val context: 
 
     override fun onBindViewHolder(viewHolder: GalleryViewHolder, i: Int) {
         val item = items[i]
-        viewHolder.title!!.text = item.title
+        viewHolder.apply {
+            title!!.text = item.title
+            if (item.groupTitle == null) {
+                category!!.visibility = View.GONE
+            } else
+                category!!.text = item.groupTitle
 
-        if (item.groupTitle == null) {
-            viewHolder.category!!.visibility = View.GONE
-        } else
-            viewHolder.category!!.text = item.groupTitle
+            if (item.tags.isEmpty()) {
+                tags!!.visibility = View.GONE
+            } else
+                tags!!.text = item.tags
 
-        if (item.tags.isEmpty()) {
-            viewHolder.tags!!.visibility = View.GONE
-        } else
-            viewHolder.tags!!.text = item.tags
+            date!!.text = item.date
+            author!!.text = item.author
+            commentsCount!!.text = item.comments
 
-        viewHolder.date!!.text = item.date
-        viewHolder.author!!.text = item.author
-        viewHolder.commentsCount!!.text = item.comments
-
-        if (shouldLoadImages) {
-            Glide.with(context).load(item.mediumImageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).into(viewHolder.image!!)
-        } else
-            viewHolder.image!!.visibility = View.GONE
+            if (shouldLoadImages) {
+                Glide.with(context)
+                        .load(item.mediumImageUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(viewHolder.image!!)
+            } else
+                image!!.visibility = View.GONE
+        }
     }
 
     override fun getItemCount() = items.size

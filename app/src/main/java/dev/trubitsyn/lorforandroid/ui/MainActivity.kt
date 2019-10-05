@@ -65,9 +65,9 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         drawerLayout!!.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
-                if (requestedNavigationItemId != currentNavigationItemId) {
-                    currentNavigationItemId = requestedNavigationItemId
-                    navigate(requestedNavigationItemId)
+                requestedNavigationItemId.let {
+                    currentNavigationItemId = it
+                    navigate(it)
                 }
             }
         })

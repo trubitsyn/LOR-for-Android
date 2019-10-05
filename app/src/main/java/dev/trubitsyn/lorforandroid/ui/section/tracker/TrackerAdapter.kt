@@ -33,12 +33,14 @@ class TrackerAdapter(private val items: List<Item>) : RecyclerView.Adapter<Track
 
     override fun onBindViewHolder(viewHolder: TrackerViewHolder, position: Int) {
         val item = items[position]
-        viewHolder.title!!.text = item.title
-        viewHolder.category!!.text = item.groupTitle
-        viewHolder.tags!!.text = item.tags
-        viewHolder.date!!.text = item.date
-        viewHolder.author!!.text = item.author
-        viewHolder.commentsCount!!.text = item.comments
+        viewHolder.apply {
+            title!!.text = item.title
+            category!!.text = item.groupTitle
+            tags!!.text = item.tags
+            date!!.text = item.date
+            author!!.text = item.author
+            commentsCount!!.text = item.comments
+        }
     }
 
     override fun getItemCount() = items.size
