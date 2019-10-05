@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/news">
 
@@ -71,6 +72,9 @@
             android:name="imageUrl"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_topic_to_imageActivity"
+            app:destination="@id/imageActivity" />
     </fragment>
     <fragment
         android:id="@+id/forumSection"
@@ -86,4 +90,12 @@
             android:name="name"
             app:argType="string" />
     </fragment>
+    <activity
+        android:id="@+id/imageActivity"
+        android:name="dev.trubitsyn.lorforandroid.ui.ImageActivity"
+        android:label="@string/activity_image">
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </activity>
 </navigation>

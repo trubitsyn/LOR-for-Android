@@ -17,7 +17,6 @@
 
 package dev.trubitsyn.lorforandroid.ui.topic
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -33,7 +32,6 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Topic
 import dev.trubitsyn.lorforandroid.api.model.Topics
-import dev.trubitsyn.lorforandroid.ui.ImageActivity
 import dev.trubitsyn.lorforandroid.ui.base.LoadableFragment
 import dev.trubitsyn.lorforandroid.util.DateUtils
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
@@ -129,11 +127,11 @@ class TopicFragment : LoadableFragment() {
             tags.visibility = View.GONE
         }
 
-        imageUrl?.let {
+        imageUrl?.let { imageUrl ->
             if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
-                loadImageAndSetImageActivityListener()
+                loadImageAndSetImageActivityListener(imageUrl)
             } else {
-                image.setOnClickListener { loadImageAndSetImageActivityListener() }
+                image.setOnClickListener { loadImageAndSetImageActivityListener(imageUrl) }
             }
         }
 
@@ -143,7 +141,7 @@ class TopicFragment : LoadableFragment() {
         message.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    private fun loadImageAndSetImageActivityListener() {
+    private fun loadImageAndSetImageActivityListener(imageUrl: String) {
         image.setImageDrawable(null)
         Glide.with(context!!)
                 .load(imageUrl)
@@ -151,9 +149,8 @@ class TopicFragment : LoadableFragment() {
                 .into(image)
 
         image.setOnClickListener {
-            val intent = Intent(activity, ImageActivity::class.java)
-            intent.putExtra(ImageActivity.ARG_IMAGE_URL, imageUrl)
-            startActivity(intent)
+            val action = TopicFragmentDirections.actionTopicToImageActivity(imageUrl)
+            findNavController().navigate(action)
         }
     }
 
