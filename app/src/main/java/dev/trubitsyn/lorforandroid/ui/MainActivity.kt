@@ -59,7 +59,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
                 }
 
         navigationView.setNavigationItemSelectedListener(this)
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
+        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close)
         drawerLayout.addDrawerListener(drawerToggle)
         drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerClosed(drawerView: View) {

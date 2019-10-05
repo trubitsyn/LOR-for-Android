@@ -45,7 +45,7 @@ abstract class SectionFragment : BaseListFragment() {
                 offset += itemsPerPage
                 adapter.notifyDataSetChanged()
                 stopRefreshAndShow()
-            } ?: showUserFriendlyError(R.string.error_npe)
+            } ?: showUserFriendlyError(R.string.error_parsing)
         }
 
         override fun onFailure(statusCode: Int, headers: Array<Header>, responseBody: ByteArray, error: Throwable) {

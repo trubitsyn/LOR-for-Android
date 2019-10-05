@@ -37,7 +37,7 @@ internal object CommentUtils {
         date.text = DateUtils.format(comment.postdate!!)
         if (comment.reply != null) {
             val parent = comments.parentOfReply(comment.reply.id!!)
-            reply.text = context.getString(R.string.replyTo, parent!!.author!!.nick)
+            reply.text = context.getString(R.string.comments_reply, parent!!.author!!.nick)
             reply.setOnClickListener { (context as CommentClickListener).showParent(comments, parent) }
         } else reply.visibility = View.GONE
     }
