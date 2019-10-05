@@ -37,7 +37,7 @@ abstract class BaseListFragment : RefreshableFragment() {
     protected lateinit var adapter: RecyclerView.Adapter<*>
     private var scrollListener: InfiniteScrollListener? = null
     protected val items: MutableList<Any> = mutableListOf()
-    protected val recyclerView by lazy { view!!.findViewById<RecyclerView>(R.id.recyclerView) }
+    protected val recyclerView by lazy { view!!.findViewById<RecyclerView>(R.id.recyclerView)!! }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,16 +61,16 @@ abstract class BaseListFragment : RefreshableFragment() {
                 if (loadMoreAllowed) fetchData()
             }
         }
-        recyclerView!!.addOnScrollListener(scrollListener!!)
+        recyclerView.addOnScrollListener(scrollListener!!)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        adapter = getAdapter_()
+        recyclerView.adapter = adapter
         if (savedInstanceState != null) {
-            initAdapter()
             stopRefreshAndShow()
         } else {
-            initAdapter()
             fetchData()
         }
     }
@@ -81,7 +81,7 @@ abstract class BaseListFragment : RefreshableFragment() {
     }
 
     override fun restart() {
-        recyclerView!!.scrollToPosition(0)
+        recyclerView.scrollToPosition(0)
         super.restart()
     }
 
@@ -92,11 +92,6 @@ abstract class BaseListFragment : RefreshableFragment() {
             showErrorView(errorString)
     }
 
-    private fun initAdapter() {
-        adapter = getAdapter_()
-        recyclerView!!.adapter = adapter
-    }
-
     protected open val loadMoreAllowed = true
 
     protected open val showDividers = true
@@ -104,7 +99,7 @@ abstract class BaseListFragment : RefreshableFragment() {
     protected open fun clearData() = items.clear()
 
     protected fun setOnClickListener(listener: ItemClickListener.OnItemClickListener) {
-        recyclerView!!.addOnItemTouchListener(ItemClickListener(context_, listener))
+        recyclerView.addOnItemTouchListener(ItemClickListener(context_, listener))
     }
 
     protected abstract fun getAdapter_(): RecyclerView.Adapter<*>
