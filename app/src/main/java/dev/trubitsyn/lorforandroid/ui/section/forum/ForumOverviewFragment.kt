@@ -39,14 +39,14 @@ class ForumOverviewFragment : SectionFragment() {
         setHasOptionsMenu(false)
     }
 
-    override fun getMaxOffset() = 0
+    override val maxOffset = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout?.isEnabled = false
     }
 
-    override fun getItemFactory() = ForumOverviewItemFactory()
+    override val itemFactory = ForumOverviewItemFactory()
 
     override fun getAdapter_() = ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
 

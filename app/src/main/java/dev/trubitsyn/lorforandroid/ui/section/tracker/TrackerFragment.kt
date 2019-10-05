@@ -55,9 +55,9 @@ class TrackerFragment : SectionFragment() {
         })
     }
 
-    override fun getItemFactory() = TrackerItemFactory()
+    override val itemFactory = TrackerItemFactory()
 
-    override fun getMaxOffset() = 180
+    override val maxOffset = 180
 
     override fun getAdapter_() = TrackerAdapter(items as MutableList<TrackerItem>)
 

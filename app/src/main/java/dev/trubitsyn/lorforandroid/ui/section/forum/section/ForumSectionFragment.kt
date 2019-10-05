@@ -43,9 +43,9 @@ class ForumSectionFragment : SectionFragment() {
         items.clear()
     }
 
-    override fun getItemFactory() = ForumSectionItemFactory()
+    override val itemFactory = ForumSectionItemFactory()
 
-    override fun getMaxOffset() = 300
+    override val maxOffset = 300
 
     override fun getAdapter_() = ForumSectionAdapter(items as MutableList<ForumSectionItem>)
 

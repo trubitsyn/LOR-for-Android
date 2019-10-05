@@ -60,9 +60,9 @@ class GalleryFragment : SectionFragment() {
         })
     }
 
-    override fun getItemFactory() = GalleryItemFactory()
+    override val itemFactory = GalleryItemFactory()
 
-    override fun getMaxOffset() = 200
+    override val maxOffset = 200
 
     override fun getAdapter_() = GalleryAdapter(items as MutableList<GalleryItem>, context_)
 

@@ -32,8 +32,6 @@ import java.nio.charset.Charset
 
 abstract class SectionFragment : BaseListFragment() {
     protected var offset: Int = 0
-    private val itemFactory = getItemFactory()
-    private val maxOffset = getMaxOffset()
     private val handler = object : AsyncHttpResponseHandler() {
         override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
             val body = try {
@@ -82,9 +80,9 @@ abstract class SectionFragment : BaseListFragment() {
         offset = 0
     }
 
-    protected abstract fun getItemFactory(): ItemFactory
+    protected abstract val itemFactory: ItemFactory
 
-    abstract fun getMaxOffset(): Int
+    abstract val maxOffset: Int
 
     protected abstract fun onItemClickCallback(position: Int)
 }

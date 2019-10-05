@@ -31,9 +31,9 @@ class NewsFragment : SectionFragment() {
     override val requestParams: RequestParams
         get() = RequestParams("offset", offset)
 
-    override fun getItemFactory() = NewsItemFactory()
+    override val itemFactory = NewsItemFactory()
 
-    override fun getMaxOffset() = 200
+    override val maxOffset = 200
 
     override fun getAdapter_() = NewsAdapter(items)
 
