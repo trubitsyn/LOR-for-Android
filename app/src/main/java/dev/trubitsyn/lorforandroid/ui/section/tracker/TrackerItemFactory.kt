@@ -17,12 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
+import android.content.Context
 import android.text.Html
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class TrackerItemFactory : ItemFactory {
+class TrackerItemFactory(val context: Context) : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val topics = body
                 .select("tbody > tr")
@@ -62,7 +63,7 @@ class TrackerItemFactory : ItemFactory {
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let(StringUtils::numericStringToHumanReadable)
+                    .let { StringUtils.readableCommentsCount(context, it) }
 
             items.add(TrackerItem(
                     url = url,

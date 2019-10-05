@@ -55,7 +55,8 @@ class TrackerFragment : SectionFragment() {
         })
     }
 
-    override val itemFactory = TrackerItemFactory()
+    override val itemFactory
+        get() = TrackerItemFactory(context!!)
 
     override val maxOffset = 180
 

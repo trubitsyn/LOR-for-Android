@@ -43,7 +43,8 @@ class ForumSectionFragment : SectionFragment() {
         items.clear()
     }
 
-    override val itemFactory = ForumSectionItemFactory()
+    override val itemFactory
+        get() = ForumSectionItemFactory(context!!)
 
     override val maxOffset = 300
 

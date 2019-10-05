@@ -17,11 +17,12 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
+import android.content.Context
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class ForumSectionItemFactory : ItemFactory {
+class ForumSectionItemFactory(val context: Context) : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val entries = body
                 .select("tbody tr")
@@ -59,7 +60,7 @@ class ForumSectionItemFactory : ItemFactory {
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let(StringUtils::numericStringToHumanReadable)
+                    .let { StringUtils.readableCommentsCount(context, it )}
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0

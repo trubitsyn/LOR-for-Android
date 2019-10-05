@@ -17,7 +17,9 @@
 
 package dev.trubitsyn.lorforandroid.util
 
+import android.content.Context
 import android.text.Spanned
+import dev.trubitsyn.lorforandroid.R
 import org.jsoup.select.Elements
 
 object StringUtils {
@@ -62,21 +64,12 @@ object StringUtils {
 
     fun removeSectionName(s: String) = s.substring(s.indexOf("—") + 2, s.length)
 
-    fun numericStringToHumanReadable(commentsCount: String): String {
-        if (commentsCount == "-") {
-            return "Нет комментариев"
+    fun readableCommentsCount(context: Context, count: String): String {
+        val quantity = when (count) {
+            "-" -> 0
+            else -> count.substring(count.length - 1).toIntOrNull() ?: 0
         }
-
-        val parsed = try {
-            Integer.parseInt(commentsCount.substring(commentsCount.length - 1))
-        } catch (ignored: NumberFormatException) {
-        }
-
-        return when (parsed) {
-            1 -> "$commentsCount комментарий"
-            2, 3, 4 -> "$commentsCount комментария"
-            else -> "$commentsCount комментариев"
-        }
+        return context.resources.getQuantityString(R.plurals.comments, quantity, quantity)
     }
 
     fun removeLineBreak(spanned: Spanned) = spanned.subSequence(0, spanned.length - 2)
