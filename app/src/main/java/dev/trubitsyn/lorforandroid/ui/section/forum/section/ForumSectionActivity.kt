@@ -30,7 +30,7 @@ class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum_section)
-        setupActionBar(this)
+        setupActionBar()
 
         group = intent.getStringExtra(ARG_GROUP)
         val name = intent.getStringExtra(ARG_NAME)

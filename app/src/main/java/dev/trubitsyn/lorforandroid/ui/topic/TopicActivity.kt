@@ -33,7 +33,7 @@ class TopicActivity : ThemeActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic)
-        setupActionBar(this)
+        setupActionBar()
         val topicFragment = supportFragmentManager.findFragmentByTag(TopicFragment.TAG) ?: {
             url = StringUtils.removeParams(intent.getStringExtra(ARG_URL)!!)
             val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)

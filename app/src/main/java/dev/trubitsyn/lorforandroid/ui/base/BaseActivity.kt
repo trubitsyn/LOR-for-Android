@@ -24,8 +24,8 @@ import dev.trubitsyn.lorforandroid.R
 abstract class BaseActivity : AppCompatActivity() {
     protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop)!! }
 
-    protected fun setupActionBar(activity: AppCompatActivity) {
-        activity.setSupportActionBar(toolbar)
+    protected fun setupActionBar() {
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

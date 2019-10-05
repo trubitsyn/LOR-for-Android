@@ -50,7 +50,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupActionBar(this)
+        setupActionBar()
 
         currentNavigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
                 ?: if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {

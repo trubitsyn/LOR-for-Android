@@ -30,7 +30,7 @@ class CommentActivity : ThemeActivity(), CommentClickListener {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
-        setupActionBar(this)
+        setupActionBar()
         if (savedInstanceState == null) {
             url = intent.getStringExtra(ARG_URL)!!
             replace(url)
