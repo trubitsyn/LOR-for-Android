@@ -26,7 +26,7 @@ import dev.trubitsyn.lorforandroid.Const
 object NetworkClient {
     private val client = AsyncHttpClient()
 
-    operator fun get(url: String, params: RequestParams?, handler: AsyncHttpResponseHandler) {
+    fun get(url: String, params: RequestParams?, handler: AsyncHttpResponseHandler) {
         client.get(getAbsoluteUrl(url), params, handler)
     }
 

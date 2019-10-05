@@ -29,10 +29,10 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Comment
 
 class CommentPreviewFragment : DialogFragment() {
-    val reply by lazy { view!!.findViewById<TextView>(R.id.commentReplyTo) }
-    val message by lazy { view!!.findViewById<TextView>(R.id.commentMessage) }
+    private val reply by lazy { view!!.findViewById<TextView>(R.id.commentReplyTo) }
+    private val message by lazy { view!!.findViewById<TextView>(R.id.commentMessage) }
     val author by lazy { view!!.findViewById<TextView>(R.id.commentAuthor) }
-    val stars by lazy { view!!.findViewById<TextView>(R.id.commentStars) }
+    private val stars by lazy { view!!.findViewById<TextView>(R.id.commentStars) }
     val date by lazy { view!!.findViewById<TextView>(R.id.commentDate) }
     private var activity: Activity? = null
     private var comment: Comment? = null

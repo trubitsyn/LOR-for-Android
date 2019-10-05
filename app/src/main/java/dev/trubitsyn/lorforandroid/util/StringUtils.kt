@@ -70,10 +70,10 @@ object StringUtils {
         } catch (ignored: NumberFormatException) {
         }
 
-        when (parsed) {
-            1 -> return "$commentsCount комментарий"
-            2, 3, 4 -> return "$commentsCount комментария"
-            else -> return "$commentsCount комментариев"
+        return when (parsed) {
+            1 -> "$commentsCount комментарий"
+            2, 3, 4 -> "$commentsCount комментария"
+            else -> "$commentsCount комментариев"
         }
     }
 

@@ -45,13 +45,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TopicFragment : LoadableFragment() {
-    internal val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView) }
+    private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView) }
     internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle) }
     internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags) }
     internal val author by lazy { view!!.findViewById<TextView>(R.id.topicAuthor) }
     internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate) }
-    internal val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage) }
-    internal val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage) }
+    private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage) }
+    private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage) }
     private var url: String? = null
     private var imageUrl: String? = null
     private var topic: Topic? = null

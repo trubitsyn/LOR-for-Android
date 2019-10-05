@@ -26,15 +26,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class ItemClickListener(context: Context, private val listener: OnItemClickListener?) : RecyclerView.OnItemTouchListener {
-    private val gestureDetector: GestureDetector
-
-    init {
-        gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapUp(e: MotionEvent): Boolean {
-                return true
-            }
-        })
-    }
+    private val gestureDetector: GestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            return true
+        }
+    })
 
     override fun onInterceptTouchEvent(view: RecyclerView, event: MotionEvent): Boolean {
         val childView = view.findChildViewUnder(event.x, event.y)

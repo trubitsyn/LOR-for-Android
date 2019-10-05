@@ -43,7 +43,7 @@ class ForumSectionItemFactory : ItemFactory {
                     .select("a")
                     .first()
                     .select("span.tag")
-                    .let { StringUtils.tagsFromElements(it) }
+                    .let(StringUtils::tagsFromElements)
             val date = it
                     .select("td.dateinterval")
                     .first()
@@ -59,7 +59,7 @@ class ForumSectionItemFactory : ItemFactory {
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let { StringUtils.numericStringToHumanReadable(it) }
+                    .let(StringUtils::numericStringToHumanReadable)
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0

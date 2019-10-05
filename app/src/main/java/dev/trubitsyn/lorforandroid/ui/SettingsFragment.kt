@@ -27,8 +27,8 @@ import dev.trubitsyn.lorforandroid.R
 
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
-    val KEY_DARK_THEME = getString(R.string.pref_dark_theme)
-    val KEY_LOAD_IMAGES = getString(R.string.pref_load_images)
+    private val KEY_DARK_THEME = getString(R.string.pref_dark_theme)
+    private val KEY_LOAD_IMAGES = getString(R.string.pref_load_images)
 
     override fun onCreatePreferences(bundle: Bundle, s: String) {
         addPreferencesFromResource(R.xml.preferences)

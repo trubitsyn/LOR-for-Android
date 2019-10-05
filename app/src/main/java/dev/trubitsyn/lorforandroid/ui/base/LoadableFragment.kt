@@ -28,7 +28,7 @@ import android.widget.TextView
 import dev.trubitsyn.lorforandroid.R
 
 abstract class LoadableFragment : BaseFragment() {
-    val progressBar by lazy { view!!.findViewById<ProgressBar>(R.id.progressBar) }
+    private val progressBar by lazy { view!!.findViewById<ProgressBar>(R.id.progressBar) }
     protected val errorView by lazy { view!!.findViewById<TextView>(R.id.errorView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

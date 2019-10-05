@@ -40,7 +40,7 @@ class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerV
             v.pinned!!.visibility = View.VISIBLE
         }
 
-        if (item.tags == null || item.tags.length > 0) {
+        if (item.tags == null || item.tags.isNotEmpty()) {
             v.tags!!.text = item.tags
         } else
             v.tags!!.visibility = View.GONE

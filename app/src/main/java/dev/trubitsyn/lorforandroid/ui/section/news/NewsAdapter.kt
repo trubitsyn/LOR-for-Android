@@ -69,7 +69,7 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
     override fun getItemCount() = items.size
 
     companion object {
-        private val MINI = 0
-        private val FULL = 1
+        private const val MINI = 0
+        private const val FULL = 1
     }
 }
