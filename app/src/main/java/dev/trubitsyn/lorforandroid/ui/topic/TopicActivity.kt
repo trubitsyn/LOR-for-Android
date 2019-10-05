@@ -57,7 +57,7 @@ class TopicActivity : ThemeActivity() {
                 return true
             }
             R.id.showComments -> {
-                val intent = Intent(this@TopicActivity, CommentActivity::class.java)
+                val intent = Intent(this, CommentActivity::class.java)
                 intent.putExtra(CommentActivity.ARG_URL, url)
                 startActivity(intent)
                 return true

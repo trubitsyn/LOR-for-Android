@@ -169,7 +169,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onForumSectionRequested(group: String, name: String) {
-        val intent = Intent(this@MainActivity, ForumSectionActivity::class.java)
+        val intent = Intent(this, ForumSectionActivity::class.java)
         intent.putExtra(ForumSectionActivity.ARG_GROUP, group)
         intent.putExtra(ForumSectionActivity.ARG_NAME, name)
         startActivity(intent)
