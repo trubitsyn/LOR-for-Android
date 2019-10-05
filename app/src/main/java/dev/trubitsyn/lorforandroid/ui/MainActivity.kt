@@ -17,7 +17,6 @@
 
 package dev.trubitsyn.lorforandroid.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
@@ -33,7 +32,6 @@ import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragmentDirections
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragmentDirections
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
-import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
 class MainActivity : ThemeActivity(), ItemClickCallback {
@@ -74,10 +72,7 @@ class MainActivity : ThemeActivity(), ItemClickCallback {
     }
 
     override fun onTopicRequested(url: String) {
-        Intent(this, TopicActivity::class.java).apply {
-            putExtra(TopicActivity.ARG_URL, url)
-            startActivity(this)
-        }
+        // TODO
     }
 
     override fun onGalleryTopicRequested(item: GalleryItem) {

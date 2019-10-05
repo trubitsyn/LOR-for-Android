@@ -21,17 +21,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Topic
@@ -54,7 +51,7 @@ class TopicFragment : LoadableFragment() {
     private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
     private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
     private lateinit var url: String
-    private lateinit var imageUrl: String
+    private var imageUrl: String? = null
     private lateinit var topic: Topic
 
     private val args by navArgs<TopicFragmentArgs>()
@@ -62,8 +59,28 @@ class TopicFragment : LoadableFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-        url = arguments!!.getString(ARG_URL)!!
-        imageUrl = arguments!!.getString(ARG_IMAGE_URL)!!
+        url = args.url
+        imageUrl = args.imageUrl
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_topic, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                return true
+            }
+            R.id.showComments -> {
+                val action = TopicFragmentDirections.actionTopicToComment(url)
+                findNavController().navigate(action)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -112,11 +129,11 @@ class TopicFragment : LoadableFragment() {
             tags.visibility = View.GONE
         }
 
-        image.let {
+        imageUrl?.let {
             if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
                 loadImageAndSetImageActivityListener()
             } else {
-                it.setOnClickListener { loadImageAndSetImageActivityListener() }
+                image.setOnClickListener { loadImageAndSetImageActivityListener() }
             }
         }
 
@@ -143,17 +160,6 @@ class TopicFragment : LoadableFragment() {
     override fun dataView() = scrollView
 
     companion object {
-        const val ARG_URL = "url"
-        const val ARG_IMAGE_URL = "imageUrl"
         const val TAG = "topicFragment"
-
-        fun newInstance(url: String, imageUrl: String): TopicFragment {
-            val fragment = TopicFragment()
-            val args = Bundle()
-            args.putString(ARG_URL, url)
-            args.putString(ARG_IMAGE_URL, imageUrl)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }

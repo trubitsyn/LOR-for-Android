@@ -22,22 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicActivity"
-            android:label="@string/activity_topic"
-            android:launchMode="singleTop">
-        </activity>
-        <activity
             android:name="dev.trubitsyn.lorforandroid.ui.ImageActivity"
             android:label="@string/activity_image"
             android:launchMode="singleTop"
             android:theme="@style/ImageActivityTheme">
-        </activity>
-        <activity
-            android:name="dev.trubitsyn.lorforandroid.ui.comment.CommentActivity"
-            android:label="@string/activity_comments">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.trubitsyn.lorforandroid.ui.topic.TopicActivity" />
         </activity>
     </application>
 

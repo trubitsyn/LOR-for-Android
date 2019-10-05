@@ -18,6 +18,8 @@
 package dev.trubitsyn.lorforandroid.ui.comment
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.navigation.fragment.navArgs
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
@@ -28,7 +30,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CommentFragment : BaseListFragment() {
+class CommentFragment : BaseListFragment(), CommentClickListener {
     private var page: Int = 0
     private var previousCount = 0
     private lateinit var url: String
@@ -37,7 +39,24 @@ class CommentFragment : BaseListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        url = arguments!!.getString(ARG_URL)!!
+        url = args.url
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.refreshButton -> {
+                resetState()
+                errorView!!.visibility = View.GONE
+                fetchData()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun showParent(comments: List<Comment>, parentComment: Comment) {
+        val commentPreviewFragment = CommentPreviewFragment.newInstance(comments, parentComment)
+        commentPreviewFragment.show(childFragmentManager, CommentPreviewFragment.TAG)
     }
 
     override fun fetchData() {
@@ -87,17 +106,8 @@ class CommentFragment : BaseListFragment() {
         get() = CommentAdapter(items as List<Comment>, context_)
 
     companion object {
-        const val ARG_URL = "url"
         const val TAG = "commentFragment"
 
         private const val COMMENTS_PER_PAGE = 50
-
-        fun newInstance(url: String): CommentFragment {
-            val commentFragment = CommentFragment()
-            val args = Bundle()
-            args.putString(ARG_URL, url)
-            commentFragment.arguments = args
-            return commentFragment
-        }
     }
 }
