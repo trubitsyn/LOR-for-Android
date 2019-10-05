@@ -23,12 +23,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.util.DividerItemDecoration
 import dev.trubitsyn.lorforandroid.ui.util.InfiniteScrollListener
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 
@@ -54,15 +54,13 @@ abstract class BaseListFragment : RefreshableFragment() {
         val layoutManager = LinearLayoutManager(context_)
         recyclerView.layoutManager = layoutManager
         if (showDividers()) {
-            recyclerView.addItemDecoration(DividerItemDecoration(context_))
+            recyclerView.addItemDecoration(DividerItemDecoration(context_, DividerItemDecoration.VERTICAL))
         }
-
         scrollListener = object : InfiniteScrollListener(layoutManager) {
             override fun onLoadMore() {
                 if (loadMoreAllowed()) fetchData()
             }
         }
-
         recyclerView!!.addOnScrollListener(scrollListener!!)
     }
 
