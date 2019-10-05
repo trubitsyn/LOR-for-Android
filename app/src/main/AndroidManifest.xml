@@ -22,13 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionActivity"
-            android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.trubitsyn.lorforandroid.ui.MainActivity" />
-        </activity>
-        <activity
             android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicActivity"
             android:label="@string/activity_topic"
             android:launchMode="singleTop">
