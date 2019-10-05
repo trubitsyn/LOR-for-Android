@@ -25,39 +25,41 @@ import org.jsoup.nodes.Element
 
 class TrackerItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
-        val topics = body.select("tbody > tr")
-        for (topic in topics) {
-            val url = topic
+        val topics = body
+                .select("tbody > tr")
+
+        topics.forEach {
+            val url = it
                     .select("td:eq(1)")
                     .select("a")
                     .first()
                     .attr("href")
                     .substring(1)
-            val title = topic
+            val title = it
                     .select("td:eq(1)")
                     .select("a")
                     .first()
                     .ownText()
                     .let { Html.fromHtml(it) }
                     .toString()
-            val groupTitle = topic
+            val groupTitle = it
                     .select("a.secondary")
                     .first()
                     .ownText()
-            val tags = topic
+            val tags = it
                     .select("span.tag")
                     .let { StringUtils.tagsFromElements(it) }
-            val date = topic
+            val date = it
                     .select("time")
                     .first()
                     .ownText()
-            val author = topic
+            val author = it
                     .select("td.dateinterval > time")
                     .first()
                     .nextSibling()
                     .toString()
                     .replace(", ", "")
-            val comments = topic
+            val comments = it
                     .select("td.numbers")
                     .first()
                     .ownText()

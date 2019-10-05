@@ -22,15 +22,20 @@ import org.jsoup.nodes.Element
 
 class ForumOverviewItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
-        val sections = body.select("div#bd").select("ul").first().select("li")
-        for (section in sections) {
-            val url = section
+        val sections = body
+                .select("div#bd")
+                .select("ul")
+                .first()
+                .select("li")
+
+        sections.forEach {
+            val url = it
                     .select("a")
                     .first()
                     .attr("href")
                     .replace("/forum/", "")
                     .replace("/", "")
-            val name = section
+            val name = it
                     .select("a")
                     .first()
                     .ownText()

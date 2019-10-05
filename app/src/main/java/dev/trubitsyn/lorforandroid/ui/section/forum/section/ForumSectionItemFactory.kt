@@ -23,9 +23,11 @@ import org.jsoup.nodes.Element
 
 class ForumSectionItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
-        val entries = body.select("tbody tr")
-        for (entry in entries) {
-            val properties = entry
+        val entries = body
+                .select("tbody tr")
+
+        entries.forEach {
+            val properties = it
                     .select("td")
                     .first()
             val url = properties
@@ -42,7 +44,7 @@ class ForumSectionItemFactory : ItemFactory {
                     .first()
                     .select("span.tag")
                     .let { StringUtils.tagsFromElements(it) }
-            val date = entry
+            val date = it
                     .select("td.dateinterval")
                     .first()
                     .select("time")
@@ -53,7 +55,7 @@ class ForumSectionItemFactory : ItemFactory {
             val author = bareAuthor
                     .substring(bareAuthor.lastIndexOf("("), bareAuthor.lastIndexOf(")"))
                     .replace("[()]".toRegex(), "")
-            val comments = entry
+            val comments = it
                     .select("td.numbers")
                     .first()
                     .ownText()

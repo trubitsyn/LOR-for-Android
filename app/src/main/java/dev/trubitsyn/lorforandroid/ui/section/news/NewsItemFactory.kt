@@ -25,22 +25,24 @@ import org.jsoup.nodes.Element
 
 class NewsItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
-        val articles = body.select("article")
-        for (article in articles) {
-            if (article.hasClass("mini-news")) {
+        val articles = body
+                .select("article")
+
+        articles.forEach {
+            if (it.hasClass("mini-news")) {
                 // Mini-news article
-                val url = article
+                val url = it
                         .select("a[href^=/news/]")
                         .first()
                         .attr("href")
                         .substring(1)
-                val title = article
+                val title = it
                         .select("a[href^=/news/]")
                         .first()
                         .ownText()
                         .let { Html.fromHtml(it) }
                         .toString()
-                val commentsCount = article
+                val commentsCount = it
                         .select("a")
                         .first()
                         .nextSibling()
@@ -56,35 +58,35 @@ class NewsItemFactory : ItemFactory {
                 ))
             } else {
                 // Standard article
-                val url = article
+                val url = it
                         .select("h1 > a[href^=/news/]")
                         .first()
                         .attr("href")
                         .substring(1)
-                val title = article
+                val title = it
                         .select("h1 > a[href^=/news/]")
                         .first()
                         .ownText()
                         .let { Html.fromHtml(it) }
                         .toString()
-                val groupTitle = article
+                val groupTitle = it
                         .select("div.group")
                         .first()
                         .text()
                         .let { StringUtils.removeSectionName(it) }
-                val tags = article
+                val tags = it
                         .select("a.tag")
                         .let { StringUtils.tagsFromElements(it) }
-                val date = article
+                val date = it
                         .select("time")
                         .first()
                         .ownText()
-                val author = article
+                val author = it
                         .select("a[itemprop^=creator], div.sign:contains(anonymous)")
                         .first()
                         ?.ownText()
                         ?.replace(" ()", "")
-                val comments = article
+                val comments = it
                         .select("div.nav > a[href$=#comments]:eq(0)")
                         .first()
                         ?.ownText()

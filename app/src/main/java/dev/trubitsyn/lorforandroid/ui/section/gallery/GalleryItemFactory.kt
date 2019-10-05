@@ -24,42 +24,44 @@ import org.jsoup.nodes.Element
 
 class GalleryItemFactory : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
-        val articles = body.select("article.news")
-        for (article in articles) {
-            val url = article
+        val articles = body
+                .select("article.news")
+
+        articles.forEach {
+            val url = it
                     .select("h1 > a[href^=/gallery/]")
                     .first()
                     .attr("href")
                     .substring(1)
-            val title = article
+            val title = it
                     .select("h1 > a[href^=/gallery/]")
                     .first()
                     .ownText()
                     .let { Html.fromHtml(it) }
                     .toString()
-            val group = article
+            val group = it
                     .select("div.group")
                     .first()
-            val groupTitle = if (group != null) StringUtils.removeSectionName(group.text()) else null
-            val tags = StringUtils.tagsFromElements(article.select("a.tag"))
-            val date = article
+            val groupTitle = group?.let { StringUtils.removeSectionName(group.text()) }
+            val tags = StringUtils.tagsFromElements(it.select("a.tag"))
+            val date = it
                     .select("time")
                     .first()
                     .ownText()
                     .split(" ".toRegex())
                     .dropLastWhile { it.isEmpty() }
                     .toTypedArray()[0]
-            val author = article
+            val author = it
                     .select("a[itemprop^=creator], div.sign:contains(anonymous)")
                     .first()
                     .ownText()
                     .replace(" ()", "")
-            val comments = article
+            val comments = it
                     .select("div.nav > a[href$=#comments]:eq(0)")
                     .first()
                     .ownText()
                     .replace("\\D+".toRegex(), "")
-            val imageUrl = article
+            val imageUrl = it
                     .select("a[itemprop^=contentURL]")
                     .attr("href")
             val withoutExtension = imageUrl.substring(0, imageUrl.length - 4)
