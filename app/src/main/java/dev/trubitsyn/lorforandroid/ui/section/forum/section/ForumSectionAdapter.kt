@@ -35,19 +35,19 @@ class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerV
     override fun onBindViewHolder(v: ForumSectionViewHolder, position: Int) {
         val item = items[position]
         v.apply {
-            title!!.text = item.title
+            title.text = item.title
 
             if (item.isPinned) {
-                pinned!!.visibility = View.VISIBLE
+                pinned.visibility = View.VISIBLE
             }
 
             if (item.tags == null || item.tags.isNotEmpty()) {
-                tags!!.text = item.tags
+                tags.text = item.tags
             } else
-                tags!!.visibility = View.GONE
-            replyFrom!!.text = item.author
-            replyDate!!.text = item.date
-            commentsCount!!.text = item.comments
+                tags.visibility = View.GONE
+            replyFrom.text = item.author
+            replyDate.text = item.date
+            commentsCount.text = item.comments
         }
     }
 

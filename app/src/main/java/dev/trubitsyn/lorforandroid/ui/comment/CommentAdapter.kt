@@ -34,7 +34,7 @@ class CommentAdapter(private val comments: List<Comment>, private val context: C
     override fun onBindViewHolder(v: CommentViewHolder, position: Int) {
         v.setIsRecyclable(false)
         val comment = comments[position]
-        CommentUtils.initView(comments, comment, context, v.replyTo!!, v.message!!, v.author!!, v.stars!!, v.date!!)
+        CommentUtils.initView(comments, comment, context, v.replyTo, v.message, v.author, v.stars, v.date)
     }
 
     override fun getItemCount() = comments.size

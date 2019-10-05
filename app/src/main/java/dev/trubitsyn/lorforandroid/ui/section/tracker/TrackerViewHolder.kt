@@ -25,10 +25,10 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
 class TrackerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.trackerTitle) }
-    val category by lazy { itemView.findViewById<TextView>(R.id.trackerGroupTitle) }
-    val tags by lazy { itemView.findViewById<TextView>(R.id.trackerTags) }
-    val author by lazy { itemView.findViewById<TextView>(R.id.trackerAuthor) }
-    val date by lazy { itemView.findViewById<TextView>(R.id.trackerDate) }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.trackerCommentsCount) }
+    val title by lazy { itemView.findViewById<TextView>(R.id.trackerTitle)!! }
+    val category by lazy { itemView.findViewById<TextView>(R.id.trackerGroupTitle)!! }
+    val tags by lazy { itemView.findViewById<TextView>(R.id.trackerTags)!! }
+    val author by lazy { itemView.findViewById<TextView>(R.id.trackerAuthor)!! }
+    val date by lazy { itemView.findViewById<TextView>(R.id.trackerDate)!! }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.trackerCommentsCount)!! }
 }

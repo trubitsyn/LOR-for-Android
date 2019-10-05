@@ -50,19 +50,19 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
             MINI -> {
                 val miniNewsItem = items[i] as MiniNewsItem
                 (viewHolder as MiniNewsViewHolder).apply {
-                    title!!.text = miniNewsItem.title
-                    commentsCount!!.text = miniNewsItem.commentsCount
+                    title.text = miniNewsItem.title
+                    commentsCount.text = miniNewsItem.commentsCount
                 }
             }
             FULL -> {
                 val newsItem = items[i] as Item
                 (viewHolder as NewsViewHolder).apply {
                     title.text = newsItem.title
-                    category!!.text = newsItem.groupTitle
-                    tags!!.text = newsItem.tags
-                    author!!.text = newsItem.author
-                    date!!.text = newsItem.date
-                    commentsCount!!.text = newsItem.comments
+                    category.text = newsItem.groupTitle
+                    tags.text = newsItem.tags
+                    author.text = newsItem.author
+                    date.text = newsItem.date
+                    commentsCount.text = newsItem.comments
                 }
             }
         }

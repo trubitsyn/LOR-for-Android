@@ -41,28 +41,28 @@ class GalleryAdapter(private val items: List<GalleryItem>, private val context: 
     override fun onBindViewHolder(viewHolder: GalleryViewHolder, i: Int) {
         val item = items[i]
         viewHolder.apply {
-            title!!.text = item.title
+            title.text = item.title
             if (item.groupTitle == null) {
-                category!!.visibility = View.GONE
+                category.visibility = View.GONE
             } else
-                category!!.text = item.groupTitle
+                category.text = item.groupTitle
 
             if (item.tags.isEmpty()) {
-                tags!!.visibility = View.GONE
+                tags.visibility = View.GONE
             } else
-                tags!!.text = item.tags
+                tags.text = item.tags
 
-            date!!.text = item.date
-            author!!.text = item.author
-            commentsCount!!.text = item.comments
+            date.text = item.date
+            author.text = item.author
+            commentsCount.text = item.comments
 
             if (shouldLoadImages) {
                 Glide.with(context)
                         .load(item.mediumImageUrl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(viewHolder.image!!)
+                        .into(viewHolder.image)
             } else
-                image!!.visibility = View.GONE
+                image.visibility = View.GONE
         }
     }
 

@@ -25,10 +25,10 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    internal val title: TextView by lazy { itemView.findViewById<TextView>(R.id.newsTitle) }
-    internal val category by lazy { itemView.findViewById<TextView>(R.id.newsCategory) }
-    internal val tags by lazy { itemView.findViewById<TextView>(R.id.newsTags) }
-    internal val author by lazy { itemView.findViewById<TextView>(R.id.newsAuthor) }
-    internal val date by lazy { itemView.findViewById<TextView>(R.id.newsDate) }
-    internal val commentsCount by lazy { itemView.findViewById<TextView>(R.id.newsCommentsCount) }
+    internal val title: TextView by lazy { itemView.findViewById<TextView>(R.id.newsTitle)!! }
+    internal val category by lazy { itemView.findViewById<TextView>(R.id.newsCategory)!! }
+    internal val tags by lazy { itemView.findViewById<TextView>(R.id.newsTags)!! }
+    internal val author by lazy { itemView.findViewById<TextView>(R.id.newsAuthor)!! }
+    internal val date by lazy { itemView.findViewById<TextView>(R.id.newsDate)!! }
+    internal val commentsCount by lazy { itemView.findViewById<TextView>(R.id.newsCommentsCount)!! }
 }

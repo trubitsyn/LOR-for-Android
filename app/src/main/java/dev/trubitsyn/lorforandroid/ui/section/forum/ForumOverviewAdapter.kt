@@ -31,7 +31,7 @@ class ForumOverviewAdapter(private val sections: List<ForumOverviewItem>) : Recy
     }
 
     override fun onBindViewHolder(v: ForumOverviewViewHolder, position: Int) {
-        v.itemName!!.text = sections[position].name
+        v.itemName.text = sections[position].name
     }
 
     override fun getItemCount() = sections.size
