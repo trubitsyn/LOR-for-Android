@@ -20,7 +20,6 @@ package dev.trubitsyn.lorforandroid.ui.section.news
 import android.content.Context
 import android.text.Html
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
@@ -94,7 +93,7 @@ class NewsItemFactory(val context: Context) : ItemFactory {
                         ?.ownText()
                         ?: context.getString(R.string.comments_limited)
 
-                items.add(Item(
+                items.add(NewsItem(
                         url = url,
                         title = title,
                         groupTitle = groupTitle,

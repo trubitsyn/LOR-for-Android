@@ -19,7 +19,6 @@ package dev.trubitsyn.lorforandroid.ui.section.news
 
 import androidx.navigation.fragment.findNavController
 import com.loopj.android.http.RequestParams
-import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 
 class NewsFragment : SectionFragment() {
@@ -42,7 +41,7 @@ class NewsFragment : SectionFragment() {
     override fun onItemClickCallback(position: Int) {
         val url = when (val item = items[position]) {
             is MiniNewsItem -> item.url
-            is Item -> item.url
+            is NewsItem -> item.url
             else -> null
         } ?: throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
 

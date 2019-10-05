@@ -21,13 +21,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.Item
 
 class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int) = when (items[position]) {
         is MiniNewsItem -> MINI
-        is Item -> FULL
+        is NewsItem -> FULL
         else -> -1
     }
 
@@ -55,7 +54,7 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
                 }
             }
             FULL -> {
-                val newsItem = items[i] as Item
+                val newsItem = items[i] as NewsItem
                 (viewHolder as NewsViewHolder).apply {
                     title.text = newsItem.title
                     category.text = newsItem.groupTitle
