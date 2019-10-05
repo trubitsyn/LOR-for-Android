@@ -37,24 +37,18 @@ abstract class SectionFragment : BaseListFragment() {
     private val maxOffset = getMaxOffset()
     private val handler = object : AsyncHttpResponseHandler() {
         override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
-            var resp: String? = null
-            try {
-                resp = String(responseBody, Charset.forName("UTF-8"))
-            } catch (e: UnsupportedEncodingException) {
-                // Will never execute
+            val body = try {
+                val resp = String(responseBody, Charset.forName("UTF-8"))
+                Jsoup.parse(resp).body()
+            } catch (e: Exception) {
+                null
             }
-
-            try {
-                val body = Jsoup.parse(resp!!).body()
+            body?.let {
                 itemFactory.prepareItems(body, items)
-            } catch (e: NullPointerException) {
-                showUserFriendlyError(R.string.error_npe)
-                return
-            }
-
-            offset += itemsPerPage
-            adapter.notifyDataSetChanged()
-            stopRefreshAndShow()
+                offset += itemsPerPage
+                adapter.notifyDataSetChanged()
+                stopRefreshAndShow()
+            } ?: showUserFriendlyError(R.string.error_npe)
         }
 
         override fun onFailure(statusCode: Int, headers: Array<Header>, responseBody: ByteArray, error: Throwable) {
