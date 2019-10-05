@@ -47,7 +47,7 @@ class GalleryFragment : SectionFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        filter = arguments!!.getInt(ARG_FILTER)
+        filter = args.filter.ordinal
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,15 +75,6 @@ class GalleryFragment : SectionFragment() {
     }
 
     companion object {
-        const val ARG_FILTER = "filter"
         const val TAG = "galleryFragment"
-
-        fun newInstance(galleryFilterEnum: GalleryFilterEnum): GalleryFragment {
-            val galleryFragment = GalleryFragment()
-            val args = Bundle()
-            args.putInt(ARG_FILTER, galleryFilterEnum.ordinal)
-            galleryFragment.arguments = args
-            return galleryFragment
-        }
     }
 }
