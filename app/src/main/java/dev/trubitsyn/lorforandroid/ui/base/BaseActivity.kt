@@ -23,7 +23,7 @@ import androidx.appcompat.widget.Toolbar
 import dev.trubitsyn.lorforandroid.R
 
 abstract class BaseActivity : AppCompatActivity() {
-    protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop) }
+    protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop)!! }
     protected var actionBar: ActionBar? = null
 
     protected fun setupActionBar(activity: AppCompatActivity) {
