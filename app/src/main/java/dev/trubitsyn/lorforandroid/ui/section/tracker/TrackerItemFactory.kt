@@ -18,7 +18,6 @@
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.text.Html
-import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
@@ -65,7 +64,7 @@ class TrackerItemFactory : ItemFactory {
                     .ownText()
                     .let(StringUtils::numericStringToHumanReadable)
 
-            items.add(Item(
+            items.add(TrackerItem(
                     url = url,
                     title = title,
                     groupTitle = groupTitle,

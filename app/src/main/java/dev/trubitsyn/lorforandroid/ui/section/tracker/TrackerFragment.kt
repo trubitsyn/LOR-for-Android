@@ -60,10 +60,10 @@ class TrackerFragment : SectionFragment() {
 
     override fun getMaxOffset() = 180
 
-    override fun getAdapter_() = TrackerAdapter(items as MutableList<Item>)
+    override fun getAdapter_() = TrackerAdapter(items as MutableList<TrackerItem>)
 
     override fun onItemClickCallback(position: Int) {
-        val item = items[position] as Item
+        val item = items[position] as TrackerItem
         if (GalleryUtils.isGalleryUrl(item.url)) {
             val imagesUrl = GalleryUtils.getGalleryImagesUrl(item.url)
             val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)

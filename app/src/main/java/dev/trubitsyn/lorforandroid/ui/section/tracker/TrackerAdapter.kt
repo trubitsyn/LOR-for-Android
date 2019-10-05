@@ -21,9 +21,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.Item
 
-class TrackerAdapter(private val items: List<Item>) : RecyclerView.Adapter<TrackerViewHolder>() {
+class TrackerAdapter(private val items: List<TrackerItem>) : RecyclerView.Adapter<TrackerViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
