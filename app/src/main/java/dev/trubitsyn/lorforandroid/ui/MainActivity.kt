@@ -18,13 +18,10 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
@@ -46,19 +43,7 @@ class MainActivity : ThemeActivity() {
         setContentView(R.layout.activity_main)
         setupActionBar()
         navigationView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp() = navController.navigateUp(drawerLayout)
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                drawerLayout.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     override fun onBackPressed() {
