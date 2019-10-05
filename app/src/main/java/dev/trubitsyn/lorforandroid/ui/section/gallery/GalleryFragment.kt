@@ -64,7 +64,8 @@ class GalleryFragment : SectionFragment() {
 
     override val maxOffset = 200
 
-    override val adapter = GalleryAdapter(items as MutableList<GalleryItem>, context_)
+    override val adapter
+        get() = GalleryAdapter(items as MutableList<GalleryItem>, context_)
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as GalleryItem

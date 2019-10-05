@@ -80,7 +80,8 @@ class CommentFragment : BaseListFragment() {
         previousCount = 0
     }
 
-    override val adapter = CommentAdapter(items as List<Comment>, context_)
+    override val adapter: CommentAdapter
+        get() = CommentAdapter(items as List<Comment>, context_)
 
     companion object {
         const val ARG_URL = "url"
