@@ -18,112 +18,43 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
-import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragment
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionActivity
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
-import dev.trubitsyn.lorforandroid.ui.section.news.NewsFragment
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment
 import dev.trubitsyn.lorforandroid.ui.topic.TopicActivity
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
-import kotlin.properties.Delegates
 
-class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedListener, ItemClickCallback {
+class MainActivity : ThemeActivity(), ItemClickCallback {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
-    private lateinit var drawerToggle: ActionBarDrawerToggle
-    private var navigationItemId by Delegates.notNull<Int>()
+    private val navController by lazy { findNavController(R.id.main_content) }
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(
+                setOf(R.id.news, R.id.gallery, R.id.tracker, R.id.forum, R.id.settings),
+                drawerLayout
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
-        navigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
-                ?: if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
-                    R.id.drawer_settings
-                } else {
-                    R.id.drawer_news
-                }
-
-        navigationView.setNavigationItemSelectedListener(this)
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close)
-        drawerLayout.addDrawerListener(drawerToggle)
-        drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                navigate(navigationItemId)
-            }
-        })
-        drawerToggle.syncState()
-        onNavigationItemSelected(navigationView.menu.findItem(navigationItemId))
+        navigationView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        menuItem.isChecked = true
-        navigationItemId = menuItem.itemId
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            navigate(navigationItemId)
-        }
-        return true
-    }
-
-    private class NavigationTarget(val title: Int, val fragmentFunc: () -> Fragment, val tag: String)
-
-    private fun navigate(selection: Int) {
-        supportActionBar!!.setDisplayShowCustomEnabled(false)
-        when (selection) {
-            R.id.drawer_news -> NavigationTarget(
-                    title = R.string.drawer_news,
-                    fragmentFunc = { NewsFragment() },
-                    tag = NewsFragment.TAG
-            )
-            R.id.drawer_gallery -> NavigationTarget(
-                    title = R.string.drawer_gallery,
-                    fragmentFunc = { GalleryFragment.newInstance(GalleryFilterEnum.all) },
-                    tag = GalleryFragment.TAG
-            )
-            R.id.drawer_tracker -> NavigationTarget(
-                    title = R.string.drawer_tracker,
-                    fragmentFunc = { TrackerFragment.newInstance(TrackerFilterEnum.all) },
-                    tag = TrackerFragment.TAG
-            )
-            R.id.drawer_forum -> NavigationTarget(
-                    title = R.string.drawer_forum,
-                    fragmentFunc = { ForumOverviewFragment() },
-                    tag = ForumOverviewFragment.TAG
-            )
-            R.id.drawer_settings -> NavigationTarget(
-                    title = R.string.drawer_settings,
-                    fragmentFunc = { SettingsFragment() },
-                    tag = SettingsFragment.TAG
-            )
-            else -> null
-        }?.let {
-            supportActionBar!!.setTitle(it.title)
-            supportFragmentManager.apply {
-                val fragment = findFragmentByTag(it.tag) ?: it.fragmentFunc()
-                beginTransaction()
-                        .replace(R.id.fragmentContainer, fragment, it.tag)
-                        .commit()
-                executePendingTransactions()
-            }
-        }
-    }
+    override fun onSupportNavigateUp() = navController.navigateUp(drawerLayout)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -139,16 +70,6 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else super.onBackPressed()
-    }
-
-    override fun onConfigurationChanged(newConfiguration: Configuration) {
-        super.onConfigurationChanged(newConfiguration)
-        drawerToggle.onConfigurationChanged(newConfiguration)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(ARG_NAV_ITEM_ID, navigationItemId)
     }
 
     override fun onTopicRequested(url: String) {
@@ -172,9 +93,5 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
             putExtra(ForumSectionActivity.ARG_NAME, name)
             startActivity(this)
         }
-    }
-
-    companion object {
-        private const val ARG_NAV_ITEM_ID = "navItemId"
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/news">
+
+    <fragment
+        android:id="@+id/news"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.news.NewsFragment"
+        android:label="@string/drawer_news" />
+    <fragment
+        android:id="@+id/gallery"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment"
+        android:label="@string/drawer_gallery" >
+        <argument
+            android:name="filter"
+            app:argType="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum"
+            android:defaultValue="all" />
+    </fragment>
+    <fragment
+        android:id="@+id/tracker"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment"
+        android:label="@string/drawer_tracker" >
+        <argument
+            android:name="filter"
+            app:argType="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum"
+            android:defaultValue="all" />
+    </fragment>
+    <fragment
+        android:id="@+id/forum"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragment"
+        android:label="@string/drawer_forum" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="dev.trubitsyn.lorforandroid.ui.SettingsFragment"
+        android:label="@string/drawer_settings" />
+</navigation>

@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_news"
+            android:id="@+id/news"
             android:icon="@drawable/ic_library_books_24dp"
             android:title="@string/drawer_news" />
         <item
-            android:id="@+id/drawer_gallery"
+            android:id="@+id/gallery"
             android:icon="@drawable/ic_image_24dp"
             android:title="@string/drawer_gallery" />
         <item
-            android:id="@+id/drawer_tracker"
+            android:id="@+id/tracker"
             android:icon="@drawable/ic_whatshot_24dp"
             android:title="@string/drawer_tracker" />
         <item
-            android:id="@+id/drawer_forum"
+            android:id="@+id/forum"
             android:icon="@drawable/ic_forum_24dp"
             android:title="@string/drawer_forum"/>
     </group>
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_settings"
+            android:id="@+id/settings"
             android:icon="@drawable/ic_settings_24dp"
             android:title="@string/drawer_settings" />
     </group>
