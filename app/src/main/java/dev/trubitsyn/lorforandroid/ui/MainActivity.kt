@@ -86,7 +86,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
 
     private fun navigate(selection: Int) {
         supportActionBar!!.setDisplayShowCustomEnabled(false)
-        val target = when (selection) {
+        when (selection) {
             R.id.drawer_news -> NavigationTarget(
                     title = R.string.drawer_news,
                     fragmentFunc = { NewsFragment() },
@@ -113,15 +113,15 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
                     tag = SettingsFragment.TAG
             )
             else -> null
-        }
-        target?.let {
+        }?.let {
             supportActionBar!!.setTitle(it.title)
-            val fragment = supportFragmentManager.findFragmentByTag(it.tag) ?: it.fragmentFunc()
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment, it.tag)
-                    .commit()
-            supportFragmentManager.executePendingTransactions()
+            supportFragmentManager.apply {
+                val fragment = findFragmentByTag(it.tag) ?: it.fragmentFunc()
+                beginTransaction()
+                        .replace(R.id.fragmentContainer, fragment, it.tag)
+                        .commit()
+                executePendingTransactions()
+            }
         }
     }
 
