@@ -29,12 +29,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
-import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragmentDirections
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragmentDirections
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
-import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
-class MainActivity : ThemeActivity(), ItemClickCallback {
+class MainActivity : ThemeActivity() {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
     private val navController by lazy { findNavController(R.id.main_content) }
@@ -69,25 +65,5 @@ class MainActivity : ThemeActivity(), ItemClickCallback {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else super.onBackPressed()
-    }
-
-    override fun onTopicRequested(url: String) {
-        // TODO
-    }
-
-    override fun onGalleryTopicRequested(item: GalleryItem) {
-        val action = GalleryFragmentDirections.actionGalleryToTopic(
-                url = item.url,
-                imageUrl = item.imageUrl
-        )
-        navController.navigate(action)
-    }
-
-    override fun onForumSectionRequested(group: String, name: String) {
-        val action = ForumOverviewFragmentDirections.actionForumOverviewToForumSection(
-                group = group,
-                name = name
-        )
-        navController.navigate(action)
     }
 }

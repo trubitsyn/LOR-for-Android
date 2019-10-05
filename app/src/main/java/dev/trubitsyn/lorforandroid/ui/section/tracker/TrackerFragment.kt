@@ -20,13 +20,13 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
-import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
 class TrackerFragment : SectionFragment() {
@@ -75,10 +75,17 @@ class TrackerFragment : SectionFragment() {
             // TODO: Url of high-res image in GalleryItem
             // Currently cannot get it because images can either have .png extension or .jpg and there's no way to determine the correct without issuing a HTTP request.
             val galleryItem = GalleryItem(item.url, item.title, item.groupTitle, item.date, item.tags, item.author!!, item.comments, medium2xImageUrl, medium2xImageUrl, mediumImageUrl)
-
-            (context_ as ItemClickCallback).onGalleryTopicRequested(galleryItem)
+            val action = TrackerFragmentDirections.actionTrackerToTopic(
+                    url = galleryItem.url,
+                    imageUrl = galleryItem.imageUrl
+            )
+            findNavController().navigate(action)
         } else {
-            (context_ as ItemClickCallback).onTopicRequested(item.url)
+            val action = TrackerFragmentDirections.actionTrackerToTopic(
+                    url = item.url,
+                    imageUrl = null
+            )
+            findNavController().navigate(action)
         }
     }
 

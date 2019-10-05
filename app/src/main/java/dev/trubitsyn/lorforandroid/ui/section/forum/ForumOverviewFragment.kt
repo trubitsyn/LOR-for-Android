@@ -20,10 +20,10 @@ package dev.trubitsyn.lorforandroid.ui.section.forum
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
-import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
 class ForumOverviewFragment : SectionFragment() {
@@ -56,7 +56,11 @@ class ForumOverviewFragment : SectionFragment() {
         if (StringUtils.isClub(item.url)) {
             Toast.makeText(context_, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
         } else {
-            (context_ as ItemClickCallback).onForumSectionRequested(item.url, item.name)
+            val action = ForumOverviewFragmentDirections.actionForumOverviewToForumSection(
+                    group = item.url,
+                    name = item.name
+            )
+            findNavController().navigate(action)
         }
     }
 

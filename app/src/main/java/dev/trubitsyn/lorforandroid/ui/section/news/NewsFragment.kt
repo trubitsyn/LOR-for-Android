@@ -17,10 +17,10 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
+import androidx.navigation.fragment.findNavController
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
-import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
 class NewsFragment : SectionFragment() {
 
@@ -46,7 +46,11 @@ class NewsFragment : SectionFragment() {
             else -> null
         } ?: throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
 
-        (context_ as ItemClickCallback).onTopicRequested(url)
+        val action = NewsFragmentDirections.actionNewsToTopic(
+                url = url,
+                imageUrl = null
+        )
+        findNavController().navigate(action)
     }
 
     companion object {
