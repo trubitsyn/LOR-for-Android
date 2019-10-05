@@ -17,29 +17,18 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
 import java.util.*
 
 class Comment {
-    @Expose
     val id: Int? = null
-    @Expose
     val author: Author? = null
-    @Expose
     val processedMessage: String? = null
-    @Expose
     val deletable: Boolean? = null
-    @Expose
     val editable: Boolean? = null
-    @Expose
     val deleted: Boolean? = null
-    @Expose
     val postdate: Date? = null
-    @Expose
     val userpic: Userpic? = null
-    @Expose
     val reply: Reply? = null
-    @Expose
     val editSummary: EditSummary? = null
 
 }

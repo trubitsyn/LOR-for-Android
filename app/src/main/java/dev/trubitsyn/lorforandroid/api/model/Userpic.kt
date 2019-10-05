@@ -17,14 +17,9 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
-
 class Userpic {
-    @Expose
     val url: String? = null
-    @Expose
     val width: Int? = null
-    @Expose
     val height: Int? = null
 
 }

@@ -17,33 +17,20 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
 import java.util.*
 
 class Topic {
-    @Expose
     val tags: List<String>? = null
-    @Expose
     val url: String? = null
-    @Expose
     val title: String? = null
-    @Expose
     val message: String? = null
-    @Expose
     val postDate: Date? = null
-    @Expose
     val lastModified: Date? = null
-    @Expose
     val sticky: Boolean? = null
-    @Expose
     val commentsCount: Int? = null
-    @Expose
     val favsCount: Int? = null
-    @Expose
     val watchCount: Int? = null
-    @Expose
     val postscore: Int? = null
-    @Expose
     val author: Author? = null
 
 }

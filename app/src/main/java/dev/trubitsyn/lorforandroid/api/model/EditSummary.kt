@@ -17,14 +17,9 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
-
 class EditSummary {
-    @Expose
     val editNick: String? = null
-    @Expose
     val editDate: String? = null
-    @Expose
     val editCount: Int? = null
 
 }

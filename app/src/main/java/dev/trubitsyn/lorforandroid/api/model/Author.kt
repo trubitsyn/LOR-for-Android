@@ -17,12 +17,8 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
-
 class Author {
-    @Expose
     val nick: String? = null
-    @Expose
     val stars: String? = null
 
 }

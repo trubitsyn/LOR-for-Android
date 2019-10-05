@@ -17,17 +17,12 @@
 
 package dev.trubitsyn.lorforandroid.api.model
 
-import com.google.gson.annotations.Expose
 import java.util.*
 
 class Reply {
-    @Expose
     val id: Int? = null
-    @Expose
     val author: String? = null
-    @Expose
     val postdate: Date? = null
-    @Expose
     val samePage: Boolean? = null
 
 }
