@@ -59,9 +59,9 @@ class ForumOverviewFragment : SectionFragment() {
         }
     }
 
-    override fun loadMoreAllowed() = false
+    override val loadMoreAllowed = false
 
-    override fun showDividers() = false
+    override val showDividers = false
 
     companion object {
         const val TAG = "forumOverviewFragment"

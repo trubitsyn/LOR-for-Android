@@ -53,12 +53,12 @@ abstract class BaseListFragment : RefreshableFragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context_)
         recyclerView.layoutManager = layoutManager
-        if (showDividers()) {
+        if (showDividers) {
             recyclerView.addItemDecoration(DividerItemDecoration(context_, DividerItemDecoration.VERTICAL))
         }
         scrollListener = object : InfiniteScrollListener(layoutManager) {
             override fun onLoadMore() {
-                if (loadMoreAllowed()) fetchData()
+                if (loadMoreAllowed) fetchData()
             }
         }
         recyclerView!!.addOnScrollListener(scrollListener!!)
@@ -97,9 +97,9 @@ abstract class BaseListFragment : RefreshableFragment() {
         recyclerView!!.adapter = adapter
     }
 
-    protected open fun loadMoreAllowed() = true
+    protected open val loadMoreAllowed = true
 
-    protected open fun showDividers() = true
+    protected open val showDividers = true
 
     protected open fun clearData() = items.clear()
 
