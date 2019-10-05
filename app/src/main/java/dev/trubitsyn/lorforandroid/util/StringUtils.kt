@@ -58,7 +58,7 @@ object StringUtils {
         sb.trimToSize()
     }
 
-    fun removeSectionName(`in`: String) = `in`.substring(`in`.indexOf("-") + 2, `in`.length)
+    fun removeSectionName(`in`: String) = `in`.substring(`in`.indexOf("—") + 2, `in`.length)
 
     fun numericStringToHumanReadable(commentsCount: String): String {
         if (commentsCount == "-") {
