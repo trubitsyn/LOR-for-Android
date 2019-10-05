@@ -17,13 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
+import android.content.Context
 import android.text.Html
+import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class NewsItemFactory : ItemFactory {
+class NewsItemFactory(val context: Context) : ItemFactory {
     override fun prepareItems(body: Element, items: MutableList<Any>) {
         val articles = body
                 .select("article")
@@ -90,7 +92,7 @@ class NewsItemFactory : ItemFactory {
                         .select("div.nav > a[href$=#comments]:eq(0)")
                         .first()
                         ?.ownText()
-                        ?: "Комментарии ограничены"
+                        ?: context.getString(R.string.comments_limited)
 
                 items.add(Item(
                         url = url,

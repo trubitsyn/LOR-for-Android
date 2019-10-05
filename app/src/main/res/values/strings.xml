@@ -47,6 +47,7 @@
         <item quantity="other">%d комментариев</item>
     </plurals>
 
+    <string name="comments_limited">Комментарии ограничены</string>
     <string name="replyTo">Ответ на комментарий от %1$s</string>
 
     <string name="error_access_denied">Вы не можете просматривать этот раздел.</string>
