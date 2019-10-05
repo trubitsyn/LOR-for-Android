@@ -40,14 +40,14 @@ class NewsItemFactory : ItemFactory {
                         .select("a[href^=/news/]")
                         .first()
                         .ownText()
-                        .let { Html.fromHtml(it) }
+                        .let(Html::fromHtml)
                         .toString()
                 val commentsCount = it
                         .select("a")
                         .first()
                         .nextSibling()
                         .toString()
-                        .let { Html.fromHtml(it) }
+                        .let(Html::fromHtml)
                         .toString()
                         .replace("[()]".toRegex(), "")
 
@@ -67,16 +67,16 @@ class NewsItemFactory : ItemFactory {
                         .select("h1 > a[href^=/news/]")
                         .first()
                         .ownText()
-                        .let { Html.fromHtml(it) }
+                        .let(Html::fromHtml)
                         .toString()
                 val groupTitle = it
                         .select("div.group")
                         .first()
                         .text()
-                        .let { StringUtils.removeSectionName(it) }
+                        .let(StringUtils::removeSectionName)
                 val tags = it
                         .select("a.tag")
-                        .let { StringUtils.tagsFromElements(it) }
+                        .let(StringUtils::tagsFromElements)
                 val date = it
                         .select("time")
                         .first()

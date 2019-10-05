@@ -37,7 +37,7 @@ class GalleryItemFactory : ItemFactory {
                     .select("h1 > a[href^=/gallery/]")
                     .first()
                     .ownText()
-                    .let { Html.fromHtml(it) }
+                    .let(Html::fromHtml)
                     .toString()
             val group = it
                     .select("div.group")
@@ -49,7 +49,7 @@ class GalleryItemFactory : ItemFactory {
                     .first()
                     .ownText()
                     .split(" ".toRegex())
-                    .dropLastWhile { it.isEmpty() }
+                    .dropLastWhile(String::isEmpty)
                     .toTypedArray()[0]
             val author = it
                     .select("a[itemprop^=creator], div.sign:contains(anonymous)")

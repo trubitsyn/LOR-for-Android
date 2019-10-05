@@ -40,7 +40,7 @@ class TrackerItemFactory : ItemFactory {
                     .select("a")
                     .first()
                     .ownText()
-                    .let { Html.fromHtml(it) }
+                    .let(Html::fromHtml)
                     .toString()
             val groupTitle = it
                     .select("a.secondary")
@@ -48,7 +48,7 @@ class TrackerItemFactory : ItemFactory {
                     .ownText()
             val tags = it
                     .select("span.tag")
-                    .let { StringUtils.tagsFromElements(it) }
+                    .let(StringUtils::tagsFromElements)
             val date = it
                     .select("time")
                     .first()
@@ -63,7 +63,7 @@ class TrackerItemFactory : ItemFactory {
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let { StringUtils.numericStringToHumanReadable(it) }
+                    .let(StringUtils::numericStringToHumanReadable)
 
             items.add(Item(
                     url = url,

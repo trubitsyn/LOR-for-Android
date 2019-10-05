@@ -29,10 +29,10 @@ object StringUtils {
     * @return /forum/general/12336213
     * */
     fun removeParams(url: String): String {
-        return if (url.split("/".toRegex()).dropLastWhile { it.isEmpty() }.size > 3) {
+        return if (url.split("/".toRegex()).dropLastWhile(String::isEmpty).size > 3) {
             url.substring(0, url.lastIndexOf("/"))
         } else
-            url.split("\\?".toRegex()).dropLastWhile { it.isEmpty() }[0]
+            url.split("\\?".toRegex()).dropLastWhile(String::isEmpty)[0]
     }
 
     fun tagsFromStrings(`in`: List<String>): String {
