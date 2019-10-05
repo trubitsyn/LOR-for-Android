@@ -34,7 +34,5 @@ class ForumOverviewAdapter(private val sections: List<ForumOverviewItem>) : Recy
         v.itemName!!.text = sections[position].name
     }
 
-    override fun getItemCount(): Int {
-        return sections.size
-    }
+    override fun getItemCount() = sections.size
 }

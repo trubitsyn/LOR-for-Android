@@ -29,10 +29,10 @@ object StringUtils {
     * @return /forum/general/12336213
     * */
     fun removeParams(url: String): String {
-        return if (url.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray().size > 3) {
+        return if (url.split("/".toRegex()).dropLastWhile { it.isEmpty() }.size > 3) {
             url.substring(0, url.lastIndexOf("/"))
         } else
-            url.split("\\?".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+            url.split("\\?".toRegex()).dropLastWhile { it.isEmpty() }[0]
     }
 
     fun tagsFromStrings(`in`: List<String>): String {
@@ -58,18 +58,15 @@ object StringUtils {
         sb.trimToSize()
     }
 
-    fun removeSectionName(`in`: String): String {
-        return `in`.substring(`in`.indexOf("-") + 2, `in`.length)
-    }
+    fun removeSectionName(`in`: String) = `in`.substring(`in`.indexOf("-") + 2, `in`.length)
 
     fun numericStringToHumanReadable(commentsCount: String): String {
         if (commentsCount == "-") {
             return "Нет комментариев"
         }
 
-        var parsed = 0
-        try {
-            parsed = Integer.parseInt(commentsCount.substring(commentsCount.length - 1))
+        val parsed = try {
+            Integer.parseInt(commentsCount.substring(commentsCount.length - 1))
         } catch (ignored: NumberFormatException) {
         }
 
@@ -80,11 +77,7 @@ object StringUtils {
         }
     }
 
-    fun removeLineBreak(spanned: Spanned): CharSequence {
-        return spanned.subSequence(0, spanned.length - 2)
-    }
+    fun removeLineBreak(spanned: Spanned) = spanned.subSequence(0, spanned.length - 2)
 
-    fun isClub(url: String): Boolean {
-        return url.contains("club")
-    }
+    fun isClub(url: String) = url.contains("club")
 }

@@ -52,15 +52,12 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         setContentView(R.layout.activity_main)
         setupActionBar(this)
 
-        if (savedInstanceState == null) {
-            if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
-                currentNavigationItemId = R.id.drawer_settings
-            } else {
-                currentNavigationItemId = R.id.drawer_news
-            }
-        } else {
-            currentNavigationItemId = savedInstanceState.getInt(ARG_NAV_ITEM_ID)
-        }
+        currentNavigationItemId = savedInstanceState?.getInt(ARG_NAV_ITEM_ID)
+                ?: if (intent.getBooleanExtra(SettingsFragment.ARG_RESTART_ACTIVITY, false)) {
+                    R.id.drawer_settings
+                } else {
+                    R.id.drawer_news
+                }
 
         navigationView!!.setNavigationItemSelectedListener(this)
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
@@ -75,7 +72,6 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
             }
         })
         drawerToggle!!.syncState()
-
         onNavigationItemSelected(navigationView!!.menu.findItem(currentNavigationItemId))
     }
 
@@ -90,7 +86,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
         return true
     }
 
-    private data class NavigationTarget(val title: Int, val fragmentFunc: () -> Fragment, val tag: String)
+    private class NavigationTarget(val title: Int, val fragmentFunc: () -> Fragment, val tag: String)
 
     private fun navigate(selection: Int) {
         actionBar!!.setDisplayShowCustomEnabled(false)
@@ -146,9 +142,7 @@ class MainActivity : ThemeActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onBackPressed() {
         if (drawerLayout!!.isDrawerOpen(GravityCompat.START)) {
             drawerLayout!!.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+        } else super.onBackPressed()
     }
 
     override fun onConfigurationChanged(newConfiguration: Configuration) {

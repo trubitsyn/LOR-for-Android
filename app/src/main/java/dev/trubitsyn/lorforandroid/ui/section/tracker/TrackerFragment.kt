@@ -20,14 +20,9 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-
-import androidx.recyclerview.widget.RecyclerView
-
 import com.loopj.android.http.RequestParams
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.Item
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
@@ -37,11 +32,9 @@ import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 class TrackerFragment : SectionFragment() {
     private var filter: Int = 0
 
-    override val itemsPerPage: Int
-        get() = 30
+    override val itemsPerPage = 30
 
-    override val path: String
-        get() = "tracker"
+    override val path = "tracker"
 
     override val requestParams: RequestParams
         get() = RequestParams("offset", offset, "filter", TrackerFilterEnum.values()[filter].name)
@@ -63,17 +56,11 @@ class TrackerFragment : SectionFragment() {
         })
     }
 
-    override fun getItemFactory(): ItemFactory {
-        return TrackerItemFactory()
-    }
+    override fun getItemFactory() = TrackerItemFactory()
 
-    override fun getMaxOffset(): Int {
-        return 180
-    }
+    override fun getMaxOffset() = 180
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return TrackerAdapter(items as MutableList<Item>)
-    }
+    override fun getAdapter_() = TrackerAdapter(items as MutableList<Item>)
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as Item

@@ -18,13 +18,12 @@
 package dev.trubitsyn.lorforandroid.util
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
-
 import dev.trubitsyn.lorforandroid.R
 
 object PreferenceUtils {
-    fun shouldLoadImagesOnMobileData(context: Context): Boolean {
+
+    private fun shouldLoadImagesOnMobileData(context: Context): Boolean {
         return getPrefs(context).getBoolean(context.getString(R.string.pref_load_images), false)
     }
 
@@ -34,7 +33,5 @@ object PreferenceUtils {
         } else true
     }
 
-    private fun getPrefs(context: Context): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-    }
+    private fun getPrefs(context: Context) = PreferenceManager.getDefaultSharedPreferences(context)
 }

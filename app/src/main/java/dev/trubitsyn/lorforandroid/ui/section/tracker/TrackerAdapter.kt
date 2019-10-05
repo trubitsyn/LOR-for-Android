@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.Item
 
-internal class TrackerAdapter(private val items: List<Item>) : RecyclerView.Adapter<TrackerViewHolder>() {
+class TrackerAdapter(private val items: List<Item>) : RecyclerView.Adapter<TrackerViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -41,7 +41,5 @@ internal class TrackerAdapter(private val items: List<Item>) : RecyclerView.Adap
         viewHolder.commentsCount!!.text = item.comments
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 }

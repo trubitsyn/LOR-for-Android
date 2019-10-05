@@ -31,11 +31,7 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 
 class GalleryAdapter(private val items: List<GalleryItem>, private val context: Context) : RecyclerView.Adapter<GalleryViewHolder>() {
-    private val shouldLoadImages: Boolean
-
-    init {
-        shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
-    }
+    private val shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GalleryViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_gallery, viewGroup, false)
@@ -66,7 +62,5 @@ class GalleryAdapter(private val items: List<GalleryItem>, private val context: 
             viewHolder.image!!.visibility = View.GONE
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 }

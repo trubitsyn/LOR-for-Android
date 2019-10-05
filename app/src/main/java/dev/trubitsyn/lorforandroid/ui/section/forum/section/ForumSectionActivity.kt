@@ -39,8 +39,8 @@ class ForumSectionActivity : ThemeActivity(), ForumSectionFragment.Callback {
     }
 
     private fun replace() {
-        var fragment = supportFragmentManager.findFragmentByTag(ForumSectionFragment.TAG) as ForumSectionFragment?
-        if (fragment == null) fragment = ForumSectionFragment.newInstance(group!!)
+        val fragment = supportFragmentManager.findFragmentByTag(ForumSectionFragment.TAG)
+                ?: ForumSectionFragment.newInstance(group!!)
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.forumSectionFragment, fragment, ForumSectionFragment.TAG)

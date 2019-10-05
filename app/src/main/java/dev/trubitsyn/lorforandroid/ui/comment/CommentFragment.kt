@@ -18,9 +18,6 @@
 package dev.trubitsyn.lorforandroid.ui.comment
 
 import android.os.Bundle
-
-import androidx.recyclerview.widget.RecyclerView
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Comment
@@ -41,35 +38,31 @@ class CommentFragment : BaseListFragment() {
     }
 
     override fun fetchData() {
-        val comments = ApiManager.INSTANCE.apiComments.getComments(url!!, page)
-        comments.enqueue(object : Callback<Comments> {
+        val call = ApiManager.INSTANCE.apiComments.getComments(url!!, page)
+        call.enqueue(object : Callback<Comments> {
             override fun onResponse(call: Call<Comments>, response: Response<Comments>) {
-                if (response.body() != null) {
-                    if (response.body().comments!!.size > 0) {
-                        val comments = response.body().comments
-                        val commentsPerPage = 50
+                response.body()?.let {
+                    it.comments?.let {
+                        when (it.size) {
+                            0 -> showUserFriendlyError(R.string.error_no_comments)
+                            else -> {
+                                if (previousCount < COMMENTS_PER_PAGE) {
+                                    // Add new comments to existing "page"
+                                    items.subList(items.size - previousCount, items.size).clear()
+                                    items.addAll(it)
+                                } else {
+                                    // Show new comments "page"
+                                    items.addAll(it)
+                                }
 
-                        if (previousCount < commentsPerPage) {
-                            // Add new comments to existing "page"
-                            val itemSize = items.size
-                            items.subList(itemSize - previousCount, itemSize).clear()
-                            items.addAll(comments!!)
-                        } else {
-                            // Show new comments "page"
-                            items.addAll(comments!!)
+                                // If loaded all comments at once, increment currentPage
+                                if (it.size == COMMENTS_PER_PAGE) {
+                                    page++
+                                }
+                                previousCount = it.size
+                                adapter.notifyDataSetChanged()
+                            }
                         }
-
-                        val commentSize = comments.size
-
-                        // If loaded all comments at once, increment currentPage
-                        if (commentSize == commentsPerPage) {
-                            page++
-                        }
-
-                        previousCount = commentSize
-                        adapter.notifyDataSetChanged()
-                    } else if (response.body().comments!!.size == 0) {
-                        showUserFriendlyError(R.string.error_no_comments)
                     }
                 }
                 stopRefreshAndShow()
@@ -87,13 +80,13 @@ class CommentFragment : BaseListFragment() {
         previousCount = 0
     }
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return CommentAdapter(items as List<Comment>, context_)
-    }
+    override fun getAdapter_() = CommentAdapter(items as List<Comment>, context_)
 
     companion object {
         const val ARG_URL = "url"
         const val TAG = "commentFragment"
+
+        private const val COMMENTS_PER_PAGE = 50
 
         fun newInstance(url: String): CommentFragment {
             val commentFragment = CommentFragment()

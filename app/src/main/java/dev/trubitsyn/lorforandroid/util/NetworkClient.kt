@@ -30,7 +30,5 @@ object NetworkClient {
         client.get(getAbsoluteUrl(url), params, handler)
     }
 
-    private fun getAbsoluteUrl(relativeUrl: String): String {
-        return Const.SITE_ROOT + relativeUrl
-    }
+    private fun getAbsoluteUrl(relativeUrl: String) = Const.SITE_ROOT + relativeUrl
 }

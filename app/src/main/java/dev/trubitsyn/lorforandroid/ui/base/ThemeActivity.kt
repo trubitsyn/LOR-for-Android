@@ -24,14 +24,11 @@ import androidx.preference.PreferenceManager
 
 import dev.trubitsyn.lorforandroid.R
 
-
 open class ThemeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+        val isDarkTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)
+        val nightMode = if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        AppCompatDelegate.setDefaultNightMode(nightMode)
         super.onCreate(savedInstanceState)
     }
 }

@@ -37,7 +37,5 @@ class CommentAdapter(private val comments: List<Comment>, private val context: C
         CommentUtils.initView(comments, comment, context, v.replyTo!!, v.message!!, v.author!!, v.stars!!, v.date!!)
     }
 
-    override fun getItemCount(): Int {
-        return comments.size
-    }
+    override fun getItemCount() = comments.size
 }

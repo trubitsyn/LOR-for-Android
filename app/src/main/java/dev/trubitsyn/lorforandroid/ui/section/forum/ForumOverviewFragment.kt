@@ -20,49 +20,35 @@ package dev.trubitsyn.lorforandroid.ui.section.forum
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-
-import androidx.recyclerview.widget.RecyclerView
-
 import com.loopj.android.http.RequestParams
-
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
 class ForumOverviewFragment : SectionFragment() {
 
-    override val itemsPerPage: Int
-        get() = 0
+    override val itemsPerPage = 0
 
-    override val path: String
-        get() = "forum"
+    override val path = "forum"
 
-    override val requestParams: RequestParams?
-        get() = null
+    override val requestParams: RequestParams? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
     }
 
-    override fun getMaxOffset(): Int {
-        return 0
-    }
+    override fun getMaxOffset() = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout?.isEnabled = false
     }
 
-    override fun getItemFactory(): ItemFactory {
-        return ForumOverviewItemFactory()
-    }
+    override fun getItemFactory() = ForumOverviewItemFactory()
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
-    }
+    override fun getAdapter_() = ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as ForumOverviewItem
@@ -73,13 +59,9 @@ class ForumOverviewFragment : SectionFragment() {
         }
     }
 
-    override fun loadMoreAllowed(): Boolean {
-        return false
-    }
+    override fun loadMoreAllowed() = false
 
-    override fun showDividers(): Boolean {
-        return false
-    }
+    override fun showDividers() = false
 
     companion object {
         const val TAG = "forumOverviewFragment"

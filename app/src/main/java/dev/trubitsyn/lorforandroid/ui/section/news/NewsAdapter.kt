@@ -25,30 +25,24 @@ import dev.trubitsyn.lorforandroid.ui.section.Item
 
 class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun getItemViewType(position: Int): Int {
-        if (items[position] is MiniNewsItem) {
-            return MINI
-        } else if (items[position] is Item) {
-            return FULL
-        }
-        return -1
+    override fun getItemViewType(position: Int) = when (items[position]) {
+        is MiniNewsItem -> MINI
+        is Item -> FULL
+        else -> -1
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        var viewHolder: RecyclerView.ViewHolder? = null
-
-        when (viewType) {
+        return when (viewType) {
             MINI -> {
                 val mini = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_mini_news, viewGroup, false)
-                viewHolder = MiniNewsViewHolder(mini)
+                MiniNewsViewHolder(mini)
             }
             FULL -> {
                 val full = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_news, viewGroup, false)
-                viewHolder = NewsViewHolder(full)
+                NewsViewHolder(full)
             }
+            else -> throw IllegalArgumentException()
         }
-
-        return viewHolder!!
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {
@@ -72,9 +66,7 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
     companion object {
         private val MINI = 0

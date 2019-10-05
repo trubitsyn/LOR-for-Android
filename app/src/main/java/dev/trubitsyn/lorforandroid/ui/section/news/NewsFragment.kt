@@ -17,47 +17,32 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import androidx.recyclerview.widget.RecyclerView
-
 import com.loopj.android.http.RequestParams
-
 import dev.trubitsyn.lorforandroid.ui.section.Item
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 
 class NewsFragment : SectionFragment() {
 
-    override val itemsPerPage: Int
-        get() = 20
+    override val itemsPerPage = 20
 
-    override val path: String
-        get() = "news"
+    override val path = "news"
 
     override val requestParams: RequestParams
         get() = RequestParams("offset", offset)
 
-    override fun getItemFactory(): ItemFactory {
-        return NewsItemFactory()
-    }
+    override fun getItemFactory() = NewsItemFactory()
 
-    override fun getMaxOffset(): Int {
-        return 200
-    }
+    override fun getMaxOffset() = 200
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return NewsAdapter(items)
-    }
+    override fun getAdapter_() = NewsAdapter(items)
 
     override fun onItemClickCallback(position: Int) {
-        val item = items[position]
-        val url: String
-        if (item is MiniNewsItem) {
-            url = (items[position] as MiniNewsItem).url
-        } else if (item is Item) {
-            url = (items[position] as Item).url
-        } else
-            throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
+        val url = when (val item = items[position]) {
+            is MiniNewsItem -> item.url
+            is Item -> item.url
+            else -> null
+        } ?: throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
 
         (context_ as ItemClickCallback).onTopicRequested(url)
     }

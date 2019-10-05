@@ -49,7 +49,5 @@ class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerV
         v.commentsCount!!.text = item.comments
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 }

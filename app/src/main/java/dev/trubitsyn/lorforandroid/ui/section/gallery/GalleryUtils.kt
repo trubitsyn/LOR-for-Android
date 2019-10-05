@@ -21,20 +21,14 @@ import dev.trubitsyn.lorforandroid.Const
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
 object GalleryUtils {
-    fun isGalleryUrl(url: String): Boolean {
-        return url.startsWith("gallery")
-    }
+    fun isGalleryUrl(url: String) = url.startsWith("gallery")
 
     fun getGalleryImagesUrl(url: String): String {
         val clean = StringUtils.removeParams(url)
         return Const.SITE_ROOT + "gallery" + clean.substring(clean.lastIndexOf("/"))
     }
 
-    fun getMedium2xImageUrl(imagesUrl: String): String {
-        return "$imagesUrl-med-2x.jpg"
-    }
+    fun getMedium2xImageUrl(imagesUrl: String) = "$imagesUrl-med-2x.jpg"
 
-    fun getMediumImageUrl(imagesUrl: String): String {
-        return "$imagesUrl-med.jpg"
-    }
+    fun getMediumImageUrl(imagesUrl: String) = "$imagesUrl-med.jpg"
 }

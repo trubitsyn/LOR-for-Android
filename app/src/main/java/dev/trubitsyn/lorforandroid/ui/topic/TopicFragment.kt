@@ -105,17 +105,18 @@ class TopicFragment : LoadableFragment() {
     private fun setTopic() {
         title!!.text = Html.fromHtml(topic!!.title)
         val tagsList = topic!!.tags
-        if (!tagsList!!.isEmpty()) {
+        if (tagsList!!.isNotEmpty()) {
             tags!!.visibility = View.VISIBLE
             tags!!.text = StringUtils.tagsFromStrings(tagsList)
-        } else
+        } else {
             tags!!.visibility = View.GONE
+        }
 
-        if (image != null) {
+        image?.let {
             if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
                 loadImageAndSetImageActivityListener()
             } else {
-                image!!.setOnClickListener { loadImageAndSetImageActivityListener() }
+                it.setOnClickListener { loadImageAndSetImageActivityListener() }
             }
         }
 
@@ -140,9 +141,7 @@ class TopicFragment : LoadableFragment() {
         }
     }
 
-    override fun dataView(): View? {
-        return scrollView
-    }
+    override fun dataView() = scrollView
 
     companion object {
         const val ARG_URL = "url"

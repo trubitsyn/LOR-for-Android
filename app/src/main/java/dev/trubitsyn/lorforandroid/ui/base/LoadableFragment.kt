@@ -66,20 +66,20 @@ abstract class LoadableFragment : BaseFragment() {
     }
 
     protected open fun stopRefresh() {
-        if (progressBar != null) progressBar!!.visibility = View.GONE
+        progressBar?.visibility = View.GONE
     }
 
     protected fun stopRefreshAndShow() {
         stopRefresh()
-        if (dataView() != null) dataView()!!.visibility = View.VISIBLE
+        dataView()?.visibility = View.VISIBLE
     }
 
     protected fun showErrorView(stringResource: Int) {
         stopRefresh()
-        if (errorView != null) {
-            dataView()!!.visibility = View.INVISIBLE
-            errorView!!.visibility = View.VISIBLE
-            errorView!!.setText(stringResource)
+        errorView?.let {
+            dataView()?.visibility = View.INVISIBLE
+            errorView.visibility = View.VISIBLE
+            errorView.setText(stringResource)
         }
     }
 

@@ -25,10 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 enum class ApiManager {
     INSTANCE;
 
-    private val GSON = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create()
+    private val gson = GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            .create()
     private val apiRestAdapter = Retrofit.Builder()
             .baseUrl(Const.SITE_ROOT + "api/")
-            .addConverterFactory(GsonConverterFactory.create(GSON))
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
     internal val apiComments: ApiComments by lazy { apiRestAdapter.create(ApiComments::class.java) }

@@ -28,7 +28,6 @@ abstract class RefreshableFragment : LoadableFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         swipeRefreshLayout.setOnRefreshListener {
             resetState()
             errorView!!.visibility = View.GONE
@@ -41,7 +40,5 @@ abstract class RefreshableFragment : LoadableFragment() {
         swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun dataView(): View? {
-        return swipeRefreshLayout
-    }
+    override fun dataView(): View? = swipeRefreshLayout
 }

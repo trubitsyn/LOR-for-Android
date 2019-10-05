@@ -24,8 +24,6 @@ object NetworkUtils {
     fun isMobileData(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
-        return if (activeNetwork != null) {
-            activeNetwork.type == ConnectivityManager.TYPE_MOBILE
-        } else false
+        return activeNetwork?.type == ConnectivityManager.TYPE_MOBILE
     }
 }

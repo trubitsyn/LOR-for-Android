@@ -17,4 +17,8 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-class MiniNewsItem(val url: String, val title: String, val commentsCount: String)
+class MiniNewsItem(
+        val url: String,
+        val title: String,
+        val commentsCount: String
+)

@@ -20,13 +20,8 @@ package dev.trubitsyn.lorforandroid.ui.section.gallery
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-
-import androidx.recyclerview.widget.RecyclerView
-
 import com.loopj.android.http.RequestParams
-
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickCallback
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
@@ -37,8 +32,7 @@ class GalleryFragment : SectionFragment() {
     private val isAll: Boolean
         get() = filter == GalleryFilterEnum.all.ordinal
 
-    override val itemsPerPage: Int
-        get() = 20
+    override val itemsPerPage = 20
 
     override val path: String
         get() {
@@ -66,17 +60,11 @@ class GalleryFragment : SectionFragment() {
         })
     }
 
-    override fun getItemFactory(): ItemFactory {
-        return GalleryItemFactory()
-    }
+    override fun getItemFactory() = GalleryItemFactory()
 
-    override fun getMaxOffset(): Int {
-        return 200
-    }
+    override fun getMaxOffset() = 200
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return GalleryAdapter(items as MutableList<GalleryItem>, context_)
-    }
+    override fun getAdapter_() = GalleryAdapter(items as MutableList<GalleryItem>, context_)
 
     override fun onItemClickCallback(position: Int) {
         val item = items[position] as GalleryItem

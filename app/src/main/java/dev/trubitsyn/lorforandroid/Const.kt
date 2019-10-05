@@ -18,5 +18,5 @@
 package dev.trubitsyn.lorforandroid
 
 object Const {
-    val SITE_ROOT = "https://www.linux.org.ru/"
+    const val SITE_ROOT = "https://www.linux.org.ru/"
 }

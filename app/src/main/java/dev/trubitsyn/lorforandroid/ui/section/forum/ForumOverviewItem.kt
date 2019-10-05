@@ -17,4 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-class ForumOverviewItem(val url: String, val name: String)
+class ForumOverviewItem(
+        val url: String,
+        val name: String
+)

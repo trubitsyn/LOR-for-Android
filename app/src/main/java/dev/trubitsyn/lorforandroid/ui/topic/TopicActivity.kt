@@ -34,12 +34,11 @@ class TopicActivity : ThemeActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic)
         setupActionBar(this)
-        var topicFragment = supportFragmentManager.findFragmentByTag(TopicFragment.TAG) as? TopicFragment
-        if (topicFragment == null) {
+        val topicFragment = supportFragmentManager.findFragmentByTag(TopicFragment.TAG) ?: {
             url = StringUtils.removeParams(intent.getStringExtra(ARG_URL)!!)
             val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)
-            topicFragment = TopicFragment.newInstance(url!!, imageUrl)
-        }
+            TopicFragment.newInstance(url!!, imageUrl)
+        }()
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.topicFragmentContainer, topicFragment, TopicFragment.TAG)

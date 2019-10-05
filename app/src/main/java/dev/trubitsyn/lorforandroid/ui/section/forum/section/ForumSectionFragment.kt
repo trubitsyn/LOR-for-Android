@@ -18,20 +18,14 @@
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
 import android.os.Bundle
-
-import androidx.recyclerview.widget.RecyclerView
-
 import com.loopj.android.http.RequestParams
-
 import dev.trubitsyn.lorforandroid.ui.section.Item
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 
 class ForumSectionFragment : SectionFragment() {
     private var group: String? = null
 
-    override val itemsPerPage: Int
-        get() = 30
+    override val itemsPerPage = 30
 
     override val path: String
         get() = "forum/" + group!!
@@ -49,17 +43,11 @@ class ForumSectionFragment : SectionFragment() {
         items.clear()
     }
 
-    override fun getItemFactory(): ItemFactory {
-        return ForumSectionItemFactory()
-    }
+    override fun getItemFactory() = ForumSectionItemFactory()
 
-    override fun getMaxOffset(): Int {
-        return 300
-    }
+    override fun getMaxOffset() = 300
 
-    override fun getAdapter_(): RecyclerView.Adapter<*> {
-        return ForumSectionAdapter(items as MutableList<ForumSectionItem>)
-    }
+    override fun getAdapter_() = ForumSectionAdapter(items as MutableList<ForumSectionItem>)
 
     override fun onItemClickCallback(position: Int) {
         (context_ as Callback).returnToActivity((items[position] as Item).url)
