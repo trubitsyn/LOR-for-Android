@@ -18,7 +18,7 @@
 package dev.trubitsyn.lorforandroid.util
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import dev.trubitsyn.lorforandroid.R
 
 object PreferenceUtils {
