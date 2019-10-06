@@ -19,59 +19,29 @@ package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
 import android.os.Bundle
 import androidx.navigation.fragment.navArgs
-import com.loopj.android.http.RequestParams
-import dev.trubitsyn.lorforandroid.ui.section.Item
-import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
+import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 
-class ForumSectionFragment : SectionFragment<ForumSectionItem>() {
+class ForumSectionFragment : BaseListFragment() {
     private val args by navArgs<ForumSectionFragmentArgs>()
-
     private var group: String? = null
-
-    override val itemsPerPage = 30
-
-    override val path: String
-        get() = "forum/" + group!!
-
-    override val requestParams: RequestParams
-        get() = RequestParams("offset", offset)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        group = arguments!!.getString(ARG_GROUP)
+        group = args.group
     }
-
-    override fun clearData() {
-        offset = 0
-        items.clear()
-    }
-
-    override val itemFactory
-        get() = ForumSectionItemFactory(context!!)
-
-    override val maxOffset = 300
 
     override val adapter: ForumSectionAdapter
-        get() = ForumSectionAdapter(items as MutableList<ForumSectionItem>)
+        get() = ForumSectionAdapter()
 
     override fun onItemClickCallback(position: Int) {
-        (context_ as Callback).returnToActivity((items[position] as Item).url)
+        //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)
     }
 
-    internal interface Callback {
+    /*internal interface Callback {
         fun returnToActivity(url: String)
-    }
+    }*/
 
     companion object {
-        const val ARG_GROUP = "group"
         const val TAG = "forumSectionFragment"
-
-        fun newInstance(group: String): ForumSectionFragment {
-            val forumSectionFragment = ForumSectionFragment()
-            val args = Bundle()
-            args.putString(ARG_GROUP, group)
-            forumSectionFragment.arguments = args
-            return forumSectionFragment
-        }
     }
 }

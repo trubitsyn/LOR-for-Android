@@ -17,14 +17,14 @@
 
 package dev.trubitsyn.lorforandroid.ui.comment
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Comment
 
-class CommentAdapter(private val comments: List<Comment>, private val context: Context) : RecyclerView.Adapter<CommentViewHolder>() {
+class CommentAdapter : PagedListAdapter<Comment, CommentViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CommentViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_comment, viewGroup, false)
@@ -33,9 +33,19 @@ class CommentAdapter(private val comments: List<Comment>, private val context: C
 
     override fun onBindViewHolder(v: CommentViewHolder, position: Int) {
         v.setIsRecyclable(false)
-        val comment = comments[position]
-        CommentUtils.initView(comments, comment, context, v.replyTo, v.message, v.author, v.stars, v.date)
+        val comment = getItem(position) ?: return
+        //CommentUtils.initView(comments, comment, context, v.replyTo, v.message, v.author, v.stars, v.date)
     }
 
-    override fun getItemCount() = comments.size
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<Comment>() {
+            override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

@@ -23,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
 
-class ForumOverviewAdapter(private val sections: List<ForumOverviewItem>) : RecyclerView.Adapter<ForumOverviewViewHolder>() {
+class ForumOverviewAdapter(
+        private val sections: List<ForumOverviewItem>
+) : RecyclerView.Adapter<ForumOverviewViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumOverviewViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_simple, parent, false)

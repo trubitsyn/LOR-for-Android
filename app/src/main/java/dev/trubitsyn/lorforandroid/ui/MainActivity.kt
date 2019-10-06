@@ -25,9 +25,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.base.ThemeActivity
+import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 
-class MainActivity : ThemeActivity() {
+class MainActivity : BaseActivity() {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
     private val navController by lazy { findNavController(R.id.main_content) }

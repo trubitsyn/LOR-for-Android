@@ -20,12 +20,11 @@ package dev.trubitsyn.lorforandroid.ui.section.forum.section
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import androidx.recyclerview.widget.RecyclerView
-
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.R
 
-class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerView.Adapter<ForumSectionViewHolder>() {
+class ForumSectionAdapter : PagedListAdapter<ForumSectionItem, ForumSectionViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumSectionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum, parent, false)
@@ -33,7 +32,7 @@ class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerV
     }
 
     override fun onBindViewHolder(v: ForumSectionViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position) ?: return
         v.apply {
             title.text = item.title
 
@@ -51,5 +50,15 @@ class ForumSectionAdapter(private val items: List<ForumSectionItem>) : RecyclerV
         }
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<ForumSectionItem>() {
+            override fun areItemsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
+                return oldItem.url == newItem.url
+            }
+
+            override fun areContentsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

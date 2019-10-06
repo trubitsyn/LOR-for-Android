@@ -17,7 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.ui.section
 
-open class Item(
+data class Item(
         val url: String,
         val title: String,
         val groupTitle: String?,

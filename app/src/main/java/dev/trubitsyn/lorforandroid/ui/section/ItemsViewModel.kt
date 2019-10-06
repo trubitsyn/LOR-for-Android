@@ -1,8 +1,8 @@
 package dev.trubitsyn.lorforandroid.ui.section
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
 import cz.msebera.android.httpclient.Header
@@ -15,8 +15,8 @@ class ItemsViewModel<T>(
         private val requestParams: RequestParams?,
         private val itemFactory: ItemFactory
 ) : ViewModel() {
-    private val items: MutableLiveData<List<T>> by lazy {
-        MutableLiveData<List<T>>().also {
+    val items: MutableLiveData<PagedList<T>> by lazy {
+        MutableLiveData<PagedList<T>>().also {
             loadItems()
         }
     }
@@ -32,15 +32,13 @@ class ItemsViewModel<T>(
             body?.let {
                 val itemReceiver = mutableListOf<Any>()
                 itemFactory.prepareItems(body, itemReceiver)
-                items.value = itemReceiver.toList() as List<T>
+                //items.value = PagedList.Builder<K, V>(dataSource, config)
             }
         }
 
         override fun onFailure(statusCode: Int, headers: Array<Header>, responseBody: ByteArray, error: Throwable) {
         }
     }
-
-    fun getItems(): LiveData<List<T>> = items
 
     fun loadItems() {
         NetworkClient.get("$path/", requestParams, handler)

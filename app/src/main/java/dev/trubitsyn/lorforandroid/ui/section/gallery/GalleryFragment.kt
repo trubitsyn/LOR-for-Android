@@ -20,30 +20,14 @@ package dev.trubitsyn.lorforandroid.ui.section.gallery
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
+import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
-class GalleryFragment : SectionFragment<GalleryItem>() {
+class GalleryFragment : BaseListFragment() {
     private val args by navArgs<GalleryFragmentArgs>()
     private var filter: Int = 0
-
-    private val isAll: Boolean
-        get() = filter == GalleryFilterEnum.all.ordinal
-
-    override val itemsPerPage = 20
-
-    override val path: String
-        get() {
-            val path = if (isAll) "" else "/" + GalleryFilterEnum.values()[filter].name
-            return "gallery$path"
-        }
-
-    override val requestParams: RequestParams
-        get() = RequestParams("offset", offset)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,20 +46,16 @@ class GalleryFragment : SectionFragment<GalleryItem>() {
         })
     }
 
-    override val itemFactory = GalleryItemFactory()
-
-    override val maxOffset = 200
-
     override val adapter
-        get() = GalleryAdapter(items as MutableList<GalleryItem>, context_)
+        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
-        val item = items[position] as GalleryItem
+        /*val item = items[position] as GalleryItem
         val action = GalleryFragmentDirections.actionGalleryToTopic(
                 url = item.url,
                 imageUrl = item.imageUrl
         )
-        findNavController().navigate(action)
+        findNavController().navigate(action)*/
     }
 
     companion object {

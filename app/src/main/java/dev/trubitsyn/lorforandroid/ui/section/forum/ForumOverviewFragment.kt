@@ -21,40 +21,30 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
+import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
+import kotlin.properties.Delegates
 
-class ForumOverviewFragment : SectionFragment<ForumOverviewItem>() {
-
-    override val itemsPerPage = 0
-
-    override val path = "forum"
-
-    override val requestParams: RequestParams? = null
+class ForumOverviewFragment : BaseListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
     }
 
-    override val maxOffset = 0
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout?.isEnabled = false
     }
 
-    override val itemFactory = ForumOverviewItemFactory()
-
     override val adapter: ForumOverviewAdapter
-        get() = ForumOverviewAdapter(items as MutableList<ForumOverviewItem>)
+        get() = ForumOverviewAdapter(listOf())
 
     override fun onItemClickCallback(position: Int) {
-        val item = items[position] as ForumOverviewItem
+        var item: ForumOverviewItem by Delegates.notNull() //items[position] as ForumOverviewItem
         if (StringUtils.isClub(item.url)) {
-            Toast.makeText(context_, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
         } else {
             val action = ForumOverviewFragmentDirections.actionForumOverviewToForumSection(
                     group = item.url,
@@ -63,8 +53,6 @@ class ForumOverviewFragment : SectionFragment<ForumOverviewItem>() {
             findNavController().navigate(action)
         }
     }
-
-    override val loadMoreAllowed = false
 
     override val showDividers = false
 

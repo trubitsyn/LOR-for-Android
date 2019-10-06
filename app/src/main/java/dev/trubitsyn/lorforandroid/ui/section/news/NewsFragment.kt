@@ -17,29 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import androidx.navigation.fragment.findNavController
-import com.loopj.android.http.RequestParams
-import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
+import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 
-class NewsFragment : SectionFragment<NewsItem>() {
-
-    override val itemsPerPage = 20
-
-    override val path = "news"
-
-    override val requestParams: RequestParams
-        get() = RequestParams("offset", offset)
-
-    override val itemFactory
-        get() = NewsItemFactory(context!!)
-
-    override val maxOffset = 200
+class NewsFragment : BaseListFragment() {
 
     override val adapter: NewsAdapter
-        get() = NewsAdapter(items)
+        get() = NewsAdapter()
 
     override fun onItemClickCallback(position: Int) {
-        val url = when (val item = items[position]) {
+        /*val url = when (val item = items[position]) {
             is MiniNewsItem -> item.url
             is NewsItem -> item.url
             else -> null
@@ -49,7 +35,7 @@ class NewsFragment : SectionFragment<NewsItem>() {
                 url = url,
                 imageUrl = null
         )
-        findNavController().navigate(action)
+        findNavController().navigate(action)*/
     }
 
     companion object {

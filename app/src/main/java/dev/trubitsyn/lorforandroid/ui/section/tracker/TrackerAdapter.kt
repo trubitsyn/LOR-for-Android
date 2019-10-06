@@ -19,10 +19,11 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.R
 
-class TrackerAdapter(private val items: List<TrackerItem>) : RecyclerView.Adapter<TrackerViewHolder>() {
+class TrackerAdapter : PagedListAdapter<TrackerItem, TrackerViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -31,7 +32,7 @@ class TrackerAdapter(private val items: List<TrackerItem>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(viewHolder: TrackerViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position) ?: return
         viewHolder.apply {
             title.text = item.title
             category.text = item.groupTitle
@@ -42,5 +43,15 @@ class TrackerAdapter(private val items: List<TrackerItem>) : RecyclerView.Adapte
         }
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<TrackerItem>() {
+            override fun areItemsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
+                return oldItem.url == newItem.url
+            }
+
+            override fun areContentsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

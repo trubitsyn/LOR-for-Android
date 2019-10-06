@@ -24,10 +24,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import dev.trubitsyn.lorforandroid.R
 
-abstract class LoadableFragment : BaseFragment() {
+abstract class LoadableFragment : Fragment() {
+    protected val swipeRefreshLayout by lazy { view!!.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) }
     private val progressBar by lazy { view!!.findViewById<ProgressBar>(R.id.progressBar) }
     protected val errorView by lazy { view!!.findViewById<TextView>(R.id.errorView) }
 
@@ -53,31 +56,39 @@ abstract class LoadableFragment : BaseFragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        swipeRefreshLayout.setOnRefreshListener {
+            resetState()
+            errorView!!.visibility = View.GONE
+        }
+    }
+
     protected open fun restart() {
         hideAllShowProgressView()
         resetState()
-        fetchData()
     }
 
     private fun hideAllShowProgressView() {
-        dataView()!!.visibility = View.GONE
+        swipeRefreshLayout!!.visibility = View.GONE
         errorView!!.visibility = View.GONE
         progressBar!!.visibility = View.VISIBLE
     }
 
     protected open fun stopRefresh() {
         progressBar?.visibility = View.GONE
+        swipeRefreshLayout.isRefreshing = false
     }
 
     protected fun stopRefreshAndShow() {
         stopRefresh()
-        dataView()?.visibility = View.VISIBLE
+        swipeRefreshLayout?.visibility = View.VISIBLE
     }
 
     protected fun showErrorView(stringResource: Int) {
         stopRefresh()
         errorView?.let {
-            dataView()?.visibility = View.INVISIBLE
+            swipeRefreshLayout?.visibility = View.INVISIBLE
             errorView.visibility = View.VISIBLE
             errorView.setText(stringResource)
         }
@@ -86,8 +97,4 @@ abstract class LoadableFragment : BaseFragment() {
     protected open fun resetState() {
         // Implement in child classes
     }
-
-    protected abstract fun fetchData()
-
-    protected abstract fun dataView(): View?
 }

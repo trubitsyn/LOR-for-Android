@@ -19,15 +19,15 @@ package dev.trubitsyn.lorforandroid.api.model
 
 import java.util.*
 
-class Comment {
-    val id: Int? = null
-    val author: Author? = null
-    val processedMessage: String? = null
-    val deletable: Boolean? = null
-    val editable: Boolean? = null
-    val deleted: Boolean? = null
-    val postdate: Date? = null
-    val userpic: Userpic? = null
-    val reply: Reply? = null
+data class Comment(
+    val id: Int? = null,
+    val author: Author? = null,
+    val processedMessage: String? = null,
+    val deletable: Boolean? = null,
+    val editable: Boolean? = null,
+    val deleted: Boolean? = null,
+    val postdate: Date? = null,
+    val userpic: Userpic? = null,
+    val reply: Reply? = null,
     val editSummary: EditSummary? = null
-}
+)

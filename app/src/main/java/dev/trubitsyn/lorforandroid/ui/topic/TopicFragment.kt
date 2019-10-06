@@ -24,6 +24,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -32,12 +33,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.api.model.Topic
-import dev.trubitsyn.lorforandroid.ui.base.LoadableFragment
 import dev.trubitsyn.lorforandroid.util.DateUtils
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
-class TopicFragment : LoadableFragment() {
+class TopicFragment : Fragment() {
     private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView)!! }
     internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle)!! }
     internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags)!! }
@@ -85,18 +85,15 @@ class TopicFragment : LoadableFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (StringUtils.isClub(url)) {
-            showErrorView(R.string.error_access_denied)
+            //showErrorView(R.string.error_access_denied)
             return
         }
         val viewModel = ViewModelProviders.of(this, TopicViewModelFactory(url))
                 .get(TopicViewModel::class.java)
         viewModel.getTopic().observe(this, Observer { topic ->
-            stopRefreshAndShow()
+            //stopRefreshAndShow()
             setTopic(topic)
         })
-    }
-
-    override fun fetchData() {
     }
 
     private fun setTopic(topic: Topic) {
@@ -135,8 +132,6 @@ class TopicFragment : LoadableFragment() {
             findNavController().navigate(action)
         }
     }
-
-    override fun dataView() = scrollView
 
     companion object {
         const val TAG = "topicFragment"

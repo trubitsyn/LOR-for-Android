@@ -17,15 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
-import dev.trubitsyn.lorforandroid.ui.section.Item
-
-class ForumSectionItem(
-        url: String,
-        title: String,
-        groupTitle: String?,
-        tags: String,
-        date: String,
-        author: String?,
-        comments: String,
+data class ForumSectionItem(
+        val url: String,
+        val title: String,
+        val groupTitle: String?,
+        val tags: String,
+        val date: String,
+        val author: String?,
+        val comments: String,
         val isPinned: Boolean
-) : Item(url, title, groupTitle, tags, date, author, comments)
+)

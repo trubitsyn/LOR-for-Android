@@ -19,13 +19,15 @@ package dev.trubitsyn.lorforandroid.ui.section.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
-class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter : PagedListAdapter<NewsItem, RecyclerView.ViewHolder>(diffCallback) {
 
-    override fun getItemViewType(position: Int) = when (items[position]) {
-        is MiniNewsItem -> MINI
+    override fun getItemViewType(position: Int) = when (getItem(position)) {
+        //is MiniNewsItem -> MINI
         is NewsItem -> FULL
         else -> -1
     }
@@ -47,14 +49,14 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {
         when (viewHolder.itemViewType) {
             MINI -> {
-                val miniNewsItem = items[i] as MiniNewsItem
+                val miniNewsItem = getItem(i) as MiniNewsItem
                 (viewHolder as MiniNewsViewHolder).apply {
                     title.text = miniNewsItem.title
                     commentsCount.text = miniNewsItem.commentsCount
                 }
             }
             FULL -> {
-                val newsItem = items[i] as NewsItem
+                val newsItem = getItem(i) as NewsItem
                 (viewHolder as NewsViewHolder).apply {
                     title.text = newsItem.title
                     category.text = newsItem.groupTitle
@@ -67,10 +69,18 @@ class NewsAdapter(private val items: List<Any>) : RecyclerView.Adapter<RecyclerV
         }
     }
 
-    override fun getItemCount() = items.size
-
     companion object {
         private const val MINI = 0
         private const val FULL = 1
+
+        private val diffCallback = object : DiffUtil.ItemCallback<NewsItem>() {
+            override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
+                return oldItem.url == newItem.url
+            }
+
+            override fun areContentsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

@@ -17,17 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-import dev.trubitsyn.lorforandroid.ui.section.Item
-
-class GalleryItem(
-        url: String,
-        title: String,
-        groupTitle: String?,
-        tags: String,
-        date: String,
-        author: String,
-        comments: String,
+data class GalleryItem(
+        val url: String,
+        val title: String,
+        val groupTitle: String?,
+        val tags: String,
+        val date: String,
+        val author: String,
+        val comments: String,
         val imageUrl: String,
         val medium2xImageUrl: String,
         val mediumImageUrl: String
-) : Item(url, title, groupTitle, tags, date, author, comments)
+)

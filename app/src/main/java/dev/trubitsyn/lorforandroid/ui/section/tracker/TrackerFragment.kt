@@ -22,23 +22,16 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
+import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
+import kotlin.properties.Delegates
 
-class TrackerFragment : SectionFragment<TrackerItem>() {
+class TrackerFragment : BaseListFragment() {
     private val args by navArgs<TrackerFragmentArgs>()
     private var filter: Int = 0
-
-    override val itemsPerPage = 30
-
-    override val path = "tracker"
-
-    override val requestParams: RequestParams
-        get() = RequestParams("offset", offset, "filter", TrackerFilterEnum.values()[filter].name)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,16 +50,11 @@ class TrackerFragment : SectionFragment<TrackerItem>() {
         })
     }
 
-    override val itemFactory
-        get() = TrackerItemFactory(context!!)
-
-    override val maxOffset = 180
-
     override val adapter: TrackerAdapter
-        get() = TrackerAdapter(items as MutableList<TrackerItem>)
+        get() = TrackerAdapter()
 
     override fun onItemClickCallback(position: Int) {
-        val item = items[position] as TrackerItem
+        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
         if (GalleryUtils.isGalleryUrl(item.url)) {
             val imagesUrl = GalleryUtils.getGalleryImagesUrl(item.url)
             val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)

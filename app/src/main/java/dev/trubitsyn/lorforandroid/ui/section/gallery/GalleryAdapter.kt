@@ -21,16 +21,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import androidx.recyclerview.widget.RecyclerView
-
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 
-class GalleryAdapter(private val items: List<GalleryItem>, private val context: Context) : RecyclerView.Adapter<GalleryViewHolder>() {
+class GalleryAdapter(
+        private val context: Context
+) : PagedListAdapter<GalleryItem, GalleryViewHolder>(diffCallback) {
     private val shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GalleryViewHolder {
@@ -39,7 +39,7 @@ class GalleryAdapter(private val items: List<GalleryItem>, private val context: 
     }
 
     override fun onBindViewHolder(viewHolder: GalleryViewHolder, i: Int) {
-        val item = items[i]
+        val item = getItem(i) ?: return
         viewHolder.apply {
             title.text = item.title
             if (item.groupTitle == null) {
@@ -66,5 +66,15 @@ class GalleryAdapter(private val items: List<GalleryItem>, private val context: 
         }
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<GalleryItem>() {
+            override fun areItemsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
+                return oldItem.url == newItem.url
+            }
+
+            override fun areContentsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

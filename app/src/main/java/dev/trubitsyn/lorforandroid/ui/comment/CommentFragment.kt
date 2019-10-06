@@ -22,19 +22,11 @@ import android.view.MenuItem
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.api.ApiManager
 import dev.trubitsyn.lorforandroid.api.model.Comment
-import dev.trubitsyn.lorforandroid.api.model.Comments
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CommentFragment : BaseListFragment(), CommentClickListener {
-    private var page: Int = 0
-    private var previousCount = 0
     private lateinit var url: String
-
     private val args by navArgs<CommentFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +39,6 @@ class CommentFragment : BaseListFragment(), CommentClickListener {
             R.id.refreshButton -> {
                 resetState()
                 errorView!!.visibility = View.GONE
-                fetchData()
                 return true
             }
         }
@@ -59,55 +50,14 @@ class CommentFragment : BaseListFragment(), CommentClickListener {
         commentPreviewFragment.show(childFragmentManager, CommentPreviewFragment.TAG)
     }
 
-    override fun fetchData() {
-        val call = ApiManager.INSTANCE.apiComments.getComments(url, page)
-        call.enqueue(object : Callback<Comments> {
-            override fun onResponse(call: Call<Comments>, response: Response<Comments>) {
-                response.body()?.let {
-                    it.comments?.let {
-                        when (it.size) {
-                            0 -> showUserFriendlyError(R.string.error_no_comments)
-                            else -> {
-                                if (previousCount < COMMENTS_PER_PAGE) {
-                                    // Add new comments to existing "page"
-                                    items.subList(items.size - previousCount, items.size).clear()
-                                    items.addAll(it)
-                                } else {
-                                    // Show new comments "page"
-                                    items.addAll(it)
-                                }
-
-                                // If loaded all comments at once, increment currentPage
-                                if (it.size == COMMENTS_PER_PAGE) {
-                                    page++
-                                }
-                                previousCount = it.size
-                                adapter.notifyDataSetChanged()
-                            }
-                        }
-                    }
-                }
-                stopRefreshAndShow()
-            }
-
-            override fun onFailure(call: Call<Comments>, t: Throwable) {
-                showUserFriendlyError(R.string.error_network)
-            }
-        })
-    }
-
-    override fun clearData() {
-        super.clearData()
-        page = 0
-        previousCount = 0
+    override fun onItemClickCallback(position: Int) {
+        //
     }
 
     override val adapter: CommentAdapter
-        get() = CommentAdapter(items as List<Comment>, context_)
+        get() = CommentAdapter()
 
     companion object {
         const val TAG = "commentFragment"
-
-        private const val COMMENTS_PER_PAGE = 50
     }
 }
