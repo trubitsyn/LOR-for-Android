@@ -27,7 +27,7 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
-class GalleryFragment : SectionFragment() {
+class GalleryFragment : SectionFragment<GalleryItem>() {
     private val args by navArgs<GalleryFragmentArgs>()
     private var filter: Int = 0
 

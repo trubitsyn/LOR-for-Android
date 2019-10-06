@@ -26,7 +26,7 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
-class ForumOverviewFragment : SectionFragment() {
+class ForumOverviewFragment : SectionFragment<ForumOverviewItem>() {
 
     override val itemsPerPage = 0
 

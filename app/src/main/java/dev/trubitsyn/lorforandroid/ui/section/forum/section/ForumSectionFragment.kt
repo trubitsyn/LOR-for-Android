@@ -23,7 +23,7 @@ import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.ui.section.Item
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 
-class ForumSectionFragment : SectionFragment() {
+class ForumSectionFragment : SectionFragment<ForumSectionItem>() {
     private val args by navArgs<ForumSectionFragmentArgs>()
 
     private var group: String? = null

@@ -21,7 +21,7 @@ import androidx.navigation.fragment.findNavController
 import com.loopj.android.http.RequestParams
 import dev.trubitsyn.lorforandroid.ui.section.SectionFragment
 
-class NewsFragment : SectionFragment() {
+class NewsFragment : SectionFragment<NewsItem>() {
 
     override val itemsPerPage = 20
 

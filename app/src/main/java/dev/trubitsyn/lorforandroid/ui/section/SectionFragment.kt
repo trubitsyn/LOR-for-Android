@@ -20,38 +20,15 @@ package dev.trubitsyn.lorforandroid.ui.section
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.loopj.android.http.AsyncHttpResponseHandler
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.loopj.android.http.RequestParams
-import cz.msebera.android.httpclient.Header
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
-import dev.trubitsyn.lorforandroid.util.NetworkClient
-import org.jsoup.Jsoup
-import java.nio.charset.Charset
 
-abstract class SectionFragment : BaseListFragment() {
+abstract class SectionFragment<T> : BaseListFragment() {
     protected var offset: Int = 0
-    private val handler = object : AsyncHttpResponseHandler() {
-        override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
-            val body = try {
-                val resp = String(responseBody, Charset.forName("UTF-8"))
-                Jsoup.parse(resp).body()
-            } catch (e: Exception) {
-                null
-            }
-            body?.let {
-                itemFactory.prepareItems(body, items)
-                offset += itemsPerPage
-                adapter.notifyDataSetChanged()
-                stopRefreshAndShow()
-            } ?: showUserFriendlyError(R.string.error_parsing)
-        }
-
-        override fun onFailure(statusCode: Int, headers: Array<Header>, responseBody: ByteArray, error: Throwable) {
-            showUserFriendlyError(R.string.error_network)
-        }
-    }
 
     abstract val itemsPerPage: Int
 
@@ -68,9 +45,21 @@ abstract class SectionFragment : BaseListFragment() {
         })
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val viewModel = ViewModelProviders.of(this, ItemsViewModelFactory<T>(itemFactory, path, requestParams))
+                .get(ItemsViewModel::class.java)
+        viewModel.getItems().observe(this, Observer { items ->
+            this.items.addAll(listOf(items))
+            offset += itemsPerPage
+            adapter.notifyDataSetChanged()
+            stopRefreshAndShow()
+        })
+    }
+
     override fun fetchData() {
         if (offset <= maxOffset) {
-            NetworkClient.get("$path/", requestParams, handler)
+            // get data
         } else
             Toast.makeText(context_, R.string.error_no_more_data, Toast.LENGTH_SHORT).show()
     }

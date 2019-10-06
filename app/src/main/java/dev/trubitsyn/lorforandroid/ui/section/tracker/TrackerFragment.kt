@@ -29,7 +29,7 @@ import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
 import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
 
-class TrackerFragment : SectionFragment() {
+class TrackerFragment : SectionFragment<TrackerItem>() {
     private val args by navArgs<TrackerFragmentArgs>()
     private var filter: Int = 0
 
