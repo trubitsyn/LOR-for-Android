@@ -1,10 +1,20 @@
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
-class TrackerDataSource {
-    //val itemFactory
-    //    get() = TrackerItemFactory(context)
-    val path = "tracker"
+import androidx.paging.PageKeyedDataSource
 
-    /*val requestParams: RequestParams
-        get() = RequestParams("offset", offset, "filter", TrackerFilterEnum.values()[filter].name)*/
+class TrackerDataSource(
+        private val repository: TrackerRepository,
+        private val filter: TrackerFilterEnum
+) : PageKeyedDataSource<Int, TrackerItem>() {
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, TrackerItem>) {
+        // TODO
+    }
+
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, TrackerItem>) {
+        // TODO
+    }
+
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, TrackerItem>) {
+        // TODO
+    }
 }

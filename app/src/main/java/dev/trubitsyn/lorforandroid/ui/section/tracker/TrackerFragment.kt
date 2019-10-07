@@ -20,6 +20,8 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dev.trubitsyn.lorforandroid.R
@@ -31,22 +33,27 @@ import kotlin.properties.Delegates
 
 class TrackerFragment : BaseListFragment() {
     private val args by navArgs<TrackerFragmentArgs>()
-    private var filter: Int = 0
+    private var filter: TrackerFilterEnum = TrackerFilterEnum.all
+    private val viewModel by viewModels<TrackerViewModel> { TrackerViewModelFactory(filter) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        filter = args.filter.ordinal
+        filter = args.filter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        SpinnerViewUtils.setSpinnerView(activity!!, R.array.tracker_spinner, filter, object : AdapterView.OnItemSelectedListener {
+        SpinnerViewUtils.setSpinnerView(activity!!, R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                filter = position
+                filter = TrackerFilterEnum.values()[position]
                 restart()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
+        })
+        viewModel.trackerItems.observe(this, Observer {
+            //stopRefreshAndShow()
+            adapter.submitList(it)
         })
     }
 
