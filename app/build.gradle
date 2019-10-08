@@ -41,8 +41,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$androidx_appcompat_version"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$androidx_lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$androidx_lifecycle_version"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
@@ -50,15 +49,15 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$androidx_paging_version"
     implementation "androidx.preference:preference:$androidx_preference_version"
 
+    implementation "androidx.room:room-ktx:$androidx_room_version"
     implementation "androidx.room:room-runtime:$androidx_room_version"
     kapt "androidx.room:room-compiler:$androidx_room_version"
-    implementation "androidx.room:room-ktx:$androidx_room_version"
 
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation "androidx.vectordrawable:vectordrawable:$androidx_vectordrawable_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
@@ -67,6 +66,7 @@ dependencies {
     implementation "com.loopj.android:android-async-http:$asynchttp_version"
     implementation "org.jsoup:jsoup:$jsoup_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
