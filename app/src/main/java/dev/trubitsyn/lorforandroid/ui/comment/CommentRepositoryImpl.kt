@@ -1,4 +1,4 @@
 package dev.trubitsyn.lorforandroid.ui.comment
 
-class NetworkCommentRepository {
+class CommentRepositoryImpl {
 }

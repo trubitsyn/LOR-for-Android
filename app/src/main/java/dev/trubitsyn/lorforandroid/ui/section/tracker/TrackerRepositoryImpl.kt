@@ -8,7 +8,7 @@ import cz.msebera.android.httpclient.Header
 import dev.trubitsyn.lorforandroid.HtmlResponseHandler
 import org.jsoup.nodes.Element
 
-class NetworkTrackerRepository(
+class TrackerRepositoryImpl(
         private val client: AsyncHttpClient,
         private val factory: TrackerItemFactory
 ) : TrackerRepository {
