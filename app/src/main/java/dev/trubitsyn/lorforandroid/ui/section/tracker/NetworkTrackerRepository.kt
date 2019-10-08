@@ -1,4 +1,4 @@
-package dev.trubitsyn.lorforandroid.ui.section.forum.section
+package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,10 +6,6 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.RequestParams
 import cz.msebera.android.httpclient.Header
 import dev.trubitsyn.lorforandroid.HtmlResponseHandler
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItemFactory
-import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerRepository
 import org.jsoup.nodes.Element
 
 class NetworkTrackerRepository(
