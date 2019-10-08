@@ -17,7 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-class ForumOverviewItem(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class ForumOverviewItem(
+        @PrimaryKey
+        val id: Long,
         val url: String,
         val name: String
 )

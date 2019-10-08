@@ -17,7 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 class MiniNewsItem(
+        @PrimaryKey
+        val id: Long,
         val url: String,
         val title: String,
         val commentsCount: String

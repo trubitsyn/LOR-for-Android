@@ -17,7 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class ForumSectionItem(
+        @PrimaryKey
+        val id: Long,
         val url: String,
         val title: String,
         val groupTitle: String?,

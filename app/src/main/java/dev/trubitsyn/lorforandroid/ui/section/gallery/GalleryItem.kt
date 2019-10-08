@@ -17,7 +17,11 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
+import androidx.room.Entity
+
+@Entity
 data class GalleryItem(
+        val id: Long,
         val url: String,
         val title: String,
         val groupTitle: String?,
