@@ -39,25 +39,37 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
+
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+
     implementation "androidx.navigation:navigation-fragment-ktx:2.1.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.1.0"
+
     implementation "androidx.paging:paging-runtime:2.1.0"
     implementation 'androidx.preference:preference:1.1.0'
+
+    implementation "androidx.room:room-runtime:2.2.0-rc01"
+    kapt "androidx.room:room-compiler:2.2.0-rc01"
+    implementation "androidx.room:room-ktx:2.2.0-rc01"
+
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'
+
     implementation 'com.squareup.retrofit2:retrofit:2.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
     implementation 'com.loopj.android:android-async-http:1.4.10'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation "androidx.room:room-testing:2.2.0-rc01"
 }
 
 buildscript {
