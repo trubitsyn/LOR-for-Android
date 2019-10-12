@@ -1,6 +1,7 @@
 package dev.trubitsyn.lorforandroid
 
 import androidx.room.Database
+import androidx.room.RoomDatabase
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumDao
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionDao
@@ -21,7 +22,7 @@ import dev.trubitsyn.lorforandroid.ui.topic.TopicDao
     ForumSectionItem::class,
     TrackerItem::class
 ], version = 1)
-abstract class AppDatabase {
+abstract class AppDatabase : RoomDatabase() {
     abstract val newsDao: NewsDao
     abstract val galleryDao: GalleryDao
     abstract val trackerDao: TrackerDao
