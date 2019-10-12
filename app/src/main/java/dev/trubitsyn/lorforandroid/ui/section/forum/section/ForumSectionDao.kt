@@ -6,5 +6,5 @@ import androidx.room.Query
 @Dao
 interface ForumSectionDao {
     @Query("SELECT * FROM forumsectionitem WHERE id = :id")
-    fun findById(id: Long)
+    fun findById(id: Long): ForumSectionItem
 }

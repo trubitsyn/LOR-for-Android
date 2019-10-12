@@ -6,5 +6,5 @@ import androidx.room.Query
 @Dao
 interface NewsDao {
     @Query("SELECT * FROM newsitem WHERE id = :id")
-    fun findById(id: Long)
+    fun findById(id: Long): NewsItem
 }

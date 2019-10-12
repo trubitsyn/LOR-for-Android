@@ -13,6 +13,7 @@ import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerDao
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
 import dev.trubitsyn.lorforandroid.ui.topic.TopicDao
+import dev.trubitsyn.lorforandroid.ui.topic.TopicItem
 
 @Database(entities = [
     NewsItem::class,
@@ -20,7 +21,7 @@ import dev.trubitsyn.lorforandroid.ui.topic.TopicDao
     TrackerItem::class,
     ForumOverviewItem::class,
     ForumSectionItem::class,
-    TrackerItem::class
+    TopicItem::class
 ], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract val newsDao: NewsDao
