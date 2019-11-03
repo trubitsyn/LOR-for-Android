@@ -69,7 +69,17 @@ class TrackerFragment : BaseListFragment() {
 
             // TODO: Url of high-res image in GalleryItem
             // Currently cannot get it because images can either have .png extension or .jpg and there's no way to determine the correct without issuing a HTTP request.
-            val galleryItem = GalleryItem(item.url, item.title, item.groupTitle, item.date, item.tags, item.author!!, item.comments, medium2xImageUrl, medium2xImageUrl, mediumImageUrl)
+            val galleryItem = GalleryItem(
+                    url = item.url,
+                    title = item.title,
+                    groupTitle = item.groupTitle,
+                    date = item.date,
+                    tags = item.tags,
+                    author = item.author!!,
+                    comments = item.comments,
+                    imageUrl = imagesUrl,
+                    medium2xImageUrl = medium2xImageUrl,
+                    mediumImageUrl = mediumImageUrl)
             val action = TrackerFragmentDirections.actionTrackerToTopic(
                     url = galleryItem.url,
                     imageUrl = galleryItem.imageUrl
