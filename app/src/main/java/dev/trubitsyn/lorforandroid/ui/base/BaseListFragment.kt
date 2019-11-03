@@ -68,15 +68,16 @@ abstract class BaseListFragment : LoadableFragment() {
         val hasData = false//items.isNotEmpty()
         if (hasData) {
             Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show()
-        } else
+        } else {
             showErrorView(errorString)
+        }
     }
 
     protected open val showDividers = true
 
     protected abstract fun onItemClickCallback(position: Int)
 
-    protected fun setOnClickListener(listener: ItemClickListener.OnItemClickListener) {
+    private fun setOnClickListener(listener: ItemClickListener.OnItemClickListener) {
         recyclerView.addOnItemTouchListener(ItemClickListener(context!!, listener))
     }
 }
