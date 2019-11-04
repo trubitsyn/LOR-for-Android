@@ -20,6 +20,7 @@ package dev.trubitsyn.lorforandroid.ui
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.core.content.edit
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -38,12 +39,12 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
         when (key) {
             KEY_DARK_THEME -> {
                 val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-                sharedPreferences.edit().putBoolean(KEY_DARK_THEME, preference!!.isChecked).apply()
+                sharedPreferences.edit { putBoolean(KEY_DARK_THEME, preference!!.isChecked) }
                 refreshScreen()
             }
             KEY_LOAD_IMAGES -> {
                 val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-                sharedPreferences.edit().putBoolean(KEY_LOAD_IMAGES, preference!!.isChecked).apply()
+                sharedPreferences.edit { putBoolean(KEY_LOAD_IMAGES, preference!!.isChecked) }
             }
         }
     }
