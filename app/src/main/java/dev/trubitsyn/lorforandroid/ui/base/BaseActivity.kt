@@ -18,13 +18,14 @@
 package dev.trubitsyn.lorforandroid.ui.base
 
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import dev.trubitsyn.lorforandroid.R
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(@LayoutRes layoutResID: Int = 0) : AppCompatActivity(layoutResID) {
     protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop)!! }
 
     override fun onCreate(savedInstanceState: Bundle?) {

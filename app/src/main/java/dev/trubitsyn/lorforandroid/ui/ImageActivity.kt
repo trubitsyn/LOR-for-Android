@@ -25,13 +25,12 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 import uk.co.senab.photoview.PhotoView
 
-class ImageActivity : BaseActivity() {
+class ImageActivity : BaseActivity(R.layout.activity_image) {
     private val photoView by lazy { findViewById<PhotoView>(R.id.photoView)!! }
     private val args by navArgs<ImageActivityArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_image)
         Glide.with(this)
                 .load(args.bitmap)
                 .fitCenter()

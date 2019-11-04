@@ -27,7 +27,7 @@ import com.google.android.material.navigation.NavigationView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(R.layout.activity_main) {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
     private val navController by lazy { findNavController(R.id.main_content) }
@@ -40,7 +40,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         navigationView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
