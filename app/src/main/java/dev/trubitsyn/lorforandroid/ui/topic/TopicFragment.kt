@@ -61,18 +61,18 @@ class TopicFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 findNavController().navigateUp()
-                return true
+                true
             }
             R.id.showComments -> {
                 val action = TopicFragmentDirections.actionTopicToComment(url)
                 findNavController().navigate(action)
-                return true
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
