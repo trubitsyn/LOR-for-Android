@@ -18,7 +18,7 @@
 package dev.trubitsyn.lorforandroid.ui.section.news
 
 import android.content.Context
-import android.text.Html
+import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
@@ -41,14 +41,14 @@ class NewsItemFactory(val context: Context) : ItemFactory {
                         .select("a[href^=/news/]")
                         .first()
                         .ownText()
-                        .let(Html::fromHtml)
+                        .parseAsHtml()
                         .toString()
                 val commentsCount = it
                         .select("a")
                         .first()
                         .nextSibling()
                         .toString()
-                        .let(Html::fromHtml)
+                        .parseAsHtml()
                         .toString()
                         .replace("[()]".toRegex(), "")
 
@@ -68,7 +68,7 @@ class NewsItemFactory(val context: Context) : ItemFactory {
                         .select("h1 > a[href^=/news/]")
                         .first()
                         .ownText()
-                        .let(Html::fromHtml)
+                        .parseAsHtml()
                         .toString()
                 val groupTitle = it
                         .select("div.group")

@@ -18,11 +18,11 @@
 package dev.trubitsyn.lorforandroid.ui.topic
 
 import android.os.Bundle
-import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.parseAsHtml
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -95,7 +95,7 @@ class TopicFragment : Fragment() {
     }
 
     private fun setTopic(topic: TopicItem) {
-        title.text = Html.fromHtml(topic.title)
+        title.text = topic.title.parseAsHtml()
         val tagsList = topic.tags
         if (tagsList.isNotEmpty()) {
             tags.visibility = View.VISIBLE
@@ -114,7 +114,7 @@ class TopicFragment : Fragment() {
 
         author.text = topic.author
         date.text = topic.postDate
-        message.text = Html.fromHtml(topic.message)
+        message.text = topic.message.parseAsHtml()
         message.movementMethod = LinkMovementMethod.getInstance()
     }
 

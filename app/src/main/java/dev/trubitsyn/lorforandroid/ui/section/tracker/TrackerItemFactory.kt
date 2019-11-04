@@ -18,7 +18,7 @@
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.content.Context
-import android.text.Html
+import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
@@ -40,7 +40,7 @@ class TrackerItemFactory(val context: Context) : ItemFactory {
                     .select("a")
                     .first()
                     .ownText()
-                    .let(Html::fromHtml)
+                    .parseAsHtml()
                     .toString()
             val groupTitle = it
                     .select("a.secondary")

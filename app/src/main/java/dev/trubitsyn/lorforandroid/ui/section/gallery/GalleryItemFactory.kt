@@ -17,7 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-import android.text.Html
+import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
@@ -37,7 +37,7 @@ class GalleryItemFactory : ItemFactory {
                     .select("h1 > a[href^=/gallery/]")
                     .first()
                     .ownText()
-                    .let(Html::fromHtml)
+                    .parseAsHtml()
                     .toString()
             val group = it
                     .select("div.group")
