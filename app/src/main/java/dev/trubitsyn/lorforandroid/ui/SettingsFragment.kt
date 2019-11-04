@@ -35,28 +35,33 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == KEY_DARK_THEME) {
-            val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-            sharedPreferences.edit().putBoolean(KEY_DARK_THEME, preference!!.isChecked).apply()
-            restart()
-        } else if (key == KEY_LOAD_IMAGES) {
-            val loadImagesPreference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-            sharedPreferences.edit().putBoolean(KEY_LOAD_IMAGES, loadImagesPreference!!.isChecked).apply()
+        when (key) {
+            KEY_DARK_THEME -> {
+                val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
+                sharedPreferences.edit().putBoolean(KEY_DARK_THEME, preference!!.isChecked).apply()
+                refreshScreen()
+            }
+            KEY_LOAD_IMAGES -> {
+                val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
+                sharedPreferences.edit().putBoolean(KEY_LOAD_IMAGES, preference!!.isChecked).apply()
+            }
         }
     }
 
-    private fun restart() {
-        activity!!.finish()
-        val intent = activity!!.intent
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(ARG_RESTART_ACTIVITY, true)
-        activity!!.startActivity(intent)
+    private fun refreshScreen() {
+        activity?.apply {
+            finish()
+            Intent().apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra(ARG_RESTART_ACTIVITY, true)
+            }
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
         super.onResume()
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
-
     }
 
     override fun onPause() {
