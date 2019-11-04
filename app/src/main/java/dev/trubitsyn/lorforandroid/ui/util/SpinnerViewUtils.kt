@@ -28,13 +28,13 @@ import dev.trubitsyn.lorforandroid.R
 object SpinnerViewUtils {
     fun setSpinnerView(activity: Activity, stringArrayResource: Int, defaultSelection: Int, listener: AdapterView.OnItemSelectedListener) {
         val spinnerView = View.inflate(activity, R.layout.spinner, null)
-        val supportBar = (activity as AppCompatActivity).supportActionBar
+        val supportBar = (activity as? AppCompatActivity)?.supportActionBar
         supportBar?.apply {
             setDisplayShowCustomEnabled(true)
             customView = spinnerView
         }
-        val spinner = spinnerView.findViewById<View>(R.id.toolbar_spinner) as Spinner
-        spinner.apply {
+        val spinner = spinnerView.findViewById<View>(R.id.toolbar_spinner) as? Spinner
+        spinner?.apply {
             val spinnerAdapter = ArrayAdapter.createFromResource(activity, stringArrayResource, android.R.layout.simple_spinner_item).apply {
                 setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             }
