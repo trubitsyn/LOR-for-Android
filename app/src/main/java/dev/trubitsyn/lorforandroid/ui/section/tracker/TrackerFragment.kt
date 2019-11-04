@@ -93,8 +93,4 @@ class TrackerFragment : BaseListFragment() {
             findNavController().navigate(action)
         }
     }
-
-    companion object {
-        const val TAG = "trackerFragment"
-    }
 }

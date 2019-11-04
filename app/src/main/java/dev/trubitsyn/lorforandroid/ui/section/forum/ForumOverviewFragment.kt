@@ -55,8 +55,4 @@ class ForumOverviewFragment : BaseListFragment() {
     }
 
     override val showDividers = false
-
-    companion object {
-        const val TAG = "forumOverviewFragment"
-    }
 }

@@ -37,8 +37,4 @@ class NewsFragment : BaseListFragment() {
         )
         findNavController().navigate(action)*/
     }
-
-    companion object {
-        const val TAG = "newsFragment"
-    }
 }

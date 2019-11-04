@@ -57,8 +57,4 @@ class GalleryFragment : BaseListFragment() {
         )
         findNavController().navigate(action)*/
     }
-
-    companion object {
-        const val TAG = "galleryFragment"
-    }
 }

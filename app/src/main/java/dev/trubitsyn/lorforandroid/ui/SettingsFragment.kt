@@ -72,6 +72,5 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
     companion object {
         const val ARG_RESTART_ACTIVITY = "restartActivity"
-        const val TAG = "settingsFragment"
     }
 }

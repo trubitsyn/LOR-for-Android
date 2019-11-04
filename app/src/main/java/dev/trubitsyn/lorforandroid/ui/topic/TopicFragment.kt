@@ -123,8 +123,4 @@ class TopicFragment : Fragment() {
             //findNavController().navigate(action)
         }
     }
-
-    companion object {
-        const val TAG = "topicFragment"
-    }
 }

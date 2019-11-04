@@ -33,8 +33,4 @@ class ForumSectionFragment : BaseListFragment() {
     /*internal interface Callback {
         fun returnToActivity(url: String)
     }*/
-
-    companion object {
-        const val TAG = "forumSectionFragment"
-    }
 }
