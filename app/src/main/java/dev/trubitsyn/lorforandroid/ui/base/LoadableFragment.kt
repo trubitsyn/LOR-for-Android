@@ -60,7 +60,7 @@ abstract class LoadableFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout.setOnRefreshListener {
             resetState()
-            errorView!!.visibility = View.GONE
+            errorView?.visibility = View.GONE
         }
     }
 
@@ -70,9 +70,9 @@ abstract class LoadableFragment : Fragment() {
     }
 
     private fun hideAllShowProgressView() {
-        swipeRefreshLayout!!.visibility = View.GONE
-        errorView!!.visibility = View.GONE
-        progressBar!!.visibility = View.VISIBLE
+        swipeRefreshLayout?.visibility = View.GONE
+        errorView?.visibility = View.GONE
+        progressBar?.visibility = View.VISIBLE
     }
 
     protected open fun stopRefresh() {
