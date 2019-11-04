@@ -17,18 +17,11 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
-import android.os.Bundle
 import androidx.navigation.fragment.navArgs
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 
 class ForumSectionFragment : BaseListFragment() {
     private val args by navArgs<ForumSectionFragmentArgs>()
-    private var group: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        group = args.group
-    }
 
     override val adapter: ForumSectionAdapter
         get() = ForumSectionAdapter()

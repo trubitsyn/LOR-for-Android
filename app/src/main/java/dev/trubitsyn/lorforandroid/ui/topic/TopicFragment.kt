@@ -43,16 +43,11 @@ class TopicFragment : Fragment() {
     internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate)!! }
     private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
     private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
-    private lateinit var url: String
-    private var imageUrl: String? = null
-
     private val args by navArgs<TopicFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-        url = args.url
-        imageUrl = args.imageUrl
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,7 +62,7 @@ class TopicFragment : Fragment() {
                 true
             }
             R.id.showComments -> {
-                val action = TopicFragmentDirections.actionTopicToComment(url)
+                val action = TopicFragmentDirections.actionTopicToComment(args.url)
                 findNavController().navigate(action)
                 true
             }
@@ -81,11 +76,11 @@ class TopicFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (StringUtils.isClub(url)) {
+        if (StringUtils.isClub(args.url)) {
             //showErrorView(R.string.error_access_denied)
             return
         }
-        val viewModel = ViewModelProviders.of(this, TopicViewModelFactory(url))
+        val viewModel = ViewModelProviders.of(this, TopicViewModelFactory(args.url))
                 .get(TopicViewModel::class.java)
         viewModel.getTopic().observe(this, Observer { topic ->
             //stopRefreshAndShow()
@@ -103,7 +98,7 @@ class TopicFragment : Fragment() {
             tags.visibility = View.GONE
         }
 
-        imageUrl?.let { imageUrl ->
+        args.imageUrl?.let { imageUrl ->
             if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
                 loadImageAndSetImageActivityListener(imageUrl)
             } else {
