@@ -25,8 +25,8 @@ import android.widget.TextView
 import androidx.core.text.parseAsHtml
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -44,6 +44,7 @@ class TopicFragment : Fragment() {
     private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
     private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
     private val args by navArgs<TopicFragmentArgs>()
+    private val viewModel by viewModels<TopicViewModel> { TopicViewModelFactory(args.url) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,8 +81,6 @@ class TopicFragment : Fragment() {
             //showErrorView(R.string.error_access_denied)
             return
         }
-        val viewModel = ViewModelProviders.of(this, TopicViewModelFactory(args.url))
-                .get(TopicViewModel::class.java)
         viewModel.getTopic().observe(this, Observer { topic ->
             //stopRefreshAndShow()
             setTopic(topic)
