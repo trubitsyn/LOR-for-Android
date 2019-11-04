@@ -21,15 +21,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.core.content.edit
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import dev.trubitsyn.lorforandroid.R
 
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
-    private val KEY_DARK_THEME = getString(R.string.pref_dark_theme)
-    private val KEY_LOAD_IMAGES = getString(R.string.pref_load_images)
+    private val darkThemeKey = getString(R.string.pref_dark_theme)
+    private val darkThemePreference by lazy { findPreference<SwitchPreferenceCompat>(darkThemeKey)!! }
+    private val loadImagesKey = getString(R.string.pref_load_images)
+    private val loadImagesPreference by lazy { findPreference<SwitchPreferenceCompat>(loadImagesKey)!! }
 
     override fun onCreatePreferences(bundle: Bundle, s: String) {
         addPreferencesFromResource(R.xml.preferences)
@@ -37,14 +38,12 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         when (key) {
-            KEY_DARK_THEME -> {
-                val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-                sharedPreferences.edit { putBoolean(KEY_DARK_THEME, preference!!.isChecked) }
+            darkThemeKey -> {
+                sharedPreferences.edit { putBoolean(darkThemeKey, darkThemePreference.isChecked) }
                 refreshScreen()
             }
-            KEY_LOAD_IMAGES -> {
-                val preference = findPreference<Preference>(key) as SwitchPreferenceCompat?
-                sharedPreferences.edit { putBoolean(KEY_LOAD_IMAGES, preference!!.isChecked) }
+            loadImagesKey -> {
+                sharedPreferences.edit { putBoolean(loadImagesKey, loadImagesPreference.isChecked) }
             }
         }
     }
