@@ -32,8 +32,6 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.api.model.Topic
-import dev.trubitsyn.lorforandroid.util.DateUtils
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
@@ -96,12 +94,12 @@ class TopicFragment : Fragment() {
         })
     }
 
-    private fun setTopic(topic: Topic) {
+    private fun setTopic(topic: TopicItem) {
         title.text = Html.fromHtml(topic.title)
         val tagsList = topic.tags
-        if (tagsList!!.isNotEmpty()) {
+        if (tagsList.isNotEmpty()) {
             tags.visibility = View.VISIBLE
-            tags.text = StringUtils.tagsFromStrings(tagsList)
+            tags.text = tagsList
         } else {
             tags.visibility = View.GONE
         }
@@ -114,8 +112,8 @@ class TopicFragment : Fragment() {
             }
         }
 
-        author.text = topic.author!!.nick
-        date.text = DateUtils.format(topic.postDate!!)
+        author.text = topic.author
+        date.text = topic.postDate
         message.text = Html.fromHtml(topic.message)
         message.movementMethod = LinkMovementMethod.getInstance()
     }
