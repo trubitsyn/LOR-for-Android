@@ -41,7 +41,5 @@ enum class ApiManager {
             .addConverterFactory(JsoupConverter.FACTORY)
             .build()
 
-    internal val apiComments: ApiComments by lazy { apiRestAdapter.create(ApiComments::class.java) }
-    internal val apiTopic: ApiTopic by lazy { apiRestAdapter.create(ApiTopic::class.java) }
     internal val siteApi: SiteApi by lazy { siteRestAdapter.create(SiteApi::class.java) }
 }
