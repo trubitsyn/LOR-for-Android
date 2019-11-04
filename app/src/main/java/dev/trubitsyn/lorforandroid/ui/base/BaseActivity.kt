@@ -34,7 +34,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    protected fun setupActionBar() {
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
