@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/news">
 
@@ -95,7 +93,7 @@
         android:name="dev.trubitsyn.lorforandroid.ui.ImageActivity"
         android:label="@string/activity_image">
         <argument
-            android:name="imageUrl"
-            app:argType="string" />
+            android:name="bitmap"
+            app:argType="android.graphics.Bitmap" />
     </activity>
 </navigation>

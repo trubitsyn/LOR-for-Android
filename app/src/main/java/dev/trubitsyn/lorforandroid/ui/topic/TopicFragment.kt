@@ -126,8 +126,8 @@ class TopicFragment : Fragment() {
                 .into(image)
 
         image.setOnClickListener {
-            val action = TopicFragmentDirections.actionTopicToImageActivity(imageUrl)
-            findNavController().navigate(action)
+            //val action = TopicFragmentDirections.actionTopicToImageActivity(bitmap)
+            //findNavController().navigate(action)
         }
     }
 

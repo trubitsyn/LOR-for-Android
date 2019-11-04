@@ -18,6 +18,7 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dev.trubitsyn.lorforandroid.R
@@ -26,14 +27,13 @@ import uk.co.senab.photoview.PhotoView
 
 class ImageActivity : BaseActivity() {
     private val photoView by lazy { findViewById<PhotoView>(R.id.photoView)!! }
+    private val args by navArgs<ImageActivityArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-
-        val imageUrl = intent.getStringExtra(ARG_IMAGE_URL)
         Glide.with(this)
-                .load(imageUrl)
+                .load(args.bitmap)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(photoView)
@@ -42,9 +42,5 @@ class ImageActivity : BaseActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    companion object {
-        const val ARG_IMAGE_URL = "imageUrl"
     }
 }
