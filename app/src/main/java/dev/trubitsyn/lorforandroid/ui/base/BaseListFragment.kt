@@ -38,16 +38,18 @@ abstract class BaseListFragment : LoadableFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(view.context)
-        recyclerView.layoutManager = layoutManager
-        if (showDividers) {
-            recyclerView.addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
-        }
-        setOnClickListener(object : ItemClickListener.OnItemClickListener {
-            override fun onItemClick(view: View) {
-                onItemClickCallback(recyclerView.getChildAdapterPosition(view))
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(view.context)
+            if (showDividers) {
+                addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             }
-        })
+            val listener = object : ItemClickListener.OnItemClickListener {
+                override fun onItemClick(view: View) {
+                    onItemClickCallback(recyclerView.getChildAdapterPosition(view))
+                }
+            }
+            addOnItemTouchListener(ItemClickListener(context!!, listener))
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,8 +77,4 @@ abstract class BaseListFragment : LoadableFragment() {
     protected open val showDividers = true
 
     protected abstract fun onItemClickCallback(position: Int)
-
-    private fun setOnClickListener(listener: ItemClickListener.OnItemClickListener) {
-        recyclerView.addOnItemTouchListener(ItemClickListener(context!!, listener))
-    }
 }
