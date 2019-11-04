@@ -33,7 +33,6 @@ abstract class BaseListFragment : LoadableFragment() {
     protected abstract val adapter: RecyclerView.Adapter<*>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
     }
 
