@@ -45,6 +45,7 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
