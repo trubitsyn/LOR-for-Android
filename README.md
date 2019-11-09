@@ -1,5 +1,5 @@
 # LOR for Android
-Оригинальный клиент linux.org.ru для Android.
+Оригинальный клиент LINUX.ORG.RU для Android.
 
 ## Скриншоты
 <div style="display:flex;">
