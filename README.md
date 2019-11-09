@@ -1,4 +1,4 @@
-# LOR for Android
+# LOR for Android ![](https://img.shields.io/badge/android-4.0+-blue?logo=android) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/trubitsyn/LOR-for-Android?include_prereleases) ![](https://img.shields.io/badge/license-GPL-green)
 Оригинальный клиент LINUX.ORG.RU для Android.
 
 ## Скриншоты
