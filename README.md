@@ -1,4 +1,4 @@
-# LOR for Android ![](https://github.com/trubitsyn/LOR-for-Android/workflows/CI/badge.svg) ![](https://img.shields.io/static/v1?label=linux.org.ru&message=thread&color=2E3436&logo=linux) ![](https://img.shields.io/badge/android-4.0+-blue?logo=android) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/trubitsyn/LOR-for-Android?include_prereleases) ![](https://img.shields.io/badge/license-GPL-green)
+# LOR for Android [![](https://github.com/trubitsyn/LOR-for-Android/workflows/CI/badge.svg)](https://github.com/trubitsyn/LOR-for-Android/actions?query=workflow%3ACI) [![](https://img.shields.io/static/v1?label=linux.org.ru&message=thread&labelColor=555753&color=2E3436&logo=linux&logoColor=E59A4F)](https://www.linux.org.ru) ![](https://img.shields.io/badge/android-4.0+-blue?logo=android) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/trubitsyn/LOR-for-Android?include_prereleases) [![](https://img.shields.io/badge/license-GPL-green)](https://github.com/trubitsyn/LOR-for-Android/blob/master/LICENSE)
 Оригинальный клиент LINUX.ORG.RU для Android.
 
 ## Скриншоты
@@ -25,4 +25,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
-```
