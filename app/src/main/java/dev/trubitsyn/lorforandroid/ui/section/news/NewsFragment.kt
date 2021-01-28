@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 Nikola Trubitsyn
+ * Copyright (C) 2015-2021 Nikola Trubitsyn (getsmp)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -8,21 +8,49 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import dagger.hilt.android.AndroidEntryPoint
+import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewsFragment : BaseListFragment() {
 
     override val adapter: NewsAdapter
         get() = NewsAdapter()
+
+    private val viewModel: NewsViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest {
+                when {
+                    it.refresh is LoadState.Loading -> {} // show progress bar
+                    it.refresh !is LoadState.Loading -> {} // retry
+                    it.refresh is LoadState.Error -> showUserFriendlyError(R.string.error_network)
+                }
+            }
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+    }
 
     override fun onItemClickCallback(position: Int) {
         /*val url = when (val item = items[position]) {

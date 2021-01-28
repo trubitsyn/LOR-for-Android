@@ -5,7 +5,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -15,21 +15,12 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.gallery
+package dev.trubitsyn.lorforandroid.api
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.room.Entity
 
-class GalleryViewModel(factory: DataSource.Factory<Int, GalleryItem>) : ViewModel() {
-    private val config = PagedList.Config.Builder()
-            .setPageSize(20)
-            .setMaxSize(200)
-            .build()
-
-    val galleryTopics: LiveData<PagedList<GalleryItem>> =
-            LivePagedListBuilder(factory, config)
-                    .build()
-}
+@Entity(tableName = "remote_keys")
+data class RemoteKey(
+        val label: String,
+        val nextKey: String?
+)

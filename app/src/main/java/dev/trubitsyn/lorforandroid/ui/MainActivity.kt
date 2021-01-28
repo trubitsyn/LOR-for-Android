@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 Nikola Trubitsyn
+ * Copyright (C) 2015-2021 Nikola Trubitsyn (getsmp)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -8,11 +8,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package dev.trubitsyn.lorforandroid.ui
@@ -24,9 +24,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
@@ -44,9 +46,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+    override fun onBackPressed() = when {
+        drawerLayout.isDrawerOpen(GravityCompat.START) -> {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else super.onBackPressed()
+        }
+        else -> super.onBackPressed()
     }
 }

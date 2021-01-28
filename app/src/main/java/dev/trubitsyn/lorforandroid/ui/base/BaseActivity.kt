@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 Nikola Trubitsyn
+ * Copyright (C) 2015-2021 Nikola Trubitsyn (getsmp)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -8,11 +8,11 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package dev.trubitsyn.lorforandroid.ui.base
@@ -25,7 +25,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import dev.trubitsyn.lorforandroid.R
 
-abstract class BaseActivity(@LayoutRes layoutResID: Int = 0) : AppCompatActivity(layoutResID) {
+abstract class BaseActivity(@LayoutRes layoutResID: Int) : AppCompatActivity(layoutResID) {
     protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop)!! }
 
     override fun onCreate(savedInstanceState: Bundle?) {

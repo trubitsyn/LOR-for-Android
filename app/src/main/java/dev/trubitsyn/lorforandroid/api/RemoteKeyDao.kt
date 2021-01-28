@@ -5,7 +5,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -15,21 +15,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.gallery
+package dev.trubitsyn.lorforandroid.api
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
-class GalleryViewModel(factory: DataSource.Factory<Int, GalleryItem>) : ViewModel() {
-    private val config = PagedList.Config.Builder()
-            .setPageSize(20)
-            .setMaxSize(200)
-            .build()
+@Dao
+interface RemoteKeyDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrReplace(remoteKey: RemoteKey)
 
-    val galleryTopics: LiveData<PagedList<GalleryItem>> =
-            LivePagedListBuilder(factory, config)
-                    .build()
+    @Query("SELECT * FROM remote_keys WHERE label = :query")
+    suspend fun remoteKeyByQuery(query: String): RemoteKey
+
+    @Query("DELETE FROM remote_keys WHERE label = :query")
+    suspend fun deleteByQuery(query: String)
 }

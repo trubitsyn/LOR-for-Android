@@ -17,11 +17,30 @@
 
 package dev.trubitsyn.lorforandroid.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import dev.trubitsyn.lorforandroid.AppDatabase
+import dev.trubitsyn.lorforandroid.ui.section.news.NewsDao
 
 @Module
-@InstallIn(FragmentComponent::class)
-class ImageModule {
+@InstallIn(SingletonComponent::class)
+class DatabaseModule {
+
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.inMemoryDatabaseBuilder(
+                context,
+                AppDatabase::class.java
+        ).build()
+    }
+
+    @Provides
+    fun provideNewsDao(appDatabase: AppDatabase): NewsDao {
+        return appDatabase.newsDao
+    }
 }
