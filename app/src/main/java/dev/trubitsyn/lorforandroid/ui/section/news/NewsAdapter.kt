@@ -25,10 +25,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
-class NewsAdapter : PagingDataAdapter<NewsItem, RecyclerView.ViewHolder>(diffCallback) {
+class NewsAdapter : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(diffCallback) {
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
-        //is MiniNewsItem -> MINI
+        is MiniNewsItem -> MINI
         is NewsItem -> FULL
         else -> -1
     }
@@ -74,13 +74,29 @@ class NewsAdapter : PagingDataAdapter<NewsItem, RecyclerView.ViewHolder>(diffCal
         private const val MINI = 0
         private const val FULL = 1
 
-        private val diffCallback = object : DiffUtil.ItemCallback<NewsItem>() {
-            override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
-                return oldItem.url == newItem.url
+        private val diffCallback = object : DiffUtil.ItemCallback<AbstractNewsItem>() {
+            override fun areItemsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
+                return when {
+                    oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
+                        oldItem.url == newItem.url
+                    }
+                    oldItem is NewsItem && newItem is NewsItem -> {
+                        oldItem.url == newItem.url
+                    }
+                    else -> false
+                }
             }
 
-            override fun areContentsTheSame(oldItem: NewsItem, newItem: NewsItem): Boolean {
-                return oldItem == newItem
+            override fun areContentsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
+                return when {
+                    oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
+                        oldItem == newItem
+                    }
+                    oldItem is NewsItem && newItem is NewsItem -> {
+                        oldItem == newItem
+                    }
+                    else -> false
+                }
             }
         }
     }

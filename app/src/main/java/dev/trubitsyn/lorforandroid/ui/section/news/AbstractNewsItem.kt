@@ -36,7 +36,7 @@ data class NewsItem(
 ) : AbstractNewsItem()
 
 @Entity
-class MiniNewsItem(
+data class MiniNewsItem(
         @PrimaryKey(autoGenerate = true)
         val id: Long = 0,
         val url: String,

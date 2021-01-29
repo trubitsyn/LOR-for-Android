@@ -25,9 +25,9 @@ import javax.inject.Inject
 
 class NewsPagingSource @Inject constructor(
         private val api: SiteApi
-) : PagingSource<Int, NewsItem>() {
+) : PagingSource<Int, AbstractNewsItem>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AbstractNewsItem> {
         val nextPage = params.key ?: FIRST_PAGE
         try {
             val response = api.getNews(0)
@@ -41,7 +41,7 @@ class NewsPagingSource @Inject constructor(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, NewsItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, AbstractNewsItem>): Int? {
         return null
     }
 
