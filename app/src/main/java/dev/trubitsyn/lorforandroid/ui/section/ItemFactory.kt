@@ -19,6 +19,6 @@ package dev.trubitsyn.lorforandroid.ui.section
 
 import org.jsoup.nodes.Element
 
-interface ItemFactory {
-    fun prepareItems(body: Element, items: MutableList<Any>)
+interface ItemFactory<out T> {
+    fun convert(body: Element): T
 }

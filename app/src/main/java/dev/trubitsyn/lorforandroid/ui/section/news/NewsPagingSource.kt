@@ -20,6 +20,7 @@ package dev.trubitsyn.lorforandroid.ui.section.news
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import java.lang.Exception
 import javax.inject.Inject
 
 class NewsPagingSource @Inject constructor(
@@ -27,10 +28,24 @@ class NewsPagingSource @Inject constructor(
 ) : PagingSource<Int, NewsItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NewsItem> {
-        TODO("Not yet implemented")
+        val nextPage = params.key ?: FIRST_PAGE
+        try {
+            val response = api.getNews(0)
+            return LoadResult.Page(
+                    data = response,
+                    prevKey = if (nextPage == FIRST_PAGE) null else nextPage - 1,
+                    nextKey = nextPage + 1
+            )
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
+        }
     }
 
     override fun getRefreshKey(state: PagingState<Int, NewsItem>): Int? {
-        TODO("Not yet implemented")
+        return null
+    }
+
+    companion object {
+       private const val FIRST_PAGE = 1
     }
 }

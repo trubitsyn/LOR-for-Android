@@ -18,19 +18,50 @@
 package dev.trubitsyn.lorforandroid.ui.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-abstract class BaseListFragment : LoadableFragment() {
-    protected val recyclerView by lazy { view!!.findViewById<RecyclerView>(R.id.recyclerView)!! }
-    protected abstract val adapter: RecyclerView.Adapter<*>
+abstract class BaseListFragment : Fragment() {
+    protected val swipeRefreshLayout by lazy { requireView().findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) }
+    private val progressBar by lazy { requireView().findViewById<ProgressBar>(R.id.progressBar) }
+    protected val errorView by lazy { requireView().findViewById<TextView>(R.id.errorView) }
+    protected val recyclerView by lazy { requireView().findViewById<RecyclerView>(R.id.recyclerView)!! }
+    protected abstract val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        retainInstance = true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.refresh, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.refreshButton -> {
+                restart()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
@@ -38,39 +69,53 @@ abstract class BaseListFragment : LoadableFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView.adapter = adapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest {
+                when {
+                    it.refresh is LoadState.Loading -> {
+                    } // show progress bar
+                    it.refresh !is LoadState.Loading -> {
+                    } // retry
+                    it.refresh is LoadState.Error -> showErrorView(R.string.error_network)
+                }
+            }
+        }
+        swipeRefreshLayout.setOnRefreshListener {
+            errorView?.visibility = View.GONE
+        }
         recyclerView.apply {
             layoutManager = LinearLayoutManager(view.context)
             if (showDividers) {
                 addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             }
-            val listener = object : ItemClickListener.OnItemClickListener {
+            addOnItemTouchListener(ItemClickListener(context!!, object : ItemClickListener.OnItemClickListener {
                 override fun onItemClick(view: View) {
                     onItemClickCallback(recyclerView.getChildAdapterPosition(view))
                 }
-            }
-            addOnItemTouchListener(ItemClickListener(context!!, listener))
+            }))
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        recyclerView.adapter = adapter
-        if (savedInstanceState != null) {
-            stopRefreshAndShow()
-        }
-    }
-
-    override fun restart() {
+    protected fun restart() {
         recyclerView.scrollToPosition(0)
-        super.restart()
+        swipeRefreshLayout?.visibility = View.GONE
+        errorView?.visibility = View.GONE
+        progressBar?.visibility = View.VISIBLE
     }
 
-    protected fun showUserFriendlyError(errorString: Int) {
-        val hasData = false//items.isNotEmpty()
-        if (hasData) {
-            Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show()
-        } else {
-            showErrorView(errorString)
+    private fun stopRefresh() {
+        progressBar?.visibility = View.GONE
+        swipeRefreshLayout.isRefreshing = false
+        swipeRefreshLayout?.visibility = View.VISIBLE
+    }
+
+    private fun showErrorView(stringResource: Int) {
+        stopRefresh()
+        errorView?.let {
+            swipeRefreshLayout?.visibility = View.INVISIBLE
+            errorView.visibility = View.VISIBLE
+            errorView.setText(stringResource)
         }
     }
 

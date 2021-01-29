@@ -20,8 +20,9 @@ package dev.trubitsyn.lorforandroid.ui.section.forum
 import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import org.jsoup.nodes.Element
 
-class ForumOverviewItemFactory : ItemFactory {
-    override fun prepareItems(body: Element, items: MutableList<Any>) {
+class ForumOverviewItemFactory : ItemFactory<List<ForumOverviewItem>> {
+    override fun convert(body: Element): List<ForumOverviewItem> {
+        val items = mutableListOf<ForumOverviewItem>()
         val sections = body
                 .select("div#bd")
                 .select("ul")
@@ -45,5 +46,6 @@ class ForumOverviewItemFactory : ItemFactory {
                     name = name
             ))
         }
+        return items
     }
 }

@@ -15,8 +15,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid
+package dev.trubitsyn.lorforandroid.site
 
-object Const {
-    const val SITE_ROOT = "https://www.linux.org.ru/"
+import org.jsoup.nodes.Document
+
+interface DocumentAdapter<T> {
+    fun fromDocument(document: Document): T?
 }

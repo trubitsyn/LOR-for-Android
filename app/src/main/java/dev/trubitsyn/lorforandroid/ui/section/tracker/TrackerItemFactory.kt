@@ -23,8 +23,9 @@ import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class TrackerItemFactory(val context: Context) : ItemFactory {
-    override fun prepareItems(body: Element, items: MutableList<Any>) {
+class TrackerItemFactory(val context: Context) : ItemFactory<List<TrackerItem>> {
+    override fun convert(body: Element): List<TrackerItem> {
+        val items = mutableListOf<TrackerItem>()
         val topics = body
                 .select("tbody > tr")
 
@@ -75,5 +76,6 @@ class TrackerItemFactory(val context: Context) : ItemFactory {
                     comments = comments
             ))
         }
+        return items
     }
 }

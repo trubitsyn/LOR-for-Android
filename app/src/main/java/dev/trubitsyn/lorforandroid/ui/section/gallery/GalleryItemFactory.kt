@@ -22,8 +22,9 @@ import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class GalleryItemFactory : ItemFactory {
-    override fun prepareItems(body: Element, items: MutableList<Any>) {
+class GalleryItemFactory : ItemFactory<List<GalleryItem>> {
+    override fun convert(body: Element): List<GalleryItem> {
+        val items = mutableListOf<GalleryItem>()
         val articles = body
                 .select("article.news")
 
@@ -81,5 +82,6 @@ class GalleryItemFactory : ItemFactory {
                     mediumImageUrl = mediumImageUrl
             ))
         }
+        return items
     }
 }

@@ -18,13 +18,15 @@
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
 import androidx.navigation.fragment.navArgs
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 
 class ForumSectionFragment : BaseListFragment() {
     private val args by navArgs<ForumSectionFragmentArgs>()
 
-    override val adapter: ForumSectionAdapter
-        get() = ForumSectionAdapter()
+    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
+        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)

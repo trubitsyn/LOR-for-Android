@@ -24,8 +24,9 @@ import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class NewsItemFactory(val context: Context) : ItemFactory {
-    override fun prepareItems(body: Element, items: MutableList<Any>) {
+class NewsItemFactory(val context: Context) : ItemFactory<List<AbstractNewsItem>> {
+    override fun convert(body: Element): List<AbstractNewsItem> {
+        val items = mutableListOf<AbstractNewsItem>()
         val articles = body
                 .select("article")
 
@@ -104,5 +105,6 @@ class NewsItemFactory(val context: Context) : ItemFactory {
                 ))
             }
         }
+        return items
     }
 }

@@ -15,16 +15,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.news
+package dev.trubitsyn.lorforandroid.site
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import okhttp3.ResponseBody
+import retrofit2.Converter
 
-@Entity
-class MiniNewsItem(
-        @PrimaryKey(autoGenerate = true)
-        val id: Long = 0,
-        val url: String,
-        val title: String,
-        val commentsCount: String
-)
+class HtmlResponseBodyConverter<T>(
+        private val parser: HtmlParser,
+        private val adapter: DocumentAdapter<*>?
+) : Converter<ResponseBody, T> {
+    override fun convert(value: ResponseBody): T? {
+        try {
+            val document = parser.parse(value.string())
+            return adapter?.fromDocument(document) as? T
+        } finally {
+            value.close()
+        }
+    }
+}

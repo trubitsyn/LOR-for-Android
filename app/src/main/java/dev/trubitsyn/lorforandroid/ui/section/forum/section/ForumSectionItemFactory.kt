@@ -22,8 +22,9 @@ import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Element
 
-class ForumSectionItemFactory(val context: Context) : ItemFactory {
-    override fun prepareItems(body: Element, items: MutableList<Any>) {
+class ForumSectionItemFactory(val context: Context) : ItemFactory<List<ForumSectionItem>> {
+    override fun convert(body: Element): List<ForumSectionItem> {
+        val items = mutableListOf<ForumSectionItem>()
         val entries = body
                 .select("tbody tr")
 
@@ -75,5 +76,6 @@ class ForumSectionItemFactory(val context: Context) : ItemFactory {
                     isPinned = isPinned
             ))
         }
+        return items
     }
 }

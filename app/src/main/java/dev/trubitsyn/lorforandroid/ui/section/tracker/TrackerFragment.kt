@@ -24,6 +24,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
@@ -51,14 +53,14 @@ class TrackerFragment : BaseListFragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         })
-        viewModel.trackerItems.observe(this, Observer {
+        viewModel.trackerItems.observe(viewLifecycleOwner, {
             //stopRefreshAndShow()
-            adapter.submitList(it)
+            //adapter.submitList(it)
         })
     }
 
-    override val adapter: TrackerAdapter
-        get() = TrackerAdapter()
+    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
+        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
@@ -73,7 +75,7 @@ class TrackerFragment : BaseListFragment() {
     }
 
     private fun navigateToGalleryTopic(item: TrackerItem) {
-        val imagesUrl = GalleryUtils.getGalleryImagesUrl(item.url)
+        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
         val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
         val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
 

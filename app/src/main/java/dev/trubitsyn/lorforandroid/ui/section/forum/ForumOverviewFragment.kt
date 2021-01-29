@@ -21,6 +21,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
@@ -38,8 +40,8 @@ class ForumOverviewFragment : BaseListFragment() {
         swipeRefreshLayout?.isEnabled = false
     }
 
-    override val adapter: ForumOverviewAdapter
-        get() = ForumOverviewAdapter(listOf())
+    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
+        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         var item: ForumOverviewItem by Delegates.notNull() //items[position] as ForumOverviewItem

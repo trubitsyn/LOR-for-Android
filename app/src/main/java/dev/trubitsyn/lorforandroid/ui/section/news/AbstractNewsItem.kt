@@ -15,20 +15,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.util
+package dev.trubitsyn.lorforandroid.ui.section.news
 
-import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.AsyncHttpResponseHandler
-import com.loopj.android.http.RequestParams
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-import dev.trubitsyn.lorforandroid.Const
+sealed class AbstractNewsItem
 
-object NetworkClient {
-    private val client = AsyncHttpClient()
+@Entity
+data class NewsItem(
+        @PrimaryKey(autoGenerate = true)
+        val id: Long = 0,
+        val url: String,
+        val title: String,
+        val groupTitle: String?,
+        val tags: String,
+        val date: String,
+        val author: String?,
+        val comments: String
+) : AbstractNewsItem()
 
-    fun get(url: String, params: RequestParams?, handler: AsyncHttpResponseHandler) {
-        client.get(getAbsoluteUrl(url), params, handler)
-    }
-
-    private fun getAbsoluteUrl(relativeUrl: String) = Const.SITE_ROOT + relativeUrl
-}
+@Entity
+class MiniNewsItem(
+        @PrimaryKey(autoGenerate = true)
+        val id: Long = 0,
+        val url: String,
+        val title: String,
+        val commentsCount: String
+): AbstractNewsItem()

@@ -34,11 +34,4 @@ class ParsingModule {
     fun provideHtmlParser(): HtmlParser {
         return JsoupParser()
     }
-
-    @Provides
-    fun provideJsonParser(): Gson {
-        return GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                .create()
-    }
 }

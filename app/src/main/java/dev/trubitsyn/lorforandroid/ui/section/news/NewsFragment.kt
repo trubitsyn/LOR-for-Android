@@ -39,13 +39,6 @@ class NewsFragment : BaseListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            adapter.loadStateFlow.collectLatest {
-                when {
-                    it.refresh is LoadState.Loading -> {} // show progress bar
-                    it.refresh !is LoadState.Loading -> {} // retry
-                    it.refresh is LoadState.Error -> showUserFriendlyError(R.string.error_network)
-                }
-            }
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
             }

@@ -18,23 +18,60 @@
 package dev.trubitsyn.lorforandroid.di
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dev.trubitsyn.lorforandroid.Const
+import dagger.hilt.components.SingletonComponent
+import dev.trubitsyn.lorforandroid.site.HtmlConverterFactory
+import dev.trubitsyn.lorforandroid.site.SiteApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Provides
-    fun provideRetrofit(gson: Gson): Retrofit {
+    fun provideSiteApi(@ParsingRetrofit retrofit: Retrofit): SiteApi {
+        return retrofit.create(SiteApi::class.java)
+    }
+
+    @ApiRetrofit
+    @Provides
+    fun provideApiRestAdapter(gson: Gson): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(Const.SITE_ROOT + "api/")
+                .baseUrl(SITE_ROOT + "api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }
+
+    @ParsingRetrofit
+    @Provides
+    fun provideParsingRetrofit(): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(SITE_ROOT)
+                .addConverterFactory(HtmlConverterFactory.create())
+                .build()
+    }
+
+    @Provides
+    fun provideGson(): Gson {
+        return GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                .create()
+    }
+
+    companion object {
+        const val SITE_ROOT = "https://www.linux.org.ru/"
+    }
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ApiRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ParsingRetrofit

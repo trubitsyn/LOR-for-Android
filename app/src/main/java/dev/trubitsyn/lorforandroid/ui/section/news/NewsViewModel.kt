@@ -37,12 +37,4 @@ class NewsViewModel @Inject constructor(
         NewsPagingSource(api)
     }.flow.cachedIn(viewModelScope)
 
-    private val dataSource: DataSource.Factory<Int, NewsItem> = newsDao.newsByDate()
-
-    private val config = PagedList.Config.Builder()
-            .setPageSize(20)
-            .setMaxSize(200)
-            .build()
-
-    val data: LiveData<PagedList<NewsItem>> = LivePagedListBuilder(dataSource, config).build()
 }

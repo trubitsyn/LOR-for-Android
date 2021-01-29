@@ -39,7 +39,7 @@ class TrackerRepositoryImpl(
             override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: Element?) {
                 val list = mutableListOf<Any>()
                 responseBody?.let {
-                    factory.prepareItems(responseBody, list)
+                    val items = factory.convert(responseBody)
                 }
                 liveList.postValue(list.toList() as List<TrackerItem>?)
             }

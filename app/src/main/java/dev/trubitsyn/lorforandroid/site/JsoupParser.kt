@@ -18,9 +18,25 @@
 package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 
 class JsoupParser : HtmlParser {
-    override fun parse(document: String) {
-        Jsoup.parse(document)
+    private val adapters  = mutableMapOf<Class<*>, DocumentAdapter<*>>()
+
+    override fun parse(document: String): Document {
+        return Jsoup.parse(document)
+    }
+
+    override fun <T> fromDocument(document: Document, clazz: Class<T>): T? {
+        val adapter = getAdapter<T>(clazz)
+        return adapter?.fromDocument(document) as? T
+    }
+
+    fun registerDocumentAdapter(adapter: DocumentAdapter<*>, clazz: Class<*>) {
+        adapters[clazz] = adapter
+    }
+
+    fun <T> getAdapter(clazz: Class<T>): DocumentAdapter<*>? {
+        return adapters.get(clazz)
     }
 }
