@@ -45,10 +45,10 @@ class TrackerFragment : BaseListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        SpinnerViewUtils.setSpinnerView(activity!!, R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
+        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 filter = TrackerFilterEnum.values()[position]
-                restart()
+                //restart()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}

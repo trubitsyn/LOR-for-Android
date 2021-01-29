@@ -36,10 +36,10 @@ class GalleryFragment : BaseListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        SpinnerViewUtils.setSpinnerView(activity!!, R.array.gallery_spinner, filter, object : AdapterView.OnItemSelectedListener {
+        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.gallery_spinner, filter, object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 filter = position
-                restart()
+                //restart()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}

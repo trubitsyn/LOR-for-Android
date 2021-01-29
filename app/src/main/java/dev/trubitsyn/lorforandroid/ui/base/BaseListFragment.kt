@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -36,9 +37,9 @@ import kotlinx.coroutines.launch
 
 abstract class BaseListFragment : Fragment() {
     protected val swipeRefreshLayout by lazy { requireView().findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) }
-    private val progressBar by lazy { requireView().findViewById<ProgressBar>(R.id.progressBar) }
-    protected val errorView by lazy { requireView().findViewById<TextView>(R.id.errorView) }
     protected val recyclerView by lazy { requireView().findViewById<RecyclerView>(R.id.recyclerView)!! }
+    protected val errorView by lazy { requireView().findViewById<TextView>(R.id.errorView) }
+    private val viewFlipper by lazy { requireView().findViewById<ViewFlipper>(R.id.viewFlipper) }
     protected abstract val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ abstract class BaseListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.refreshButton -> {
-                restart()
+                adapter.refresh()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -64,58 +65,39 @@ abstract class BaseListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_swiperefresh_recyclerview, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
-        viewLifecycleOwner.lifecycleScope.launch {
-            adapter.loadStateFlow.collectLatest {
-                when {
-                    it.refresh is LoadState.Loading -> {
-                    } // show progress bar
-                    it.refresh !is LoadState.Loading -> {
-                    } // retry
-                    it.refresh is LoadState.Error -> showErrorView(R.string.error_network)
-                }
-            }
-        }
-        swipeRefreshLayout.setOnRefreshListener {
-            errorView?.visibility = View.GONE
-        }
+        swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(view.context)
             if (showDividers) {
                 addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             }
-            addOnItemTouchListener(ItemClickListener(context!!, object : ItemClickListener.OnItemClickListener {
+            addOnItemTouchListener(ItemClickListener(requireContext(), object : ItemClickListener.OnItemClickListener {
                 override fun onItemClick(view: View) {
                     onItemClickCallback(recyclerView.getChildAdapterPosition(view))
                 }
             }))
         }
-    }
-
-    protected fun restart() {
-        recyclerView.scrollToPosition(0)
-        swipeRefreshLayout?.visibility = View.GONE
-        errorView?.visibility = View.GONE
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    private fun stopRefresh() {
-        progressBar?.visibility = View.GONE
-        swipeRefreshLayout.isRefreshing = false
-        swipeRefreshLayout?.visibility = View.VISIBLE
-    }
-
-    private fun showErrorView(stringResource: Int) {
-        stopRefresh()
-        errorView?.let {
-            swipeRefreshLayout?.visibility = View.INVISIBLE
-            errorView.visibility = View.VISIBLE
-            errorView.setText(stringResource)
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest {
+                when (it.refresh) {
+                    is LoadState.Loading -> {
+                        viewFlipper.displayedChild = R.id.progressBar
+                    }
+                    is LoadState.NotLoading -> {
+                        viewFlipper.displayedChild = R.id.swipeRefreshLayout
+                    }
+                    is LoadState.Error -> {
+                        errorView.setText(R.string.error_network)
+                        viewFlipper.displayedChild = R.id.errorView
+                    }
+                }
+            }
         }
     }
 

@@ -69,5 +69,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/progress" />
+    <include layout="@layout/layout_progress" />
+    <include layout="@layout/layout_error" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
