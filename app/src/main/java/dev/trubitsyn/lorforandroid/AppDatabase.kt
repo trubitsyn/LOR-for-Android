@@ -19,7 +19,7 @@ package dev.trubitsyn.lorforandroid
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import dev.trubitsyn.lorforandroid.ui.section.forum.ForumDao
+import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewDao
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionDao
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
@@ -44,7 +44,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val newsDao: NewsDao
     abstract val galleryDao: GalleryDao
     abstract val trackerDao: TrackerDao
-    abstract val forumDao: ForumDao
+    abstract val forumOverviewDao: ForumOverviewDao
     abstract val forumSectionDao: ForumSectionDao
     abstract val topicDao: TopicDao
 }

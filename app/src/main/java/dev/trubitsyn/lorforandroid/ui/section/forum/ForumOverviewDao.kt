@@ -15,14 +15,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.topic
+package dev.trubitsyn.lorforandroid.ui.section.forum
 
 import androidx.room.Dao
 import androidx.room.Query
 import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TopicDao : BaseDao<TopicItem> {
-    @Query("SELECT * FROM topicitem WHERE id = :id")
-    fun findById(id: Long): TopicItem
+interface ForumOverviewDao : BaseDao<ForumOverviewItem> {
+    @Query("SELECT * FROM forumoverviewitem")
+    fun getAll(): Flow<List<ForumOverviewItem>>
 }

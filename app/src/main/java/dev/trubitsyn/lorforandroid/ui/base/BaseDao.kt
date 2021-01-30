@@ -15,13 +15,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.forum
+package dev.trubitsyn.lorforandroid.ui.base
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Update
 
-@Dao
-interface ForumDao {
-    @Query("SELECT * FROM forumoverviewitem")
-    fun getAll(): List<ForumOverviewItem>
+interface BaseDao<T> {
+
+    @Insert
+    fun insert(vararg obj: T)
+
+    @Update
+    fun update(vararg obj: T)
+
+    @Delete
+    fun delete()
 }

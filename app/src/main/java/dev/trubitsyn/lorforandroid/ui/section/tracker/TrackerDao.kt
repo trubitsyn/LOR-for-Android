@@ -19,9 +19,14 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import androidx.room.Dao
 import androidx.room.Query
+import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TrackerDao {
+interface TrackerDao : BaseDao<TrackerItem> {
     @Query("SELECT * FROM trackeritem WHERE id = :id")
     fun findById(id: Long): TrackerItem
+
+    @Query("SELECT * FROM trackeritem")
+    fun getAll(): Flow<List<TrackerItem>>
 }

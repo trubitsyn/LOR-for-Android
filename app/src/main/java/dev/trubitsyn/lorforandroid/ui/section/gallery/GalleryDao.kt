@@ -19,9 +19,14 @@ package dev.trubitsyn.lorforandroid.ui.section.gallery
 
 import androidx.room.Dao
 import androidx.room.Query
+import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface GalleryDao {
+interface GalleryDao : BaseDao<GalleryItem> {
     @Query("SELECT * FROM galleryitem WHERE id = :id")
     fun findById(id: Long): GalleryItem
+
+    @Query("SELECT * FROM galleryitem")
+    fun getAll(): Flow<List<GalleryItem>>
 }

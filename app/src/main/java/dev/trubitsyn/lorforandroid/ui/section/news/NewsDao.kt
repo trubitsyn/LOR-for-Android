@@ -17,15 +17,19 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
+import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NewsDao {
+interface NewsDao : BaseDao<NewsItem> {
     @Query("SELECT * FROM newsitem WHERE id = :id")
     fun findById(id: Long): NewsItem
 
+    @Query("SELECT * FROM newsitem")
+    fun getAll(): Flow<List<NewsItem>>
+
     @Query("SELECT * FROM newsitem ORDER BY date")
-    fun newsByDate(): DataSource.Factory<Int, NewsItem>
+    fun newsByDate(): Flow<List<NewsItem>>
 }

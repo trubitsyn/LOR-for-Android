@@ -19,9 +19,14 @@ package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
 import androidx.room.Dao
 import androidx.room.Query
+import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ForumSectionDao {
+interface ForumSectionDao : BaseDao<ForumSectionItem> {
     @Query("SELECT * FROM forumsectionitem WHERE id = :id")
     fun findById(id: Long): ForumSectionItem
+
+    @Query("SELECT * FROM forumsectionitem")
+    fun getAll(): Flow<List<ForumSectionItem>>
 }
