@@ -15,14 +15,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.forum
+package dev.trubitsyn.lorforandroid.site.adapter
 
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
-import org.jsoup.nodes.Element
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
+import org.jsoup.nodes.Document
 
-class ForumOverviewItemFactory : ItemFactory<List<ForumOverviewItem>> {
-    override fun convert(body: Element): List<ForumOverviewItem> {
+class ForumOverviewItemAdapter : DocumentAdapter<List<ForumOverviewItem>> {
+
+    override fun convert(document: Document): List<ForumOverviewItem> {
         val items = mutableListOf<ForumOverviewItem>()
+        val body = document.body()
         val sections = body
                 .select("div#bd")
                 .select("ul")

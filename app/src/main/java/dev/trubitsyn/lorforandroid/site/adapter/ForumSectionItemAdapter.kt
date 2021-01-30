@@ -15,16 +15,21 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.forum.section
+package dev.trubitsyn.lorforandroid.site.adapter
 
 import android.content.Context
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
-class ForumSectionItemFactory(val context: Context) : ItemFactory<List<ForumSectionItem>> {
-    override fun convert(body: Element): List<ForumSectionItem> {
+class ForumSectionItemAdapter(
+        val context: Context
+) : DocumentAdapter<List<ForumSectionItem>> {
+
+    override fun convert(document: Document): List<ForumSectionItem> {
         val items = mutableListOf<ForumSectionItem>()
+        val body = document.body()
         val entries = body
                 .select("tbody tr")
 
@@ -61,7 +66,7 @@ class ForumSectionItemFactory(val context: Context) : ItemFactory<List<ForumSect
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let { StringUtils.readableCommentsCount(context, it )}
+                    .let { StringUtils.readableCommentsCount(context, it) }
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0

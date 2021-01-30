@@ -15,17 +15,24 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.news
+package dev.trubitsyn.lorforandroid.site.adapter
 
 import android.content.Context
 import androidx.core.text.parseAsHtml
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
+import dev.trubitsyn.lorforandroid.ui.section.news.MiniNewsItem
+import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
-class NewsItemFactory(val context: Context) : ItemFactory<List<AbstractNewsItem>> {
-    override fun convert(body: Element): List<AbstractNewsItem> {
+class NewsItemDocumentAdapter(
+        val context: Context
+) : DocumentAdapter<List<AbstractNewsItem>> {
+
+    override fun convert(document: Document): List<AbstractNewsItem> {
         val items = mutableListOf<AbstractNewsItem>()
+        val body = document.body()
         val articles = body
                 .select("article")
 

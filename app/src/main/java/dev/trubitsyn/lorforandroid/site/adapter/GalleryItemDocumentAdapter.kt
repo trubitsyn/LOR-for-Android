@@ -15,16 +15,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.gallery
+package dev.trubitsyn.lorforandroid.site.adapter
 
 import androidx.core.text.parseAsHtml
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
+import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
-class GalleryItemFactory : ItemFactory<List<GalleryItem>> {
-    override fun convert(body: Element): List<GalleryItem> {
+class GalleryItemDocumentAdapter : DocumentAdapter<List<GalleryItem>> {
+
+    override fun convert(document: Document): List<GalleryItem> {
         val items = mutableListOf<GalleryItem>()
+        val body = document.body()
         val articles = body
                 .select("article.news")
 

@@ -26,9 +26,10 @@ import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Document
 
 class AbstractNewsItemAdapter : DocumentAdapter<List<AbstractNewsItem>> {
+
     override fun convert(document: Document): List<AbstractNewsItem> {
-        val body = document.body()
         val items = mutableListOf<AbstractNewsItem>()
+        val body = document.body()
         val articles = body
                 .select("article")
 

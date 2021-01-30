@@ -20,8 +20,6 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingDataAdapter
@@ -36,7 +34,7 @@ import kotlin.properties.Delegates
 class TrackerFragment : BaseListFragment() {
     private val args by navArgs<TrackerFragmentArgs>()
     private var filter: TrackerFilterEnum = TrackerFilterEnum.all
-    private val viewModel by viewModels<TrackerViewModel> { TrackerViewModelFactory(filter) }
+    //private val viewModel by viewModels<TrackerViewModel> { TrackerViewModelFactory(filter) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +51,10 @@ class TrackerFragment : BaseListFragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         })
-        viewModel.trackerItems.observe(viewLifecycleOwner, {
+        //viewModel.trackerItems.observe(viewLifecycleOwner, {
             //stopRefreshAndShow()
             //adapter.submitList(it)
-        })
+        //})
     }
 
     override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>

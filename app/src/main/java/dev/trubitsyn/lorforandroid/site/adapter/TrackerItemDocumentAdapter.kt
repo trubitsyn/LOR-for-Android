@@ -15,17 +15,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.tracker
+package dev.trubitsyn.lorforandroid.site.adapter
 
 import android.content.Context
 import androidx.core.text.parseAsHtml
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
-class TrackerItemFactory(val context: Context) : ItemFactory<List<TrackerItem>> {
-    override fun convert(body: Element): List<TrackerItem> {
+class TrackerItemDocumentAdapter(val context: Context) : DocumentAdapter<List<TrackerItem>> {
+
+    override fun convert(document: Document): List<TrackerItem> {
         val items = mutableListOf<TrackerItem>()
+        val body = document.body()
         val topics = body
                 .select("tbody > tr")
 
