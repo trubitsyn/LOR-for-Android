@@ -98,7 +98,7 @@ class TopicFragment : Fragment() {
         }
 
         args.imageUrl?.let { imageUrl ->
-            if (PreferenceUtils.shouldLoadImagesNow(context!!)) {
+            if (PreferenceUtils.shouldLoadImagesNow(requireContext())) {
                 loadImageAndSetImageActivityListener(imageUrl)
             } else {
                 image.setOnClickListener { loadImageAndSetImageActivityListener(imageUrl) }
@@ -113,7 +113,7 @@ class TopicFragment : Fragment() {
 
     private fun loadImageAndSetImageActivityListener(imageUrl: String) {
         image.setImageDrawable(null)
-        Glide.with(context!!)
+        Glide.with(requireContext())
                 .load(imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(image)
