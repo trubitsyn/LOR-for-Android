@@ -40,7 +40,7 @@ class NetworkModule {
 
     @ApiRetrofit
     @Provides
-    fun provideApiRestAdapter(gson: Gson): Retrofit {
+    fun provideApiRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(SITE_ROOT + "api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
