@@ -28,11 +28,11 @@ class HtmlConverterFactory private constructor(
 ) : Converter.Factory() {
 
     override fun responseBodyConverter(
-            type: Type?,
+            type: Type,
             annotations: Array<out Annotation>?,
-            retrofit: Retrofit?
+            retrofit: Retrofit
     ): Converter<ResponseBody, Element> {
-        val adapter = parser.getAdapter(type?.javaClass as Class<*>)
+        val adapter = parser.getAdapter(type)
         return HtmlResponseBodyConverter(parser, adapter)
     }
 

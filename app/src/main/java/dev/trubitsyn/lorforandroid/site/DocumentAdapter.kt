@@ -20,5 +20,5 @@ package dev.trubitsyn.lorforandroid.site
 import org.jsoup.nodes.Document
 
 interface DocumentAdapter<T> {
-    fun fromDocument(document: Document): T?
+    fun convert(document: Document): T?
 }

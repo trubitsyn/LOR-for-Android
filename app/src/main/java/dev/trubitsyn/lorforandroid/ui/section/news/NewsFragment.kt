@@ -21,18 +21,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
-import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsFragment : BaseListFragment() {
 
-    override val adapter: NewsAdapter
-        get() = NewsAdapter()
+    @Inject override lateinit var adapter: NewsAdapter
 
     private val viewModel: NewsViewModel by viewModels()
 

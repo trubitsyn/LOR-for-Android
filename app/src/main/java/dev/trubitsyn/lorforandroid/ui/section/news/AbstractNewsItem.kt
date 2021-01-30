@@ -32,7 +32,7 @@ data class NewsItem(
         val tags: String,
         val date: String,
         val author: String?,
-        val comments: String
+        val comments: Int
 ) : AbstractNewsItem()
 
 @Entity
@@ -41,5 +41,5 @@ data class MiniNewsItem(
         val id: Long = 0,
         val url: String,
         val title: String,
-        val commentsCount: String
+        val comments: Int
 ): AbstractNewsItem()

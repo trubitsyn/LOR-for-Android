@@ -20,7 +20,7 @@ package dev.trubitsyn.lorforandroid.site
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
-import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
+import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -31,7 +31,7 @@ interface SiteApi {
     @GET(value = "news/")
     suspend fun getNews(
             @Query(value = "offset") offset: Int
-    ): List<NewsItem>
+    ): List<AbstractNewsItem>
 
     @GET(value = "gallery/")
     suspend fun getGallery(

@@ -19,31 +19,38 @@ package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.util.*
 
 class JsoupParser private constructor(): HtmlParser {
-    private val adapters  = WeakHashMap<Class<*>, DocumentAdapter<*>>()
+    val adapters = WeakHashMap<String, DocumentAdapter<*>>()
 
     override fun parse(document: String): Document {
         return Jsoup.parse(document)
     }
 
-    override fun <T> fromDocument(document: Document, clazz: Class<T>): T? {
-        val adapter = getAdapter<T>(clazz)
-        return adapter?.fromDocument(document) as? T
-    }
-
-    override fun <T> getAdapter(clazz: Class<T>): DocumentAdapter<*>? {
-        return adapters[clazz]
+    override fun getAdapter(type: Type): DocumentAdapter<*>? {
+        val typeCanonicalName = type.toString()
+        return adapters[typeCanonicalName]
     }
 
     class Builder {
-        private val instance = JsoupParser()
+        val instance = JsoupParser()
 
-        fun registerDocumentAdapter(adapter: DocumentAdapter<*>, clazz: Class<*>) = apply {
-            instance.adapters[clazz] = adapter
+        inline fun <reified T> registerDocumentAdapter(adapter: DocumentAdapter<T>) = apply {
+            val type = object : TypeReference<T>() {}.type
+            val typeCanonicalName = type.toString()
+            instance.adapters[typeCanonicalName] = adapter
         }
 
         fun build() = instance
     }
+}
+
+abstract class TypeReference<T> : Comparable<TypeReference<T>> {
+    val type: Type =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
+
+    override fun compareTo(other: TypeReference<T>) = 0
 }

@@ -25,6 +25,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.HtmlParser
 import dev.trubitsyn.lorforandroid.site.JsoupParser
+import dev.trubitsyn.lorforandroid.site.adapter.AbstractNewsItemAdapter
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -33,7 +34,7 @@ class ParsingModule {
     @Provides
     fun provideHtmlParser(): HtmlParser {
         return JsoupParser.Builder()
-                //.registerDocumentAdapter()
+                .registerDocumentAdapter(AbstractNewsItemAdapter())
                 .build()
     }
 

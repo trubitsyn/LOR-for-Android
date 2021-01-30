@@ -17,15 +17,19 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.qualifiers.ActivityContext
 import dev.trubitsyn.lorforandroid.R
+import javax.inject.Inject
 
-class NewsAdapter : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(diffCallback) {
+class NewsAdapter @Inject constructor(
+        @ActivityContext private val context: Context
+) : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(diffCallback) {
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
         is MiniNewsItem -> MINI
@@ -47,24 +51,32 @@ class NewsAdapter : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>
         }
     }
 
-    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, i: Int) {
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
             MINI -> {
-                val miniNewsItem = getItem(i) as MiniNewsItem
+                val miniNewsItem = getItem(position) as MiniNewsItem
                 (viewHolder as MiniNewsViewHolder).apply {
                     title.text = miniNewsItem.title
-                    commentsCount.text = miniNewsItem.commentsCount
+                    commentsCount.text = context.resources.getQuantityString(
+                            R.plurals.comments,
+                            miniNewsItem.comments,
+                            miniNewsItem.comments
+                    )
                 }
             }
             FULL -> {
-                val newsItem = getItem(i) as NewsItem
+                val newsItem = getItem(position) as NewsItem
                 (viewHolder as NewsViewHolder).apply {
                     title.text = newsItem.title
                     category.text = newsItem.groupTitle
                     tags.text = newsItem.tags
                     author.text = newsItem.author
                     date.text = newsItem.date
-                    commentsCount.text = newsItem.comments
+                    commentsCount.text = context.resources.getQuantityString(
+                            R.plurals.comments,
+                            newsItem.comments,
+                            newsItem.comments
+                    )
                 }
             }
         }

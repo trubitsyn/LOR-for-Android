@@ -27,7 +27,12 @@ class HtmlResponseBodyConverter<T>(
     override fun convert(value: ResponseBody): T? {
         try {
             val document = parser.parse(value.string())
-            return adapter?.fromDocument(document) as? T
+            val rawResult = adapter?.convert(document)
+            val result = rawResult as? T
+            return result
+        } catch (e: Exception) {
+            print(e)
+            return null
         } finally {
             value.close()
         }

@@ -18,11 +18,10 @@
 package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.nodes.Document
+import java.lang.reflect.Type
 
 interface HtmlParser {
     fun parse(document: String): Document
 
-    fun <T> fromDocument(document: Document, clazz: Class<T>): T?
-
-    fun <T> getAdapter(clazz: Class<T>): DocumentAdapter<*>?
+    fun getAdapter(type: Type): DocumentAdapter<*>?
 }

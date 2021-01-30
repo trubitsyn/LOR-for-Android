@@ -15,16 +15,19 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.news
+package dev.trubitsyn.lorforandroid.site.adapter
 
-import android.content.Context
 import androidx.core.text.parseAsHtml
-import dev.trubitsyn.lorforandroid.ui.section.ItemFactory
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
+import dev.trubitsyn.lorforandroid.ui.section.news.MiniNewsItem
+import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
-class NewsItemFactory(val context: Context) : ItemFactory<List<AbstractNewsItem>> {
-    override fun convert(body: Element): List<AbstractNewsItem> {
+class AbstractNewsItemAdapter : DocumentAdapter<List<AbstractNewsItem>> {
+    override fun convert(document: Document): List<AbstractNewsItem> {
+        val body = document.body()
         val items = mutableListOf<AbstractNewsItem>()
         val articles = body
                 .select("article")
@@ -51,6 +54,7 @@ class NewsItemFactory(val context: Context) : ItemFactory<List<AbstractNewsItem>
                         .parseAsHtml()
                         .toString()
                         .replace("[()]".toRegex(), "")
+                        .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
                 items.add(MiniNewsItem(
@@ -93,6 +97,7 @@ class NewsItemFactory(val context: Context) : ItemFactory<List<AbstractNewsItem>
                         .first()
                         ?.ownText()
                         .toString()
+                        .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
                 items.add(NewsItem(
