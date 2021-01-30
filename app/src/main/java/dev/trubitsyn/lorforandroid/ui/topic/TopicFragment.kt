@@ -26,7 +26,6 @@ import androidx.core.text.parseAsHtml
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -81,7 +80,7 @@ class TopicFragment : Fragment() {
             //showErrorView(R.string.error_access_denied)
             return
         }
-        viewModel.getTopic().observe(this, Observer { topic ->
+        viewModel.getTopic().observe(viewLifecycleOwner, { topic ->
             //stopRefreshAndShow()
             setTopic(topic)
         })
