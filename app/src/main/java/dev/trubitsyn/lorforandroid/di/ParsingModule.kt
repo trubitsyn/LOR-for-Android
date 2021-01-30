@@ -22,12 +22,12 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.HtmlParser
 import dev.trubitsyn.lorforandroid.site.JsoupParser
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 class ParsingModule {
 
     @Provides
