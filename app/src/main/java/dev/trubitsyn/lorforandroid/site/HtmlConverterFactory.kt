@@ -22,10 +22,10 @@ import org.jsoup.nodes.Element
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
-import javax.inject.Inject
 
-class HtmlConverterFactory private constructor(): Converter.Factory() {
-    @Inject lateinit var parser: HtmlParser
+class HtmlConverterFactory private constructor(
+        private val parser: HtmlParser
+) : Converter.Factory() {
 
     override fun responseBodyConverter(
             type: Type?,
@@ -37,8 +37,8 @@ class HtmlConverterFactory private constructor(): Converter.Factory() {
     }
 
     companion object {
-        fun create(): HtmlConverterFactory {
-            return HtmlConverterFactory()
+        fun create(parser: HtmlParser): HtmlConverterFactory {
+            return HtmlConverterFactory(parser)
         }
     }
 }

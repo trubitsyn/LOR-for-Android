@@ -23,6 +23,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.HtmlConverterFactory
+import dev.trubitsyn.lorforandroid.site.HtmlParser
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -60,10 +61,10 @@ class NetworkModule {
 
     @ParsingRetrofit
     @Provides
-    fun provideParsingRetrofit(client: OkHttpClient): Retrofit {
+    fun provideParsingRetrofit(client: OkHttpClient, parser: HtmlParser): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(SITE_ROOT)
-                .addConverterFactory(HtmlConverterFactory.create())
+                .addConverterFactory(HtmlConverterFactory.create(parser))
                 .client(client)
                 .build()
     }
