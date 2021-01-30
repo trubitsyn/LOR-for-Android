@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">LOR for Android</string>
+
+    <string name="activity_main">LINUX.ORG.RU</string>
+    <string name="activity_topic">Тема</string>
+    <string name="activity_image">Изображение</string>
+    <string name="activity_comments">Комментарии</string>
+
+    <string name="drawer_news">Новости</string>
+    <string name="drawer_gallery">Галерея</string>
+    <string name="drawer_tracker">Трекер</string>
+    <string name="drawer_forum">Форум</string>
+    <string name="drawer_settings">Настройки</string>
+
+    <string-array name="tracker_spinner">
+        <item>Все</item>
+        <item>Основные</item>
+        <item>Без talks</item>
+        <item>Технические</item>
+    </string-array>
+
+    <string-array name="gallery_spinner">
+        <item>Все</item>
+        <item>Скриншоты</item>
+        <item>Рабочие места</item>
+    </string-array>
+    
+    <string name="pref_category_interface">Интерфейс</string>
+
+    <string name="pref_dark_theme">dark_theme</string>
+    <string name="pref_title_dark_theme">Ночной режим</string>
+    
+    <string name="pref_category_preferences">Предпочтения</string>
+
+    <string name="pref_load_images">load_images</string>
+    <string name="pref_title_load_images">Загружать изображения при медленном соединении</string>
+
+    <string name="nav_open">Открыть панель навигации</string>
+    <string name="nav_close">Закрыть панель навигации</string>
+    <string name="refresh">Обновить</string>
+
+    <plurals name="comments">
+        <item quantity="zero">Нет комментариев</item>
+        <item quantity="one">%1$d комментарий</item>
+        <item quantity="two">%1$d комментария</item>
+        <item quantity="few">%1$d комментария</item>
+        <item quantity="many">%1$d комментариев</item>
+        <item quantity="other">%1$d shit happens</item>
+    </plurals>
+
+    <string name="comments_limited">Комментарии ограничены</string>
+    <string name="comments_reply">Ответ на комментарий от %1$s</string>
+
+    <string name="error_access_denied">Вы не можете просматривать этот раздел.</string>
+    <string name="error_parsing">При обработке данных произошла ошибка. Возможно, это связано с изменениями на сайте.</string>
+    <string name="error_network">Не удалось получить данные. Проверьте подключение к сети.</string>
+    <string name="error_no_more_data">Нет более старых тем.</string>
+    <string name="error_no_comments">Нет комментариев.</string>
+</resources>
