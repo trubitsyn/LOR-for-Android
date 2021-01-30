@@ -32,7 +32,9 @@ class ParsingModule {
 
     @Provides
     fun provideHtmlParser(): HtmlParser {
-        return JsoupParser()
+        return JsoupParser.Builder()
+                //.registerDocumentAdapter()
+                .build()
     }
 
     @Provides

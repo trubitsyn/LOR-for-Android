@@ -22,14 +22,16 @@ import org.jsoup.nodes.Element
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
+import javax.inject.Inject
 
-class HtmlConverterFactory private constructor() : Converter.Factory() {
+class HtmlConverterFactory private constructor(): Converter.Factory() {
+    @Inject lateinit var parser: HtmlParser
+
     override fun responseBodyConverter(
             type: Type?,
             annotations: Array<out Annotation>?,
             retrofit: Retrofit?
     ): Converter<ResponseBody, Element> {
-        val parser = JsoupParser()
         val adapter = parser.getAdapter(type?.javaClass as Class<*>)
         return HtmlResponseBodyConverter(parser, adapter)
     }

@@ -19,9 +19,10 @@ package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.util.*
 
-class JsoupParser : HtmlParser {
-    private val adapters  = mutableMapOf<Class<*>, DocumentAdapter<*>>()
+class JsoupParser private constructor(): HtmlParser {
+    private val adapters  = WeakHashMap<Class<*>, DocumentAdapter<*>>()
 
     override fun parse(document: String): Document {
         return Jsoup.parse(document)
@@ -32,11 +33,17 @@ class JsoupParser : HtmlParser {
         return adapter?.fromDocument(document) as? T
     }
 
-    fun registerDocumentAdapter(adapter: DocumentAdapter<*>, clazz: Class<*>) {
-        adapters[clazz] = adapter
+    override fun <T> getAdapter(clazz: Class<T>): DocumentAdapter<*>? {
+        return adapters[clazz]
     }
 
-    fun <T> getAdapter(clazz: Class<T>): DocumentAdapter<*>? {
-        return adapters.get(clazz)
+    class Builder {
+        private val instance = JsoupParser()
+
+        fun registerDocumentAdapter(adapter: DocumentAdapter<*>, clazz: Class<*>) = apply {
+            instance.adapters[clazz] = adapter
+        }
+
+        fun build() = instance
     }
 }
