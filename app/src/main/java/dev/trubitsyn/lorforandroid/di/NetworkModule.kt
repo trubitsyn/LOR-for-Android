@@ -18,7 +18,6 @@
 package dev.trubitsyn.lorforandroid.di
 
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +30,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ApiRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ParsingRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -75,22 +82,7 @@ class NetworkModule {
         }
     }
 
-    @Provides
-    fun provideGson(): Gson {
-        return GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                .create()
-    }
-
     companion object {
         const val SITE_ROOT = "https://www.linux.org.ru/"
     }
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class ApiRetrofit
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class ParsingRetrofit
