@@ -20,7 +20,6 @@ package dev.trubitsyn.lorforandroid.ui.section.news
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import java.lang.Exception
 import javax.inject.Inject
 
 class NewsPagingSource @Inject constructor(
@@ -28,13 +27,13 @@ class NewsPagingSource @Inject constructor(
 ) : PagingSource<Int, AbstractNewsItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AbstractNewsItem> {
-        val nextPage = params.key ?: FIRST_PAGE
+        val nextOffset = params.key ?: FIRST_PAGE_OFFSET
         try {
-            val response = api.getNews(0)
+            val response = api.getNews(nextOffset)
             return LoadResult.Page(
                     data = response,
-                    prevKey = if (nextPage == FIRST_PAGE) null else nextPage - 1,
-                    nextKey = nextPage + 1
+                    prevKey = if (nextOffset == FIRST_PAGE_OFFSET) null else nextOffset - OFFSET,
+                    nextKey = nextOffset + OFFSET
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
@@ -46,6 +45,7 @@ class NewsPagingSource @Inject constructor(
     }
 
     companion object {
-       private const val FIRST_PAGE = 1
+        private const val FIRST_PAGE_OFFSET = 10
+        private const val OFFSET = 10
     }
 }
