@@ -26,5 +26,5 @@ import dev.trubitsyn.lorforandroid.R
 
 
 class ForumOverviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    internal val itemName by lazy { itemView.findViewById<TextView>(R.id.itemName)!! }
+    internal val itemName by lazy { itemView.findViewById<TextView>(R.id.itemName) }
 }

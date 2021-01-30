@@ -30,8 +30,8 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
-    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout)!! }
-    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView)!! }
+    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
+    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
     private val navController by lazy { findNavController(R.id.main_content) }
     private val appBarConfiguration by lazy {
         AppBarConfiguration(

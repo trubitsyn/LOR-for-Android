@@ -26,10 +26,10 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
 class ForumSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.forumTitle)!! }
-    val tags by lazy { itemView.findViewById<TextView>(R.id.forumTags)!! }
-    val replyFrom by lazy { itemView.findViewById<TextView>(R.id.forumReplyFrom)!! }
-    val replyDate by lazy { itemView.findViewById<TextView>(R.id.forumReplyDate)!! }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.forumCommentsCount)!! }
-    val pinned by lazy { itemView.findViewById<ImageView>(R.id.forumPinned)!! }
+    val title by lazy { itemView.findViewById<TextView>(R.id.forumTitle) }
+    val tags by lazy { itemView.findViewById<TextView>(R.id.forumTags) }
+    val replyFrom by lazy { itemView.findViewById<TextView>(R.id.forumReplyFrom) }
+    val replyDate by lazy { itemView.findViewById<TextView>(R.id.forumReplyDate) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.forumCommentsCount) }
+    val pinned by lazy { itemView.findViewById<ImageView>(R.id.forumPinned) }
 }

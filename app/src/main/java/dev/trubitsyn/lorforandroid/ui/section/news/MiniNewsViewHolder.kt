@@ -25,6 +25,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.R
 
 class MiniNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.miniNewsTitle)!! }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.miniNewsCommentsCount)!! }
+    val title by lazy { itemView.findViewById<TextView>(R.id.miniNewsTitle) }
+    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.miniNewsCommentsCount) }
 }

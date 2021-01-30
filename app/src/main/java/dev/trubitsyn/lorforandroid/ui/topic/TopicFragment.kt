@@ -36,13 +36,13 @@ import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
 class TopicFragment : Fragment() {
-    private val scrollView by lazy { view!!.findViewById<NestedScrollView>(R.id.topicScrollView)!! }
-    internal val title by lazy { view!!.findViewById<TextView>(R.id.topicTitle)!! }
-    internal val tags by lazy { view!!.findViewById<TextView>(R.id.topicTags)!! }
-    internal val author by lazy { view!!.findViewById<TextView>(R.id.topicAuthor)!! }
-    internal val date by lazy { view!!.findViewById<TextView>(R.id.topicDate)!! }
-    private val image by lazy { view!!.findViewById<ImageView>(R.id.topicImage)!! }
-    private val message by lazy { view!!.findViewById<TextView>(R.id.topicMessage)!! }
+    private val scrollView by lazy { requireView().findViewById<NestedScrollView>(R.id.topicScrollView) }
+    internal val title by lazy { requireView().findViewById<TextView>(R.id.topicTitle) }
+    internal val tags by lazy { requireView().findViewById<TextView>(R.id.topicTags) }
+    internal val author by lazy { requireView().findViewById<TextView>(R.id.topicAuthor) }
+    internal val date by lazy { requireView().findViewById<TextView>(R.id.topicDate) }
+    private val image by lazy { requireView().findViewById<ImageView>(R.id.topicImage) }
+    private val message by lazy { requireView().findViewById<TextView>(R.id.topicMessage) }
     private val args by navArgs<TopicFragmentArgs>()
     private val viewModel by viewModels<TopicViewModel> { TopicViewModelFactory(args.url) }
 
