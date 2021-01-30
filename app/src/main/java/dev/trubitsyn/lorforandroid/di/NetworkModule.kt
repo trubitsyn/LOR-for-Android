@@ -25,6 +25,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.HtmlConverterFactory
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
@@ -40,20 +43,36 @@ class NetworkModule {
 
     @ApiRetrofit
     @Provides
-    fun provideApiRetrofit(gson: Gson): Retrofit {
+    fun provideApiRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(SITE_ROOT + "api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
                 .build()
     }
 
     @ParsingRetrofit
     @Provides
-    fun provideParsingRetrofit(): Retrofit {
+    fun provideParsingRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(SITE_ROOT)
                 .addConverterFactory(HtmlConverterFactory.create())
+                .client(client)
                 .build()
+    }
+
+    @Provides
+    fun provideHttpClient(interceptor: Interceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build()
+    }
+
+    @Provides
+    fun provideLoggingInterceptor(): Interceptor {
+        return HttpLoggingInterceptor().apply {
+            setLevel(HttpLoggingInterceptor.Level.BODY)
+        }
     }
 
     @Provides
