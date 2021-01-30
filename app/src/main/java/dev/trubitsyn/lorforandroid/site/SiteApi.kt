@@ -22,33 +22,32 @@ import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SiteApi {
 
-    @GET(value = "news")
+    @GET(value = "news/")
     suspend fun getNews(
             @Query(value = "offset") offset: Int
     ): List<NewsItem>
 
-    @GET(value = "gallery")
+    @GET(value = "gallery/")
     suspend fun getGallery(
             @Query(value = "offset") offset: Int
     ): List<GalleryItem>
 
-    @GET(value = "tracker")
+    @GET(value = "tracker/")
     suspend fun getTracker(
             @Query(value = "filter") filter: String,
             @Query(value = "offset") offset: Int
     ): List<TrackerItem>
 
-    @GET(value = "forum")
+    @GET(value = "forum/")
     suspend fun getForum(): List<ForumOverviewItem>
 
-    @GET(value = "forum/{section}")
+    @GET(value = "forum/{section}/")
     suspend fun getForumSection(
             @Path(value = "section") section: String,
             @Query(value = "offset") offset: Int
