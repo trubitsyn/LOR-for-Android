@@ -22,5 +22,5 @@ ext {
     material_version = '1.2.1'
     okhttp_version = '4.9.1'
     photoview_version = '1.2.6'
-    retrofit_version = '2.7.0'
+    retrofit_version = '2.9.0'
 }
