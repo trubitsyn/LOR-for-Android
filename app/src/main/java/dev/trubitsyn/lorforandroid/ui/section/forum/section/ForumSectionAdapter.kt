@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 class ForumSectionAdapter @Inject constructor(
         @ActivityContext private val context: Context
-) : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(diffCallback) {
+) : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumSectionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum, parent, false)
@@ -61,15 +61,13 @@ class ForumSectionAdapter @Inject constructor(
         }
     }
 
-    companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<ForumSectionItem>() {
-            override fun areItemsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
-                return oldItem.url == newItem.url
-            }
+    private object Comparator : DiffUtil.ItemCallback<ForumSectionItem>() {
+        override fun areItemsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
+            return oldItem.url == newItem.url
+        }
 
-            override fun areContentsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
-                return oldItem == newItem
-            }
+        override fun areContentsTheSame(oldItem: ForumSectionItem, newItem: ForumSectionItem): Boolean {
+            return oldItem == newItem
         }
     }
 }

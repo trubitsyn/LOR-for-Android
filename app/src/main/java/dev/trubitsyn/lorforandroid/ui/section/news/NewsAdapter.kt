@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 class NewsAdapter @Inject constructor(
         @ActivityContext private val context: Context
-) : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(diffCallback) {
+) : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(Comparator) {
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
         is MiniNewsItem -> MINI
@@ -82,34 +82,34 @@ class NewsAdapter @Inject constructor(
         }
     }
 
-    companion object {
-        private const val MINI = 0
-        private const val FULL = 1
-
-        private val diffCallback = object : DiffUtil.ItemCallback<AbstractNewsItem>() {
-            override fun areItemsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
-                return when {
-                    oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
-                        oldItem.url == newItem.url
-                    }
-                    oldItem is NewsItem && newItem is NewsItem -> {
-                        oldItem.url == newItem.url
-                    }
-                    else -> false
+    private object Comparator : DiffUtil.ItemCallback<AbstractNewsItem>() {
+        override fun areItemsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
+            return when {
+                oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
+                    oldItem.url == newItem.url
                 }
-            }
-
-            override fun areContentsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
-                return when {
-                    oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
-                        oldItem == newItem
-                    }
-                    oldItem is NewsItem && newItem is NewsItem -> {
-                        oldItem == newItem
-                    }
-                    else -> false
+                oldItem is NewsItem && newItem is NewsItem -> {
+                    oldItem.url == newItem.url
                 }
+                else -> false
             }
         }
+
+        override fun areContentsTheSame(oldItem: AbstractNewsItem, newItem: AbstractNewsItem): Boolean {
+            return when {
+                oldItem is MiniNewsItem && newItem is MiniNewsItem -> {
+                    oldItem == newItem
+                }
+                oldItem is NewsItem && newItem is NewsItem -> {
+                    oldItem == newItem
+                }
+                else -> false
+            }
+        }
+    }
+
+    private companion object {
+        private const val MINI = 0
+        private const val FULL = 1
     }
 }

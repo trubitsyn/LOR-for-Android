@@ -47,7 +47,7 @@ class TrackerPagingSource constructor(
         return null
     }
 
-    companion object {
+    private companion object {
         private const val FIRST_PAGE_OFFSET = 10
         private const val OFFSET = 10
     }

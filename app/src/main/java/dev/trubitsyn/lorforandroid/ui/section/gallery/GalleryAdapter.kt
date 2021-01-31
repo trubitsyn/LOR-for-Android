@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 class GalleryAdapter @Inject constructor(
         @ActivityContext private val context: Context
-) : PagingDataAdapter<GalleryItem, GalleryViewHolder>(diffCallback) {
+) : PagingDataAdapter<GalleryItem, GalleryViewHolder>(Comparator) {
 
     private val shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
 
@@ -76,15 +76,13 @@ class GalleryAdapter @Inject constructor(
         }
     }
 
-    companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<GalleryItem>() {
-            override fun areItemsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
-                return oldItem.url == newItem.url
-            }
+    private object Comparator : DiffUtil.ItemCallback<GalleryItem>() {
+        override fun areItemsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
+            return oldItem.url == newItem.url
+        }
 
-            override fun areContentsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
-                return oldItem == newItem
-            }
+        override fun areContentsTheSame(oldItem: GalleryItem, newItem: GalleryItem): Boolean {
+            return oldItem == newItem
         }
     }
 }

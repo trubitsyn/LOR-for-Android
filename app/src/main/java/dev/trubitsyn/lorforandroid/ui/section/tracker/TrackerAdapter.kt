@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 class TrackerAdapter @Inject constructor(
         @ActivityContext private val context: Context
-) : PagingDataAdapter<TrackerItem, TrackerViewHolder>(diffCallback) {
+) : PagingDataAdapter<TrackerItem, TrackerViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -52,15 +52,13 @@ class TrackerAdapter @Inject constructor(
         }
     }
 
-    companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<TrackerItem>() {
-            override fun areItemsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
-                return oldItem.url == newItem.url
-            }
+    object Comparator : DiffUtil.ItemCallback<TrackerItem>() {
+        override fun areItemsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
+            return oldItem.url == newItem.url
+        }
 
-            override fun areContentsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
-                return oldItem == newItem
-            }
+        override fun areContentsTheSame(oldItem: TrackerItem, newItem: TrackerItem): Boolean {
+            return oldItem == newItem
         }
     }
 }
