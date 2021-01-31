@@ -21,12 +21,12 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.javaType
 import kotlin.reflect.typeOf
 
 class JsoupParser private constructor(): HtmlParser {
-    val adapters = WeakHashMap<String, DocumentAdapter<*>>()
+    val adapters = ConcurrentHashMap<String, DocumentAdapter<*>>()
 
     override fun parse(document: String): Document {
         return Jsoup.parse(document)
@@ -44,13 +44,8 @@ class JsoupParser private constructor(): HtmlParser {
         inline fun <reified T> registerDocumentAdapter(adapter: DocumentAdapter<T>) = apply {
             val typeWithExtends = object : TypeReference<T>() {}.type
             val typeWithoutExtends = typeOf<T>().javaType
-            registerAdapterOfType(typeWithExtends, typeWithoutExtends, adapter)
-        }
-
-        fun registerAdapterOfType(type1: Type, type2: Type, adapter: DocumentAdapter<*>) {
-            print(type1.toString())
-            print(type2.toString())
-            instance.adapters[type1.toString()] = adapter
+            instance.adapters[typeWithExtends.toString()] = adapter
+            instance.adapters[typeWithoutExtends.toString()] = adapter
         }
 
         fun build() = instance
