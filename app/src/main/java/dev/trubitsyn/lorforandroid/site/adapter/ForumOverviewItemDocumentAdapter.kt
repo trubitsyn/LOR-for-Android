@@ -21,7 +21,7 @@ import dev.trubitsyn.lorforandroid.site.DocumentAdapter
 import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
 import org.jsoup.nodes.Document
 
-class ForumOverviewItemAdapter : DocumentAdapter<List<ForumOverviewItem>> {
+class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>> {
 
     override fun convert(document: Document): List<ForumOverviewItem> {
         val items = mutableListOf<ForumOverviewItem>()

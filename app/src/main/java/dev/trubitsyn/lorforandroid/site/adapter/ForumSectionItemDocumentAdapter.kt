@@ -22,7 +22,7 @@ import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Document
 
-class ForumSectionItemAdapter : DocumentAdapter<List<ForumSectionItem>> {
+class ForumSectionItemDocumentAdapter : DocumentAdapter<List<ForumSectionItem>> {
 
     override fun convert(document: Document): List<ForumSectionItem> {
         val items = mutableListOf<ForumSectionItem>()
