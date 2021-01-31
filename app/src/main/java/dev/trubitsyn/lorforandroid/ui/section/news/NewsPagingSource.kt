@@ -44,7 +44,7 @@ class NewsPagingSource(
     }
 
     private companion object {
-        private const val FIRST_PAGE_OFFSET = 10
+        private const val FIRST_PAGE_OFFSET = 0
         private const val OFFSET = 10
     }
 }
