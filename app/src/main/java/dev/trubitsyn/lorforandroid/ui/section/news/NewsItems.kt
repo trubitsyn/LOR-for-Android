@@ -42,4 +42,4 @@ data class MiniNewsItem(
         val url: String,
         val title: String,
         val comments: Int
-): AbstractNewsItem()
+) : AbstractNewsItem()

@@ -20,17 +20,23 @@ package dev.trubitsyn.lorforandroid.ui.section.forum
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ForumOverviewFragment : BaseListFragment() {
+    @Inject
+    override lateinit var adapter: ForumOverviewAdapter
+    private val viewModel: ForumOverviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +46,12 @@ class ForumOverviewFragment : BaseListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout?.isEnabled = false
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
+            }
+        }
     }
-
-    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
-        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         var item: ForumOverviewItem by Delegates.notNull() //items[position] as ForumOverviewItem

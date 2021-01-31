@@ -55,7 +55,7 @@ abstract class BaseListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.refreshButton -> {
-                adapter.refresh()
+                //adapter.refresh()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -69,7 +69,7 @@ abstract class BaseListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
-        swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
+        //swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(view.context)
             if (showDividers) {

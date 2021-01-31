@@ -17,23 +17,32 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import javax.inject.Inject
 
-@HiltViewModel
-class ForumOverviewViewModel @Inject constructor(
+class ForumOverviewPagingSource(
         private val api: SiteApi
-) : ViewModel() {
+) : PagingSource<Int, ForumOverviewItem>() {
 
-    val flow = Pager(
-            PagingConfig(pageSize = 20, maxSize = 200)
-    ) {
-        ForumOverviewPagingSource(api)
-    }.flow.cachedIn(viewModelScope)
+    suspend fun getForumCategories(): List<ForumOverviewItem> {
+        return api.getForum()
+    }
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ForumOverviewItem> {
+        try {
+            val response = api.getForum()
+            return LoadResult.Page(
+                    data = response,
+                    prevKey = null,
+                    nextKey = null
+            )
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, ForumOverviewItem>): Int? {
+        return null
+    }
 }

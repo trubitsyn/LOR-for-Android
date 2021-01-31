@@ -17,18 +17,32 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ForumSectionFragment : BaseListFragment() {
+    @Inject
+    override lateinit var adapter: ForumSectionAdapter
+    private val viewModel: ForumSectionViewModel by viewModels()
     private val args by navArgs<ForumSectionFragmentArgs>()
 
-    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
-        get() = TODO()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+    }
 
     override fun onItemClickCallback(position: Int) {
         //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)

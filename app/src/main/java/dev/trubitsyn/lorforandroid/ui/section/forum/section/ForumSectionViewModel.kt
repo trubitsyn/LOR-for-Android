@@ -17,17 +17,23 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.trubitsyn.lorforandroid.site.SiteApi
+import javax.inject.Inject
 
-class ForumSectionViewModel(val factory: DataSource.Factory<Int, ForumSectionItem>) {
-    private val config = PagedList.Config.Builder()
-            .setPageSize(30)
-            .setMaxSize(300)
-            .build()
+@HiltViewModel
+class ForumSectionViewModel @Inject constructor(
+        private val api: SiteApi
+) : ViewModel() {
 
-    val forumSectionTopics: LiveData<PagedList<ForumSectionItem>> =
-            LivePagedListBuilder(factory, config).build()
+    val flow = Pager(
+            PagingConfig(pageSize = 20, maxSize = 200)
+    ) {
+        ForumSectionPagingSource(api)
+    }.flow.cachedIn(viewModelScope)
 }

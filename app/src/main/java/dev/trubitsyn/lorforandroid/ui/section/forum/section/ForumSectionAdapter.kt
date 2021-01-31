@@ -36,9 +36,9 @@ class ForumSectionAdapter @Inject constructor(
         return ForumSectionViewHolder(view)
     }
 
-    override fun onBindViewHolder(v: ForumSectionViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ForumSectionViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        v.apply {
+        viewHolder.apply {
             title.text = item.title
             pinned.visibility = if (item.isPinned) {
                 View.VISIBLE

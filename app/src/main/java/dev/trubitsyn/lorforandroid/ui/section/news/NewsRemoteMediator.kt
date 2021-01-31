@@ -23,7 +23,6 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import dev.trubitsyn.lorforandroid.AppDatabase
-import dev.trubitsyn.lorforandroid.api.RemoteKey
 import dev.trubitsyn.lorforandroid.api.RemoteKeyDao
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import retrofit2.HttpException

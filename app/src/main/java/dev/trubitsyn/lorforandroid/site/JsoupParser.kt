@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.javaType
 import kotlin.reflect.typeOf
 
-class JsoupParser private constructor(): HtmlParser {
+class JsoupParser private constructor() : HtmlParser {
     val adapters = ConcurrentHashMap<String, DocumentAdapter<*>>()
 
     override fun parse(document: String): Document {
