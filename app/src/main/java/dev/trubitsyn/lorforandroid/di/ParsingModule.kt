@@ -26,11 +26,13 @@ import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.HtmlParser
 import dev.trubitsyn.lorforandroid.site.JsoupParser
 import dev.trubitsyn.lorforandroid.site.adapter.*
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ParsingModule {
 
+    @Singleton
     @Provides
     fun provideHtmlParser(): HtmlParser {
         return JsoupParser.Builder()
@@ -42,6 +44,7 @@ class ParsingModule {
                 .build()
     }
 
+    @Singleton
     @Provides
     fun provideGson(): Gson {
         return GsonBuilder()

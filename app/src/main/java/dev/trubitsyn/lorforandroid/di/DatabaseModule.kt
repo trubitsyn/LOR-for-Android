@@ -26,11 +26,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.AppDatabase
 import dev.trubitsyn.lorforandroid.ui.section.news.NewsDao
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
 
+    @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.inMemoryDatabaseBuilder(
@@ -39,6 +41,7 @@ class DatabaseModule {
         ).build()
     }
 
+    @Singleton
     @Provides
     fun provideNewsDao(appDatabase: AppDatabase): NewsDao {
         return appDatabase.newsDao

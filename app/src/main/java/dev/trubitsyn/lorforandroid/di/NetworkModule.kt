@@ -31,6 +31,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
@@ -44,11 +45,13 @@ annotation class ParsingRetrofit
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
+    @Singleton
     @Provides
     fun provideSiteApi(@ParsingRetrofit retrofit: Retrofit): SiteApi {
         return retrofit.create(SiteApi::class.java)
     }
 
+    @Singleton
     @ApiRetrofit
     @Provides
     fun provideApiRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
@@ -59,6 +62,7 @@ class NetworkModule {
                 .build()
     }
 
+    @Singleton
     @ParsingRetrofit
     @Provides
     fun provideParsingRetrofit(client: OkHttpClient, parser: HtmlParser): Retrofit {
@@ -69,6 +73,7 @@ class NetworkModule {
                 .build()
     }
 
+    @Singleton
     @Provides
     fun provideHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
@@ -76,6 +81,7 @@ class NetworkModule {
                 .build()
     }
 
+    @Singleton
     @Provides
     fun provideLoggingInterceptor(): Interceptor {
         return HttpLoggingInterceptor().apply {
