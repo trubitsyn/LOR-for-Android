@@ -22,16 +22,15 @@ import retrofit2.Converter
 
 class HtmlResponseBodyConverter<T>(
         private val parser: HtmlParser,
-        private val adapter: DocumentAdapter<*>?
+        private val adapter: DocumentAdapter<*>
 ) : Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
         try {
             val document = parser.parse(value.string())
-            val rawResult = adapter?.convert(document)
+            val rawResult = adapter.convert(document)
             val result = rawResult as? T
             return result
         } catch (e: Exception) {
-            print(e)
             return null
         } finally {
             value.close()

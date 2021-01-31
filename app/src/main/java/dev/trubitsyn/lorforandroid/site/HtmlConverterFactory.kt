@@ -31,8 +31,8 @@ class HtmlConverterFactory private constructor(
             type: Type,
             annotations: Array<out Annotation>?,
             retrofit: Retrofit
-    ): Converter<ResponseBody, Element> {
-        val adapter = parser.getAdapter(type)
+    ): Converter<ResponseBody, Element>? {
+        val adapter = parser.getAdapter(type) ?: return null
         return HtmlResponseBodyConverter(parser, adapter)
     }
 
