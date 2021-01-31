@@ -34,8 +34,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
     private val navController by lazy { findNavController(R.id.main_content) }
     private val appBarConfiguration by lazy {
+        val destinations = setOf(
+                R.id.news,
+                R.id.gallery,
+                R.id.tracker,
+                R.id.forum,
+                R.id.settings
+        )
         AppBarConfiguration(
-                setOf(R.id.news, R.id.gallery, R.id.tracker, R.id.forum, R.id.settings),
+                destinations,
                 drawerLayout
         )
     }

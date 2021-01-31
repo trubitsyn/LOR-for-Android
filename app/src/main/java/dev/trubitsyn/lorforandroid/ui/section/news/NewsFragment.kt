@@ -29,9 +29,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsFragment : BaseListFragment() {
-
-    @Inject override lateinit var adapter: NewsAdapter
-
+    @Inject
+    override lateinit var adapter: NewsAdapter
     private val viewModel: NewsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

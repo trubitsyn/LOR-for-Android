@@ -21,16 +21,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import dagger.hilt.android.qualifiers.ActivityContext
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
+import javax.inject.Inject
 
-class GalleryAdapter(
-        private val context: Context
-) : PagedListAdapter<GalleryItem, GalleryViewHolder>(diffCallback) {
+class GalleryAdapter @Inject constructor(
+        @ActivityContext private val context: Context
+) : PagingDataAdapter<GalleryItem, GalleryViewHolder>(diffCallback) {
+
     private val shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GalleryViewHolder {
@@ -38,31 +41,38 @@ class GalleryAdapter(
         return GalleryViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: GalleryViewHolder, i: Int) {
-        val item = getItem(i) ?: return
+    override fun onBindViewHolder(viewHolder: GalleryViewHolder, position: Int) {
+        val item = getItem(position) ?: return
         viewHolder.apply {
             title.text = item.title
             if (item.groupTitle == null) {
                 category.visibility = View.GONE
-            } else
+            } else {
+                category.visibility = View.VISIBLE
                 category.text = item.groupTitle
-
+            }
             if (item.tags.isEmpty()) {
                 tags.visibility = View.GONE
-            } else
+            } else {
+                tags.visibility = View.VISIBLE
                 tags.text = item.tags
-
+            }
             date.text = item.date
             author.text = item.author
-            commentsCount.text = item.comments
-
+            commentsCount.text = context.resources.getQuantityString(
+                    R.plurals.comments,
+                    item.comments,
+                    item.comments
+            )
             if (shouldLoadImages) {
+                image.visibility = View.VISIBLE
                 Glide.with(context)
                         .load(item.mediumImageUrl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(viewHolder.image)
-            } else
+            } else {
                 image.visibility = View.GONE
+            }
         }
     }
 

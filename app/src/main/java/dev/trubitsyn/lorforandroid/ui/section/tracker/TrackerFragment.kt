@@ -19,46 +19,44 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
-import dev.trubitsyn.lorforandroid.R
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
-import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class TrackerFragment : BaseListFragment() {
     private val args by navArgs<TrackerFragmentArgs>()
-    private var filter: TrackerFilterEnum = TrackerFilterEnum.all
-    //private val viewModel by viewModels<TrackerViewModel> { TrackerViewModelFactory(filter) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        filter = args.filter
-    }
+    //private var filter: TrackerFilterEnum = TrackerFilterEnum.all
+    @Inject
+    override lateinit var adapter: TrackerAdapter
+    private val viewModel by viewModels<TrackerViewModel>()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                filter = TrackerFilterEnum.values()[position]
-                //restart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        })
-        //viewModel.trackerItems.observe(viewLifecycleOwner, {
-            //stopRefreshAndShow()
-            //adapter.submitList(it)
-        //})
+        }
+        //        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                //filter = TrackerFilterEnum.values()[position]
+//                //restart()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {}
+//        })
     }
-
-    override val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
-        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem

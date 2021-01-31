@@ -66,6 +66,7 @@ class GalleryItemDocumentAdapter : DocumentAdapter<List<GalleryItem>> {
                     .first()
                     .ownText()
                     .replace("\\D+".toRegex(), "")
+                    .toInt()
             val imageUrl = it
                     .select("a[itemprop^=contentURL]")
                     .attr("href")

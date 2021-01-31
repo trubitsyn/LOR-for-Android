@@ -15,11 +15,11 @@
     <fragment
         android:id="@+id/gallery"
         android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment"
-        android:label="@string/drawer_gallery" >
+        android:label="@string/drawer_gallery">
         <argument
             android:name="filter"
-            app:argType="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum"
-            android:defaultValue="all" />
+            android:defaultValue="all"
+            app:argType="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum" />
         <action
             android:id="@+id/action_gallery_to_topic"
             app:destination="@id/topic" />
@@ -27,11 +27,11 @@
     <fragment
         android:id="@+id/tracker"
         android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment"
-        android:label="@string/drawer_tracker" >
+        android:label="@string/drawer_tracker">
         <argument
             android:name="filter"
-            app:argType="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum"
-            android:defaultValue="all" />
+            android:defaultValue="all"
+            app:argType="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum" />
         <action
             android:id="@+id/action_tracker_to_topic"
             app:destination="@id/topic" />
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/comment"
         android:name="dev.trubitsyn.lorforandroid.ui.comment.CommentFragment"
-        android:label="@string/activity_comments" >
+        android:label="@string/activity_comments">
         <argument
             android:name="url"
             app:argType="string" />

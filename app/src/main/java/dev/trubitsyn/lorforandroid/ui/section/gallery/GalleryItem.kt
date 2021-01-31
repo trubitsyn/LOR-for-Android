@@ -30,7 +30,7 @@ data class GalleryItem(
         val tags: String,
         val date: String,
         val author: String,
-        val comments: String,
+        val comments: Int,
         val imageUrl: String,
         val medium2xImageUrl: String,
         val mediumImageUrl: String

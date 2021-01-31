@@ -39,7 +39,7 @@ abstract class BaseListFragment : Fragment() {
     protected val recyclerView by lazy { requireView().findViewById<RecyclerView>(R.id.recyclerView) }
     protected val errorView by lazy { requireView().findViewById<TextView>(R.id.errorView) }
     private val viewFlipper by lazy { requireView().findViewById<ViewFlipper>(R.id.viewFlipper) }
-    protected abstract val adapter: PagingDataAdapter<*, RecyclerView.ViewHolder>
+    protected abstract val adapter: PagingDataAdapter<*, *>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

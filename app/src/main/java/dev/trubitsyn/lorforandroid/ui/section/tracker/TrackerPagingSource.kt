@@ -15,20 +15,24 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.news
+package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
 
-class NewsPagingSource(
-        private val api: SiteApi
-) : PagingSource<Int, AbstractNewsItem>() {
+class TrackerPagingSource constructor(
+        private val api: SiteApi,
+        private val filter: TrackerFilterEnum
+) : PagingSource<Int, TrackerItem>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AbstractNewsItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TrackerItem> {
         val nextOffset = params.key ?: FIRST_PAGE_OFFSET
         try {
-            val response = api.getNews(nextOffset)
+            val response = api.getTracker(
+                    filter = filter.name,
+                    offset = nextOffset
+            )
             return LoadResult.Page(
                     data = response,
                     prevKey = if (nextOffset == FIRST_PAGE_OFFSET) null else nextOffset - OFFSET,
@@ -39,7 +43,7 @@ class NewsPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, AbstractNewsItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, TrackerItem>): Int? {
         return null
     }
 

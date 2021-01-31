@@ -20,8 +20,10 @@ package dev.trubitsyn.lorforandroid.ui.section.forum.section
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 
+@AndroidEntryPoint
 class ForumSectionFragment : BaseListFragment() {
     private val args by navArgs<ForumSectionFragmentArgs>()
 

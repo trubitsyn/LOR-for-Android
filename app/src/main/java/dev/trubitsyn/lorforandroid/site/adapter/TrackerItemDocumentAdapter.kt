@@ -17,14 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.site.adapter
 
-import android.content.Context
 import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.site.DocumentAdapter
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Document
 
-class TrackerItemDocumentAdapter(val context: Context) : DocumentAdapter<List<TrackerItem>> {
+class TrackerItemDocumentAdapter : DocumentAdapter<List<TrackerItem>> {
 
     override fun convert(document: Document): List<TrackerItem> {
         val items = mutableListOf<TrackerItem>()
@@ -67,7 +66,8 @@ class TrackerItemDocumentAdapter(val context: Context) : DocumentAdapter<List<Tr
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let { StringUtils.readableCommentsCount(context, it) }
+                    .toString()
+                    .toInt()
 
             items.add(TrackerItem(
                     url = url,

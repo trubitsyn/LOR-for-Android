@@ -48,9 +48,6 @@ class JsoupParser private constructor(): HtmlParser {
     }
 }
 
-abstract class TypeReference<T> : Comparable<TypeReference<T>> {
-    val type: Type =
-            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
-
-    override fun compareTo(other: TypeReference<T>) = 0
+abstract class TypeReference<T> {
+    val type: Type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
 }

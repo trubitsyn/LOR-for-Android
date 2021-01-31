@@ -17,7 +17,6 @@
 
 package dev.trubitsyn.lorforandroid.site.adapter
 
-import android.content.Context
 import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.site.DocumentAdapter
 import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
@@ -26,9 +25,7 @@ import dev.trubitsyn.lorforandroid.ui.section.news.NewsItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Document
 
-class NewsItemDocumentAdapter(
-        val context: Context
-) : DocumentAdapter<List<AbstractNewsItem>> {
+class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> {
 
     override fun convert(document: Document): List<AbstractNewsItem> {
         val items = mutableListOf<AbstractNewsItem>()
@@ -58,6 +55,7 @@ class NewsItemDocumentAdapter(
                         .parseAsHtml()
                         .toString()
                         .replace("[()]".toRegex(), "")
+                        .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
                 items.add(MiniNewsItem(
@@ -100,6 +98,7 @@ class NewsItemDocumentAdapter(
                         .first()
                         ?.ownText()
                         .toString()
+                        .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
                 items.add(NewsItem(

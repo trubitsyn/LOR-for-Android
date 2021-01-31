@@ -17,15 +17,12 @@
 
 package dev.trubitsyn.lorforandroid.site.adapter
 
-import android.content.Context
 import dev.trubitsyn.lorforandroid.site.DocumentAdapter
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import org.jsoup.nodes.Document
 
-class ForumSectionItemAdapter(
-        val context: Context
-) : DocumentAdapter<List<ForumSectionItem>> {
+class ForumSectionItemAdapter : DocumentAdapter<List<ForumSectionItem>> {
 
     override fun convert(document: Document): List<ForumSectionItem> {
         val items = mutableListOf<ForumSectionItem>()
@@ -66,7 +63,8 @@ class ForumSectionItemAdapter(
                     .select("td.numbers")
                     .first()
                     .ownText()
-                    .let { StringUtils.readableCommentsCount(context, it) }
+                    .toString()
+                    .toInt()
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0

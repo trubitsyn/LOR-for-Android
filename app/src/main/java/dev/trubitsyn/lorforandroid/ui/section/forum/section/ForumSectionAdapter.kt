@@ -17,14 +17,19 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import dagger.hilt.android.qualifiers.ActivityContext
 import dev.trubitsyn.lorforandroid.R
+import javax.inject.Inject
 
-class ForumSectionAdapter : PagedListAdapter<ForumSectionItem, ForumSectionViewHolder>(diffCallback) {
+class ForumSectionAdapter @Inject constructor(
+        @ActivityContext private val context: Context
+) : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumSectionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum, parent, false)
@@ -35,18 +40,24 @@ class ForumSectionAdapter : PagedListAdapter<ForumSectionItem, ForumSectionViewH
         val item = getItem(position) ?: return
         v.apply {
             title.text = item.title
-
-            if (item.isPinned) {
-                pinned.visibility = View.VISIBLE
+            pinned.visibility = if (item.isPinned) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
-
-            if (item.tags == null || item.tags.isNotEmpty()) {
+            if (item.tags.isNotEmpty()) {
                 tags.text = item.tags
-            } else
+                tags.visibility = View.VISIBLE
+            } else {
                 tags.visibility = View.GONE
+            }
             replyFrom.text = item.author
             replyDate.text = item.date
-            commentsCount.text = item.comments
+            commentsCount.text = context.resources.getQuantityString(
+                    R.plurals.comments,
+                    item.comments,
+                    item.comments
+            )
         }
     }
 

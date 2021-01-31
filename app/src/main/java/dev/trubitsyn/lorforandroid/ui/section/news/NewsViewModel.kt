@@ -17,17 +17,17 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-        private val newsDao: NewsDao,
         private val api: SiteApi
 ) : ViewModel() {
 
@@ -36,5 +36,4 @@ class NewsViewModel @Inject constructor(
     ) {
         NewsPagingSource(api)
     }.flow.cachedIn(viewModelScope)
-
 }

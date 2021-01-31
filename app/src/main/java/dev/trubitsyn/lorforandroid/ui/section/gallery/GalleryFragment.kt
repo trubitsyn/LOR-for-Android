@@ -19,35 +19,39 @@ package dev.trubitsyn.lorforandroid.ui.section.gallery
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import androidx.navigation.fragment.navArgs
-import dev.trubitsyn.lorforandroid.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
-import dev.trubitsyn.lorforandroid.ui.util.SpinnerViewUtils
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class GalleryFragment : BaseListFragment() {
-    private val args by navArgs<GalleryFragmentArgs>()
-    private var filter: Int = 0
+    @Inject
+    override lateinit var adapter: GalleryAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        filter = args.filter.ordinal
-    }
+    //private val args by navArgs<GalleryFragmentArgs>()
+    //private var filter: Int = args.filter.ordinal
+    private val viewModel: GalleryViewModel by viewModels()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.gallery_spinner, filter, object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                filter = position
-                //restart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.gallery_spinner, filter, object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                //filter = position
+//                //restart()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {}
+//        })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        })
+        }
     }
-
-    override val adapter
-        get() = TODO()
 
     override fun onItemClickCallback(position: Int) {
         /*val item = items[position] as GalleryItem

@@ -17,13 +17,18 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import dagger.hilt.android.qualifiers.ActivityContext
 import dev.trubitsyn.lorforandroid.R
+import javax.inject.Inject
 
-class TrackerAdapter : PagedListAdapter<TrackerItem, TrackerViewHolder>(diffCallback) {
+class TrackerAdapter @Inject constructor(
+        @ActivityContext private val context: Context
+) : PagingDataAdapter<TrackerItem, TrackerViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -39,7 +44,11 @@ class TrackerAdapter : PagedListAdapter<TrackerItem, TrackerViewHolder>(diffCall
             tags.text = item.tags
             date.text = item.date
             author.text = item.author
-            commentsCount.text = item.comments
+            commentsCount.text = context.resources.getQuantityString(
+                    R.plurals.comments,
+                    item.comments,
+                    item.comments
+            )
         }
     }
 

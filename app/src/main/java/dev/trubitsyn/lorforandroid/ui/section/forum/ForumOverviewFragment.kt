@@ -23,11 +23,13 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class ForumOverviewFragment : BaseListFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

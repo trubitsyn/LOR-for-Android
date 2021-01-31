@@ -30,5 +30,5 @@ data class TrackerItem(
         val tags: String,
         val date: String,
         val author: String?,
-        val comments: String
+        val comments: Int
 )

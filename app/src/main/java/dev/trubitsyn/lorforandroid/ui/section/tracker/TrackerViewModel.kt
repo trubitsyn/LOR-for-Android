@@ -18,20 +18,24 @@
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.trubitsyn.lorforandroid.site.SiteApi
+import javax.inject.Inject
 
-class TrackerViewModel(
-        //private val repository: TrackerRepository,
-        private val filter: TrackerFilterEnum
+@HiltViewModel
+class TrackerViewModel @Inject constructor(
+        private val api: SiteApi
 ) : ViewModel() {
-    private val config = PagedList.Config.Builder()
-            .setPageSize(30)
-            .setMaxSize(180)
-            .build()
 
-    //private val factory = TrackerDataSourceFactory(repository, filter)
+    val filter = TrackerFilterEnum.all
 
-    //val trackerItems: LiveData<PagedList<TrackerItem>> =
-    //        LivePagedListBuilder(factory, config).build()
-
+    val flow = Pager(
+            PagingConfig(pageSize = 20, maxSize = 200)
+    ) {
+        TrackerPagingSource(api, filter)
+    }.flow.cachedIn(viewModelScope)
 }

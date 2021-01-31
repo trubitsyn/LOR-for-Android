@@ -30,10 +30,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.util.PreferenceUtils
 import dev.trubitsyn.lorforandroid.util.StringUtils
 
+@AndroidEntryPoint
 class TopicFragment : Fragment() {
     private val scrollView by lazy { requireView().findViewById<NestedScrollView>(R.id.topicScrollView) }
     internal val title by lazy { requireView().findViewById<TextView>(R.id.topicTitle) }

@@ -15,20 +15,20 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.news
+package dev.trubitsyn.lorforandroid.ui.section.gallery
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
 
-class NewsPagingSource(
+class GalleryPagingSource(
         private val api: SiteApi
-) : PagingSource<Int, AbstractNewsItem>() {
+) : PagingSource<Int, GalleryItem>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AbstractNewsItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GalleryItem> {
         val nextOffset = params.key ?: FIRST_PAGE_OFFSET
         try {
-            val response = api.getNews(nextOffset)
+            val response = api.getGallery(nextOffset)
             return LoadResult.Page(
                     data = response,
                     prevKey = if (nextOffset == FIRST_PAGE_OFFSET) null else nextOffset - OFFSET,
@@ -39,7 +39,7 @@ class NewsPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, AbstractNewsItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GalleryItem>): Int? {
         return null
     }
 
