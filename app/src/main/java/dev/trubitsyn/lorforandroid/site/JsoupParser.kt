@@ -19,9 +19,10 @@ package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.*
+import kotlin.reflect.javaType
+import kotlin.reflect.typeOf
 
 class JsoupParser private constructor(): HtmlParser {
     val adapters = WeakHashMap<String, DocumentAdapter<*>>()
@@ -38,16 +39,17 @@ class JsoupParser private constructor(): HtmlParser {
     class Builder {
         val instance = JsoupParser()
 
+        @OptIn(ExperimentalStdlibApi::class)
         inline fun <reified T> registerDocumentAdapter(adapter: DocumentAdapter<T>) = apply {
-            val type = object : TypeReference<T>() {}.type
-            val typeCanonicalName = type.toString()
-            instance.adapters[typeCanonicalName] = adapter
+            val actualType = typeOf<T>()
+            val typeCanonicalName = actualType.javaType.toString()
+            registerAdapterOfType(typeCanonicalName, adapter)
+        }
+
+        fun registerAdapterOfType(type: String, adapter: DocumentAdapter<*>) {
+            instance.adapters[type] = adapter
         }
 
         fun build() = instance
     }
-}
-
-abstract class TypeReference<T> {
-    val type: Type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
 }
