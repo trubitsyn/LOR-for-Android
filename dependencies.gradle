@@ -20,7 +20,7 @@ ext {
     kotlin_coroutines_version = '1.4.2'
     leakcanary_version = '2.6'
     material_version = '1.2.1'
-    okhttp_version = '4.3.1'
+    okhttp_version = '4.9.1'
     photoview_version = '1.2.6'
     retrofit_version = '2.7.0'
 }
