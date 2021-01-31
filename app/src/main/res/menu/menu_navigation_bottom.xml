@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/news"
+        android:icon="@drawable/ic_library_books_24dp"
+        android:title="@string/drawer_news" />
+    <item
+        android:id="@+id/gallery"
+        android:icon="@drawable/ic_image_24dp"
+        android:title="@string/drawer_gallery" />
+    <item
+        android:id="@+id/tracker"
+        android:icon="@drawable/ic_whatshot_24dp"
+        android:title="@string/drawer_tracker" />
+    <item
+        android:id="@+id/forum"
+        android:icon="@drawable/ic_forum_24dp"
+        android:title="@string/drawer_forum" />
+</menu>
