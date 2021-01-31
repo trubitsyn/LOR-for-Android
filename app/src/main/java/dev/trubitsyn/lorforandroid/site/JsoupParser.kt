@@ -19,6 +19,7 @@ package dev.trubitsyn.lorforandroid.site
 
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.*
 import kotlin.reflect.javaType
@@ -32,8 +33,8 @@ class JsoupParser private constructor(): HtmlParser {
     }
 
     override fun getAdapter(type: Type): DocumentAdapter<*>? {
-        val typeCanonicalName = type.toString()
-        return adapters[typeCanonicalName]
+        val typeName = type.toString()
+        return adapters[typeName]
     }
 
     class Builder {
@@ -41,15 +42,21 @@ class JsoupParser private constructor(): HtmlParser {
 
         @OptIn(ExperimentalStdlibApi::class)
         inline fun <reified T> registerDocumentAdapter(adapter: DocumentAdapter<T>) = apply {
-            val actualType = typeOf<T>()
-            val typeCanonicalName = actualType.javaType.toString()
-            registerAdapterOfType(typeCanonicalName, adapter)
+            val typeWithExtends = object : TypeReference<T>() {}.type
+            val typeWithoutExtends = typeOf<T>().javaType
+            registerAdapterOfType(typeWithExtends, typeWithoutExtends, adapter)
         }
 
-        fun registerAdapterOfType(type: String, adapter: DocumentAdapter<*>) {
-            instance.adapters[type] = adapter
+        fun registerAdapterOfType(type1: Type, type2: Type, adapter: DocumentAdapter<*>) {
+            print(type1.toString())
+            print(type2.toString())
+            instance.adapters[type1.toString()] = adapter
         }
 
         fun build() = instance
+    }
+
+    abstract class TypeReference<T> {
+        val type: Type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
     }
 }
