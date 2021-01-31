@@ -23,6 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
@@ -32,6 +33,7 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 class MainActivity : BaseActivity(R.layout.activity_main) {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
     private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
+    private val bottomNavigationView by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val navController by lazy { findNavController(R.id.main_content) }
     private val appBarConfiguration by lazy {
         val destinations = setOf(
@@ -49,7 +51,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigationView.setupWithNavController(navController)
+        //navigationView.setupWithNavController(navController)
+        bottomNavigationView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 

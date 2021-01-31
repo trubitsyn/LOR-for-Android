@@ -26,7 +26,7 @@ import androidx.preference.PreferenceManager
 import dev.trubitsyn.lorforandroid.R
 
 abstract class BaseActivity(@LayoutRes layoutResID: Int) : AppCompatActivity(layoutResID) {
-    protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbarTop) }
+    protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val isDarkTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)
