@@ -26,12 +26,11 @@ import org.jsoup.nodes.Document
 class TrackerItemDocumentAdapter : DocumentAdapter<List<TrackerItem>> {
 
     override fun convert(document: Document): List<TrackerItem> {
-        val items = mutableListOf<TrackerItem>()
         val body = document.body()
         val topics = body
                 .select("tbody > tr")
 
-        topics.forEach {
+        return topics.map {
             val url = it
                     .select("td:eq(1)")
                     .select("a")
@@ -69,7 +68,7 @@ class TrackerItemDocumentAdapter : DocumentAdapter<List<TrackerItem>> {
                     .toString()
                     .toInt()
 
-            items.add(TrackerItem(
+            TrackerItem(
                     url = url,
                     title = title,
                     groupTitle = groupTitle,
@@ -77,8 +76,7 @@ class TrackerItemDocumentAdapter : DocumentAdapter<List<TrackerItem>> {
                     date = date,
                     author = author,
                     comments = comments
-            ))
+            )
         }
-        return items
     }
 }

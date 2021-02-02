@@ -27,12 +27,11 @@ import org.jsoup.nodes.Document
 class GalleryItemDocumentAdapter : DocumentAdapter<List<GalleryItem>> {
 
     override fun convert(document: Document): List<GalleryItem> {
-        val items = mutableListOf<GalleryItem>()
         val body = document.body()
         val articles = body
                 .select("article.news")
 
-        articles.forEach {
+        return articles.map {
             val url = it
                     .select("h1 > a[href^=/gallery/]")
                     .first()
@@ -74,7 +73,7 @@ class GalleryItemDocumentAdapter : DocumentAdapter<List<GalleryItem>> {
             val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(withoutExtension)
             val mediumImageUrl = GalleryUtils.getMediumImageUrl(withoutExtension)
 
-            items.add(GalleryItem(
+            GalleryItem(
                     url = url,
                     title = title,
                     groupTitle = groupTitle,
@@ -85,8 +84,7 @@ class GalleryItemDocumentAdapter : DocumentAdapter<List<GalleryItem>> {
                     imageUrl = imageUrl,
                     medium2xImageUrl = medium2xImageUrl,
                     mediumImageUrl = mediumImageUrl
-            ))
+            )
         }
-        return items
     }
 }

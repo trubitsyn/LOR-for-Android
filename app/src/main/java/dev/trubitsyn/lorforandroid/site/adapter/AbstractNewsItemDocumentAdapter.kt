@@ -28,12 +28,11 @@ import org.jsoup.nodes.Document
 class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> {
 
     override fun convert(document: Document): List<AbstractNewsItem> {
-        val items = mutableListOf<AbstractNewsItem>()
         val body = document.body()
         val articles = body
                 .select("article")
 
-        articles.forEach {
+        return articles.map {
             if (it.hasClass("mini-news")) {
                 // Mini-news article
                 val url = it
@@ -58,11 +57,11 @@ class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> 
                         .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
-                items.add(MiniNewsItem(
+                MiniNewsItem(
                         url = url,
                         title = title,
                         comments = commentsCount
-                ))
+                )
             } else {
                 // Standard article
                 val url = it
@@ -101,7 +100,7 @@ class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> 
                         .replace("[^0-9.]".toRegex(), "")
                         .toInt()
 
-                items.add(NewsItem(
+                NewsItem(
                         url = url,
                         title = title,
                         groupTitle = groupTitle,
@@ -109,9 +108,8 @@ class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> 
                         date = date,
                         author = author,
                         comments = comments
-                ))
+                )
             }
         }
-        return items
     }
 }

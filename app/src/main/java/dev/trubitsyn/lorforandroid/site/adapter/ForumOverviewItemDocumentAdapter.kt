@@ -24,7 +24,6 @@ import org.jsoup.nodes.Document
 class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>> {
 
     override fun convert(document: Document): List<ForumOverviewItem> {
-        val items = mutableListOf<ForumOverviewItem>()
         val body = document.body()
         val sections = body
                 .select("div#bd")
@@ -32,7 +31,7 @@ class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>
                 .first()
                 .select("li")
 
-        sections.forEach {
+        return sections.map {
             val url = it
                     .select("a")
                     .first()
@@ -44,11 +43,10 @@ class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>
                     .first()
                     .ownText()
 
-            items.add(ForumOverviewItem(
+            ForumOverviewItem(
                     url = url,
                     name = name
-            ))
+            )
         }
-        return items
     }
 }

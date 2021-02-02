@@ -30,7 +30,7 @@ class ForumSectionItemDocumentAdapter : DocumentAdapter<List<ForumSectionItem>> 
         val entries = body
                 .select("tbody tr")
 
-        entries.forEach {
+        return entries.map {
             val properties = it
                     .select("td")
                     .first()
@@ -68,7 +68,8 @@ class ForumSectionItemDocumentAdapter : DocumentAdapter<List<ForumSectionItem>> 
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0
-            items.add(ForumSectionItem(
+
+            ForumSectionItem(
                     url = url,
                     title = title,
                     groupTitle = null,
@@ -77,8 +78,7 @@ class ForumSectionItemDocumentAdapter : DocumentAdapter<List<ForumSectionItem>> 
                     author = author,
                     comments = comments,
                     isPinned = isPinned
-            ))
+            )
         }
-        return items
     }
 }
