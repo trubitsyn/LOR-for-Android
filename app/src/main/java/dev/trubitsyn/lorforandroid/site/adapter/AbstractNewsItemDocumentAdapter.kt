@@ -55,7 +55,7 @@ class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> 
                         .toString()
                         .replace("[()]".toRegex(), "")
                         .replace("[^0-9.]".toRegex(), "")
-                        .toInt()
+                        .toIntOrNull() ?: 0
 
                 MiniNewsItem(
                         url = url,
@@ -98,7 +98,7 @@ class AbstractNewsItemDocumentAdapter : DocumentAdapter<List<AbstractNewsItem>> 
                         ?.ownText()
                         .toString()
                         .replace("[^0-9.]".toRegex(), "")
-                        .toInt()
+                        .toIntOrNull() ?: 0
 
                 NewsItem(
                         url = url,

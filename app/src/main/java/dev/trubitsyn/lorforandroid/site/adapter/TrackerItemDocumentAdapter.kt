@@ -66,7 +66,7 @@ class TrackerItemDocumentAdapter : DocumentAdapter<List<TrackerItem>> {
                     .first()
                     .ownText()
                     .toString()
-                    .toInt()
+                    .toIntOrNull() ?: 0
 
             TrackerItem(
                     url = url,

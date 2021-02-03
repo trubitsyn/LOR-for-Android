@@ -64,7 +64,7 @@ class ForumSectionItemDocumentAdapter : DocumentAdapter<List<ForumSectionItem>> 
                     .first()
                     .ownText()
                     .toString()
-                    .toInt()
+                    .toIntOrNull() ?: 0
             val isPinned = properties
                     .select("i.icon-pin")
                     .size > 0
