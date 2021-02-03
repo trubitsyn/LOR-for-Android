@@ -9,17 +9,21 @@
         </item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
+        <item name="android:textAppearance">@style/TextAppearance.App</item>
     </style>
 
-    <style name="Theme.App.Dark" parent="Theme.AppCompat">
-        <item name="android:background">@android:color/black</item>
+    <style name="Theme.App.Dark" parent="Theme.AppCompat.DayNight.DarkActionBar" />
+
+    <style name="Widget.App.RecyclerView" parent="Theme.App">
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
-    <style name="Widget.Toolbar" parent="Theme.App">
+    <style name="Widget.App.Toolbar" parent="Theme.App">
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
         <item name="actionMenuTextColor">@color/colorAccent</item>
         <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="iconTint">@color/colorAccent</item>
     </style>
 
     <style name="Layout.Item.Simple" parent="Theme.App">
@@ -36,17 +40,38 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="TextAppearance.App.Item.Headline" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.App" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColorLink">@color/colorLink</item>
+        <item name="iconTint">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.App.Headline" parent="TextAppearance.App">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.App.Tags" parent="TextAppearance.App">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.App.Widget.RecyclerView.Item.Headline" parent="TextAppearance.App">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.App.Item.Title" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.App.Widget.RecyclerView.Item.Title" parent="TextAppearance.App">
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.App.Item.Small" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.App.Widget.RecyclerView.Item.Small" parent="TextAppearance.App">
         <item name="android:textSize">14sp</item>
+        <item name="iconTint">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.App.Widget.RecyclerView.Item.Tags" parent="TextAppearance.App.Widget.RecyclerView.Item.Small">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>

@@ -22,7 +22,7 @@
             android:id="@+id/forumTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.App.Item.Headline" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 
     </LinearLayout>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,18 +51,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
         <TextView
             android:id="@+id/forumReplyDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/forumCommentsCount"
-        android:textAppearance="@style/TextAppearance.App.Item.Small"
+        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start" />

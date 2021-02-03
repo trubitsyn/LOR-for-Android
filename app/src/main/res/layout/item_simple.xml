@@ -9,5 +9,5 @@
         android:id="@+id/itemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.App.Item.Title" />
+        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title" />
 </LinearLayout>

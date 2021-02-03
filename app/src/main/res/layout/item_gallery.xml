@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:textAppearance="@style/TextAppearance.App.Item.Headline" />
+        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:gravity="start"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
         <TextView
             android:id="@+id/galleryTags"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
     </LinearLayout>
 
     <ImageView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
         <TextView
             android:id="@+id/galleryDate"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -70,13 +70,14 @@
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_chat_bubble_24dp" />
+            app:srcCompat="@drawable/ic_chat_bubble_24dp"
+            app:tint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/galleryCommentsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
     </LinearLayout>
 
 </LinearLayout>
