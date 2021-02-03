@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Layout.Item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Layout.Item"
     android:orientation="vertical">
 
     <TextView
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
-        style="@style/TextAppearance.App.Item.Headline" />
+        android:textAppearance="@style/TextAppearance.App.Item.Headline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +23,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            style="@style/TextAppearance.App.Item.Small"
-            android:gravity="start" />
+            android:gravity="start"
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
 
         <TextView
             android:id="@+id/trackerTags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.App.Item.Small"
             android:ellipsize="end"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,13 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            style="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
 
         <TextView
             android:id="@+id/trackerDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.App.Item.Small" />
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
     </LinearLayout>
 
     <TextView
@@ -60,6 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start"
-        style="@style/TextAppearance.App.Item.Small" />
+        android:textAppearance="@style/TextAppearance.App.Item.Small" />
 
 </LinearLayout>

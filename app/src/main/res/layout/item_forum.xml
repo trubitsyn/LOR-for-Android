@@ -20,9 +20,9 @@
 
         <TextView
             android:id="@+id/forumTitle"
-            style="@style/TextAppearance.App.Item.Headline"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.App.Item.Headline" />
 
     </LinearLayout>
 
@@ -33,11 +33,11 @@
 
         <TextView
             android:id="@+id/forumTags"
-            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,22 +47,22 @@
 
         <TextView
             android:id="@+id/forumReplyFrom"
-            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
 
         <TextView
             android:id="@+id/forumReplyDate"
-            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.App.Item.Small" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/forumCommentsCount"
-        style="@style/TextAppearance.App.Item.Small"
+        android:textAppearance="@style/TextAppearance.App.Item.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start" />
