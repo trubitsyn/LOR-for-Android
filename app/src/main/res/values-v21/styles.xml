@@ -5,4 +5,5 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
+
 </resources>

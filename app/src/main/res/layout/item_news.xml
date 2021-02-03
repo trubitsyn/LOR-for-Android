@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/listThreeLine"
+    style="@style/Layout.Item"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/newsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/primaryText"
+        style="@style/TextAppearance.App.Item.Headline"
         android:gravity="start" />
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            style="@style/secondaryText"
+            style="@style/TextAppearance.App.Item.Small"
             android:gravity="start" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            style="@style/secondaryText"
+            style="@style/TextAppearance.App.Item.Small"
             android:maxLines="1" />
     </LinearLayout>
 
@@ -46,13 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            style="@style/secondaryText"/>
+            style="@style/TextAppearance.App.Item.Small" />
 
         <TextView
             android:id="@+id/newsDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/secondaryText"/>
+            style="@style/TextAppearance.App.Item.Small" />
     </LinearLayout>
 
     <TextView
@@ -60,6 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start"
-        style="@style/secondaryText"/>
+        style="@style/TextAppearance.App.Item.Small" />
 
 </LinearLayout>

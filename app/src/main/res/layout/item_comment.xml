@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height='wrap_content'
     android:orientation="vertical"
-    style="@style/listThreeLine">
+    style="@style/Layout.Item">
 
-    <include layout="@layout/comment"/>
+    <include layout="@layout/comment" />
 
 </LinearLayout>

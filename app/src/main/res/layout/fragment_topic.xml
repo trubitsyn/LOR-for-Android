@@ -63,7 +63,7 @@
                     android:id="@+id/topicMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColorLink="@color/link" />
+                    android:textColorLink="@color/colorLink" />
 
             </LinearLayout>
 

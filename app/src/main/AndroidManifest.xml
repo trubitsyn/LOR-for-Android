@@ -26,8 +26,7 @@
             android:name="dev.trubitsyn.lorforandroid.ui.ImageActivity"
             android:label="@string/activity_image"
             android:launchMode="singleTop"
-            android:theme="@style/ImageActivityTheme">
-        </activity>
+            android:theme="@style/Theme.App.Dark"></activity>
     </application>
 
 </manifest>

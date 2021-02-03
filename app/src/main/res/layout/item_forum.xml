@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Layout.Item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/listThreeLine"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,14 +15,14 @@
             android:id="@+id/forumPinned"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_priority_high_24dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_priority_high_24dp" />
 
         <TextView
             android:id="@+id/forumTitle"
+            style="@style/TextAppearance.App.Item.Headline"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/primaryText"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -33,10 +33,10 @@
 
         <TextView
             android:id="@+id/forumTags"
+            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            style="@style/secondaryText"
             android:maxLines="1" />
     </LinearLayout>
 
@@ -47,24 +47,24 @@
 
         <TextView
             android:id="@+id/forumReplyFrom"
+            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            style="@style/secondaryText"/>
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/forumReplyDate"
+            style="@style/TextAppearance.App.Item.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/secondaryText"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/forumCommentsCount"
+        style="@style/TextAppearance.App.Item.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        style="@style/secondaryText"/>
+        android:gravity="start" />
 
 </LinearLayout>

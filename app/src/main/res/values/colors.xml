@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="link">#729FCF</color>
+    <color name="colorPrimary">#2E3436</color>
+    <color name="colorPrimaryDark">#272C2D</color>
+    <color name="colorAccent">#E9B96E</color>
+    <color name="colorLink">#729FCF</color>
 </resources>

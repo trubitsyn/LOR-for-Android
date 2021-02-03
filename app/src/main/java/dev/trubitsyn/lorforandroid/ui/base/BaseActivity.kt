@@ -20,18 +20,16 @@ package dev.trubitsyn.lorforandroid.ui.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import androidx.preference.PreferenceManager
 import dev.trubitsyn.lorforandroid.R
 
 abstract class BaseActivity(@LayoutRes layoutResID: Int) : AppCompatActivity(layoutResID) {
     protected val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val isDarkTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)
-        val nightMode = if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        AppCompatDelegate.setDefaultNightMode(nightMode)
+        //val isDarkTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_dark_theme), false)
+        //val nightMode = if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        //AppCompatDelegate.setDefaultNightMode(nightMode)
         super.onCreate(savedInstanceState)
     }
 
