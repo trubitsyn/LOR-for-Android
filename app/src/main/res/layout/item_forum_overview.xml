@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class="ForumOverviewItemBinding">
+
+        <variable
+            name="item"
+            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/Layout.Item.Simple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.name}"
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title" />
+    </LinearLayout>
+</layout>

@@ -17,14 +17,17 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-import android.view.View
-import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.ForumOverviewItemBinding
 
-import dev.trubitsyn.lorforandroid.R
 
+class ForumOverviewViewHolder(
+        private val binding: ForumOverviewItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-class ForumOverviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    internal val itemName by lazy { itemView.findViewById<TextView>(R.id.itemName) }
+    fun bind(item: ForumOverviewItem) {
+        binding.item = item
+        binding.executePendingBindings()
+    }
+
 }
