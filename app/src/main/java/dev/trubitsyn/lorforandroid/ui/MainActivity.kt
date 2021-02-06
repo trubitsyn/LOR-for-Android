@@ -18,7 +18,6 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -57,9 +56,9 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     override fun onBackPressed() = when {
-        drawerLayout.isDrawerOpen(GravityCompat.START) -> {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        }
+        //drawerLayout.isDrawerOpen(GravityCompat.START) -> {
+        //    drawerLayout.closeDrawer(GravityCompat.START)
+        //}
         else -> super.onBackPressed()
     }
 }
