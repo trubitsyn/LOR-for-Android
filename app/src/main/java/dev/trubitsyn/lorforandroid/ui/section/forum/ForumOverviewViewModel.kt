@@ -24,6 +24,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -47,6 +48,8 @@ class ForumOverviewViewModel @Inject constructor(
     fun onItemSelected(item: ForumOverviewItem) {
         viewModelScope.launch {
             _selectionState.value = SelectionState.Item(item)
+            delay(1000)
+            _selectionState.value = SelectionState.Nothing
         }
     }
 
