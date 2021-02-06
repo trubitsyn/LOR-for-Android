@@ -1,83 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/Layout.Item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout>
 
-    <TextView
-        android:id="@+id/galleryTitle"
+    <data class="GalleryItemBinding">
+
+        <variable
+            name="item"
+            type="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        style="@style/Layout.Item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/galleryCategory"
-            android:layout_width="wrap_content"
+            android:id="@+id/galleryTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
             android:gravity="start"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 
-        <TextView
-            android:id="@+id/galleryTags"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/galleryImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
+            <TextView
+                android:id="@+id/galleryCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="start"
+                android:text="@{item.groupTitle}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/galleryAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
-
-        <TextView
-            android:id="@+id/galleryDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+            <TextView
+                android:id="@+id/galleryTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.tags}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
+        </LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="bottom"
-            android:layout_marginEnd="2dp"
-            android:layout_marginRight="2dp"
-            android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_chat_bubble_24dp"
-            app:tint="@color/colorAccent" />
+            android:id="@+id/galleryImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/galleryCommentsCount"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/galleryAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@{item.author}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+
+            <TextView
+                android:id="@+id/galleryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@{item.date}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/ic_chat_bubble_24dp"
+                app:tint="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/galleryCommentsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@plurals/comments(item.comments, item.comments)}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

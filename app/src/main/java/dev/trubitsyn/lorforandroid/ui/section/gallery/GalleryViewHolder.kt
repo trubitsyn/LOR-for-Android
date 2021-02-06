@@ -17,20 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.GalleryItemBinding
 
-import dev.trubitsyn.lorforandroid.R
+class GalleryViewHolder(
+        private val binding: GalleryItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-class GalleryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.galleryTitle) }
-    val category by lazy { itemView.findViewById<TextView>(R.id.galleryCategory) }
-    val tags by lazy { itemView.findViewById<TextView>(R.id.galleryTags) }
-    val author by lazy { itemView.findViewById<TextView>(R.id.galleryAuthor) }
-    val date by lazy { itemView.findViewById<TextView>(R.id.galleryDate) }
-    val image by lazy { itemView.findViewById<ImageView>(R.id.galleryImage) }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.galleryCommentsCount) }
+    fun bind(item: GalleryItem) {
+        binding.item = item
+        binding.executePendingBindings()
+    }
 }

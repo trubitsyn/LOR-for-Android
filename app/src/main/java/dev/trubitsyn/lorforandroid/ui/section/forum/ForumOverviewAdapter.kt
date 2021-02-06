@@ -25,8 +25,7 @@ import dev.trubitsyn.lorforandroid.databinding.ForumOverviewItemBinding
 import javax.inject.Inject
 
 
-class ForumOverviewAdapter @Inject constructor(
-) : PagingDataAdapter<ForumOverviewItem, ForumOverviewViewHolder>(Comparator) {
+class ForumOverviewAdapter @Inject constructor() : PagingDataAdapter<ForumOverviewItem, ForumOverviewViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumOverviewViewHolder {
         val inflater = LayoutInflater.from(parent.context)

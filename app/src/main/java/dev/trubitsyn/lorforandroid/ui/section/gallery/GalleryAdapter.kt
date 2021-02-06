@@ -17,63 +17,24 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import dagger.hilt.android.qualifiers.ActivityContext
-import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.util.PreferenceUtils
+import dev.trubitsyn.lorforandroid.databinding.GalleryItemBinding
 import javax.inject.Inject
 
-class GalleryAdapter @Inject constructor(
-        @ActivityContext private val context: Context
-) : PagingDataAdapter<GalleryItem, GalleryViewHolder>(Comparator) {
+class GalleryAdapter @Inject constructor() : PagingDataAdapter<GalleryItem, GalleryViewHolder>(Comparator) {
 
-    private val shouldLoadImages = PreferenceUtils.shouldLoadImagesNow(context)
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GalleryViewHolder {
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_gallery, viewGroup, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = GalleryItemBinding.inflate(inflater, parent, false)
         return GalleryViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: GalleryViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        viewHolder.apply {
-            title.text = item.title
-            if (item.groupTitle == null) {
-                category.visibility = View.GONE
-            } else {
-                category.visibility = View.VISIBLE
-                category.text = item.groupTitle
-            }
-            if (item.tags.isEmpty()) {
-                tags.visibility = View.GONE
-            } else {
-                tags.visibility = View.VISIBLE
-                tags.text = item.tags
-            }
-            date.text = item.date
-            author.text = item.author
-            commentsCount.text = context.resources.getQuantityString(
-                    R.plurals.comments,
-                    item.comments,
-                    item.comments
-            )
-            if (shouldLoadImages) {
-                image.visibility = View.VISIBLE
-                Glide.with(context)
-                        .load(item.mediumImageUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(viewHolder.image)
-            } else {
-                image.visibility = View.GONE
-            }
-        }
+        viewHolder.bind(item)
     }
 
     private object Comparator : DiffUtil.ItemCallback<GalleryItem>() {
