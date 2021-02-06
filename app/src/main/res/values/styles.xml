@@ -8,7 +8,7 @@
             @style/Widget.MaterialComponents.BottomNavigationView.Colored
         </item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-        <item name="android:windowBackground">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:textAppearance">@style/TextAppearance.App</item>
     </style>
 
