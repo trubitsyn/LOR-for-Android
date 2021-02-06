@@ -25,10 +25,6 @@ class ForumOverviewPagingSource(
         private val api: SiteApi
 ) : PagingSource<Int, ForumOverviewItem>() {
 
-    suspend fun getForumCategories(): List<ForumOverviewItem> {
-        return api.getForum()
-    }
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ForumOverviewItem> {
         try {
             val response = api.getForum()
