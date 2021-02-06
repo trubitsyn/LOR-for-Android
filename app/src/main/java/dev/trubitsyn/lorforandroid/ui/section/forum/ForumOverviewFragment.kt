@@ -28,6 +28,7 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ForumOverviewFragment : BaseListFragment() {
@@ -43,7 +44,7 @@ class ForumOverviewFragment : BaseListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         swipeRefreshLayout?.isEnabled = false
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectionState.collectLatest { state ->
                 when (state) {
                     is ForumOverviewViewModel.SelectionState.Item -> {
@@ -52,7 +53,7 @@ class ForumOverviewFragment : BaseListFragment() {
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
             }
