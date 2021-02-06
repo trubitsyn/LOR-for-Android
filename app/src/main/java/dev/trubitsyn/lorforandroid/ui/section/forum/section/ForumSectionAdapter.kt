@@ -32,7 +32,7 @@ class ForumSectionAdapter @Inject constructor(
 ) : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumSectionViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum_section, parent, false)
         return ForumSectionViewHolder(view)
     }
 
