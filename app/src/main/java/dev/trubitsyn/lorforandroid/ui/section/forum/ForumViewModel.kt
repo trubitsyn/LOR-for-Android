@@ -31,21 +31,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ForumOverviewViewModel @Inject constructor(
+class ForumViewModel @Inject constructor(
         private val api: SiteApi
 ) : ViewModel() {
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)
     ) {
-        ForumOverviewPagingSource(api)
+        ForumPagingSource(api)
     }.flow.cachedIn(viewModelScope)
 
     private val _selectionState = MutableStateFlow<SelectionState>(SelectionState.Nothing)
 
     val selectionState: StateFlow<SelectionState> = _selectionState
 
-    fun onItemSelected(item: ForumOverviewItem) {
+    fun onItemSelected(item: ForumItem) {
         viewModelScope.launch {
             _selectionState.value = SelectionState.Item(item)
             delay(1000)
@@ -55,6 +55,6 @@ class ForumOverviewViewModel @Inject constructor(
 
     sealed class SelectionState {
         object Nothing : SelectionState()
-        data class Item(val item: ForumOverviewItem) : SelectionState()
+        data class Item(val item: ForumItem) : SelectionState()
     }
 }

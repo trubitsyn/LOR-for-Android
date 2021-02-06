@@ -37,7 +37,7 @@ class ParsingModule {
     fun provideHtmlParser(): HtmlParser {
         return JsoupParser.Builder()
                 .registerDocumentAdapter(AbstractNewsItemDocumentAdapter())
-                .registerDocumentAdapter(ForumOverviewItemDocumentAdapter())
+                .registerDocumentAdapter(ForumItemDocumentAdapter())
                 .registerDocumentAdapter(ForumSectionItemDocumentAdapter())
                 .registerDocumentAdapter(GalleryItemDocumentAdapter())
                 .registerDocumentAdapter(TrackerItemDocumentAdapter())

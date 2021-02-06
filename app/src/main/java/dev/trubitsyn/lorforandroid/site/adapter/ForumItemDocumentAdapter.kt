@@ -18,12 +18,12 @@
 package dev.trubitsyn.lorforandroid.site.adapter
 
 import dev.trubitsyn.lorforandroid.site.DocumentAdapter
-import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
+import dev.trubitsyn.lorforandroid.ui.section.forum.ForumItem
 import org.jsoup.nodes.Document
 
-class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>> {
+class ForumItemDocumentAdapter : DocumentAdapter<List<ForumItem>> {
 
-    override fun convert(document: Document): List<ForumOverviewItem> {
+    override fun convert(document: Document): List<ForumItem> {
         val body = document.body()
         val sections = body
                 .select("div#bd")
@@ -43,7 +43,7 @@ class ForumOverviewItemDocumentAdapter : DocumentAdapter<List<ForumOverviewItem>
                     .first()
                     .ownText()
 
-            ForumOverviewItem(
+            ForumItem(
                     url = url,
                     name = name
             )

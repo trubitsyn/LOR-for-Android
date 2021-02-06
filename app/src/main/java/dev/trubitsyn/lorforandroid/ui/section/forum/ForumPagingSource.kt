@@ -21,11 +21,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.trubitsyn.lorforandroid.site.SiteApi
 
-class ForumOverviewPagingSource(
+class ForumPagingSource(
         private val api: SiteApi
-) : PagingSource<Int, ForumOverviewItem>() {
+) : PagingSource<Int, ForumItem>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ForumOverviewItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ForumItem> {
         try {
             val response = api.getForum()
             return LoadResult.Page(
@@ -38,7 +38,7 @@ class ForumOverviewPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ForumOverviewItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ForumItem>): Int? {
         return null
     }
 }

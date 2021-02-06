@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data class="ForumOverviewItemBinding">
+    <data class="ForumItemBinding">
 
         <variable
             name="item"
-            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem" />
+            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumItem" />
 
         <variable
             name="viewModel"
-            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewViewModel" />
+            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

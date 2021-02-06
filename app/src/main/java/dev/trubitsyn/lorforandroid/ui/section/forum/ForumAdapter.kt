@@ -21,30 +21,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import dev.trubitsyn.lorforandroid.databinding.ForumOverviewItemBinding
+import dev.trubitsyn.lorforandroid.databinding.ForumItemBinding
 
 
-class ForumOverviewAdapter constructor(
-        private val viewModel: ForumOverviewViewModel
-) : PagingDataAdapter<ForumOverviewItem, ForumOverviewViewHolder>(Comparator) {
+class ForumAdapter constructor(
+        private val viewModel: ForumViewModel
+) : PagingDataAdapter<ForumItem, ForumViewHolder>(Comparator) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumOverviewViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ForumOverviewItemBinding.inflate(inflater, parent, false)
-        return ForumOverviewViewHolder(binding)
+        val binding = ForumItemBinding.inflate(inflater, parent, false)
+        return ForumViewHolder(binding)
     }
 
-    override fun onBindViewHolder(viewHolder: ForumOverviewViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ForumViewHolder, position: Int) {
         val item = getItem(position) ?: return
         viewHolder.bind(item, viewModel)
     }
 
-    private object Comparator : DiffUtil.ItemCallback<ForumOverviewItem>() {
-        override fun areItemsTheSame(oldItem: ForumOverviewItem, newItem: ForumOverviewItem): Boolean {
+    private object Comparator : DiffUtil.ItemCallback<ForumItem>() {
+        override fun areItemsTheSame(oldItem: ForumItem, newItem: ForumItem): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: ForumOverviewItem, newItem: ForumOverviewItem): Boolean {
+        override fun areContentsTheSame(oldItem: ForumItem, newItem: ForumItem): Boolean {
             return oldItem == newItem
         }
     }

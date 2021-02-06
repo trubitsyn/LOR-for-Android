@@ -31,15 +31,15 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ForumOverviewFragment : BaseListFragment() {
+class ForumFragment : BaseListFragment() {
 
-    override lateinit var adapter: ForumOverviewAdapter
-    private val viewModel: ForumOverviewViewModel by viewModels()
+    override lateinit var adapter: ForumAdapter
+    private val viewModel: ForumViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-        adapter = ForumOverviewAdapter(viewModel)
+        adapter = ForumAdapter(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class ForumOverviewFragment : BaseListFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectionState.collectLatest { state ->
                 when (state) {
-                    is ForumOverviewViewModel.SelectionState.Item -> {
+                    is ForumViewModel.SelectionState.Item -> {
                         onItemSelected(state.item)
                     }
                 }
@@ -61,11 +61,11 @@ class ForumOverviewFragment : BaseListFragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun onItemSelected(item: ForumOverviewItem) {
+    private fun onItemSelected(item: ForumItem) {
         if (StringUtils.isClub(item.url)) {
             Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
         } else {
-            val action = ForumOverviewFragmentDirections.actionForumOverviewToForumSection(
+            val action = ForumFragmentDirections.actionForumToForumSection(
                     group = item.url,
                     name = item.name
             )

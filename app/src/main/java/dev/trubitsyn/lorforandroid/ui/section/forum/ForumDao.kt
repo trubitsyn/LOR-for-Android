@@ -17,18 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-import androidx.recyclerview.widget.RecyclerView
-import dev.trubitsyn.lorforandroid.databinding.ForumOverviewItemBinding
+import androidx.room.Dao
+import androidx.room.Query
+import dev.trubitsyn.lorforandroid.ui.base.BaseDao
+import kotlinx.coroutines.flow.Flow
 
-
-class ForumOverviewViewHolder(
-        private val binding: ForumOverviewItemBinding
-) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(item: ForumOverviewItem, viewModel: ForumOverviewViewModel) {
-        binding.item = item
-        binding.viewModel = viewModel
-        binding.executePendingBindings()
-    }
-
+@Dao
+interface ForumDao : BaseDao<ForumItem> {
+    @Query("SELECT * FROM forumitem")
+    fun getAll(): Flow<List<ForumItem>>
 }

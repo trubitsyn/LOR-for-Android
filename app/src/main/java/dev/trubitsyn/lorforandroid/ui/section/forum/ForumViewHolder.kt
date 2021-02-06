@@ -17,13 +17,18 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.ForumItemBinding
 
-@Entity
-data class ForumOverviewItem(
-        @PrimaryKey(autoGenerate = true)
-        val id: Long = 0,
-        val url: String,
-        val name: String
-)
+
+class ForumViewHolder(
+        private val binding: ForumItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(item: ForumItem, viewModel: ForumViewModel) {
+        binding.item = item
+        binding.viewModel = viewModel
+        binding.executePendingBindings()
+    }
+
+}

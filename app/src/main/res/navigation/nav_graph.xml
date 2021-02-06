@@ -38,10 +38,10 @@
     </fragment>
     <fragment
         android:id="@+id/forum"
-        android:name="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewFragment"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.forum.ForumFragment"
         android:label="@string/drawer_forum">
         <action
-            android:id="@+id/action_forumOverview_to_forumSection"
+            android:id="@+id/action_forum_to_forumSection"
             app:destination="@id/forumSection" />
     </fragment>
     <fragment

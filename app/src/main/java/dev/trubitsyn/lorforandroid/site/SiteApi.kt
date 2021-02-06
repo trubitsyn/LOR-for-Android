@@ -17,7 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.site
 
-import dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem
+import dev.trubitsyn.lorforandroid.ui.section.forum.ForumItem
 import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
@@ -45,7 +45,7 @@ interface SiteApi {
     ): List<TrackerItem>
 
     @GET(value = "forum/")
-    suspend fun getForum(): List<ForumOverviewItem>
+    suspend fun getForum(): List<ForumItem>
 
     @GET(value = "forum/{section}/")
     suspend fun getForumSection(

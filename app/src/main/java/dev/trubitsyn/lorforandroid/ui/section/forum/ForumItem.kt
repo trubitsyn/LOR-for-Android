@@ -17,13 +17,13 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum
 
-import androidx.room.Dao
-import androidx.room.Query
-import dev.trubitsyn.lorforandroid.ui.base.BaseDao
-import kotlinx.coroutines.flow.Flow
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Dao
-interface ForumOverviewDao : BaseDao<ForumOverviewItem> {
-    @Query("SELECT * FROM forumoverviewitem")
-    fun getAll(): Flow<List<ForumOverviewItem>>
-}
+@Entity
+data class ForumItem(
+        @PrimaryKey(autoGenerate = true)
+        val id: Long = 0,
+        val url: String,
+        val name: String
+)
