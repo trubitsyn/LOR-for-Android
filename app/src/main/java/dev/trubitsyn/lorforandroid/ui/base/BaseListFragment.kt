@@ -19,6 +19,7 @@ package dev.trubitsyn.lorforandroid.ui.base
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
@@ -30,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.ui.util.ItemClickListener
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -38,6 +38,7 @@ abstract class BaseListFragment : Fragment() {
     protected val swipeRefreshLayout by lazy { requireView().findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout) }
     protected val recyclerView by lazy { requireView().findViewById<RecyclerView>(R.id.recyclerView) }
     protected val errorView by lazy { requireView().findViewById<TextView>(R.id.errorView) }
+    protected val progressBar by lazy { requireView().findViewById<ProgressBar>(R.id.progressBar) }
     private val viewFlipper by lazy { requireView().findViewById<ViewFlipper>(R.id.viewFlipper) }
     protected abstract val adapter: PagingDataAdapter<*, *>
 
@@ -85,14 +86,14 @@ abstract class BaseListFragment : Fragment() {
             adapter.loadStateFlow.collectLatest {
                 when (it.refresh) {
                     is LoadState.Loading -> {
-                        viewFlipper.displayedChild = R.id.progressBar
+                        viewFlipper.displayedChild = viewFlipper.indexOfChild(progressBar)
                     }
                     is LoadState.NotLoading -> {
-                        viewFlipper.displayedChild = R.id.swipeRefreshLayout
+                        viewFlipper.displayedChild = viewFlipper.indexOfChild(swipeRefreshLayout)
                     }
                     is LoadState.Error -> {
                         errorView.setText(R.string.error_network)
-                        viewFlipper.displayedChild = R.id.errorView
+                        viewFlipper.displayedChild = viewFlipper.indexOfChild(errorView)
                     }
                 }
             }
