@@ -17,18 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
-import android.view.View
-import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.TrackerItemBinding
 
-import dev.trubitsyn.lorforandroid.R
+class TrackerViewHolder(
+        private val binding: TrackerItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-class TrackerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.trackerTitle) }
-    val category by lazy { itemView.findViewById<TextView>(R.id.trackerGroupTitle) }
-    val tags by lazy { itemView.findViewById<TextView>(R.id.trackerTags) }
-    val author by lazy { itemView.findViewById<TextView>(R.id.trackerAuthor) }
-    val date by lazy { itemView.findViewById<TextView>(R.id.trackerDate) }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.trackerCommentsCount) }
+    fun bind(item: TrackerItem) {
+        binding.item = item
+        binding.executePendingBindings()
+    }
 }

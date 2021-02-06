@@ -17,39 +17,24 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import dagger.hilt.android.qualifiers.ActivityContext
-import dev.trubitsyn.lorforandroid.R
+import dev.trubitsyn.lorforandroid.databinding.TrackerItemBinding
 import javax.inject.Inject
 
-class TrackerAdapter @Inject constructor(
-        @ActivityContext private val context: Context
-) : PagingDataAdapter<TrackerItem, TrackerViewHolder>(Comparator) {
+class TrackerAdapter @Inject constructor() : PagingDataAdapter<TrackerItem, TrackerViewHolder>(Comparator) {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TrackerViewHolder {
-        val layoutInflater = LayoutInflater.from(viewGroup.context)
-        val view = layoutInflater.inflate(R.layout.item_tracker, viewGroup, false)
-        return TrackerViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackerViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = TrackerItemBinding.inflate(inflater, parent, false)
+        return TrackerViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: TrackerViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        viewHolder.apply {
-            title.text = item.title
-            category.text = item.groupTitle
-            tags.text = item.tags
-            date.text = item.date
-            author.text = item.author
-            commentsCount.text = context.resources.getQuantityString(
-                    R.plurals.comments,
-                    item.comments,
-                    item.comments
-            )
-        }
+        viewHolder.bind(item)
     }
 
     object Comparator : DiffUtil.ItemCallback<TrackerItem>() {
