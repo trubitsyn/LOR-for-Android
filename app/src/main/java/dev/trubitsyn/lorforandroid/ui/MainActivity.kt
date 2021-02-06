@@ -18,20 +18,16 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
-    private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
-    private val navigationView by lazy { findViewById<NavigationView>(R.id.navigationView) }
     private val bottomNavigationView by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val navController by lazy { findNavController(R.id.main_content) }
     private val appBarConfiguration by lazy {
@@ -42,23 +38,12 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 R.id.forum,
                 R.id.settings
         )
-        AppBarConfiguration(
-                destinations,
-                drawerLayout
-        )
+        AppBarConfiguration(destinations)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //navigationView.setupWithNavController(navController)
         bottomNavigationView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onBackPressed() = when {
-        //drawerLayout.isDrawerOpen(GravityCompat.START) -> {
-        //    drawerLayout.closeDrawer(GravityCompat.START)
-        //}
-        else -> super.onBackPressed()
     }
 }
