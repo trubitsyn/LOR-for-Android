@@ -17,18 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import android.view.View
-import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.NewsItemBinding
 
-import dev.trubitsyn.lorforandroid.R
+class NewsViewHolder(
+        private val binding: NewsItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    internal val title by lazy { itemView.findViewById<TextView>(R.id.newsTitle) }
-    internal val category by lazy { itemView.findViewById<TextView>(R.id.newsCategory) }
-    internal val tags by lazy { itemView.findViewById<TextView>(R.id.newsTags) }
-    internal val author by lazy { itemView.findViewById<TextView>(R.id.newsAuthor) }
-    internal val date by lazy { itemView.findViewById<TextView>(R.id.newsDate) }
-    internal val commentsCount by lazy { itemView.findViewById<TextView>(R.id.newsCommentsCount) }
+    fun bind(item: NewsItem) {
+        binding.item = item
+        binding.executePendingBindings()
+    }
 }

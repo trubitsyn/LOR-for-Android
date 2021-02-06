@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Layout.Item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout>
 
-    <TextView
-        android:id="@+id/newsTitle"
+    <data class="NewsItemBinding">
+
+        <variable
+            name="item"
+            type="dev.trubitsyn.lorforandroid.ui.section.news.NewsItem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/Layout.Item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
-        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/newsCategory"
-            android:layout_width="wrap_content"
+            android:id="@+id/newsTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
             android:gravity="start"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 
-        <TextView
-            android:id="@+id/newsTags"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/newsCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="start"
+                android:text="@{item.groupTitle}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+
+            <TextView
+                android:id="@+id/newsTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.tags}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/newsAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@{item.author}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+
+            <TextView
+                android:id="@+id/newsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.date}"
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/newsCommentsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{@plurals/comments(item.comments, item.comments)}"
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/newsAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
-
-        <TextView
-            android:id="@+id/newsDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/newsCommentsCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
-
-</LinearLayout>
+</layout>

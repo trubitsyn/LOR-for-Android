@@ -24,7 +24,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.qualifiers.ActivityContext
-import dev.trubitsyn.lorforandroid.R
+import dev.trubitsyn.lorforandroid.databinding.MiniNewsItemBinding
+import dev.trubitsyn.lorforandroid.databinding.NewsItemBinding
 import javax.inject.Inject
 
 class NewsAdapter @Inject constructor(
@@ -37,14 +38,15 @@ class NewsAdapter @Inject constructor(
         else -> -1
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             MINI -> {
-                val mini = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_mini_news, viewGroup, false)
+                val mini = MiniNewsItemBinding.inflate(inflater, parent, false)
                 MiniNewsViewHolder(mini)
             }
             FULL -> {
-                val full = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_news, viewGroup, false)
+                val full = NewsItemBinding.inflate(inflater, parent, false)
                 NewsViewHolder(full)
             }
             else -> throw IllegalArgumentException()
@@ -55,29 +57,11 @@ class NewsAdapter @Inject constructor(
         when (viewHolder.itemViewType) {
             MINI -> {
                 val miniNewsItem = getItem(position) as MiniNewsItem
-                (viewHolder as MiniNewsViewHolder).apply {
-                    title.text = miniNewsItem.title
-                    commentsCount.text = context.resources.getQuantityString(
-                            R.plurals.comments,
-                            miniNewsItem.comments,
-                            miniNewsItem.comments
-                    )
-                }
+                (viewHolder as MiniNewsViewHolder).bind(miniNewsItem)
             }
             FULL -> {
                 val newsItem = getItem(position) as NewsItem
-                (viewHolder as NewsViewHolder).apply {
-                    title.text = newsItem.title
-                    category.text = newsItem.groupTitle
-                    tags.text = newsItem.tags
-                    author.text = newsItem.author
-                    date.text = newsItem.date
-                    commentsCount.text = context.resources.getQuantityString(
-                            R.plurals.comments,
-                            newsItem.comments,
-                            newsItem.comments
-                    )
-                }
+                (viewHolder as NewsViewHolder).bind(newsItem)
             }
         }
     }
