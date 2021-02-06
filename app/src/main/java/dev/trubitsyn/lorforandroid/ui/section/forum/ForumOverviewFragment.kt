@@ -39,7 +39,7 @@ class ForumOverviewFragment : BaseListFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
         adapter = ForumOverviewAdapter(viewModel)
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.selectionState.collectLatest { state ->
                 when (state) {
                     is ForumOverviewViewModel.SelectionState.Item -> {
@@ -52,7 +52,7 @@ class ForumOverviewFragment : BaseListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         swipeRefreshLayout?.isEnabled = false
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
             }
