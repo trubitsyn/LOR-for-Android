@@ -30,7 +30,6 @@ import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class TrackerFragment : BaseListFragment() {
@@ -58,17 +57,17 @@ class TrackerFragment : BaseListFragment() {
 //        })
     }
 
-    override fun onItemClickCallback(position: Int) {
-        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
-        item.let {
-            if (GalleryUtils.isGalleryUrl(it.url)) {
-                navigateToGalleryTopic(it)
-            } else {
-                navigateToTopic(it)
-            }
-        }
-
-    }
+//    override fun onItemClickCallback(position: Int) {
+//        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
+//        item.let {
+//            if (GalleryUtils.isGalleryUrl(it.url)) {
+//                navigateToGalleryTopic(it)
+//            } else {
+//                navigateToTopic(it)
+//            }
+//        }
+//
+//    }
 
     private fun navigateToGalleryTopic(item: TrackerItem) {
         val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)

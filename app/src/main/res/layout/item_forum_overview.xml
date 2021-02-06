@@ -6,6 +6,10 @@
         <variable
             name="item"
             type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewItem" />
+
+        <variable
+            name="viewModel"
+            type="dev.trubitsyn.lorforandroid.ui.section.forum.ForumOverviewViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{item.name}"
+            android:onClick="@{() -> viewModel.onItemSelected(item)}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title" />
     </LinearLayout>
 </layout>

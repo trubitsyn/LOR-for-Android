@@ -53,12 +53,12 @@ class GalleryFragment : BaseListFragment() {
         }
     }
 
-    override fun onItemClickCallback(position: Int) {
-        /*val item = items[position] as GalleryItem
-        val action = GalleryFragmentDirections.actionGalleryToTopic(
-                url = item.url,
-                imageUrl = item.imageUrl
-        )
-        findNavController().navigate(action)*/
-    }
+//    override fun onItemClickCallback(position: Int) {
+//        /*val item = items[position] as GalleryItem
+//        val action = GalleryFragmentDirections.actionGalleryToTopic(
+//                url = item.url,
+//                imageUrl = item.imageUrl
+//        )
+//        findNavController().navigate(action)*/
+//    }
 }

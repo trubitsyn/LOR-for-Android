@@ -44,9 +44,9 @@ class ForumSectionFragment : BaseListFragment() {
         }
     }
 
-    override fun onItemClickCallback(position: Int) {
-        //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)
-    }
+    //override fun onItemClickCallback(position: Int) {
+    //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)
+    //}
 
     /*internal interface Callback {
         fun returnToActivity(url: String)

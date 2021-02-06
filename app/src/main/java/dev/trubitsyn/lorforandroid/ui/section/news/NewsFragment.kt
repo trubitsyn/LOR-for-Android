@@ -42,7 +42,7 @@ class NewsFragment : BaseListFragment() {
         }
     }
 
-    override fun onItemClickCallback(position: Int) {
+    //override fun onItemClickCallback(position: Int) {
         /*val url = when (val item = items[position]) {
             is MiniNewsItem -> item.url
             is NewsItem -> item.url
@@ -54,5 +54,5 @@ class NewsFragment : BaseListFragment() {
                 imageUrl = null
         )
         findNavController().navigate(action)*/
-    }
+    //}
 }

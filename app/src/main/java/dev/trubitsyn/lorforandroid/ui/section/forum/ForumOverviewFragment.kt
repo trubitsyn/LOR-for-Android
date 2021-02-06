@@ -28,33 +28,39 @@ import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ForumOverviewFragment : BaseListFragment() {
-    @Inject
+
     override lateinit var adapter: ForumOverviewAdapter
     private val viewModel: ForumOverviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        swipeRefreshLayout?.isEnabled = false
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                adapter.submitData(it)
+        adapter = ForumOverviewAdapter(viewModel)
+        lifecycleScope.launchWhenStarted {
+            viewModel.selectionState.collectLatest { state ->
+                when (state) {
+                    is ForumOverviewViewModel.SelectionState.Item -> {
+                        onItemSelected(state.item)
+                    }
+                }
             }
         }
     }
 
-    override fun onItemClickCallback(position: Int) {
-        var item: ForumOverviewItem by Delegates.notNull() //items[position] as ForumOverviewItem
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        swipeRefreshLayout?.isEnabled = false
+        lifecycleScope.launchWhenCreated {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun onItemSelected(item: ForumOverviewItem) {
         if (StringUtils.isClub(item.url)) {
             Toast.makeText(context, R.string.error_access_denied, Toast.LENGTH_SHORT).show()
         } else {

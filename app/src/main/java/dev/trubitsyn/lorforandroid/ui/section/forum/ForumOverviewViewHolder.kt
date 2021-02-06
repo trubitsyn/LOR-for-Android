@@ -25,8 +25,9 @@ class ForumOverviewViewHolder(
         private val binding: ForumOverviewItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: ForumOverviewItem) {
+    fun bind(item: ForumOverviewItem, viewModel: ForumOverviewViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 
