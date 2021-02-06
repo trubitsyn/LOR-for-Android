@@ -3,6 +3,8 @@
 
     <data class="ForumSectionItemBinding">
 
+        <import type="android.view.View" />
+
         <variable
             name="item"
             type="dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem" />
@@ -25,7 +27,7 @@
                 android:id="@+id/forumPinned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="@{item.pinned ? View.VISIBLE : View.GONE }"
                 app:srcCompat="@drawable/ic_priority_high_24dp"
                 app:tint="@color/colorAccent" />
 
@@ -33,6 +35,7 @@
                 android:id="@+id/forumTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.title}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 
         </LinearLayout>
@@ -48,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@{item.tags}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
         </LinearLayout>
 
@@ -62,12 +66,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
+                android:text="@{item.author}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
             <TextView
                 android:id="@+id/forumReplyDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.date}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
         </LinearLayout>
 
@@ -76,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:text="@{@plurals/comments(item.comments, item.comments)}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
     </LinearLayout>

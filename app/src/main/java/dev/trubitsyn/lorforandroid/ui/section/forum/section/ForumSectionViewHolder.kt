@@ -17,19 +17,15 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.forum.section
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
+import dev.trubitsyn.lorforandroid.databinding.ForumSectionItemBinding
 
-import dev.trubitsyn.lorforandroid.R
+class ForumSectionViewHolder(
+        private val binding: ForumSectionItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-class ForumSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title by lazy { itemView.findViewById<TextView>(R.id.forumTitle) }
-    val tags by lazy { itemView.findViewById<TextView>(R.id.forumTags) }
-    val replyFrom by lazy { itemView.findViewById<TextView>(R.id.forumReplyFrom) }
-    val replyDate by lazy { itemView.findViewById<TextView>(R.id.forumReplyDate) }
-    val commentsCount by lazy { itemView.findViewById<TextView>(R.id.forumCommentsCount) }
-    val pinned by lazy { itemView.findViewById<ImageView>(R.id.forumPinned) }
+    fun bind(item: ForumSectionItem) {
+        binding.item = item
+        binding.executePendingBindings()
+    }
 }
