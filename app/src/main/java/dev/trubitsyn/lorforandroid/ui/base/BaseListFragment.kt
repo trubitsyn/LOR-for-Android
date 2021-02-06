@@ -56,7 +56,7 @@ abstract class BaseListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.refreshButton -> {
-                //adapter.refresh()
+                adapter.refresh()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -70,28 +70,27 @@ abstract class BaseListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
-        //swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
+        swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(view.context)
             if (showDividers) {
                 addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             }
-            addOnItemTouchListener(ItemClickListener(requireContext(), object : ItemClickListener.OnItemClickListener {
-                override fun onItemClick(view: View) {
-                    onItemClickCallback(recyclerView.getChildAdapterPosition(view))
-                }
-            }))
         }
         viewLifecycleOwner.lifecycleScope.launch {
             adapter.loadStateFlow.collectLatest {
                 when (it.refresh) {
                     is LoadState.Loading -> {
-                        viewFlipper.displayedChild = viewFlipper.indexOfChild(progressBar)
+                        if (!swipeRefreshLayout.isRefreshing) {
+                            viewFlipper.displayedChild = viewFlipper.indexOfChild(progressBar)
+                        }
                     }
                     is LoadState.NotLoading -> {
                         viewFlipper.displayedChild = viewFlipper.indexOfChild(swipeRefreshLayout)
+                        swipeRefreshLayout.isRefreshing = false
                     }
                     is LoadState.Error -> {
+                        swipeRefreshLayout.isRefreshing = false
                         errorView.setText(R.string.error_network)
                         viewFlipper.displayedChild = viewFlipper.indexOfChild(errorView)
                     }
@@ -101,6 +100,4 @@ abstract class BaseListFragment : Fragment() {
     }
 
     protected open val showDividers = true
-
-    protected abstract fun onItemClickCallback(position: Int)
 }
