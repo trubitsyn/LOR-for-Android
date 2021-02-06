@@ -17,20 +17,16 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.news
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.qualifiers.ActivityContext
 import dev.trubitsyn.lorforandroid.databinding.MiniNewsItemBinding
 import dev.trubitsyn.lorforandroid.databinding.NewsItemBinding
 import javax.inject.Inject
 
-class NewsAdapter @Inject constructor(
-        @ActivityContext private val context: Context
-) : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(Comparator) {
+class NewsAdapter @Inject constructor() : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(Comparator) {
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
         is MiniNewsItem -> MINI
