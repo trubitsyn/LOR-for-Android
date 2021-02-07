@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/tracker"
-        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerSectionFragment"
         android:label="@string/drawer_tracker">
         <argument
             android:name="filter"

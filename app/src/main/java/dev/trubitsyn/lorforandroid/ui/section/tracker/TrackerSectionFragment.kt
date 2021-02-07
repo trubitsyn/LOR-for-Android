@@ -32,8 +32,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TrackerFragment : BaseListFragment() {
-    private val args by navArgs<TrackerFragmentArgs>()
+class TrackerSectionFragment : BaseListFragment() {
+    private val args by navArgs<TrackerSectionFragmentArgs>()
 
     //private var filter: TrackerFilterEnum = TrackerFilterEnum.all
     @Inject
@@ -88,7 +88,7 @@ class TrackerFragment : BaseListFragment() {
                 imageUrl = imagesUrl,
                 medium2xImageUrl = medium2xImageUrl,
                 mediumImageUrl = mediumImageUrl)
-        val action = TrackerFragmentDirections.actionTrackerToTopic(
+        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
                 url = galleryItem.url,
                 imageUrl = galleryItem.imageUrl
         )
@@ -96,7 +96,7 @@ class TrackerFragment : BaseListFragment() {
     }
 
     private fun navigateToTopic(item: TrackerItem) {
-        val action = TrackerFragmentDirections.actionTrackerToTopic(
+        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
                 url = item.url,
                 imageUrl = null
         )
