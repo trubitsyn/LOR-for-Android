@@ -28,28 +28,28 @@ import retrofit2.http.Query
 
 interface SiteApi {
 
-    @GET(value = "news/")
+    @GET("news/")
     suspend fun getNews(
-            @Query(value = "offset") offset: Int
+            @Query("offset") offset: Int
     ): List<AbstractNewsItem>
 
-    @GET(value = "gallery/")
+    @GET("gallery/")
     suspend fun getGallery(
-            @Query(value = "offset") offset: Int
+            @Query("offset") offset: Int
     ): List<GalleryItem>
 
-    @GET(value = "tracker/")
+    @GET("tracker/")
     suspend fun getTracker(
-            @Query(value = "filter") filter: String,
-            @Query(value = "offset") offset: Int
+            @Query("filter") filter: String,
+            @Query("offset") offset: Int
     ): List<TrackerItem>
 
-    @GET(value = "forum/")
+    @GET("forum/")
     suspend fun getForum(): List<ForumItem>
 
-    @GET(value = "forum/{section}/")
+    @GET("forum/{section}/")
     suspend fun getForumSection(
-            @Path(value = "section") section: String,
-            @Query(value = "offset") offset: Int
+            @Path("section") section: String,
+            @Query("offset") offset: Int
     ): List<ForumSectionItem>
 }
