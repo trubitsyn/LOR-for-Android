@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GalleryFragment : BaseListFragment() {
+class GallerySectionFragment : BaseListFragment() {
     @Inject
     override lateinit var adapter: GalleryAdapter
 

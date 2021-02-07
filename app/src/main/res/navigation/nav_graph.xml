@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/gallery"
-        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GallerySectionFragment"
         android:label="@string/drawer_gallery">
         <argument
             android:name="filter"
