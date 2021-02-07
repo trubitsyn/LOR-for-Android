@@ -1,0 +1,1 @@
+LOR for Android is a client application for Linux.org.ru website.
