@@ -1,9 +1,10 @@
 Categories:
   - Internet
+AutoName: LOR for Android
 AuthorName: Nikola Trubitsyn
 AuthorEmail: nikola.trubitsyn@gmail.com
 AuthorWebSite: https://trubitsyn.dev
-License: GPL-3.0-only
+License: GPL-3.0-or-later
 SourceCode: https://github.com/trubitsyn/LOR-for-Android
 IssueTracker: https://github.com/trubitsyn/LOR-for-Android/issues
 AntiFeatures: NonFreeNet
@@ -21,3 +22,5 @@ Builds:
 
 AutoUpdateMode: Version v%v
 UpdateCheckMode: Tags
+CurrentVersion: 1.0.0-alpha
+CurrentVersionCode: 1
