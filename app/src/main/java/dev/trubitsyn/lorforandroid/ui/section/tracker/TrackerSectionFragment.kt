@@ -19,13 +19,9 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.android.components.FragmentComponent
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -103,19 +99,10 @@ class TrackerSectionFragment : BaseListFragment() {
 //        findNavController().navigate(action)
     }
 
-    @InstallIn(FragmentComponent::class)
-    @dagger.hilt.EntryPoint
-    interface EntryPoint {
-        fun adapter(): TrackerAdapter
-    }
-
     companion object {
 
-        fun newInstance(fragment: Fragment): TrackerSectionFragment {
-            val hiltEntryPoint = EntryPointAccessors.fromFragment(fragment, EntryPoint::class.java)
-            return TrackerSectionFragment().apply {
-                adapter = hiltEntryPoint.adapter()
-            }
+        fun newInstance(): TrackerSectionFragment {
+            return TrackerSectionFragment()
         }
     }
 }

@@ -21,11 +21,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class TrackerFragmentAdapter(
-        private val fragment: Fragment
+        fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
-        return TrackerSectionFragment.newInstance(fragment)
+        return TrackerSectionFragment.newInstance()
     }
 
     override fun getItemCount() = TrackerFilter.count()
