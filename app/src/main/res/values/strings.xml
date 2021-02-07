@@ -12,7 +12,7 @@
     <string name="drawer_forum">Forum</string>
     <string name="drawer_settings">Settings</string>
 
-    <string-array name="tracker_spinner">
+    <string-array name="tracker_filter">
         <item>All</item>
         <item>Main</item>
         <item>No talks</item>

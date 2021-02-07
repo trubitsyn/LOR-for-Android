@@ -26,12 +26,8 @@
     </fragment>
     <fragment
         android:id="@+id/tracker"
-        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerSectionFragment"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFragment"
         android:label="@string/drawer_tracker">
-        <argument
-            android:name="filter"
-            android:defaultValue="all"
-            app:argType="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerFilterEnum" />
         <action
             android:id="@+id/action_tracker_to_topic"
             app:destination="@id/topic" />

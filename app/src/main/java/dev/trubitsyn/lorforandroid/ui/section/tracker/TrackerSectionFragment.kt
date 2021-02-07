@@ -19,21 +19,21 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.components.FragmentComponent
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
-import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrackerSectionFragment : BaseListFragment() {
-    private val args by navArgs<TrackerSectionFragmentArgs>()
+    //private val args by navArgs<TrackerSectionFragmentArgs>()
 
     //private var filter: TrackerFilterEnum = TrackerFilterEnum.all
     @Inject
@@ -69,37 +69,53 @@ class TrackerSectionFragment : BaseListFragment() {
 //
 //    }
 
-    private fun navigateToGalleryTopic(item: TrackerItem) {
-        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
-        val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
-        val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
-
-        // TODO: Url of high-res image in GalleryItem
-        // Currently cannot get it because images can either have .jpg or .png extension
-        // and there's no way to determine the correct without issuing an HTTP request.
-        val galleryItem = GalleryItem(
-                url = item.url,
-                title = item.title,
-                groupTitle = item.groupTitle,
-                date = item.date,
-                tags = item.tags,
-                author = item.author!!,
-                comments = item.comments,
-                imageUrl = imagesUrl,
-                medium2xImageUrl = medium2xImageUrl,
-                mediumImageUrl = mediumImageUrl)
-        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
-                url = galleryItem.url,
-                imageUrl = galleryItem.imageUrl
-        )
-        findNavController().navigate(action)
-    }
+//    private fun navigateToGalleryTopic(item: TrackerItem) {
+//        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
+//        val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
+//        val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
+//
+//        // TODO: Url of high-res image in GalleryItem
+//        // Currently cannot get it because images can either have .jpg or .png extension
+//        // and there's no way to determine the correct without issuing an HTTP request.
+//        val galleryItem = GalleryItem(
+//                url = item.url,
+//                title = item.title,
+//                groupTitle = item.groupTitle,
+//                date = item.date,
+//                tags = item.tags,
+//                author = item.author!!,
+//                comments = item.comments,
+//                imageUrl = imagesUrl,
+//                medium2xImageUrl = medium2xImageUrl,
+//                mediumImageUrl = mediumImageUrl)
+//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
+//                url = galleryItem.url,
+//                imageUrl = galleryItem.imageUrl
+//        )
+//        findNavController().navigate(action)
+//    }
 
     private fun navigateToTopic(item: TrackerItem) {
-        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
-                url = item.url,
-                imageUrl = null
-        )
-        findNavController().navigate(action)
+//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
+//                url = item.url,
+//                imageUrl = null
+//        )
+//        findNavController().navigate(action)
+    }
+
+    @InstallIn(FragmentComponent::class)
+    @dagger.hilt.EntryPoint
+    interface EntryPoint {
+        fun adapter(): TrackerAdapter
+    }
+
+    companion object {
+
+        fun newInstance(fragment: Fragment): TrackerSectionFragment {
+            val hiltEntryPoint = EntryPointAccessors.fromFragment(fragment, EntryPoint::class.java)
+            return TrackerSectionFragment().apply {
+                adapter = hiltEntryPoint.adapter()
+            }
+        }
     }
 }
