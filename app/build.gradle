@@ -10,8 +10,8 @@ android {
         applicationId "dev.trubitsyn.lorforandroid"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0.0-alpha"
+        versionCode 2
+        versionName "1.0.0-alpha.1"
         vectorDrawables.useSupportLibrary true
 
         archivesBaseName = "v${versionName}"
