@@ -1,0 +1,23 @@
+Categories:
+  - Internet
+AuthorName: Nikola Trubitsyn
+AuthorEmail: nikola.trubitsyn@gmail.com
+AuthorWebSite: https://trubitsyn.dev
+License: GPL-3.0-only
+SourceCode: https://github.com/trubitsyn/LOR-for-Android
+IssueTracker: https://github.com/trubitsyn/LOR-for-Android/issues
+AntiFeatures: NonFreeNet
+
+RepoType: git
+Repo: https://github.com/trubitsyn/LOR-for-Android
+
+Builds:
+  - versionName: 1.0.0-alpha
+    versionCode: 1
+    commit: v1.0.0-alpha
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
