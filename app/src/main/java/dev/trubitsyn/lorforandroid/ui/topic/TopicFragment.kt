@@ -82,42 +82,4 @@ class TopicFragment : Fragment() {
             }
         }
     }
-
-    //    override fun onItemClickCallback(position: Int) {
-//        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
-//        item.let {
-//            if (GalleryUtils.isGalleryUrl(it.url)) {
-//                navigateToGalleryTopic(it)
-//            } else {
-//                navigateToTopic(it)
-//            }
-//        }
-//
-//    }
-
-//    private fun navigateToGalleryTopic(item: TrackerItem) {
-//        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
-//        val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
-//        val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
-//
-//        // TODO: Url of high-res image in GalleryItem
-//        // Currently cannot get it because images can either have .jpg or .png extension
-//        // and there's no way to determine the correct without issuing an HTTP request.
-//        val galleryItem = GalleryItem(
-//                url = item.url,
-//                title = item.title,
-//                groupTitle = item.groupTitle,
-//                date = item.date,
-//                tags = item.tags,
-//                author = item.author!!,
-//                comments = item.comments,
-//                imageUrl = imagesUrl,
-//                medium2xImageUrl = medium2xImageUrl,
-//                mediumImageUrl = mediumImageUrl)
-//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
-//                url = galleryItem.url,
-//                imageUrl = galleryItem.imageUrl
-//        )
-//        findNavController().navigate(action)
-//    }
 }
