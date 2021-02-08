@@ -33,6 +33,14 @@
             app:destination="@id/topic" />
     </fragment>
     <fragment
+        android:id="@+id/trackerSection"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerSectionFragment">
+        <argument
+            android:name="filter"
+            android:defaultValue="all"
+            app:argType="string" />
+    </fragment>
+    <fragment
         android:id="@+id/forum"
         android:name="dev.trubitsyn.lorforandroid.ui.section.forum.ForumFragment"
         android:label="@string/drawer_forum">

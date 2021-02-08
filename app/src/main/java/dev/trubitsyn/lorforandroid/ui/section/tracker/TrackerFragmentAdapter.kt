@@ -25,7 +25,7 @@ class TrackerFragmentAdapter(
 ) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
-        return TrackerSectionFragment.newInstance()
+        return TrackerSectionFragment.newInstance(TrackerFilter[position])
     }
 
     override fun getItemCount() = TrackerFilter.count()

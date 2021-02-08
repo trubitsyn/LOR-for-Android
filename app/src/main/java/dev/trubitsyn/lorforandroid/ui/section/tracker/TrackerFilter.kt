@@ -17,10 +17,10 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.tracker
 
-import androidx.annotation.IntDef
+import androidx.annotation.StringDef
 
 @Retention(AnnotationRetention.SOURCE)
-@IntDef(
+@StringDef(
         TrackerFilter.ALL,
         TrackerFilter.MAIN,
         TrackerFilter.NO_TALKS,
@@ -28,10 +28,10 @@ import androidx.annotation.IntDef
 )
 annotation class TrackerFilter {
     companion object {
-        const val ALL = 0
-        const val MAIN = 1
-        const val NO_TALKS = 2
-        const val TECH = 3
+        const val ALL = "all"
+        const val MAIN = "main"
+        const val NO_TALKS = "notalks"
+        const val TECH = "tech"
 
         private val values = arrayOf(
                 ALL,
@@ -44,8 +44,4 @@ annotation class TrackerFilter {
 
         fun count() = values.size
     }
-}
-
-enum class TrackerFilterEnum {
-    all, main, notalks, tech
 }

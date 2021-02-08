@@ -23,14 +23,14 @@ import dev.trubitsyn.lorforandroid.site.SiteApi
 
 class TrackerPagingSource constructor(
         private val api: SiteApi,
-        private val filter: TrackerFilterEnum
+        @TrackerFilter private val filter: String
 ) : PagingSource<Int, TrackerItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TrackerItem> {
         val nextOffset = params.key ?: FIRST_PAGE_OFFSET
         try {
             val response = api.getTracker(
-                    filter = filter.name,
+                    filter = filter,
                     offset = nextOffset
             )
             return LoadResult.Page(

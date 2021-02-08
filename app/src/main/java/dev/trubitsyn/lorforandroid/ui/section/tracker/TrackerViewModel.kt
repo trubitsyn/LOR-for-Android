@@ -22,16 +22,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import javax.inject.Inject
 
-@HiltViewModel
-class TrackerViewModel @Inject constructor(
-        private val api: SiteApi
+class TrackerViewModel constructor(
+        private val api: SiteApi,
+        @TrackerFilter private val filter: String
 ) : ViewModel() {
-
-    val filter = TrackerFilterEnum.all
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)

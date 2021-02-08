@@ -29,12 +29,18 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrackerSectionFragment : BaseListFragment() {
-    //private val args by navArgs<TrackerSectionFragmentArgs>()
 
-    //private var filter: TrackerFilterEnum = TrackerFilterEnum.all
     @Inject
     override lateinit var adapter: TrackerAdapter
-    private val viewModel by viewModels<TrackerViewModel>()
+    private lateinit var args: TrackerSectionFragmentArgs
+    private val viewModel by viewModels<TrackerViewModel> {
+        TrackerViewModelFactory(requireContext().applicationContext, args.filter)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        args = TrackerSectionFragmentArgs.fromBundle(requireArguments())
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -101,8 +107,10 @@ class TrackerSectionFragment : BaseListFragment() {
 
     companion object {
 
-        fun newInstance(): TrackerSectionFragment {
-            return TrackerSectionFragment()
+        fun newInstance(@TrackerFilter filter: String): TrackerSectionFragment {
+            return TrackerSectionFragment().apply {
+                arguments = TrackerSectionFragmentArgs(filter).toBundle()
+            }
         }
     }
 }
