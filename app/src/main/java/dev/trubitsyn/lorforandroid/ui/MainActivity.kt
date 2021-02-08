@@ -18,7 +18,8 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -26,9 +27,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
+    private val viewModel by viewModels<MainViewModel>()
     private val bottomNavigationView by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val navController by lazy { findNavController(R.id.main_content) }
     val topLevelDestinations = setOf(
@@ -46,11 +50,16 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         bottomNavigationView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in topLevelDestinations) {
-                bottomNavigationView.visibility = View.VISIBLE
+                viewModel.showBottomNavigation()
             } else {
-                bottomNavigationView.visibility = View.GONE
+                viewModel.hideBottomNavigation()
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.bottomNavigationViewVisibility.collectLatest {
+                bottomNavigationView.visibility = it
             }
         }
     }
