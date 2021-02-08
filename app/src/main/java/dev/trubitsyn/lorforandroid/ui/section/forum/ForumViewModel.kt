@@ -26,7 +26,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,7 +43,7 @@ class ForumViewModel @Inject constructor(
 
     private val _selectionState = MutableStateFlow<SelectionState>(SelectionState.Nothing)
 
-    val selectionState: StateFlow<SelectionState> = _selectionState
+    val selectionState = _selectionState.asStateFlow()
 
     fun onItemSelected(item: ForumItem) {
         viewModelScope.launch {

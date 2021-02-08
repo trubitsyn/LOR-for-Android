@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -59,11 +59,11 @@ class TopicViewModel(
 
     private val _errorVisibility = MutableStateFlow(View.GONE)
 
-    val progressVisibility: StateFlow<Int> = _progressVisibility
+    val progressVisibility = _progressVisibility.asStateFlow()
 
-    val contentVisibility: StateFlow<Int> = _contentVisibility
+    val contentVisibility = _contentVisibility.asStateFlow()
 
-    val errorVisibility: StateFlow<Int> = _errorVisibility
+    val errorVisibility = _errorVisibility.asStateFlow()
 
     init {
         viewModelScope.launch {

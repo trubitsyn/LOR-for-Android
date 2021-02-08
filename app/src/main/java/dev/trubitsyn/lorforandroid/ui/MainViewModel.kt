@@ -20,13 +20,13 @@ package dev.trubitsyn.lorforandroid.ui
 import android.view.View
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class MainViewModel : ViewModel() {
 
     private val _bottomNavigationVisibility = MutableStateFlow(View.VISIBLE)
 
-    val bottomNavigationViewVisibility: StateFlow<Int> = _bottomNavigationVisibility
+    val bottomNavigationViewVisibility = _bottomNavigationVisibility.asStateFlow()
 
     fun showBottomNavigation() {
         _bottomNavigationVisibility.value = View.VISIBLE
