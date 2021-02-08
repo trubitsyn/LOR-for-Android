@@ -2,7 +2,6 @@
     <string name="app_name">LOR for Android</string>
 
     <string name="activity_main">LINUX.ORG.RU</string>
-    <string name="activity_topic">Topic</string>
     <string name="activity_image">Image</string>
     <string name="activity_comments">Comments</string>
 

@@ -67,7 +67,7 @@
     <fragment
         android:id="@+id/topic"
         android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicFragment"
-        android:label="@string/activity_topic">
+        android:label="">
         <action
             android:id="@+id/action_topic_to_comment"
             app:destination="@id/comment" />
