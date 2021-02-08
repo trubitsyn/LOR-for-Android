@@ -65,7 +65,7 @@ class TopicFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = TopicFragmentBinding.inflate(inflater, container, false)
+        binding = TopicFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
