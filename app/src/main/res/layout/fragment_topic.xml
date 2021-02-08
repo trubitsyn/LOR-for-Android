@@ -7,6 +7,10 @@
         <variable
             name="topic"
             type="dev.trubitsyn.lorforandroid.ui.topic.TopicItem" />
+
+        <variable
+            name="viewModel"
+            type="dev.trubitsyn.lorforandroid.ui.topic.TopicViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -19,7 +23,8 @@
             android:layout_height="match_parent"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:scrollbarStyle="outsideInset">
+            android:scrollbarStyle="outsideInset"
+            android:visibility="@{viewModel.contentVisibility}">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,8 +86,12 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <include layout="@layout/layout_progress" />
+        <include
+            layout="@layout/layout_progress"
+            android:visibility="@{viewModel.progressVisibility}" />
 
-        <include layout="@layout/layout_error" />
+        <include
+            layout="@layout/layout_error"
+            android:visibility="@{viewModel.errorVisibility}" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

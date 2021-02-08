@@ -22,7 +22,32 @@ import dev.trubitsyn.lorforandroid.ui.topic.TopicItem
 import org.jsoup.nodes.Document
 
 class TopicDocumentAdapter : DocumentAdapter<TopicItem> {
-    override fun convert(document: Document): TopicItem? {
-        TODO("Not yet implemented")
+    override fun convert(document: Document): TopicItem {
+        val body = document.body()
+        val title = body.select("header > h1").text()
+        val url = body.select("header > h1 > a").attr("href")
+        val tags = "tag1, tag2"
+        val message = body.select("div[itemprop=articleBody] > p").text()
+        val postDate = body.select("footer > sign > time").text()
+        val sticky = false
+        val commentsCount = 0
+        val favsCount = 0
+        val watchCount = 0
+        val postScore = 0
+        val author = "author"
+
+        return TopicItem(
+                url = url,
+                title = title,
+                tags = tags,
+                message = message,
+                postDate = postDate,
+                sticky = sticky,
+                commentsCount = commentsCount,
+                favsCount = favsCount,
+                watchCount = watchCount,
+                postScore = postScore,
+                author = author
+        )
     }
 }
