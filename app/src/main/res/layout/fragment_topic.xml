@@ -13,9 +13,10 @@
             type="dev.trubitsyn.lorforandroid.ui.topic.TopicViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/topicScrollView"
@@ -29,6 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
                 <TextView
@@ -59,13 +61,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
-                        android:text="@{topic.author}" />
+                        android:text="@{topic.author}"
+                        android:textAppearance="@style/TextAppearance.App" />
 
                     <TextView
                         android:id="@+id/topicDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{topic.postDate}" />
+                        android:text="@{topic.postDate}"
+                        android:textAppearance="@style/TextAppearance.App" />
 
                 </LinearLayout>
 
@@ -80,7 +84,8 @@
                     android:id="@+id/topicMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{topic.message}" />
+                    android:text="@{topic.message}"
+                    android:textAppearance="@style/TextAppearance.App" />
 
             </LinearLayout>
 
@@ -93,5 +98,5 @@
         <include
             layout="@layout/layout_error"
             android:visibility="@{viewModel.errorVisibility}" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
 </layout>

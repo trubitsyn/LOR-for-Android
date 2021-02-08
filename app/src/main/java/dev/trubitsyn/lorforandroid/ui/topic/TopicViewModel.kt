@@ -45,7 +45,9 @@ class TopicViewModel(
         }
         _loadState.value = when (response) {
             null -> LoadState.Error
-            else -> LoadState.NotLoading
+            else -> LoadState.NotLoading.also {
+                emit(response)
+            }
         }
     }
 
