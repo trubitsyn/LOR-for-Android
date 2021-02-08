@@ -24,8 +24,9 @@ class TrackerViewHolder(
         private val binding: TrackerItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: TrackerItem) {
+    fun bind(item: TrackerItem, viewModel: TrackerViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 }

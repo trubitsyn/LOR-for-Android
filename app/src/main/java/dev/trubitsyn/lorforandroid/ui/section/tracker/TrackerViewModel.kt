@@ -23,6 +23,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class TrackerViewModel constructor(
         private val api: SiteApi,
@@ -34,4 +38,21 @@ class TrackerViewModel constructor(
     ) {
         TrackerPagingSource(api, filter)
     }.flow.cachedIn(viewModelScope)
+
+    private val _selectionState = MutableStateFlow<SelectionState>(SelectionState.Nothing)
+
+    val selectionState: StateFlow<SelectionState> = _selectionState
+
+    fun onItemSelected(item: TrackerItem) {
+        viewModelScope.launch {
+            _selectionState.value = SelectionState.Item(item)
+            delay(1000)
+            _selectionState.value = SelectionState.Nothing
+        }
+    }
+
+    sealed class SelectionState {
+        object Nothing : SelectionState()
+        data class Item(val item: TrackerItem) : SelectionState()
+    }
 }

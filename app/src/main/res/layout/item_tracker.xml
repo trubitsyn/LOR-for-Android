@@ -6,6 +6,10 @@
         <variable
             name="item"
             type="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem" />
+
+        <variable
+            name="viewModel"
+            type="dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:onClick="@{() -> viewModel.onItemSelected(item)}"
             android:text="@{item.title}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
 

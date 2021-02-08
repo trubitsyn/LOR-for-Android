@@ -21,16 +21,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrackerSectionFragment : BaseListFragment() {
 
-    @Inject
     override lateinit var adapter: TrackerAdapter
     private lateinit var args: TrackerSectionFragmentArgs
     private val viewModel by viewModels<TrackerViewModel> {
@@ -40,61 +39,33 @@ class TrackerSectionFragment : BaseListFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         args = TrackerSectionFragmentArgs.fromBundle(requireArguments())
+        adapter = TrackerAdapter(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectionState.collectLatest { state ->
+                when (state) {
+                    is TrackerViewModel.SelectionState.Item -> {
+                        onItemSelected(state.item)
+                    }
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
             }
         }
+        super.onViewCreated(view, savedInstanceState)
     }
 
-//    override fun onItemClickCallback(position: Int) {
-//        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
-//        item.let {
-//            if (GalleryUtils.isGalleryUrl(it.url)) {
-//                navigateToGalleryTopic(it)
-//            } else {
-//                navigateToTopic(it)
-//            }
-//        }
-//
-//    }
-
-//    private fun navigateToGalleryTopic(item: TrackerItem) {
-//        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
-//        val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
-//        val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
-//
-//        // TODO: Url of high-res image in GalleryItem
-//        // Currently cannot get it because images can either have .jpg or .png extension
-//        // and there's no way to determine the correct without issuing an HTTP request.
-//        val galleryItem = GalleryItem(
-//                url = item.url,
-//                title = item.title,
-//                groupTitle = item.groupTitle,
-//                date = item.date,
-//                tags = item.tags,
-//                author = item.author!!,
-//                comments = item.comments,
-//                imageUrl = imagesUrl,
-//                medium2xImageUrl = medium2xImageUrl,
-//                mediumImageUrl = mediumImageUrl)
-//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
-//                url = galleryItem.url,
-//                imageUrl = galleryItem.imageUrl
-//        )
-//        findNavController().navigate(action)
-//    }
-
-    private fun navigateToTopic(item: TrackerItem) {
-//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
-//                url = item.url,
-//                imageUrl = null
-//        )
-//        findNavController().navigate(action)
+    private fun onItemSelected(item: TrackerItem) {
+        val action = TrackerFragmentDirections.actionTrackerToTopic(
+                url = item.url,
+                imageUrl = null
+        )
+        findNavController().navigate(action)
     }
 
     companion object {

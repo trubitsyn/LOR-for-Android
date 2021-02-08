@@ -22,9 +22,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.databinding.TrackerItemBinding
-import javax.inject.Inject
 
-class TrackerAdapter @Inject constructor() : PagingDataAdapter<TrackerItem, TrackerViewHolder>(Comparator) {
+class TrackerAdapter constructor(
+        private val viewModel: TrackerViewModel
+) : PagingDataAdapter<TrackerItem, TrackerViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,7 @@ class TrackerAdapter @Inject constructor() : PagingDataAdapter<TrackerItem, Trac
 
     override fun onBindViewHolder(viewHolder: TrackerViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        viewHolder.bind(item)
+        viewHolder.bind(item, viewModel)
     }
 
     object Comparator : DiffUtil.ItemCallback<TrackerItem>() {
