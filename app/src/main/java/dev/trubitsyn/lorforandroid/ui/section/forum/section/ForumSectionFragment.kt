@@ -27,15 +27,18 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ForumSectionFragment : BaseListFragment() {
 
-    @Inject
     override lateinit var adapter: ForumSectionAdapter
     private val viewModel by viewModels<ForumSectionViewModel> {
         ForumSectionViewModelFactory(requireContext().applicationContext)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = ForumSectionAdapter(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

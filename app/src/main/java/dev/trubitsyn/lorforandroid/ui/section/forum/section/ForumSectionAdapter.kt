@@ -22,9 +22,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.databinding.ForumSectionItemBinding
-import javax.inject.Inject
 
-class ForumSectionAdapter @Inject constructor() : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(Comparator) {
+class ForumSectionAdapter constructor(
+        private val viewModel: ForumSectionViewModel
+) : PagingDataAdapter<ForumSectionItem, ForumSectionViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumSectionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,7 @@ class ForumSectionAdapter @Inject constructor() : PagingDataAdapter<ForumSection
 
     override fun onBindViewHolder(viewHolder: ForumSectionViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        viewHolder.bind(item)
+        viewHolder.bind(item, viewModel)
     }
 
     private object Comparator : DiffUtil.ItemCallback<ForumSectionItem>() {

@@ -24,9 +24,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.databinding.MiniNewsItemBinding
 import dev.trubitsyn.lorforandroid.databinding.NewsItemBinding
-import javax.inject.Inject
 
-class NewsAdapter @Inject constructor() : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(Comparator) {
+class NewsAdapter constructor(
+        private val viewModel: NewsViewModel
+) : PagingDataAdapter<AbstractNewsItem, RecyclerView.ViewHolder>(Comparator) {
 
     override fun getItemViewType(position: Int) = when (getItem(position)) {
         is MiniNewsItem -> MINI
@@ -53,11 +54,11 @@ class NewsAdapter @Inject constructor() : PagingDataAdapter<AbstractNewsItem, Re
         when (viewHolder.itemViewType) {
             MINI -> {
                 val miniNewsItem = getItem(position) as MiniNewsItem
-                (viewHolder as MiniNewsViewHolder).bind(miniNewsItem)
+                (viewHolder as MiniNewsViewHolder).bind(miniNewsItem, viewModel)
             }
             FULL -> {
                 val newsItem = getItem(position) as NewsItem
-                (viewHolder as NewsViewHolder).bind(newsItem)
+                (viewHolder as NewsViewHolder).bind(newsItem, viewModel)
             }
         }
     }

@@ -24,8 +24,9 @@ class MiniNewsViewHolder(
         private val binding: MiniNewsItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: MiniNewsItem) {
+    fun bind(item: MiniNewsItem, viewModel: NewsViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 }

@@ -24,8 +24,9 @@ class NewsViewHolder(
         private val binding: NewsItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: NewsItem) {
+    fun bind(item: NewsItem, viewModel: NewsViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 }

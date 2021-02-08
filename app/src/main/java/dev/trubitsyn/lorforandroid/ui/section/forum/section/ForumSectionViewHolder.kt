@@ -24,8 +24,9 @@ class ForumSectionViewHolder(
         private val binding: ForumSectionItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: ForumSectionItem) {
+    fun bind(item: ForumSectionItem, viewModel: ForumSectionViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 }
