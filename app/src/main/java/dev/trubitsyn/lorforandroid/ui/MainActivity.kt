@@ -18,6 +18,7 @@
 package dev.trubitsyn.lorforandroid.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -30,20 +31,27 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseActivity
 class MainActivity : BaseActivity(R.layout.activity_main) {
     private val bottomNavigationView by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val navController by lazy { findNavController(R.id.main_content) }
+    val topLevelDestinations = setOf(
+            R.id.news,
+            R.id.gallery,
+            R.id.tracker,
+            R.id.forum,
+            R.id.settings
+    )
     private val appBarConfiguration by lazy {
-        val destinations = setOf(
-                R.id.news,
-                R.id.gallery,
-                R.id.tracker,
-                R.id.forum,
-                R.id.settings
-        )
-        AppBarConfiguration(destinations)
+        AppBarConfiguration(topLevelDestinations)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bottomNavigationView.setupWithNavController(navController)
         toolbar.setupWithNavController(navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id in topLevelDestinations) {
+                bottomNavigationView.visibility = View.VISIBLE
+            } else {
+                bottomNavigationView.visibility = View.GONE
+            }
+        }
     }
 }
