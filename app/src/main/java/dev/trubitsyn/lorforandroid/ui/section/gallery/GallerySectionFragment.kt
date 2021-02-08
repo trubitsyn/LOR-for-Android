@@ -29,23 +29,21 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class GallerySectionFragment : BaseListFragment() {
+
     @Inject
     override lateinit var adapter: GalleryAdapter
+    private lateinit var args: GallerySectionFragmentArgs
+    private val viewModel by viewModels<GalleryViewModel> {
+        GalleryViewModelFactory(requireContext().applicationContext, args.filter)
+    }
 
-    //private val args by navArgs<GalleryFragmentArgs>()
-    //private var filter: Int = args.filter.ordinal
-    private val viewModel: GalleryViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        args = GallerySectionFragmentArgs.fromBundle(requireArguments())
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.gallery_spinner, filter, object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                //filter = position
-//                //restart()
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {}
-//        })
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
@@ -61,4 +59,13 @@ class GallerySectionFragment : BaseListFragment() {
 //        )
 //        findNavController().navigate(action)*/
 //    }
+
+    companion object {
+
+        fun newInstance(@GalleryFilter filter: String): GallerySectionFragment {
+            return GallerySectionFragment().apply {
+                arguments = GallerySectionFragmentArgs(filter).toBundle()
+            }
+        }
+    }
 }

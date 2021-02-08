@@ -17,6 +17,28 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-enum class GalleryFilterEnum {
-    all, screenshots, workplaces
+import androidx.annotation.StringDef
+
+@Retention(AnnotationRetention.SOURCE)
+@StringDef(
+        GalleryFilter.ALL,
+        GalleryFilter.SCREENSHOTS,
+        GalleryFilter.WORKPLACES
+)
+annotation class GalleryFilter {
+    companion object {
+        const val ALL = "all"
+        const val SCREENSHOTS = "screenshots"
+        const val WORKPLACES = "workplaces"
+
+        private val values = arrayOf(
+                ALL,
+                SCREENSHOTS,
+                WORKPLACES
+        )
+
+        operator fun get(i: Int) = values[i]
+
+        val size = values.size
+    }
 }

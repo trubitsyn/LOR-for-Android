@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.tracker
+package dev.trubitsyn.lorforandroid.ui.section.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,22 +25,22 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.databinding.TrackerFragmentBinding
+import dev.trubitsyn.lorforandroid.databinding.GalleryFragmentBinding
 
 @AndroidEntryPoint
-class TrackerFragment : Fragment() {
-    private lateinit var binding: TrackerFragmentBinding
+class GalleryFragment : Fragment() {
+    private lateinit var binding: GalleryFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = TrackerFragmentBinding.inflate(inflater, container, false)
+        binding = GalleryFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.pager.adapter = TrackerFragmentAdapter(this)
+        binding.pager.adapter = GalleryFragmentAdapter(this)
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-            val filters = resources.getStringArray(R.array.tracker_filter)
+            val filters = resources.getStringArray(R.array.gallery_filter)
             tab.text = filters[position]
         }.attach()
     }

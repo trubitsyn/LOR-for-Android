@@ -30,9 +30,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ForumSectionFragment : BaseListFragment() {
+
     @Inject
     override lateinit var adapter: ForumSectionAdapter
-    private val viewModel: ForumSectionViewModel by viewModels()
+    private val viewModel by viewModels<ForumSectionViewModel>()
     private val args by navArgs<ForumSectionFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -14,15 +14,19 @@
     </fragment>
     <fragment
         android:id="@+id/gallery"
-        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GallerySectionFragment"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFragment"
         android:label="@string/drawer_gallery">
-        <argument
-            android:name="filter"
-            android:defaultValue="all"
-            app:argType="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryFilterEnum" />
         <action
             android:id="@+id/action_gallery_to_topic"
             app:destination="@id/topic" />
+    </fragment>
+    <fragment
+        android:id="@+id/gallerySection"
+        android:name="dev.trubitsyn.lorforandroid.ui.section.gallery.GallerySectionFragment">
+        <argument
+            android:name="filter"
+            android:defaultValue="all"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/tracker"

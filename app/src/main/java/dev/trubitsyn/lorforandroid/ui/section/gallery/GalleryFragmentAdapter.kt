@@ -5,7 +5,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -17,21 +17,16 @@
 
 package dev.trubitsyn.lorforandroid.ui.section.gallery
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import dev.trubitsyn.lorforandroid.site.SiteApi
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class GalleryViewModel constructor(
-        private val api: SiteApi,
-        @GalleryFilter private val filter: String
-) : ViewModel() {
+class GalleryFragmentAdapter(
+        fragment: Fragment
+) : FragmentStateAdapter(fragment) {
 
-    val flow = Pager(
-            PagingConfig(pageSize = 20, maxSize = 200)
-    ) {
-        GalleryPagingSource(api, filter)
-    }.flow.cachedIn(viewModelScope)
+    override fun createFragment(position: Int): Fragment {
+        return GallerySectionFragment.newInstance(GalleryFilter[position])
+    }
+
+    override fun getItemCount() = GalleryFilter.size
 }

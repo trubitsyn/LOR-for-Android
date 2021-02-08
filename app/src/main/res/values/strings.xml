@@ -19,7 +19,7 @@
         <item>Technical</item>
     </string-array>
 
-    <string-array name="gallery_spinner">
+    <string-array name="gallery_filter">
         <item>All</item>
         <item>Screenshots</item>
         <item>Workplaces</item>

@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 class ForumFragment : BaseListFragment() {
 
     override lateinit var adapter: ForumAdapter
-    private val viewModel: ForumViewModel by viewModels()
+    private val viewModel by viewModels<ForumViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

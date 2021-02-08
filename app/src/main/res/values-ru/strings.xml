@@ -19,7 +19,7 @@
         <item>Технические</item>
     </string-array>
 
-    <string-array name="gallery_spinner">
+    <string-array name="gallery_filter">
         <item>Все</item>
         <item>Скриншоты</item>
         <item>Рабочие места</item>

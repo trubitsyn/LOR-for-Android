@@ -49,14 +49,6 @@ class TrackerSectionFragment : BaseListFragment() {
                 adapter.submitData(it)
             }
         }
-        //        SpinnerViewUtils.setSpinnerView(requireActivity(), R.array.tracker_spinner, filter.ordinal, object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-//                //filter = TrackerFilterEnum.values()[position]
-//                //restart()
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>) {}
-//        })
     }
 
 //    override fun onItemClickCallback(position: Int) {

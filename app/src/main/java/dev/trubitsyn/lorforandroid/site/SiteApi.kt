@@ -38,6 +38,12 @@ interface SiteApi {
             @Query("offset") offset: Int
     ): List<GalleryItem>
 
+    @GET("gallery/{section}/")
+    suspend fun getGallerySection(
+            @Path("section") section: String,
+            @Query("offset") offset: Int
+    ): List<GalleryItem>
+
     @GET("tracker/")
     suspend fun getTracker(
             @Query("filter") filter: String,
