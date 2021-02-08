@@ -17,11 +17,37 @@
 
 package dev.trubitsyn.lorforandroid.ui.topic
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
+import dev.trubitsyn.lorforandroid.site.SiteApi
 
-class TopicViewModelFactory(private val url: String) : ViewModelProvider.NewInstanceFactory() {
+class TopicViewModelFactory(
+        context: Context,
+        private val url: String
+) : ViewModelProvider.Factory {
+
+    private var api: SiteApi
+
+    init {
+        val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
+        api = entryPoint.api()
+    }
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TopicViewModel(url) as T
+        if (modelClass.isAssignableFrom(TopicViewModel::class.java)) {
+            val topicUrl = TopicUrl.fromUrl(url)
+            return TopicViewModel(api, topicUrl) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+
+    @dagger.hilt.EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface EntryPoint {
+        fun api(): SiteApi
     }
 }

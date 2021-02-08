@@ -17,20 +17,28 @@
 
 package dev.trubitsyn.lorforandroid.ui.topic
 
-import androidx.lifecycle.ViewModel
-import dev.trubitsyn.lorforandroid.site.SiteApi
-import kotlinx.coroutines.flow.flow
+import dev.trubitsyn.lorforandroid.util.StringUtils
 
-class TopicViewModel(
-        api: SiteApi,
-        private val url: TopicUrl,
-) : ViewModel() {
+data class TopicUrl(
+        val section: String,
+        val group: String,
+        val id: Long
+) {
 
-    val flow = flow<TopicItem> {
-        api.getTopic(
-                section = url.section,
-                group = url.group,
-                id = url.id
-        )
+    companion object {
+        const val SLASH = "/"
+
+        fun fromUrl(url: String): TopicUrl {
+            val plainUrl = StringUtils.removeParams(url)
+            val (section, group, id) = plainUrl
+                    .removePrefix(SLASH)
+                    .removeSuffix(SLASH)
+                    .split(SLASH)
+            return TopicUrl(
+                    section = section,
+                    group = group,
+                    id = id.toLong()
+            )
+        }
     }
 }

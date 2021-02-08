@@ -15,22 +15,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.topic
+package dev.trubitsyn.lorforandroid.site.adapter
 
-import androidx.lifecycle.ViewModel
-import dev.trubitsyn.lorforandroid.site.SiteApi
-import kotlinx.coroutines.flow.flow
+import dev.trubitsyn.lorforandroid.site.DocumentAdapter
+import dev.trubitsyn.lorforandroid.ui.topic.TopicItem
+import org.jsoup.nodes.Document
 
-class TopicViewModel(
-        api: SiteApi,
-        private val url: TopicUrl,
-) : ViewModel() {
-
-    val flow = flow<TopicItem> {
-        api.getTopic(
-                section = url.section,
-                group = url.group,
-                id = url.id
-        )
+class TopicDocumentAdapter : DocumentAdapter<TopicItem> {
+    override fun convert(document: Document): TopicItem? {
+        TODO("Not yet implemented")
     }
 }

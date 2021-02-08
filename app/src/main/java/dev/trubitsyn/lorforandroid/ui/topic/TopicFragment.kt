@@ -20,32 +20,24 @@ package dev.trubitsyn.lorforandroid.ui.topic
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.text.parseAsHtml
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
-import dev.trubitsyn.lorforandroid.util.PreferenceUtils
-import dev.trubitsyn.lorforandroid.util.StringUtils
+import dev.trubitsyn.lorforandroid.databinding.TopicFragmentBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TopicFragment : Fragment() {
-    private val scrollView by lazy { requireView().findViewById<NestedScrollView>(R.id.topicScrollView) }
-    internal val title by lazy { requireView().findViewById<TextView>(R.id.topicTitle) }
-    internal val tags by lazy { requireView().findViewById<TextView>(R.id.topicTags) }
-    internal val author by lazy { requireView().findViewById<TextView>(R.id.topicAuthor) }
-    internal val date by lazy { requireView().findViewById<TextView>(R.id.topicDate) }
-    private val image by lazy { requireView().findViewById<ImageView>(R.id.topicImage) }
-    private val message by lazy { requireView().findViewById<TextView>(R.id.topicMessage) }
     private val args by navArgs<TopicFragmentArgs>()
-    private val viewModel by viewModels<TopicViewModel> { TopicViewModelFactory(args.url) }
+    private val viewModel by viewModels<TopicViewModel> {
+        TopicViewModelFactory(requireContext(), args.url)
+    }
+    private lateinit var binding: TopicFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,55 +65,56 @@ class TopicFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_topic, container, false)
+        val binding = TopicFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (StringUtils.isClub(args.url)) {
-            //showErrorView(R.string.error_access_denied)
-            return
-        }
-        viewModel.getTopic().observe(viewLifecycleOwner, { topic ->
-            //stopRefreshAndShow()
-            setTopic(topic)
-        })
-    }
-
-    private fun setTopic(topic: TopicItem) {
-        title.text = topic.title.parseAsHtml()
-        val tagsList = topic.tags
-        if (tagsList.isNotEmpty()) {
-            tags.visibility = View.VISIBLE
-            tags.text = tagsList
-        } else {
-            tags.visibility = View.GONE
-        }
-
-        args.imageUrl?.let { imageUrl ->
-            if (PreferenceUtils.shouldLoadImagesNow(requireContext())) {
-                loadImageAndSetImageActivityListener(imageUrl)
-            } else {
-                image.setOnClickListener { loadImageAndSetImageActivityListener(imageUrl) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.topicMessage.movementMethod = LinkMovementMethod.getInstance()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                binding.topic = it
+                binding.executePendingBindings()
             }
         }
-
-        author.text = topic.author
-        date.text = topic.postDate
-        message.text = topic.message.parseAsHtml()
-        message.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    private fun loadImageAndSetImageActivityListener(imageUrl: String) {
-        image.setImageDrawable(null)
-        Glide.with(requireContext())
-                .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image)
+    //    override fun onItemClickCallback(position: Int) {
+//        var item: TrackerItem by Delegates.notNull() //items[position] as TrackerItem
+//        item.let {
+//            if (GalleryUtils.isGalleryUrl(it.url)) {
+//                navigateToGalleryTopic(it)
+//            } else {
+//                navigateToTopic(it)
+//            }
+//        }
+//
+//    }
 
-        image.setOnClickListener {
-            //val action = TopicFragmentDirections.actionTopicToImageActivity(bitmap)
-            //findNavController().navigate(action)
-        }
-    }
+//    private fun navigateToGalleryTopic(item: TrackerItem) {
+//        val imagesUrl = GalleryUtils.getGalleryImagesUrl("https://linux.org.ru/", item.url)
+//        val medium2xImageUrl = GalleryUtils.getMedium2xImageUrl(imagesUrl)
+//        val mediumImageUrl = GalleryUtils.getMediumImageUrl(imagesUrl)
+//
+//        // TODO: Url of high-res image in GalleryItem
+//        // Currently cannot get it because images can either have .jpg or .png extension
+//        // and there's no way to determine the correct without issuing an HTTP request.
+//        val galleryItem = GalleryItem(
+//                url = item.url,
+//                title = item.title,
+//                groupTitle = item.groupTitle,
+//                date = item.date,
+//                tags = item.tags,
+//                author = item.author!!,
+//                comments = item.comments,
+//                imageUrl = imagesUrl,
+//                medium2xImageUrl = medium2xImageUrl,
+//                mediumImageUrl = mediumImageUrl)
+//        val action = TrackerSectionFragmentDirections.actionTrackerToTopic(
+//                url = galleryItem.url,
+//                imageUrl = galleryItem.imageUrl
+//        )
+//        findNavController().navigate(action)
+//    }
 }

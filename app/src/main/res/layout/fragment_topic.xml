@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/topicScrollView"
+    <data class="TopicFragmentBinding">
+
+        <variable
+            name="topic"
+            type="dev.trubitsyn.lorforandroid.ui.topic.TopicItem" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:scrollbarStyle="outsideInset"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/topicScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/topicTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.App.Headline" />
-
-            <TextView
-                android:id="@+id/topicTags"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.App.Tags" />
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:scrollbarStyle="outsideInset">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/topicAuthor"
+                    android:id="@+id/topicTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@{topic.title}"
+                    android:textAppearance="@style/TextAppearance.App.Headline" />
+
+                <TextView
+                    android:id="@+id/topicTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@{topic.tags}"
+                    android:textAppearance="@style/TextAppearance.App.Tags" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/topicAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="@{topic.author}" />
+
+                    <TextView
+                        android:id="@+id/topicDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{topic.postDate}" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/topicImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:srcCompat="@drawable/ic_image_24dp" />
+
+                <TextView
+                    android:id="@+id/topicMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp" />
-
-                <TextView
-                    android:id="@+id/topicDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:text="@{topic.message}" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/topicImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                app:srcCompat="@drawable/ic_image_24dp" />
+        </androidx.core.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/topicMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <include layout="@layout/layout_progress" />
 
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <include layout="@layout/layout_progress" />
-
-    <include layout="@layout/layout_error" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include layout="@layout/layout_error" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

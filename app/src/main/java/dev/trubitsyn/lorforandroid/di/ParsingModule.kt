@@ -41,6 +41,7 @@ class ParsingModule {
                 .registerDocumentAdapter(ForumSectionItemDocumentAdapter())
                 .registerDocumentAdapter(GalleryItemDocumentAdapter())
                 .registerDocumentAdapter(TrackerItemDocumentAdapter())
+                .registerDocumentAdapter(TopicDocumentAdapter())
                 .build()
     }
 

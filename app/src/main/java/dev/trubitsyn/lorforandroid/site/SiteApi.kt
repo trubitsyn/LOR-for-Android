@@ -22,6 +22,7 @@ import dev.trubitsyn.lorforandroid.ui.section.forum.section.ForumSectionItem
 import dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem
 import dev.trubitsyn.lorforandroid.ui.section.news.AbstractNewsItem
 import dev.trubitsyn.lorforandroid.ui.section.tracker.TrackerItem
+import dev.trubitsyn.lorforandroid.ui.topic.TopicItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -58,4 +59,11 @@ interface SiteApi {
             @Path("section") section: String,
             @Query("offset") offset: Int
     ): List<ForumSectionItem>
+
+    @GET
+    suspend fun getTopic(
+            @Path("section") section: String,
+            @Path("group") group: String,
+            @Path("id") id: Long
+    ): TopicItem
 }
