@@ -24,22 +24,22 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import dev.trubitsyn.lorforandroid.ui.base.DefaultSelectionStateHandle
 
 class TrackerViewModelFactory(
         context: Context,
         @TrackerFilter private val filter: String
 ) : ViewModelProvider.Factory {
 
-    private var api: SiteApi
-
-    init {
-        val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
-        api = entryPoint.api()
-    }
+    private val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TrackerViewModel::class.java)) {
-            return TrackerViewModel(api, filter) as T
+            return TrackerViewModel(
+                    api = entryPoint.api(),
+                    selectionStateHandle = DefaultSelectionStateHandle(),
+                    filter = filter
+            ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

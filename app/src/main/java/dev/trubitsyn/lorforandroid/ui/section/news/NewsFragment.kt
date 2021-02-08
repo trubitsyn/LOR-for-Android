@@ -21,8 +21,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,10 +34,21 @@ class NewsFragment : BaseListFragment() {
 
     @Inject
     override lateinit var adapter: NewsAdapter
-    private val viewModel by viewModels<NewsViewModel>()
+    private val viewModel by viewModels<NewsViewModel> {
+        NewsViewModelFactory(requireContext().applicationContext)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectionState.collectLatest { state ->
+                when (state) {
+                    is SelectionState.Item -> {
+                        onItemSelected(state.item as AbstractNewsItem)
+                    }
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
@@ -43,17 +56,15 @@ class NewsFragment : BaseListFragment() {
         }
     }
 
-    //override fun onItemClickCallback(position: Int) {
-        /*val url = when (val item = items[position]) {
-            is MiniNewsItem -> item.url
+    fun onItemSelected(item: AbstractNewsItem) {
+        val url = when (item) {
             is NewsItem -> item.url
-            else -> null
-        } ?: throw ClassCastException("Object cannot be cast neither to MiniNewsItem nor to Item.")
-
+            is MiniNewsItem -> item.url
+        }
         val action = NewsFragmentDirections.actionNewsToTopic(
                 url = url,
                 imageUrl = null
         )
-        findNavController().navigate(action)*/
-    //}
+        findNavController().navigate(action)
+    }
 }

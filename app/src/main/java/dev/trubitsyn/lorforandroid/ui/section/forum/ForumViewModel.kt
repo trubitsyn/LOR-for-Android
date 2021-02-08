@@ -22,39 +22,17 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import dev.trubitsyn.lorforandroid.ui.base.SelectionStateHandle
 
-@HiltViewModel
-class ForumViewModel @Inject constructor(
-        private val api: SiteApi
-) : ViewModel() {
+class ForumViewModel constructor(
+        private val api: SiteApi,
+        private val selectionStateHandle: SelectionStateHandle<ForumItem>
+) : ViewModel(), SelectionStateHandle<ForumItem> by selectionStateHandle {
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)
     ) {
         ForumPagingSource(api)
     }.flow.cachedIn(viewModelScope)
-
-    private val _selectionState = MutableStateFlow<SelectionState>(SelectionState.Nothing)
-
-    val selectionState = _selectionState.asStateFlow()
-
-    fun onItemSelected(item: ForumItem) {
-        viewModelScope.launch {
-            _selectionState.value = SelectionState.Item(item)
-            delay(1000)
-            _selectionState.value = SelectionState.Nothing
-        }
-    }
-
-    sealed class SelectionState {
-        object Nothing : SelectionState()
-        data class Item(val item: ForumItem) : SelectionState()
-    }
 }

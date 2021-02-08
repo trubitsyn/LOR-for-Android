@@ -22,14 +22,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import javax.inject.Inject
+import dev.trubitsyn.lorforandroid.ui.base.SelectionStateHandle
 
-@HiltViewModel
-class ForumSectionViewModel @Inject constructor(
-        private val api: SiteApi
-) : ViewModel() {
+class ForumSectionViewModel constructor(
+        private val api: SiteApi,
+        private val selectionStateHandle: SelectionStateHandle<ForumSectionItem>
+) : ViewModel(), SelectionStateHandle<ForumSectionItem> by selectionStateHandle {
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)

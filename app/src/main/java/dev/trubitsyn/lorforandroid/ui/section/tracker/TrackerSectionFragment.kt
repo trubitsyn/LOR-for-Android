@@ -24,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -46,8 +47,8 @@ class TrackerSectionFragment : BaseListFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectionState.collectLatest { state ->
                 when (state) {
-                    is TrackerViewModel.SelectionState.Item -> {
-                        onItemSelected(state.item)
+                    is SelectionState.Item -> {
+                        onItemSelected(state.item as TrackerItem)
                     }
                 }
             }

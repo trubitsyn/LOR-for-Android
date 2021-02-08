@@ -22,14 +22,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import javax.inject.Inject
+import dev.trubitsyn.lorforandroid.ui.base.DefaultSelectionStateHandle
+import dev.trubitsyn.lorforandroid.ui.base.SelectionStateHandle
 
-@HiltViewModel
-class NewsViewModel @Inject constructor(
-        private val api: SiteApi
-) : ViewModel() {
+class NewsViewModel constructor(
+        private val api: SiteApi,
+        private val selectionStateHandle: DefaultSelectionStateHandle<AbstractNewsItem>
+) : ViewModel(), SelectionStateHandle<AbstractNewsItem> by selectionStateHandle {
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)

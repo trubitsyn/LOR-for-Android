@@ -26,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.R
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import dev.trubitsyn.lorforandroid.util.StringUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,7 +35,9 @@ import kotlinx.coroutines.launch
 class ForumFragment : BaseListFragment() {
 
     override lateinit var adapter: ForumAdapter
-    private val viewModel by viewModels<ForumViewModel>()
+    private val viewModel by viewModels<ForumViewModel> {
+        ForumViewModelFactory(requireContext().applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +50,8 @@ class ForumFragment : BaseListFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectionState.collectLatest { state ->
                 when (state) {
-                    is ForumViewModel.SelectionState.Item -> {
-                        onItemSelected(state.item)
+                    is SelectionState.Item -> {
+                        onItemSelected(state.item as ForumItem)
                     }
                 }
             }

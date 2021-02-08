@@ -21,9 +21,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,11 +34,21 @@ class ForumSectionFragment : BaseListFragment() {
 
     @Inject
     override lateinit var adapter: ForumSectionAdapter
-    private val viewModel by viewModels<ForumSectionViewModel>()
-    private val args by navArgs<ForumSectionFragmentArgs>()
+    private val viewModel by viewModels<ForumSectionViewModel> {
+        ForumSectionViewModelFactory(requireContext().applicationContext)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectionState.collectLatest { state ->
+                when (state) {
+                    is SelectionState.Item -> {
+                        onItemSelected(state.item as ForumSectionItem)
+                    }
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
@@ -45,11 +56,11 @@ class ForumSectionFragment : BaseListFragment() {
         }
     }
 
-    //override fun onItemClickCallback(position: Int) {
-    //(context as Callback).returnToActivity((items[position] as ForumSectionItem).url)
-    //}
-
-    /*internal interface Callback {
-        fun returnToActivity(url: String)
-    }*/
+    fun onItemSelected(item: ForumSectionItem) {
+        val action = ForumSectionFragmentDirections.actionForumSectionToTopic(
+                url = item.url,
+                imageUrl = null
+        )
+        findNavController().navigate(action)
+    }
 }

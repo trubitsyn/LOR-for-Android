@@ -23,11 +23,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import dev.trubitsyn.lorforandroid.site.SiteApi
+import dev.trubitsyn.lorforandroid.ui.base.SelectionStateHandle
 
 class GalleryViewModel constructor(
         private val api: SiteApi,
-        @GalleryFilter private val filter: String
-) : ViewModel() {
+        @GalleryFilter private val filter: String,
+        private val selectionStateHandle: SelectionStateHandle<GalleryItem>
+) : ViewModel(), SelectionStateHandle<GalleryItem> by selectionStateHandle {
 
     val flow = Pager(
             PagingConfig(pageSize = 20, maxSize = 200)

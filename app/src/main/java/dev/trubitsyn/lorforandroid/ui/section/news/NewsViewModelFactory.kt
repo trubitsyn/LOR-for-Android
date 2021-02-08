@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.trubitsyn.lorforandroid.ui.section.gallery
+package dev.trubitsyn.lorforandroid.ui.section.news
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -26,19 +26,17 @@ import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.SiteApi
 import dev.trubitsyn.lorforandroid.ui.base.DefaultSelectionStateHandle
 
-class GalleryViewModelFactory(
-        context: Context,
-        @GalleryFilter private val filter: String
+class NewsViewModelFactory(
+        context: Context
 ) : ViewModelProvider.Factory {
 
     private val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(GalleryViewModel::class.java)) {
-            return GalleryViewModel(
+        if (modelClass.isAssignableFrom(NewsViewModel::class.java)) {
+            return NewsViewModel(
                     api = entryPoint.api(),
-                    selectionStateHandle = DefaultSelectionStateHandle(),
-                    filter = filter
+                    selectionStateHandle = DefaultSelectionStateHandle()
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

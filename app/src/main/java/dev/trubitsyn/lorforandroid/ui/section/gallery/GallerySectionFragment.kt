@@ -21,8 +21,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
+import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,20 +47,28 @@ class GallerySectionFragment : BaseListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectionState.collectLatest { state ->
+                when (state) {
+                    is SelectionState.Item -> {
+                        onItemSelected(state.item as GalleryItem)
+                    }
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
             }
         }
     }
 
-//    override fun onItemClickCallback(position: Int) {
-//        /*val item = items[position] as GalleryItem
-//        val action = GalleryFragmentDirections.actionGalleryToTopic(
-//                url = item.url,
-//                imageUrl = item.imageUrl
-//        )
-//        findNavController().navigate(action)*/
-//    }
+    fun onItemSelected(item: GalleryItem) {
+        val action = GalleryFragmentDirections.actionGalleryToTopic(
+                url = item.url,
+                imageUrl = item.imageUrl
+        )
+        findNavController().navigate(action)
+    }
 
     companion object {
 
