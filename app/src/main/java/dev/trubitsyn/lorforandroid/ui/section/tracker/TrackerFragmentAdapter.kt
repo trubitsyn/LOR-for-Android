@@ -28,5 +28,5 @@ class TrackerFragmentAdapter(
         return TrackerSectionFragment.newInstance(TrackerFilter[position])
     }
 
-    override fun getItemCount() = TrackerFilter.count()
+    override fun getItemCount() = TrackerFilter.size
 }

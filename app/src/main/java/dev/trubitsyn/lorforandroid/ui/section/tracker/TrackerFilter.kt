@@ -42,6 +42,6 @@ annotation class TrackerFilter {
 
         operator fun get(i: Int) = values[i]
 
-        fun count() = values.size
+        val size = values.size
     }
 }
