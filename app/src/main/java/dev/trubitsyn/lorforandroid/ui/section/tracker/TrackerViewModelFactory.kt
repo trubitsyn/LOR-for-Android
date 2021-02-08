@@ -24,15 +24,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import dev.trubitsyn.lorforandroid.site.SiteApi
-import javax.inject.Inject
 
 class TrackerViewModelFactory(
-        private val context: Context,
+        context: Context,
         @TrackerFilter private val filter: String
 ) : ViewModelProvider.Factory {
 
-    @Inject
-    lateinit var api: SiteApi
+    private var api: SiteApi
 
     init {
         val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
