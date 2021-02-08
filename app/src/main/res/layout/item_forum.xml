@@ -22,8 +22,8 @@
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{item.name}"
             android:onClick="@{() -> viewModel.onItemSelected(item)}"
+            android:text="@{item.name}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title" />
     </LinearLayout>
 </layout>
