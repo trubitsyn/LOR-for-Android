@@ -17,7 +17,6 @@
 
 package dev.trubitsyn.lorforandroid.ui.topic
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.trubitsyn.lorforandroid.site.SiteApi
@@ -32,7 +31,7 @@ class TopicViewModel(
         private val url: TopicUrl,
 ) : ViewModel() {
 
-    val flow = flow<TopicItem> {
+    val flow = flow {
         _loadState.value = LoadState.Loading
         val response = try {
             api.getTopic(
@@ -53,36 +52,36 @@ class TopicViewModel(
 
     private val _loadState = MutableStateFlow<LoadState>(LoadState.NotLoading)
 
-    private val _progressVisibility = MutableStateFlow(View.GONE)
+    private val _isProgressVisible = MutableStateFlow(true)
 
-    private val _contentVisibility = MutableStateFlow(View.GONE)
+    private val _isContentVisible = MutableStateFlow(false)
 
-    private val _errorVisibility = MutableStateFlow(View.GONE)
+    private val _isErrorVisible = MutableStateFlow(false)
 
-    val progressVisibility = _progressVisibility.asStateFlow()
+    val isProgressVisible = _isProgressVisible.asStateFlow()
 
-    val contentVisibility = _contentVisibility.asStateFlow()
+    val isContentVisible = _isContentVisible.asStateFlow()
 
-    val errorVisibility = _errorVisibility.asStateFlow()
+    val isErrorVisible = _isErrorVisible.asStateFlow()
 
     init {
         viewModelScope.launch {
             _loadState.collectLatest {
                 when (it) {
                     is LoadState.Loading -> {
-                        _progressVisibility.value = View.VISIBLE
-                        _contentVisibility.value = View.GONE
-                        _errorVisibility.value = View.GONE
+                        _isProgressVisible.emit(true)
+                        _isContentVisible.emit(false)
+                        _isErrorVisible.emit(false)
                     }
                     is LoadState.NotLoading -> {
-                        _contentVisibility.value = View.VISIBLE
-                        _progressVisibility.value = View.GONE
-                        _errorVisibility.value = View.GONE
+                        _isProgressVisible.emit(false)
+                        _isContentVisible.emit(true)
+                        _isErrorVisible.emit(false)
                     }
                     is LoadState.Error -> {
-                        _errorVisibility.value = View.VISIBLE
-                        _progressVisibility.value = View.GONE
-                        _contentVisibility.value = View.GONE
+                        _isProgressVisible.emit(false)
+                        _isContentVisible.emit(false)
+                        _isErrorVisible.emit(true)
                     }
                 }
             }

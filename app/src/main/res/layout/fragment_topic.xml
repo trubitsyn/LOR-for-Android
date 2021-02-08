@@ -18,85 +18,20 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/topicScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:scrollbarStyle="outsideInset"
-            android:visibility="@{viewModel.contentVisibility}">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/topicTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@{topic.title}"
-                    android:textAppearance="@style/TextAppearance.App.Headline" />
-
-                <TextView
-                    android:id="@+id/topicTags"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@{topic.tags}"
-                    android:textAppearance="@style/TextAppearance.App.Tags" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/topicAuthor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:text="@{topic.author}"
-                        android:textAppearance="@style/TextAppearance.App" />
-
-                    <TextView
-                        android:id="@+id/topicDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{topic.postDate}"
-                        android:textAppearance="@style/TextAppearance.App" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/topicImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:srcCompat="@drawable/ic_image_24dp" />
-
-                <TextView
-                    android:id="@+id/topicMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{topic.message}"
-                    android:textAppearance="@style/TextAppearance.App" />
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/topicView"
+            layout="@layout/layout_topic"
+            app:isVisible="@{viewModel.isContentVisible}"
+            app:topic="@{topic}" />
 
         <include
+            android:id="@+id/progressView"
             layout="@layout/layout_progress"
-            android:visibility="@{viewModel.progressVisibility}" />
+            app:isVisible="@{viewModel.isProgressVisible}" />
 
         <include
+            android:id="@+id/errorView"
             layout="@layout/layout_error"
-            android:visibility="@{viewModel.errorVisibility}" />
+            app:isVisible="@{viewModel.isErrorVisible}" />
     </FrameLayout>
 </layout>

@@ -71,7 +71,7 @@ class TopicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.topicMessage.movementMethod = LinkMovementMethod.getInstance()
+        binding.topicView.topicMessage.movementMethod = LinkMovementMethod.getInstance()
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.executePendingBindings()

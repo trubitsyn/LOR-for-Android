@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/errorView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_horizontal_margin"
-    android:gravity="center" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isVisible"
+            type="boolean" />
+    </data>
+
+    <TextView
+        android:id="@+id/errorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}" />
+</layout>

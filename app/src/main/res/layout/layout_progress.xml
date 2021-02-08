@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/progressBar"
-    android:layout_width="45dp"
-    android:layout_height="45dp"
-    android:layout_centerInParent="true"
-    android:layout_gravity="center"
-    android:background="@color/colorPrimary"
-    android:indeterminate="true"
-    android:indeterminateTint="@color/colorAccent" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isVisible"
+            type="boolean" />
+    </data>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent"
+        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}" />
+</layout>
