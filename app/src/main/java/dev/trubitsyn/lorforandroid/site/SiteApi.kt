@@ -60,7 +60,7 @@ interface SiteApi {
             @Query("offset") offset: Int
     ): List<ForumSectionItem>
 
-    @GET
+    @GET("{section}/{group}/{id}")
     suspend fun getTopic(
             @Path("section") section: String,
             @Path("group") group: String,
