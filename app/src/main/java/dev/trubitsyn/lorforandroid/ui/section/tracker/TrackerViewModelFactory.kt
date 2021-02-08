@@ -20,10 +20,8 @@ package dev.trubitsyn.lorforandroid.ui.section.tracker
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
-import dev.trubitsyn.lorforandroid.site.SiteApi
+import dev.trubitsyn.lorforandroid.di.EntryPoints
 import dev.trubitsyn.lorforandroid.ui.base.DefaultSelectionStateHandle
 
 class TrackerViewModelFactory(
@@ -31,7 +29,7 @@ class TrackerViewModelFactory(
         @TrackerFilter private val filter: String
 ) : ViewModelProvider.Factory {
 
-    private val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoint::class.java)
+    private val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoints::class.java)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TrackerViewModel::class.java)) {
@@ -42,11 +40,5 @@ class TrackerViewModelFactory(
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
-    }
-
-    @dagger.hilt.EntryPoint
-    @InstallIn(SingletonComponent::class)
-    interface EntryPoint {
-        fun api(): SiteApi
     }
 }
