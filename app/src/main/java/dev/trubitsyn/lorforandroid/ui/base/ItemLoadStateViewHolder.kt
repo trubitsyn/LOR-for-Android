@@ -17,7 +17,6 @@
 
 package dev.trubitsyn.lorforandroid.ui.base
 
-import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import dev.trubitsyn.lorforandroid.databinding.LoadStateItemBinding
@@ -28,6 +27,7 @@ class ItemLoadStateViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(loadState: LoadState) {
-        binding.progressView.progressBar.isVisible = loadState is LoadState.Loading
+        binding.state = loadState
+        binding.executePendingBindings()
     }
 }

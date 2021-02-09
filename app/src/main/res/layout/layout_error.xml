@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="ErrorLayoutBinding">
 
@@ -8,6 +9,10 @@
         <variable
             name="isVisible"
             type="boolean" />
+
+        <variable
+            name="futureText"
+            type="java.lang.CharSequence" />
     </data>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -17,5 +22,6 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.App"
-        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}" />
+        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
+        app:futureText="@{futureText}" />
 </layout>

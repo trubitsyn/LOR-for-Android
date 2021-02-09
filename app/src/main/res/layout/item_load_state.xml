@@ -4,6 +4,8 @@
 
     <data class="LoadStateItemBinding">
 
+        <import type="androidx.paging.LoadState" />
+
         <variable
             name="state"
             type="androidx.paging.LoadState" />
@@ -17,7 +19,13 @@
         <include
             android:id="@+id/progressView"
             layout="@layout/layout_progress"
-            app:isVisible="@{true}" />
+            app:isVisible="@{state instanceof LoadState.Loading}" />
+
+        <include
+            android:id="@+id/errorView"
+            layout="@layout/layout_error"
+            app:futureText="@{@string/error_network}"
+            app:isVisible="@{state instanceof LoadState.Error}" />
 
     </FrameLayout>
 </layout>
