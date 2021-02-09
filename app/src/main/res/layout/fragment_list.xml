@@ -16,6 +16,9 @@
 
     <include layout="@layout/layout_progress" />
 
-    <include layout="@layout/layout_error" />
+    <include
+        layout="@layout/layout_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </ViewFlipper>

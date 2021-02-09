@@ -55,4 +55,6 @@
     <string name="error_network">Could not get data. Please check your network connection.</string>
     <string name="error_no_more_data">No older topics left.</string>
     <string name="error_no_comments">No more comments left.</string>
+
+    <string name="action_retry">Retry</string>
 </resources>

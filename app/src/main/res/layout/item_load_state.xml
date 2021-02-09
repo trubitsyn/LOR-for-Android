@@ -22,9 +22,8 @@
             app:isVisible="@{state instanceof LoadState.Loading}" />
 
         <include
-            android:id="@+id/errorView"
-            layout="@layout/layout_error"
-            app:futureText="@{@string/error_network}"
+            android:id="@+id/refreshView"
+            layout="@layout/layout_refresh"
             app:isVisible="@{state instanceof LoadState.Error}" />
 
     </FrameLayout>
