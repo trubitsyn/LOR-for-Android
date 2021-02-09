@@ -6,6 +6,10 @@
         <variable
             name="item"
             type="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryItem" />
+
+        <variable
+            name="viewModel"
+            type="dev.trubitsyn.lorforandroid.ui.section.gallery.GalleryViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:onClick="@{() -> viewModel.onItemSelected(item)}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline"
             app:futureText="@{item.title}" />
 
@@ -35,8 +40,8 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="start"
-                app:futureText="@{item.groupTitle}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small"
+                app:futureText="@{item.groupTitle}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/galleryTags"
@@ -44,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                app:futureText="@{item.tags}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags"
+                app:futureText="@{item.tags}" />
         </LinearLayout>
 
         <ImageView
@@ -66,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                app:futureText="@{item.author}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small"
+                app:futureText="@{item.author}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/galleryDate"
@@ -75,8 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                app:futureText="@{item.date}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small"
+                app:futureText="@{item.date}" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -92,8 +97,8 @@
                 android:id="@+id/galleryCommentsCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:futureText="@{@plurals/comments(item.comments, item.comments)}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small"
+                app:futureText="@{@plurals/comments(item.comments, item.comments)}" />
         </LinearLayout>
 
     </LinearLayout>
