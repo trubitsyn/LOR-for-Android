@@ -27,12 +27,10 @@ import dev.trubitsyn.lorforandroid.ui.base.BaseListFragment
 import dev.trubitsyn.lorforandroid.ui.base.SelectionState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class GallerySectionFragment : BaseListFragment() {
 
-    @Inject
     override lateinit var adapter: GalleryAdapter
     private lateinit var args: GallerySectionFragmentArgs
     private val viewModel by viewModels<GalleryViewModel> {
@@ -42,6 +40,7 @@ class GallerySectionFragment : BaseListFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         args = GallerySectionFragmentArgs.fromBundle(requireArguments())
+        adapter = GalleryAdapter(viewModel)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

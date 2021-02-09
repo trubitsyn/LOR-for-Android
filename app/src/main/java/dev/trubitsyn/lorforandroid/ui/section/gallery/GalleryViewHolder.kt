@@ -24,8 +24,9 @@ class GalleryViewHolder(
         private val binding: GalleryItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: GalleryItem) {
+    fun bind(item: GalleryItem, viewModel: GalleryViewModel) {
         binding.item = item
+        binding.viewModel = viewModel
         binding.executePendingBindings()
     }
 }

@@ -22,9 +22,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import dev.trubitsyn.lorforandroid.databinding.GalleryItemBinding
-import javax.inject.Inject
 
-class GalleryAdapter @Inject constructor() : PagingDataAdapter<GalleryItem, GalleryViewHolder>(Comparator) {
+class GalleryAdapter constructor(
+        private val viewModel: GalleryViewModel
+) : PagingDataAdapter<GalleryItem, GalleryViewHolder>(Comparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,7 @@ class GalleryAdapter @Inject constructor() : PagingDataAdapter<GalleryItem, Gall
 
     override fun onBindViewHolder(viewHolder: GalleryViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        viewHolder.bind(item)
+        viewHolder.bind(item, viewModel)
     }
 
     private object Comparator : DiffUtil.ItemCallback<GalleryItem>() {
