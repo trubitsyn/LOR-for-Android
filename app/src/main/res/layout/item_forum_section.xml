@@ -35,13 +35,13 @@
                 app:srcCompat="@drawable/ic_priority_high_24dp"
                 app:tint="@color/colorAccent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forumTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.onItemSelected(item)}"
-                android:text="@{item.title}"
-                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
+                android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline"
+                app:futureText="@{item.title}" />
 
         </LinearLayout>
 

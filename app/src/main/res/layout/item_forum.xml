@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="ForumItemBinding">
 
@@ -18,12 +18,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onItemSelected(item)}"
-            android:text="@{item.name}"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Title"
+            app:futureText="@{item.name}" />
     </LinearLayout>
 </layout>

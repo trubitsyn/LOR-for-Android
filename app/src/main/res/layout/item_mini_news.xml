@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="MiniNewsItemBinding">
 
@@ -18,14 +18,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/miniNewsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:onClick="@{() -> viewModel.onItemSelected(item)}"
-            android:text="@{item.title}"
-            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline" />
+            android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline"
+            app:futureText="@{item.title}" />
 
         <TextView
             android:id="@+id/miniNewsCommentsCount"
