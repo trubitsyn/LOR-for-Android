@@ -77,12 +77,12 @@
                 android:layout_margin="5dp"
                 app:srcCompat="@drawable/ic_image_24dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/topicMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{topic.message}"
-                android:textAppearance="@style/TextAppearance.App" />
+                android:textAppearance="@style/TextAppearance.App"
+                app:futureText="@{topic.message}" />
 
         </LinearLayout>
 

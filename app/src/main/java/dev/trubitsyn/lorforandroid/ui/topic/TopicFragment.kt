@@ -71,13 +71,12 @@ class TopicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.topicView.topicMessage.movementMethod = LinkMovementMethod.getInstance()
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.executePendingBindings()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 binding.topic = it
+                binding.topicView.topicMessage.movementMethod = LinkMovementMethod.getInstance()
+                binding.lifecycleOwner = viewLifecycleOwner
+                binding.viewModel = viewModel
                 binding.executePendingBindings()
             }
         }
