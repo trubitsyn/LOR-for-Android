@@ -30,20 +30,20 @@
             android:background="@color/colorPrimary"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/topicTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@{topic.title}"
+                app:futureText="@{topic.title}"
                 android:textAppearance="@style/TextAppearance.App.Headline" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/topicTags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@{topic.tags}"
+                app:futureText="@{topic.tags}"
                 android:textAppearance="@style/TextAppearance.App.Tags" />
 
             <LinearLayout
@@ -52,20 +52,20 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/topicAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@{topic.author}"
+                    app:futureText="@{topic.author}"
                     android:textAppearance="@style/TextAppearance.App" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/topicDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{topic.postDate}"
+                    app:futureText="@{topic.postDate}"
                     android:textAppearance="@style/TextAppearance.App" />
 
             </LinearLayout>

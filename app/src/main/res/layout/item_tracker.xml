@@ -32,23 +32,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/trackerGroupTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="start"
-                android:text="@{item.groupTitle}"
+                app:futureText="@{item.groupTitle}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/trackerTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{item.tags}"
+                app:futureText="@{item.tags}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Tags" />
         </LinearLayout>
 
@@ -57,29 +57,29 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/trackerAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:text="@{item.author}"
+                app:futureText="@{item.author}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/trackerDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.date}"
+                app:futureText="@{item.date}"
                 android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
         </LinearLayout>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/trackerCommentsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@{@plurals/comments(item.comments, item.comments)}"
+            app:futureText="@{@plurals/comments(item.comments, item.comments)}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
     </LinearLayout>

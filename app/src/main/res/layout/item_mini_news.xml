@@ -27,12 +27,12 @@
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Headline"
             app:futureText="@{item.title}" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/miniNewsCommentsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@{@plurals/comments(item.comments, item.comments)}"
+            app:futureText="@{@plurals/comments(item.comments, item.comments)}"
             android:textAppearance="@style/TextAppearance.App.Widget.RecyclerView.Item.Small" />
 
     </LinearLayout>
