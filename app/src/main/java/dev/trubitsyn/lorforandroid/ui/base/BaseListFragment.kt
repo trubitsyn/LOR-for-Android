@@ -69,7 +69,9 @@ abstract class BaseListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter.withLoadStateFooter(
+                footer = ItemLoadStateAdapter(adapter::retry)
+        )
         swipeRefreshLayout.setOnRefreshListener(adapter::refresh)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(view.context)
