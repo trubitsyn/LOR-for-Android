@@ -27,8 +27,8 @@ import dev.trubitsyn.lorforandroid.ui.base.SelectionStateHandle
 
 class GalleryViewModel constructor(
         private val api: SiteApi,
+        private val selectionStateHandle: SelectionStateHandle<GalleryItem>,
         @GalleryFilter private val filter: String,
-        private val selectionStateHandle: SelectionStateHandle<GalleryItem>
 ) : ViewModel(), SelectionStateHandle<GalleryItem> by selectionStateHandle {
 
     val flow = Pager(
