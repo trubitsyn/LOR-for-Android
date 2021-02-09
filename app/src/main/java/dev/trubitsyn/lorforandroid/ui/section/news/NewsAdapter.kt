@@ -51,13 +51,15 @@ class NewsAdapter constructor(
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        when (viewHolder.itemViewType) {
+        val item = getItem(position)
+        val viewType = getItemViewType(position)
+        when (viewType) {
             MINI -> {
-                val miniNewsItem = getItem(position) as MiniNewsItem
+                val miniNewsItem = item as MiniNewsItem
                 (viewHolder as MiniNewsViewHolder).bind(miniNewsItem, viewModel)
             }
             FULL -> {
-                val newsItem = getItem(position) as NewsItem
+                val newsItem = item as NewsItem
                 (viewHolder as NewsViewHolder).bind(newsItem, viewModel)
             }
         }
