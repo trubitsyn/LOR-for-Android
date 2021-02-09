@@ -17,6 +17,7 @@
 
 package dev.trubitsyn.lorforandroid.site.adapter
 
+import androidx.core.text.parseAsHtml
 import dev.trubitsyn.lorforandroid.site.DocumentAdapter
 import dev.trubitsyn.lorforandroid.ui.topic.TopicItem
 import org.jsoup.nodes.Document
@@ -24,11 +25,17 @@ import org.jsoup.nodes.Document
 class TopicDocumentAdapter : DocumentAdapter<TopicItem> {
     override fun convert(document: Document): TopicItem {
         val body = document.body()
-        val title = body.select("header > h1").text()
-        val url = body.select("header > h1 > a").attr("href")
+        val title = body.select("header > h1")
+                .text()
+        val url = body.select("header > h1 > a")
+                .attr("href")
         val tags = "tag1, tag2"
-        val message = body.select("div[itemprop=articleBody] > p").text()
-        val postDate = body.select("footer > sign > time").text()
+        val message = body.select("div[itemprop=articleBody] > p")
+                .text()
+                .parseAsHtml()
+                .toString()
+        val postDate = body.select("footer > sign > time")
+                .text()
         val sticky = false
         val commentsCount = 0
         val favsCount = 0
