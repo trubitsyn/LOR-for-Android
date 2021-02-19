@@ -26,7 +26,7 @@ data class TopicUrl(
 ) {
 
     companion object {
-        const val SLASH = "/"
+        private const val SLASH = "/"
 
         fun fromUrl(url: String): TopicUrl {
             val plainUrl = StringUtils.removeParams(url)

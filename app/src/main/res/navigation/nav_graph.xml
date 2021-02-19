@@ -57,20 +57,9 @@
         android:name="dev.trubitsyn.lorforandroid.ui.SettingsFragment"
         android:label="@string/drawer_settings" />
     <fragment
-        android:id="@+id/comment"
-        android:name="dev.trubitsyn.lorforandroid.ui.comment.CommentFragment"
-        android:label="@string/activity_comments">
-        <argument
-            android:name="url"
-            app:argType="string" />
-    </fragment>
-    <fragment
         android:id="@+id/topic"
         android:name="dev.trubitsyn.lorforandroid.ui.topic.TopicFragment"
         android:label="">
-        <action
-            android:id="@+id/action_topic_to_comment"
-            app:destination="@id/comment" />
         <argument
             android:name="url"
             app:argType="string" />

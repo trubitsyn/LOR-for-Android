@@ -27,15 +27,15 @@ class NewsPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AbstractNewsItem> {
         val nextOffset = params.key ?: FIRST_PAGE_OFFSET
-        try {
+        return try {
             val response = api.getNews(nextOffset)
-            return LoadResult.Page(
+            LoadResult.Page(
                     data = response,
                     prevKey = if (nextOffset == FIRST_PAGE_OFFSET) null else nextOffset - OFFSET,
                     nextKey = nextOffset + OFFSET
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
 

@@ -56,15 +56,15 @@ class TopicFragment : Fragment() {
                 true
             }
             R.id.showComments -> {
-                val action = TopicFragmentDirections.actionTopicToComment(args.url)
-                findNavController().navigate(action)
+                //val action = TopicFragmentDirections.actionTopicToComment(args.url)
+                //findNavController().navigate(action)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = TopicFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -73,11 +73,13 @@ class TopicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
-                binding.topic = it
-                binding.topicView.topicMessage.movementMethod = LinkMovementMethod.getInstance()
-                binding.lifecycleOwner = viewLifecycleOwner
-                binding.viewModel = viewModel
-                binding.executePendingBindings()
+                binding.apply {
+                    topic = it
+                    topicView.topicMessage.movementMethod = LinkMovementMethod.getInstance()
+                    lifecycleOwner = viewLifecycleOwner
+                    viewModel = viewModel
+                    executePendingBindings()
+                }
             }
         }
     }

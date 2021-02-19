@@ -25,13 +25,12 @@ class HtmlResponseBodyConverter<T>(
         private val adapter: DocumentAdapter<*>
 ) : Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
-        try {
+        return try {
             val document = parser.parse(value.string())
             val rawResult = adapter.convert(document)
-            val result = rawResult as? T
-            return result
+            rawResult as? T
         } catch (e: Exception) {
-            return null
+            null
         } finally {
             value.close()
         }

@@ -28,7 +28,7 @@ class TopicViewModelFactory(
         private val url: String
 ) : ViewModelProvider.Factory {
 
-    val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoints::class.java)
+    private val entryPoint = EntryPointAccessors.fromApplication(context, EntryPoints::class.java)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TopicViewModel::class.java)) {

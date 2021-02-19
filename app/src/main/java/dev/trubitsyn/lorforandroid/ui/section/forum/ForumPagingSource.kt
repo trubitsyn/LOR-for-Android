@@ -26,15 +26,15 @@ class ForumPagingSource(
 ) : PagingSource<Int, ForumItem>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ForumItem> {
-        try {
+        return try {
             val response = api.getForum()
-            return LoadResult.Page(
+            LoadResult.Page(
                     data = response,
                     prevKey = null,
                     nextKey = null
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
 
