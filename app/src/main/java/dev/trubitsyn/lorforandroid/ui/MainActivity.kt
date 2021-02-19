@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     private val viewModel by viewModels<MainViewModel>()
     private val bottomNavigationView by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val navController by lazy { findNavController(R.id.main_content) }
-    val topLevelDestinations = setOf(
+    private val topLevelDestinations = setOf(
             R.id.news,
             R.id.gallery,
             R.id.tracker,
@@ -62,5 +62,9 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 bottomNavigationView.visibility = it
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
