@@ -1,5 +1,5 @@
 ext {
-    android_build_tools_version = '7.0.0-alpha05'
+    android_build_tools_version = '7.0.0-alpha14'
 
     androidx_appcompat_version = '1.2.0'
     androidx_collection_version = '1.1.0'
